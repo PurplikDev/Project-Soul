@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float defaultSpeed = 12f;
     public float speed;
+
     public float gravity = -9.81f;
     public float jumpHeight = 3f;
 
@@ -22,6 +23,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+
+        CalculateStats();
+
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if(isGrounded && velocity.y < 0) {
@@ -33,12 +37,6 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 move = transform.right * x + transform.forward * z;
 
-        if(Input.GetButton("Sprint")) {
-            speed = defaultSpeed * 1.45f;
-        } else {
-            speed = defaultSpeed;
-        }
-
         characterController.Move(move * speed * Time.deltaTime);
 
         animator.SetFloat("speed", move.sqrMagnitude);
@@ -49,5 +47,17 @@ public class PlayerMovement : MonoBehaviour
 
         velocity.y += gravity * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
+    }
+
+    private void CalculateStats() {
+
+        if (Input.GetButton("Sprint"))
+        {
+            speed = defaultSpeed * 1.45f;
+        }
+        else
+        {
+            speed = defaultSpeed;
+        }
     }
 }
