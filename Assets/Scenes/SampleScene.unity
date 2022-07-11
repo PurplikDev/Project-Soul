@@ -423,6 +423,7 @@ GameObject:
   - component: {fileID: 747922229}
   - component: {fileID: 747922230}
   - component: {fileID: 747922231}
+  - component: {fileID: 747922232}
   m_Layer: 0
   m_Name: Basic Enemy
   m_TagString: Enemy
@@ -469,7 +470,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.425
-  m_Speed: 6
+  m_Speed: 1
   m_Acceleration: 200
   avoidancePriority: 50
   m_AngularSpeed: 180
@@ -529,6 +530,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!111 &747922232
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 747922225}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 691e00843eb62484894b9dac3c1b8841, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1001 &870388042
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -973,7 +989,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterController: {fileID: 943586856}
-  defaultSpeed: 12
+  defaultSpeed: 6
   speed: 0
   gravity: -50
   jumpHeight: 1.5
@@ -3213,7 +3229,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4404148687741565707}
-  m_LocalRotation: {x: 0.14005166, y: -0, z: -0, w: 0.9901442}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0.8125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3223,7 +3239,7 @@ Transform:
   - {fileID: 9150064786217604575}
   m_Father: {fileID: 543450653125965602}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 16.102, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3369579514429249294
 GameObject:
   m_ObjectHideFlags: 0
