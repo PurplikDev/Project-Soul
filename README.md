@@ -18,3 +18,6 @@ Which is also the most basic enemy that you can encounter in the game.
 
 ![shamblingHusk](https://user-images.githubusercontent.com/60230933/178545331-afdfb685-998a-452f-ac67-97f62d5e0c21.png)
 ![shamblingHuskInGame](https://user-images.githubusercontent.com/60230933/178545420-40f8ed89-984e-4745-b78b-3f91be626b92.png)
+
+
+#### Most textures are not final! They were made when I was just messing around because I didn't want to walk around as a white cube!
