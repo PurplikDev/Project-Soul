@@ -12,6 +12,8 @@ The game will basically be about going around a dungeon, looting and trying to g
 ![playerModel](https://user-images.githubusercontent.com/60230933/178545365-5e981321-0c4f-43b9-a167-2855d7a19b7c.png)
 ![playerModel](https://user-images.githubusercontent.com/60230933/178543700-c96adf28-5bcc-4070-800a-3b15920aa0d8.png)
 
+The second one has Goggles of Revealing as a small test for equipable armor.
+
 ## Shambling Husk Model
 
 Which is also the most basic enemy that you can encounter in the game.
