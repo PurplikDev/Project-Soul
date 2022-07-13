@@ -1,29 +1,35 @@
 using UnityEngine;
 
-public class PlayerStats : MonoBehaviour
+public class EntityStats : MonoBehaviour
 {
-    public int maxHealth = 100;
+    public int baseHealth = 100;
+    public int maxHealth;
     public int health { get; private set; }
+    public bool alive;
 
-    public PlayerStat attackDamage;
-    public PlayerStat reach;
+    public EntityStat enemyLevel;
+
+    public EntityStat attackDamage;
+    public EntityStat reach;
 
     void Awake() {
-        health = maxHealth;
+        maxHealth = baseHealth * (enemyLevel.GetValue() * 5);
+
+        health = baseHealth;
+    }
+
+    public void Damage(int damageAmount, string damageType) {
+
+        switch(damageType) {
+            case "true": health -= damageAmount; break;
+        }
+
     }
 
     void Update() {
-        if(Input.GetKeyDown(KeyCode.T)) {
-            Damage(5);
-        }
-    }
-
-    public void Damage(int damage) {
-
-        health -= damage;
-
-        Debug.Log(transform.name + " got damaged for " + damage);
-
-
+       if(health <= 0)
+        {
+            Destroy(gameObject);
+        } 
     }
 }

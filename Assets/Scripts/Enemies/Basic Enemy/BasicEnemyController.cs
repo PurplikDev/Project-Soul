@@ -9,16 +9,25 @@ public class BasicEnemyController : MonoBehaviour
 
     Transform playerTarget;
     NavMeshAgent navMeshAgent;
+    EntityStats entityStats;
+
+    private bool alive = true;
 
     void Start() {
         playerTarget = PlayerManager.playerManager.playerObject.transform;
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
-    void Update() {
-        float distance = Vector3.Distance(playerTarget.position, transform.position);
-        if(distance <= lookRadius)  {
-            navMeshAgent.SetDestination(playerTarget.position);
+    void Update()
+    {
+
+
+        if(alive){ 
+            float distance = Vector3.Distance(playerTarget.position, transform.position);
+            if (distance <= lookRadius)
+            {
+                navMeshAgent.SetDestination(playerTarget.position);
+            }
         }
     }
 

@@ -292,7 +292,8 @@ Animation:
   m_Enabled: 1
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: 364161160a855f8489e565748f58f0fe, type: 2}
-  m_Animations: []
+  m_Animations:
+  - {fileID: 7400000, guid: 364161160a855f8489e565748f58f0fe, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -421,11 +422,11 @@ GameObject:
   - component: {fileID: 747922228}
   - component: {fileID: 747922226}
   - component: {fileID: 747922229}
-  - component: {fileID: 747922230}
   - component: {fileID: 747922231}
   - component: {fileID: 747922232}
+  - component: {fileID: 747922230}
   m_Layer: 0
-  m_Name: Basic Enemy
+  m_Name: Shambilng Husk
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -495,22 +496,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookRadius: 10
---- !u!54 &747922230
-Rigidbody:
+--- !u!114 &747922230
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 747922225}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e65006fcc5192db41a7316ce1267e234, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseHealth: 100
+  maxHealth: 100
+  enemyLevel: 0
+  attackDamage:
+    baseValue: 0
+  reach:
+    baseValue: 0
 --- !u!95 &747922231
 Animator:
   serializedVersion: 3
@@ -521,7 +525,7 @@ Animator:
   m_GameObject: {fileID: 747922225}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: cccd2325adf01bd4691b566d5d8a8d86, type: 2}
+  m_Controller: {fileID: 9100000, guid: a2aac2bee9565954faa6dc9cb376210d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -933,8 +937,9 @@ GameObject:
   - component: {fileID: 943586857}
   - component: {fileID: 943586856}
   - component: {fileID: 943586858}
-  - component: {fileID: 943586859}
+  - component: {fileID: 943586861}
   - component: {fileID: 943586860}
+  - component: {fileID: 943586859}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -992,7 +997,7 @@ MonoBehaviour:
   defaultSpeed: 6
   speed: 0
   gravity: -50
-  jumpHeight: 1.5
+  jumpHeight: 1
   groundCheck: {fileID: 185106713}
   groundDistance: 0.4
   groundMask:
@@ -1011,6 +1016,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0d6f5d9b9dafbf439481c304d72be8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 0
+  attackDamage:
+    baseValue: 0
+  reach:
+    baseValue: 0
 --- !u!114 &943586860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1024,6 +1034,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aimPoint: {fileID: 80107468}
+--- !u!95 &943586861
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943586855}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 74c720e069ff2eb43a910b721d3c9bff, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,12 +4,12 @@ using UnityEngine;
 
 [System.Serializable]
 
-public class PlayerStat
+public class EntityStat
 {
     [SerializeField]
     private int baseValue;
 
-    public float GetValue() {
+    public int GetValue() {
         return baseValue;
     }
 }

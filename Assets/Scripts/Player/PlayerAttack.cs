@@ -4,6 +4,7 @@ public class PlayerAttack : MonoBehaviour
 {
 
     public Transform aimPoint;
+    private EntityStats targetStats;
 
     private void OnDrawGizmosSelected()
     {
@@ -15,7 +16,9 @@ public class PlayerAttack : MonoBehaviour
         RaycastHit hit;
         if(Input.GetButtonDown("Fire1")) {
             Physics.Raycast(aimPoint.position, aimPoint.forward, out hit, 10f);
-            Debug.Log(hit.transform.name);
+            targetStats = hit.transform.GetComponent<EntityStats>();
+            targetStats.Damage(10, "true");
+            Debug.Log(hit.transform.name + " " + targetStats.health.ToString()); 
         }
     }
 }
