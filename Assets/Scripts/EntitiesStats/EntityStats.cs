@@ -14,12 +14,10 @@ public class EntityStats : MonoBehaviour
 
     void Awake() {
         maxHealth = baseHealth * (enemyLevel.GetValue() * 5);
-
         health = baseHealth;
     }
 
     public void Damage(int damageAmount, string damageType) {
-
         switch(damageType) {
             case "true": health -= damageAmount; break;
         }
@@ -27,8 +25,7 @@ public class EntityStats : MonoBehaviour
     }
 
     void Update() {
-       if(health <= 0)
-        {
+       if(health <= 0) {
             Destroy(gameObject);
         } 
     }

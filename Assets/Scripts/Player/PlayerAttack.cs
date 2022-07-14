@@ -13,12 +13,20 @@ public class PlayerAttack : MonoBehaviour
     }
 
     void Update() {
-        RaycastHit hit;
+
         if(Input.GetButtonDown("Fire1")) {
-            Physics.Raycast(aimPoint.position, aimPoint.forward, out hit, 10f);
-            targetStats = hit.transform.GetComponent<EntityStats>();
-            targetStats.Damage(10, "true");
-            Debug.Log(hit.transform.name + " " + targetStats.health.ToString()); 
+
+            transform.GetComponent<PlayerMovement>().animator.SetTrigger("attacked");
+            Attack();
         }
+    }
+
+    void Attack() {
+        RaycastHit hit;
+        Physics.Raycast(aimPoint.position, aimPoint.forward, out hit, 10f);
+        targetStats = hit.transform.GetComponent<EntityStats>();
+        targetStats.Damage(10, "true");
+        Debug.Log(hit.transform.name + " " + targetStats.health.ToString());
+        transform.GetComponent<PlayerMovement>().animator.ResetTrigger("attacked");
     }
 }
