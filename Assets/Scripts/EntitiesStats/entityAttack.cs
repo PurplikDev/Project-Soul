@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerAttack : MonoBehaviour
+public class entityAttack : MonoBehaviour
 {
 
     public Transform aimPoint;
@@ -12,14 +12,8 @@ public class PlayerAttack : MonoBehaviour
         Gizmos.DrawRay(aimPoint.position, aimPoint.forward);
     }
 
-    void Update() {
-
-        if(Input.GetButtonDown("Fire1")) {
-            transform.GetComponent<PlayerMovement>().animator.SetTrigger("attacked");
-        }
-    }
-
-    void Attack() {
+    void Attack()
+    {
         RaycastHit hit;
         Physics.Raycast(aimPoint.position, aimPoint.forward, out hit, 10f);
         targetStats = hit.transform.GetComponent<EntityStats>();

@@ -2,30 +2,29 @@ using UnityEngine;
 
 public class EntityStats : MonoBehaviour
 {
-    public int baseHealth = 100;
+    public int baseHealth;
     public int maxHealth;
     public int health { get; private set; }
-    public bool alive;
 
-    public EntityStat enemyLevel;
+    [Min(1)]
+    public EntityStat entityLevel;
 
-    public EntityStat attackDamage;
+    public EntityStat attackDamage { get; private set; }
     public EntityStat reach;
 
     void Awake() {
-        maxHealth = baseHealth * (enemyLevel.GetValue() * 5);
-        health = baseHealth;
+        maxHealth = baseHealth + (entityLevel.GetValue() * 10);
+        health = maxHealth;
     }
 
     public void Damage(int damageAmount, string damageType) {
         switch(damageType) {
             case "true": health -= damageAmount; break;
         }
-
     }
 
     void Update() {
-       if(health <= 0) {
+       if(health <= 0 && !gameObject.CompareTag("Player")) {
             Destroy(gameObject);
         } 
     }
