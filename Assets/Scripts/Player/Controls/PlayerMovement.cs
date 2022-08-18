@@ -4,8 +4,8 @@ public class PlayerMovement : MonoBehaviour
 {
     public CharacterController characterController;
 
-    public float defaultSpeed = 12f;
-    public float speed;
+    private float defaultSpeed;
+    private float speed;
 
     public float gravity = -9.81f;
     public float jumpHeight = 3f;
@@ -13,6 +13,11 @@ public class PlayerMovement : MonoBehaviour
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
+
+    public Transform playerBody;
+    public Transform playerHead;
+    private float headRotationY = 0f;
+    private float bodyRotationY = 0f;
 
     Vector3 velocity;
     bool isGrounded;
@@ -49,13 +54,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void CalculateStats() {
 
-        if (Input.GetButton("Sprint"))
-        {
+        defaultSpeed = gameObject.GetComponent<EntityStats>().speed;
+
+        if (Input.GetButton("Sprint")) {
             speed = defaultSpeed * 1.45f;
+            animator.SetFloat("sprintModifier", 1.45f);
         }
         else
         {
             speed = defaultSpeed;
+            animator.SetFloat("sprintModifier", 1f);
         }
     }
 }

@@ -6,6 +6,8 @@ public class EntityStats : MonoBehaviour
     public int maxHealth;
     public int health { get; private set; }
 
+    public float speed;
+
     [Min(1)]
     public EntityStat entityLevel;
 
