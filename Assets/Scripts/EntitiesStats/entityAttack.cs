@@ -28,7 +28,7 @@ public class entityAttack : MonoBehaviour
         RaycastHit hit;
         Physics.Raycast(aimPoint.position, aimPoint.forward, out hit, 5f);
 
-        if(hit.transform.CompareTag("Player")) {
+        if(hit.transform != null && hit.transform.CompareTag("Player")) {
             transform.GetComponent<Animator>().SetTrigger("attacked");
         }
     }

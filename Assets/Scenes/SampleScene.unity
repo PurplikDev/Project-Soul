@@ -460,6 +460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookRadius: 10
+  entityAim: {fileID: 932924568}
 --- !u!114 &747922230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1045,8 +1046,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e65006fcc5192db41a7316ce1267e234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseHealth: 2147483647
-  maxHealth: 2147483647
+  baseHealth: 100
+  maxHealth: 100
   speed: 5
   entityLevel:
     baseValue: 1
