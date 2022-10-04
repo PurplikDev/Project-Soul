@@ -37,6 +37,6 @@ public class shamblingHuskController: MonoBehaviour
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, lookRadius);
-        Gizmos.DrawRay(entityAim.position, entityAim.forward, );
+        //Gizmos.DrawRay(entityAim.position, entityAim.forward, );
     }
 }
