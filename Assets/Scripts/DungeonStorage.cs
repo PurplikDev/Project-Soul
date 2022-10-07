@@ -17,6 +17,5 @@ public class DungeonStorage : MonoBehaviour
     {
         spawnRooms.Add(DungeonThemes.DEBUG, inputSpawnRooms[0]);
         spawnRooms.Add(DungeonThemes.PLAGUE, inputSpawnRooms[1]);
-
     }
 }

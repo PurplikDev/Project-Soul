@@ -6,14 +6,9 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField]
     DungeonStorage.DungeonThemes selectedDungeonTheme = new DungeonStorage.DungeonThemes();
 
-    public bool start;
-
-    void Update()
+    private void Start()
     {
-        while(start)
-        {
-            Instantiate(transform.GetComponent<DungeonStorage>().spawnRooms[selectedDungeonTheme], transform.position, Quaternion.identity);
-            start = false;
-        }
+        
+        Instantiate(transform.GetComponent<DungeonStorage>().spawnRooms[selectedDungeonTheme], transform.position, Quaternion.identity);
     }
 }
