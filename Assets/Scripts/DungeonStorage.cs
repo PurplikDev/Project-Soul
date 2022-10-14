@@ -7,15 +7,24 @@ public class DungeonStorage : MonoBehaviour
     {
         DEBUG,
         PLAGUE,
-
+        ICE,
+        CLASSIC
     }
 
-    public GameObject[] inputSpawnRooms;
-    public Dictionary<DungeonThemes, GameObject> spawnRooms = new Dictionary<DungeonThemes, GameObject>();
+    [SerializeField]
+    public DungeonThemes selectedDungeonTheme = new DungeonThemes();
 
-    void Awake()
-    {
-        spawnRooms.Add(DungeonThemes.DEBUG, inputSpawnRooms[0]);
-        spawnRooms.Add(DungeonThemes.PLAGUE, inputSpawnRooms[1]);
-    }
+    [Header("Starting Rooms")]
+    public GameObject[] spawnRooms;
+
+
+    [Header("Layouts")]
+    public GameObject[] plagueLayouts;
+    public GameObject[] iceLayouts;
+    public GameObject[] classicLayouts;
+
+    [Header("Rooms")]
+    public GameObject[] plagueRooms;
+    public GameObject[] iceRooms;
+    public GameObject[] classicRooms;
 }

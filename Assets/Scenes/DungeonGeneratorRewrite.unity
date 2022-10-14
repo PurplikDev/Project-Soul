@@ -293,14 +293,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 648847939}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 20, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &835595028
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,7 +311,6 @@ GameObject:
   m_Component:
   - component: {fileID: 835595031}
   - component: {fileID: 835595030}
-  - component: {fileID: 835595029}
   m_Layer: 0
   m_Name: DungeonSpawnPoint
   m_TagString: Untagged
@@ -319,21 +318,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &835595029
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 835595028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7c105efc40b244ad9ecc256ebb9b0c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputSpawnRooms:
-  - {fileID: 3903510161261591694, guid: 4821e6f6b9c5a45deb5c6a8f62f08d45, type: 3}
-  - {fileID: 3903510161261591694, guid: 537b417daeb1d435895530fdf5f81c7e, type: 3}
 --- !u!114 &835595030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,8 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79f563364d1d746199117db5edcdef0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedDungeonTheme: 0
-  start: 0
+  dungeonGenerationController: {fileID: 1567485511}
 --- !u!4 &835595031
 Transform:
   m_ObjectHideFlags: 0
@@ -362,4 +345,62 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1567485508
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1567485511}
+  - component: {fileID: 1567485509}
+  m_Layer: 0
+  m_Name: DungeonGenerationController
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: afddc64ce70c14d0fa5312a1ba6e8cbe, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1567485509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567485508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7c105efc40b244ad9ecc256ebb9b0c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedDungeonTheme: 1
+  spawnRooms:
+  - {fileID: 3903510161261591694, guid: 4821e6f6b9c5a45deb5c6a8f62f08d45, type: 3}
+  - {fileID: 3903510161261591694, guid: 537b417daeb1d435895530fdf5f81c7e, type: 3}
+  - {fileID: 3903510161261591694, guid: 4574efaa9091340cb807d38128ccfbb8, type: 3}
+  - {fileID: 3903510161261591694, guid: dd28962c0297840e09bea7629f2aaa87, type: 3}
+  plagueLayouts:
+  - {fileID: 8513423421107233145, guid: 5f6002e285afe4167b155e74737cd072, type: 3}
+  - {fileID: 8513423421107233145, guid: 239ccd84706e042b78f27f32aa7e66f3, type: 3}
+  iceLayouts: []
+  classicLayouts: []
+  plagueRooms: []
+  iceRooms: []
+  classicRooms: []
+--- !u!4 &1567485511
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567485508}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
