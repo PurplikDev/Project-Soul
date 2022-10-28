@@ -17,6 +17,9 @@ public class DungeonStorage : MonoBehaviour
     [Header("Starting Rooms")]
     public GameObject[] spawnRooms;
 
+    [Header("Ending Rooms")]
+    public GameObject[] endRooms;
+
 
     [Header("Layouts")]
     public GameObject[] plagueLayouts;

@@ -8,7 +8,8 @@ public class DungeonSpawnPoint : MonoBehaviour
     {
         LAYOUT,
         ROOM,
-        CORRIDOR
+        CORRIDOR,
+        ENDROOM
     }
 
     [SerializeField]
@@ -16,12 +17,15 @@ public class DungeonSpawnPoint : MonoBehaviour
 
     private GameObject dungeonGenerationController;
     private DungeonStorage dungeonStorage;
+    private DungeonGenerator dungeonGenerator;
 
     public Dictionary<DungeonStorage.DungeonThemes, Dictionary<GeneratorType, GameObject[]>> themeTypes = new Dictionary<DungeonStorage.DungeonThemes, Dictionary<GeneratorType, GameObject[]>>();
 
     public Dictionary<GeneratorType, GameObject[]> plagueParts = new Dictionary<GeneratorType, GameObject[]>();
     public Dictionary<GeneratorType, GameObject[]> iceParts = new Dictionary<GeneratorType, GameObject[]>();
     public Dictionary<GeneratorType, GameObject[]> classicParts = new Dictionary<GeneratorType, GameObject[]>();
+
+    public Dictionary<DungeonStorage.DungeonThemes, GameObject> endRooms = new Dictionary<DungeonStorage.DungeonThemes, GameObject>();
 
     private Dictionary<GeneratorType, GameObject[]> selectedType;
     private GameObject[] selectedPart;
@@ -32,13 +36,19 @@ public class DungeonSpawnPoint : MonoBehaviour
     {
         dungeonGenerationController = GameObject.Find("DungeonGenerationController");
         dungeonStorage = dungeonGenerationController.GetComponent<DungeonStorage>();
+        dungeonGenerator = dungeonGenerationController.GetComponent<DungeonGenerator>();
 
         MainRegistry();
 
         selectedType = themeTypes[dungeonStorage.selectedDungeonTheme];
         selectedPart = selectedType[selectedGeneratorType];
-
-        Instantiate(selectedPart[Random.Range(0, selectedPart.Length)], transform.position, Quaternion.identity);
+        if(selectedGeneratorType == GeneratorType.ENDROOM && !dungeonGenerator.hasExit) {
+            Instantiate(endRooms[dungeonStorage.selectedDungeonTheme], transform.position, Quaternion.identity);
+            dungeonGenerator.hasExit = true;
+        } else {
+            Instantiate(selectedPart[Random.Range(0, selectedPart.Length)], transform.position, Quaternion.identity);
+        }
+        
     }
 
     private void MainRegistry()
@@ -54,6 +64,8 @@ public class DungeonSpawnPoint : MonoBehaviour
         // Classic Stuff
         RegisterClassicTypes();
         RegisterClassicParts();
+
+        RegisterEndRooms();
     }
 
     // Plague Registry
@@ -90,5 +102,15 @@ public class DungeonSpawnPoint : MonoBehaviour
     private void RegisterClassicTypes()
     {
         classicParts.Add(GeneratorType.LAYOUT, dungeonStorage.classicLayouts);
+    }
+
+    // End Registry
+
+    private void RegisterEndRooms()
+    {
+        endRooms.Add(DungeonStorage.DungeonThemes.DEBUG, dungeonStorage.endRooms[0]);
+        endRooms.Add(DungeonStorage.DungeonThemes.PLAGUE, dungeonStorage.endRooms[1]);
+        endRooms.Add(DungeonStorage.DungeonThemes.ICE, dungeonStorage.endRooms[2]);
+        endRooms.Add(DungeonStorage.DungeonThemes.CLASSIC, dungeonStorage.endRooms[3]);
     }
 }
