@@ -58,8 +58,8 @@ public class DisplayInventory : MonoBehaviour
                 var obj = Instantiate(inventoryPrefab, Vector3.zero, Quaternion.identity, transform);
                 obj.transform.GetChild(0).GetComponentInChildren<Image>().sprite = inventory.database.getItem[itemStack.item.ID].icon;
                 obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
-                obj.transform.Find("ItemAmount").GetComponent<TextMeshProUGUI>().text = itemStack.itemAmount.ToString("n0");
-                obj.transform.Find("ItemName").GetComponent<TextMeshProUGUI>().text = itemStack.item.name;
+                            obj.transform.Find("ItemAmount").GetComponent<TextMeshProUGUI>().text = itemStack.itemAmount.ToString("n0");
+            obj.transform.Find("ItemName").GetComponent<TextMeshProUGUI>().text = itemStack.item.name;
                 itemDisplayed.Add(inventory.inventory.items[i], obj);
             }
 
