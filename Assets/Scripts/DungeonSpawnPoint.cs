@@ -23,11 +23,17 @@ public class DungeonSpawnPoint : MonoBehaviour
         dungeonGenerator = dungeonGenerationController.GetComponent<DungeonGenerator>();
 
         selectedType = dungeonStorage.themeTypes[dungeonStorage.selectedDungeonTheme];
-        selectedPart = selectedType[selectedGeneratorType];
-        if(selectedGeneratorType == DungeonStorage.GeneratorType.ENDROOM && !dungeonGenerator.hasExit) {
-            Instantiate(dungeonStorage.endRoomThemes[dungeonStorage.selectedDungeonTheme], transform.position, Quaternion.identity);
-            dungeonGenerator.hasExit = true;
+        if(selectedGeneratorType == DungeonStorage.GeneratorType.ENDROOM) {
+            if(!dungeonGenerator.hasExit)
+            {
+                Instantiate(dungeonStorage.endRoomThemes[dungeonStorage.selectedDungeonTheme], transform.position, Quaternion.identity);
+                dungeonGenerator.hasExit = true;
+            } else
+            {
+                Debug.Log("idk");
+            }
         } else {
+            selectedPart = selectedType[selectedGeneratorType];
             Instantiate(selectedPart[Random.Range(0, selectedPart.Length)], transform.position, Quaternion.identity);
         }
 
