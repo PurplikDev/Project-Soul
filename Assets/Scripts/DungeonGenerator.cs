@@ -8,6 +8,7 @@ public class DungeonGenerator : MonoBehaviour
 
     public Dictionary<DungeonStorage.DungeonThemes, GameObject> spawnRooms = new Dictionary<DungeonStorage.DungeonThemes, GameObject>();
     public bool hasExit;
+    public int amountOfExits;
    
 
     private void Awake()

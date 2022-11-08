@@ -14,23 +14,64 @@ public class DungeonSpawnPoint : MonoBehaviour
     private Dictionary<DungeonStorage.GeneratorType, GameObject[]> selectedType;
     private GameObject[] selectedPart;
 
+    private int randomChance;
 
-
-    private void Start()
+    void Awake()
     {
         dungeonGenerationController = GameObject.Find("DungeonGenerationController");
         dungeonStorage = dungeonGenerationController.GetComponent<DungeonStorage>();
         dungeonGenerator = dungeonGenerationController.GetComponent<DungeonGenerator>();
 
         selectedType = dungeonStorage.themeTypes[dungeonStorage.selectedDungeonTheme];
-        if(selectedGeneratorType == DungeonStorage.GeneratorType.DEADEND && !dungeonGenerator.hasExit) {
-            Instantiate(dungeonStorage.endRoomThemes[dungeonStorage.selectedDungeonTheme], transform.position, Quaternion.identity);
-            dungeonGenerator.hasExit = true;
-        } else {
+
+        // GENERATES A DUNGEON PART IF IT IS NOT A DEAD END
+
+        if(selectedGeneratorType != DungeonStorage.GeneratorType.DEADEND) {
             selectedPart = selectedType[selectedGeneratorType];
             Instantiate(selectedPart[Random.Range(0, selectedPart.Length)], transform.position, Quaternion.identity);
+        } else { 
+            dungeonGenerator.amountOfExits++;
         }
+    }
 
-        Destroy(gameObject);
+    void Start()
+    {
+        // GENERATES AN EXIT OR A DEAD END
+
+        if(selectedGeneratorType == DungeonStorage.GeneratorType.DEADEND)
+        {
+            dungeonGenerationController = GameObject.Find("DungeonGenerationController");
+            dungeonStorage = dungeonGenerationController.GetComponent<DungeonStorage>();
+            dungeonGenerator = dungeonGenerationController.GetComponent<DungeonGenerator>();
+            selectedPart = selectedType[selectedGeneratorType];
+
+            randomChance = Random.Range(0, 100) % 3;
+
+            if (!dungeonGenerator.hasExit)
+            {
+                if (randomChance != 2) {
+                    if (dungeonGenerator.amountOfExits == 1)
+                    {
+                        Instantiate(dungeonStorage.endRoomThemes[dungeonStorage.selectedDungeonTheme], transform.position, Quaternion.identity);
+                        dungeonGenerator.hasExit = true;
+                    }
+                    else
+                    {
+                        Instantiate(selectedPart[Random.Range(0, selectedPart.Length)], transform.position, Quaternion.identity);
+                    }
+                } else
+                {
+                    Instantiate(dungeonStorage.endRoomThemes[dungeonStorage.selectedDungeonTheme], transform.position, Quaternion.identity);
+                    dungeonGenerator.hasExit = true;
+                }
+            }
+            else
+            {
+                Instantiate(selectedPart[Random.Range(0, selectedPart.Length)], transform.position, Quaternion.identity);
+            }
+
+            dungeonGenerator.amountOfExits--;
+            Destroy(gameObject);
+        }
     }
 }
