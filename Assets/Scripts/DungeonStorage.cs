@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static DungeonSpawnPoint;
 
 public class DungeonStorage : MonoBehaviour
 {
@@ -17,7 +16,7 @@ public class DungeonStorage : MonoBehaviour
         LAYOUT,
         ROOM,
         CORRIDOR,
-        ENDROOM
+        DEADEND
     }
 
     [SerializeField]
@@ -40,6 +39,11 @@ public class DungeonStorage : MonoBehaviour
     public GameObject[] iceRooms;
     public GameObject[] classicRooms;
 
+    [Header("Dead Ends")]
+    public GameObject[] plagueDeadEnds;
+    public GameObject[] iceDeadEnds;
+    public GameObject[] classicDeadEnds;
+
     public Dictionary<DungeonThemes, Dictionary<GeneratorType, GameObject[]>> themeTypes = new Dictionary<DungeonThemes, Dictionary<GeneratorType, GameObject[]>>();
 
     public Dictionary<GeneratorType, GameObject[]> plagueParts = new Dictionary<GeneratorType, GameObject[]>();
@@ -56,63 +60,62 @@ public class DungeonStorage : MonoBehaviour
     private void MainRegistry()
     {
         // Plague Stuff
-        RegisterPlagueTypes();
-        RegisterPlagueParts();
+        RegisterPlague();
 
         // Ice Stuff
-        RegisterIceTypes();
-        RegisterIceParts();
+        RegisterIce();
 
         // Classic Stuff
-        RegisterClassicTypes();
-        RegisterClassicParts();
+        RegisterClassic();
 
-        RegisterEndRooms();
+        // Exit Rooms
+        RegisterExitRooms();
     }
 
     // Plague Registry
 
-    private void RegisterPlagueParts()
+    private void RegisterPlague()
     {
+        // THEME
         themeTypes.Add(DungeonThemes.PLAGUE, plagueParts);
-    }
 
-    private void RegisterPlagueTypes()
-    {
+        // PARTS
         plagueParts.Add(GeneratorType.LAYOUT, plagueLayouts);
+        plagueParts.Add(GeneratorType.DEADEND, plagueDeadEnds);
+
     }
 
     // Ice Registry
 
-    private void RegisterIceParts()
+    private void RegisterIce()
     {
+        // THEME
         themeTypes.Add(DungeonThemes.ICE, iceParts);
-    }
 
-    private void RegisterIceTypes()
-    {
+        // PARTS
         iceParts.Add(GeneratorType.LAYOUT, iceLayouts);
+        iceParts.Add(GeneratorType.DEADEND, iceDeadEnds);
     }
 
     // Classic Registry
 
-    private void RegisterClassicParts()
+    private void RegisterClassic()
     {
+        // THEME
         themeTypes.Add(DungeonThemes.CLASSIC, classicParts);
-    }
 
-    private void RegisterClassicTypes()
-    {
+        // PARTS
         classicParts.Add(GeneratorType.LAYOUT, classicLayouts);
+        classicParts.Add(GeneratorType.DEADEND, classicDeadEnds);
     }
 
     // End Registry
 
-    private void RegisterEndRooms()
+    private void RegisterExitRooms()
     {
-        endRoomThemes.Add(DungeonThemes.DEBUG, endRooms[0]);
-        endRoomThemes.Add(DungeonThemes.PLAGUE, endRooms[1]);
-        endRoomThemes.Add(DungeonThemes.ICE, endRooms[2]);
-        endRoomThemes.Add(DungeonThemes.CLASSIC, endRooms[3]);
+        endRoomThemes.Add(DungeonThemes.DEBUG, exitRooms[0]);
+        endRoomThemes.Add(DungeonThemes.PLAGUE, exitRooms[1]);
+        endRoomThemes.Add(DungeonThemes.ICE, exitRooms[2]);
+        endRoomThemes.Add(DungeonThemes.CLASSIC, exitRooms[3]);
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1072,19 +1072,25 @@ MonoBehaviour:
   - {fileID: 3903510161261591694, guid: 537b417daeb1d435895530fdf5f81c7e, type: 3}
   - {fileID: 3903510161261591694, guid: 4574efaa9091340cb807d38128ccfbb8, type: 3}
   - {fileID: 3903510161261591694, guid: dd28962c0297840e09bea7629f2aaa87, type: 3}
-  endRooms:
+  exitRooms:
   - {fileID: 3903510161261591694, guid: ffe74da66e71fe34382b00a431225ca5, type: 3}
   - {fileID: 3903510161261591694, guid: cbb0b9feaecfb344b83445c8566769e5, type: 3}
   - {fileID: 3903510161261591694, guid: 64b73bc95759bf44aa21ea1633f47d03, type: 3}
   - {fileID: 3903510161261591694, guid: 1ed8b3d65e7915b4f9af2ecda29badc0, type: 3}
   plagueLayouts:
-  - {fileID: 5010801143545698854, guid: b32f53252de8e4afd932e8fed7d4d210, type: 3}
   - {fileID: 7837886756817680536, guid: ee8ad6d2192414cf483ba2bc663578a6, type: 3}
+  - {fileID: 7837886756817680536, guid: 6428b2e8ee3ae44b381b5993b30bb7a6, type: 3}
   iceLayouts: []
   classicLayouts: []
   plagueRooms: []
   iceRooms: []
   classicRooms: []
+  plagueDeadEnds:
+  - {fileID: 3903510161261591694, guid: 8384d32b3feea4f71b705fbc427cc443, type: 3}
+  - {fileID: 3903510161261591694, guid: 99164987b8232474ea7d956830ba16c1, type: 3}
+  - {fileID: 3903510161261591694, guid: eb40242b22afa4dca94a98192841064a, type: 3}
+  iceDeadEnds: []
+  classicDeadEnds: []
 --- !u!4 &1567485511
 Transform:
   m_ObjectHideFlags: 0
