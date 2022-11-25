@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class TestPlayer : MonoBehaviour
 {
@@ -31,6 +32,6 @@ public class TestPlayer : MonoBehaviour
 
     void OnApplicationQuit()
     {
-        inventory.inventory.items.Clear();
+        inventory.inventory.items = new ItemStack[28];
     }
 }

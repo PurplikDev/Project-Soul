@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -828,10 +828,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventory: {fileID: 11400000, guid: 969b97d388b9e8747b3261201e5113a3, type: 2}
   inventoryPrefab: {fileID: 6007873725403915221, guid: a60e55649470ead40a19826e6306c72b, type: 3}
-  X_START: 0
+  X_START: -70
   Y_START: 122
-  X_SPACE_BETWEEN_ITEM: 55
-  NUMBER_OF_COLUMN: 1
+  X_SPACE_BETWEEN_ITEM: 47
+  NUMBER_OF_COLUMN: 4
   Y_SPACE_BETWEEN_ITEMS: 40
 --- !u!1 &1213998334
 GameObject:
@@ -1120,6 +1120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dungeonGenerationController: {fileID: 1567485511}
   hasExit: 0
+  amountOfExits: 0
 --- !u!1 &1830914430
 GameObject:
   m_ObjectHideFlags: 0

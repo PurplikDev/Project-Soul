@@ -1,13 +1,17 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 public class DisplayInventory : MonoBehaviour
 {
-    public InventoryObject inventory;
+    public MouseItem mouseItem = new MouseItem();
 
+    public InventoryObject inventory;
     public GameObject inventoryPrefab;
 
     public int X_START;
@@ -16,58 +20,127 @@ public class DisplayInventory : MonoBehaviour
     public int NUMBER_OF_COLUMN;
     public int Y_SPACE_BETWEEN_ITEMS;
 
-    Dictionary<ItemStack, GameObject> itemDisplayed = new Dictionary<ItemStack, GameObject>();
-
-    // Start is called before the first frame update
+    Dictionary<GameObject, ItemStack> itemsDisplayed = new Dictionary<GameObject, ItemStack>();
+    
     void Start()
     {
-        CreateDisplay();
+        CreateSlots();
     }
-
-    // Update is called once per frame
     void Update()
     {
-        UpdateDisplay();
+        UpdateSlots();
     }
 
-    public void CreateDisplay()
+    public void UpdateSlots()
     {
-        for (int i = 0; i < inventory.inventory.items.Count; i++)
+        foreach(KeyValuePair<GameObject, ItemStack> _slot in itemsDisplayed)
         {
-            ItemStack itemStack = inventory.inventory.items[i];
-
-            var obj = Instantiate(inventoryPrefab, Vector3.zero, Quaternion.identity, transform);
-            obj.transform.GetChild(0).GetComponentInChildren<Image>().sprite = inventory.database.getItem[itemStack.item.ID].icon; obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
-            obj.transform.Find("ItemAmount").GetComponent<TextMeshProUGUI>().text = itemStack.itemAmount.ToString("n0");
-            obj.transform.Find("ItemName").GetComponent<TextMeshProUGUI>().text = itemStack.item.name;
-            itemDisplayed.Add(itemStack, obj);
-        }
-    }
-
-    public void UpdateDisplay()
-    {
-        for (int i = 0; i < inventory.inventory.items.Count; i++)
-        {
-            ItemStack itemStack = inventory.inventory.items[i];
-
-            if (itemDisplayed.ContainsKey(itemStack))
+            if(_slot.Value.itemID > 0)
             {
-                itemDisplayed[itemStack].GetComponentInChildren<TextMeshProUGUI>().text = inventory.inventory.items[i].itemAmount.ToString("n0");
-            } else
-            {
-                var obj = Instantiate(inventoryPrefab, Vector3.zero, Quaternion.identity, transform);
-                obj.transform.GetChild(0).GetComponentInChildren<Image>().sprite = inventory.database.getItem[itemStack.item.ID].icon;
-                obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
-                            obj.transform.Find("ItemAmount").GetComponent<TextMeshProUGUI>().text = itemStack.itemAmount.ToString("n0");
-            obj.transform.Find("ItemName").GetComponent<TextMeshProUGUI>().text = itemStack.item.name;
-                itemDisplayed.Add(inventory.inventory.items[i], obj);
+                _slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().sprite = inventory.database.getItem[_slot.Value.item.ID].icon;
+                _slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().color = new Color(1, 1, 1, 1);
+                _slot.Key.GetComponentInChildren<TextMeshProUGUI>().text = _slot.Value.itemAmount == 1 ? "" : _slot.Value.itemAmount.ToString("n0");
+            } else {
+                _slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().sprite = null;
+                _slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().color = new Color(1, 1, 1, 0);
+                _slot.Key.GetComponentInChildren<TextMeshProUGUI>().text = "";
             }
-
         }
     }
+
+    public void CreateSlots()
+    {
+        itemsDisplayed = new Dictionary<GameObject, ItemStack>();
+        for (int i = 0; i < inventory.inventory.items.Length; i++)
+        {
+            var obj = Instantiate(inventoryPrefab, Vector3.zero, Quaternion.identity, transform);
+            obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
+
+            AddEvent(obj, EventTriggerType.PointerEnter, delegate { OnEnter(obj); });
+            AddEvent(obj, EventTriggerType.PointerExit, delegate { OnExit(obj); });
+            AddEvent(obj, EventTriggerType.BeginDrag, delegate { BeginDrag(obj); });
+            AddEvent(obj, EventTriggerType.EndDrag, delegate { EndDrag(obj); });
+            AddEvent(obj, EventTriggerType.Drag, delegate { OnDrag(obj); });
+
+            itemsDisplayed.Add(obj, inventory.inventory.items[i]);
+        }
+    }
+
+    public void OnEnter(GameObject gameObject)
+    {
+        mouseItem.hoverObject = gameObject;
+        if(itemsDisplayed.ContainsKey(gameObject))
+        {
+            mouseItem.hoverStack = itemsDisplayed[gameObject];
+        }
+    }
+
+    public void OnExit(GameObject gameObject)
+    {
+        mouseItem.hoverObject = null;
+        mouseItem.hoverStack = null;
+    }
+
+    public void BeginDrag(GameObject gameObject)
+    {
+        var mouseObject = new GameObject();
+        var rectTransform = mouseObject.AddComponent<RectTransform>();
+        rectTransform.sizeDelta = new Vector2(30, 30);
+        mouseObject.transform.SetParent(transform.parent);
+        if (itemsDisplayed[gameObject].itemID > 0)
+        {
+            var image = mouseObject.AddComponent<Image>();
+            image.sprite = inventory.database.getItem[itemsDisplayed[gameObject].itemID].icon;
+            image.raycastTarget = false;
+        }
+        mouseItem.gameObject = mouseObject;
+        mouseItem.itemStack = itemsDisplayed[gameObject];
+    }
+
+    public void EndDrag(GameObject gameObject)
+    {
+        if (mouseItem.hoverObject)
+        {
+            inventory.MoveItem(itemsDisplayed[gameObject], itemsDisplayed[mouseItem.hoverObject]);
+        } 
+        else
+        {
+
+        }
+        Destroy(mouseItem.gameObject);
+        mouseItem.itemStack = null;
+
+    }
+
+    public void OnDrag(GameObject gameObject)
+    {
+        if(mouseItem.gameObject != null)
+        {
+            mouseItem.gameObject.GetComponent<RectTransform>().position = Input.mousePosition;
+        }
+    }
+
+
 
     public Vector3 GetPosition(int i)
     {
         return new Vector3(X_START + (X_SPACE_BETWEEN_ITEM * (i % NUMBER_OF_COLUMN)), Y_START + (-Y_SPACE_BETWEEN_ITEMS * (i / NUMBER_OF_COLUMN)), 0f);
     }
+
+    private void AddEvent(GameObject gameObject, EventTriggerType triggerType, UnityAction<BaseEventData> action)
+    {
+        EventTrigger trigger = gameObject.GetComponent<EventTrigger>();
+        var eventTrigger = new EventTrigger.Entry();
+        eventTrigger.eventID = triggerType;
+        eventTrigger.callback.AddListener(action);
+        trigger.triggers.Add(eventTrigger);
+    }
+}
+
+public class MouseItem
+{
+    public GameObject gameObject;
+    public ItemStack itemStack;
+    public ItemStack hoverStack;
+    public GameObject hoverObject;
 }
