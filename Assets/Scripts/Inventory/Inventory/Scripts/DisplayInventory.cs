@@ -29,6 +29,10 @@ public class DisplayInventory : MonoBehaviour
     void Update()
     {
         UpdateSlots();
+        if (mouseItem.gameObject != null)
+        {
+            MoveItem();
+        }
     }
 
     public void UpdateSlots()
@@ -55,12 +59,16 @@ public class DisplayInventory : MonoBehaviour
         {
             var obj = Instantiate(inventoryPrefab, Vector3.zero, Quaternion.identity, transform);
             obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
-
+            
             AddEvent(obj, EventTriggerType.PointerEnter, delegate { OnEnter(obj); });
             AddEvent(obj, EventTriggerType.PointerExit, delegate { OnExit(obj); });
+            /*
             AddEvent(obj, EventTriggerType.BeginDrag, delegate { BeginDrag(obj); });
             AddEvent(obj, EventTriggerType.EndDrag, delegate { EndDrag(obj); });
             AddEvent(obj, EventTriggerType.Drag, delegate { OnDrag(obj); });
+            */
+
+            AddEvent(obj, EventTriggerType.PointerClick, delegate { OnClick(obj); });
 
             itemsDisplayed.Add(obj, inventory.inventory.items[i]);
         }
@@ -69,6 +77,7 @@ public class DisplayInventory : MonoBehaviour
     public void OnEnter(GameObject gameObject)
     {
         mouseItem.hoverObject = gameObject;
+        Debug.Log("OnEnter: " + mouseItem.hoverObject);
         if(itemsDisplayed.ContainsKey(gameObject))
         {
             mouseItem.hoverStack = itemsDisplayed[gameObject];
@@ -77,10 +86,11 @@ public class DisplayInventory : MonoBehaviour
 
     public void OnExit(GameObject gameObject)
     {
+        Debug.Log("exiting");
         mouseItem.hoverObject = null;
         mouseItem.hoverStack = null;
     }
-
+    /*
     public void BeginDrag(GameObject gameObject)
     {
         var mouseObject = new GameObject();
@@ -105,7 +115,7 @@ public class DisplayInventory : MonoBehaviour
         } 
         else
         {
-
+            Debug.Log("guh?");
         }
         Destroy(mouseItem.gameObject);
         mouseItem.itemStack = null;
@@ -114,13 +124,40 @@ public class DisplayInventory : MonoBehaviour
 
     public void OnDrag(GameObject gameObject)
     {
-        if(mouseItem.gameObject != null)
+        if (mouseItem.gameObject != null)
         {
             mouseItem.gameObject.GetComponent<RectTransform>().position = Input.mousePosition;
         }
     }
+    */
+    public void OnClick(GameObject gameObject)
+    {
+        if(mouseItem.hoverObject)
+        {
+            inventory.MoveItem(itemsDisplayed[gameObject], itemsDisplayed[mouseItem.hoverObject]);
+        } else
+        {
+            var mouseObject = new GameObject();
+            var rectTransform = mouseObject.AddComponent<RectTransform>();
+            rectTransform.sizeDelta = new Vector2(30, 30);
+            mouseObject.transform.SetParent(transform.parent);
+            if (itemsDisplayed[gameObject].itemID > 0)
+            {
+                var image = mouseObject.AddComponent<Image>();
+                image.sprite = inventory.database.getItem[itemsDisplayed[gameObject].itemID].icon;
+                image.raycastTarget = false;
+            }
+            Destroy(mouseItem.gameObject);
+            mouseItem.itemStack = null;
+            mouseItem.gameObject = mouseObject;
+            mouseItem.itemStack = itemsDisplayed[gameObject];
+        }
+    }
 
-
+    public void MoveItem()
+    {
+        mouseItem.gameObject.GetComponent<RectTransform>().position = Input.mousePosition;
+    }
 
     public Vector3 GetPosition(int i)
     {
