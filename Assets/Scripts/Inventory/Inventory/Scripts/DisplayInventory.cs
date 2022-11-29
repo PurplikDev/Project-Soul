@@ -77,7 +77,7 @@ public class DisplayInventory : MonoBehaviour
     public void OnEnter(GameObject gameObject)
     {
         mouseItem.hoverObject = gameObject;
-        Debug.Log("OnEnter: " + mouseItem.hoverObject);
+        
         if(itemsDisplayed.ContainsKey(gameObject))
         {
             mouseItem.hoverStack = itemsDisplayed[gameObject];
@@ -86,7 +86,6 @@ public class DisplayInventory : MonoBehaviour
 
     public void OnExit(GameObject gameObject)
     {
-        Debug.Log("exiting");
         mouseItem.hoverObject = null;
         mouseItem.hoverStack = null;
     }
@@ -132,11 +131,15 @@ public class DisplayInventory : MonoBehaviour
     */
     public void OnClick(GameObject gameObject)
     {
-        if(mouseItem.hoverObject)
+        if(mouseItem.gameObject)
         {
-            inventory.MoveItem(itemsDisplayed[gameObject], itemsDisplayed[mouseItem.hoverObject]);
+            inventory.MoveItem(itemsDisplayed[gameObject], mouseItem.itemStack);
+            mouseItem.itemStack = null;
+            GameObject.Destroy(mouseItem.gameObject);
+            
         } else
         {
+            Debug.Log("not funny click");
             var mouseObject = new GameObject();
             var rectTransform = mouseObject.AddComponent<RectTransform>();
             rectTransform.sizeDelta = new Vector2(30, 30);

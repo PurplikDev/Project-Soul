@@ -16,8 +16,8 @@ public class PlayerMovement : MonoBehaviour
 
     public Transform playerBody;
     public Transform playerHead;
-    private float headRotationY = 0f;
-    private float bodyRotationY = 0f;
+//    private float headRotationY = 0f;
+//    private float bodyRotationY = 0f;
 
     Vector3 velocity;
     bool isGrounded;
