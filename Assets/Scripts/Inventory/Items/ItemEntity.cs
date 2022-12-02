@@ -7,6 +7,9 @@ public class ItemEntity : MonoBehaviour
     public ItemObject item;
     private Transform model;
 
+    [Range(1, 32)]
+    public int itemAmount = 1;
+
     private float itemRotationY;
 
     void Awake()

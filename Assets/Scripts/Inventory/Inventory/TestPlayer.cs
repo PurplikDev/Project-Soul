@@ -10,10 +10,11 @@ public class TestPlayer : MonoBehaviour
     void OnTriggerEnter(Collider collider)
     {
         var item = collider.GetComponent<ItemEntity>();
+        int itemAmount = collider.GetComponent<ItemEntity>().itemAmount;
 
         if(item)
         {
-            inventory.AddItem(new Item(item.item), 1);
+            inventory.AddItem(new Item(item.item), itemAmount);
             Destroy(collider.gameObject);
         }
     }

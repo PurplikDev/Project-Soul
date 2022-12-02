@@ -131,30 +131,37 @@ public class DisplayInventory : MonoBehaviour
     */
     public void OnClick(GameObject gameObject)
     {
-        if(mouseItem.gameObject)
+        if (/*Input.GetMouseButton(0)*/ true)
         {
-            inventory.MoveItem(itemsDisplayed[gameObject], mouseItem.itemStack);
-            mouseItem.itemStack = null;
-            GameObject.Destroy(mouseItem.gameObject);
-            
-        } else
-        {
-            Debug.Log("not funny click");
-            var mouseObject = new GameObject();
-            var rectTransform = mouseObject.AddComponent<RectTransform>();
-            rectTransform.sizeDelta = new Vector2(30, 30);
-            mouseObject.transform.SetParent(transform.parent);
-            if (itemsDisplayed[gameObject].itemID > 0)
+            ItemStack _itemStack;
+            itemsDisplayed.TryGetValue(gameObject, out _itemStack);
+            if (mouseItem.gameObject)
             {
-                var image = mouseObject.AddComponent<Image>();
-                image.sprite = inventory.database.getItem[itemsDisplayed[gameObject].itemID].icon;
-                image.raycastTarget = false;
+                inventory.MoveItem(itemsDisplayed[gameObject], mouseItem.itemStack);
+                mouseItem.itemStack = null;
+                Destroy(mouseItem.gameObject);
+
             }
-            Destroy(mouseItem.gameObject);
-            mouseItem.itemStack = null;
-            mouseItem.gameObject = mouseObject;
-            mouseItem.itemStack = itemsDisplayed[gameObject];
+            else if (_itemStack.itemID > 0)
+            {
+                Debug.Log("not funny click");
+                var mouseObject = new GameObject();
+                var rectTransform = mouseObject.AddComponent<RectTransform>();
+                rectTransform.sizeDelta = new Vector2(30, 30);
+                mouseObject.transform.SetParent(transform.parent);
+                if (itemsDisplayed[gameObject].itemID > 0)
+                {
+                    var image = mouseObject.AddComponent<Image>();
+                    image.sprite = inventory.database.getItem[itemsDisplayed[gameObject].itemID].icon;
+                    image.raycastTarget = false;
+                }
+                Destroy(mouseItem.gameObject);
+                mouseItem.itemStack = null;
+                mouseItem.gameObject = mouseObject;
+                mouseItem.itemStack = itemsDisplayed[gameObject];
+            }
         }
+        
     }
 
     public void MoveItem()

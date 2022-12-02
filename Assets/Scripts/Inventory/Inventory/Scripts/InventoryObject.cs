@@ -15,18 +15,27 @@ public class InventoryObject : ScriptableObject
     public ItemDatabase database;
     public Inventory inventory;
 
-    public void AddItem(Item _item, int itemAmount)
+    public void AddItem(Item _item, int _itemAmount)
     {
 
         for(int i = 0; i < inventory.items.Length; i++)
         {
-            if (inventory.items[i].item.ID == _item.ID)
+
+            if (inventory.items[i].item.ID == _item.ID && inventory.items[i].item.maxStackSize < inventory.items[i].itemAmount + _itemAmount)
             {
-                inventory.items[i].AddItemAmount(itemAmount);
+                Debug.Log("item big: " + inventory.items[i].item.name + "\ntoo big by: " + (inventory.items[i].item.maxStackSize - (inventory.items[i].itemAmount + _itemAmount)));
+                int overflow = inventory.items[i].item.maxStackSize - inventory.items[i].itemAmount;
+                inventory.items[i].AddItemAmount(overflow);
+                _itemAmount -= overflow;
+
+            }
+            if (inventory.items[i].item.ID == _item.ID && inventory.items[i].item.maxStackSize > inventory.items[i].itemAmount + _itemAmount)
+            {
+                inventory.items[i].AddItemAmount(_itemAmount);
                 return;
             }
         }
-        SetEmptySlot(_item, itemAmount);
+        SetEmptySlot(_item, _itemAmount);
 
     }
 
@@ -85,6 +94,7 @@ public class ItemStack
     public int itemID;
     public Item item;
     public int itemAmount;
+    public int maxStackSize;
     public ItemStack()
     {
         itemID = 0;

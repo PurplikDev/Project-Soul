@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f64de1cc72d39a41a7478c742bbf186, type: 3}
   m_Name: Petr
   m_EditorClassIdentifier: 
-  ID: 4
+  ID: 3
   icon: {fileID: 21300000, guid: afddc64ce70c14d0fa5312a1ba6e8cbe, type: 3}
-  type: 3
+  type: 0
+  maxStackSize: 1
   desc: Sleeping Hat
