@@ -23,7 +23,6 @@ public class InventoryObject : ScriptableObject
 
             if (inventory.items[i].item.ID == _item.ID && inventory.items[i].item.maxStackSize < inventory.items[i].itemAmount + _itemAmount)
             {
-                Debug.Log("item big: " + inventory.items[i].item.name + "\ntoo big by: " + (inventory.items[i].item.maxStackSize - (inventory.items[i].itemAmount + _itemAmount)));
                 int overflow = inventory.items[i].item.maxStackSize - inventory.items[i].itemAmount;
                 inventory.items[i].AddItemAmount(overflow);
                 _itemAmount -= overflow;

@@ -144,7 +144,6 @@ public class DisplayInventory : MonoBehaviour
             }
             else if (_itemStack.itemID > 0)
             {
-                Debug.Log("not funny click");
                 var mouseObject = new GameObject();
                 var rectTransform = mouseObject.AddComponent<RectTransform>();
                 rectTransform.sizeDelta = new Vector2(30, 30);
