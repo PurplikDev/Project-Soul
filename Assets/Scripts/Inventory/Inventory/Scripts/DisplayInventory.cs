@@ -20,7 +20,7 @@ public class DisplayInventory : MonoBehaviour
     public int NUMBER_OF_COLUMN;
     public int Y_SPACE_BETWEEN_ITEMS;
 
-    Dictionary<GameObject, ItemStack> itemsDisplayed = new Dictionary<GameObject, ItemStack>();
+    public Dictionary<GameObject, ItemStack> itemsDisplayed = new Dictionary<GameObject, ItemStack>();
     
     void Start()
     {
@@ -62,14 +62,14 @@ public class DisplayInventory : MonoBehaviour
             
             AddEvent(obj, EventTriggerType.PointerEnter, delegate { OnEnter(obj); });
             AddEvent(obj, EventTriggerType.PointerExit, delegate { OnExit(obj); });
-            
-            AddEvent(obj, EventTriggerType.BeginDrag, delegate { BeginDrag(obj); });
             /*
+            AddEvent(obj, EventTriggerType.BeginDrag, delegate { BeginDrag(obj); });
+            
             AddEvent(obj, EventTriggerType.EndDrag, delegate { EndDrag(obj); });
             AddEvent(obj, EventTriggerType.Drag, delegate { OnDrag(obj); });
             */
 
-            AddEvent(obj, EventTriggerType.PointerClick, delegate { OnClick(obj); });
+            //AddEvent(obj, EventTriggerType.PointerClick, delegate { OnClick(obj); });
 
             itemsDisplayed.Add(obj, inventory.inventory.items[i]);
         }
@@ -183,6 +183,8 @@ public class DisplayInventory : MonoBehaviour
         eventTrigger.callback.AddListener(action);
         trigger.triggers.Add(eventTrigger);
     }
+
+    
 }
 
 public class MouseItem
