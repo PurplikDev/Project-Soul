@@ -62,8 +62,9 @@ public class DisplayInventory : MonoBehaviour
             
             AddEvent(obj, EventTriggerType.PointerEnter, delegate { OnEnter(obj); });
             AddEvent(obj, EventTriggerType.PointerExit, delegate { OnExit(obj); });
-            /*
+            
             AddEvent(obj, EventTriggerType.BeginDrag, delegate { BeginDrag(obj); });
+            /*
             AddEvent(obj, EventTriggerType.EndDrag, delegate { EndDrag(obj); });
             AddEvent(obj, EventTriggerType.Drag, delegate { OnDrag(obj); });
             */
@@ -89,7 +90,7 @@ public class DisplayInventory : MonoBehaviour
         mouseItem.hoverObject = null;
         mouseItem.hoverStack = null;
     }
-    /*
+    
     public void BeginDrag(GameObject gameObject)
     {
         var mouseObject = new GameObject();
@@ -105,7 +106,7 @@ public class DisplayInventory : MonoBehaviour
         mouseItem.gameObject = mouseObject;
         mouseItem.itemStack = itemsDisplayed[gameObject];
     }
-
+    /*
     public void EndDrag(GameObject gameObject)
     {
         if (mouseItem.hoverObject)
@@ -131,6 +132,7 @@ public class DisplayInventory : MonoBehaviour
     */
     public void OnClick(GameObject gameObject)
     {
+
         if (/*Input.GetMouseButton(0)*/ true)
         {
             ItemStack _itemStack;
