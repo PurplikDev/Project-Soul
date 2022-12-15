@@ -93,7 +93,6 @@ public class ItemStack
     public int itemID;
     public Item item;
     public int itemAmount;
-    public int maxStackSize;
     public ItemStack()
     {
         itemID = 0;

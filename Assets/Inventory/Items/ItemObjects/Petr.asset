@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Petr
   m_EditorClassIdentifier: 
   ID: 3
-  icon: {fileID: 21300000, guid: afddc64ce70c14d0fa5312a1ba6e8cbe, type: 3}
+  icon: {fileID: 21300000, guid: 3e48c466d8c08413ba4953f59115a5bd, type: 3}
   type: 0
   maxStackSize: 1
   desc: Sleeping Hat
