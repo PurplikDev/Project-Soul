@@ -20,25 +20,32 @@ public class ItemStackObject : MonoBehaviour, IPointerClickHandler
             
             if (displayInventory.mouseItem.gameObject)
             {
-                displayInventory.inventory.MoveItem(displayInventory.itemsDisplayed[gameObject], displayInventory.mouseItem.itemStack);
-                displayInventory.mouseItem.itemStack = null;
-                Destroy(displayInventory.mouseItem.gameObject);
-
+                displayInventory.inventory.MoveItem(displayInventory.mouseItem.itemStack, displayInventory.itemsDisplayed[gameObject]);
+                if (displayInventory.mouseItem.itemStack.itemID == 0)
+                {
+                    Destroy(displayInventory.mouseItem.gameObject);
+                    displayInventory.mouseItem.itemStack = null;
+                }
+                else
+                {
+                    UpdateMouseObject(displayInventory.mouseItem.gameObject);
+                }
             }
             else if (_itemStack.itemID > 0)
             {
                 var mouseObject = new GameObject();
-                InstatiateHoverObject(mouseObject);
+                InstatiateMouseObject(mouseObject);
                 displayInventory.mouseItem.itemStack = null;
                 displayInventory.mouseItem.gameObject = mouseObject;
-                displayInventory.mouseItem.itemStack = displayInventory.itemsDisplayed[gameObject];
+                displayInventory.mouseItem.itemStack = new ItemStack(displayInventory.itemsDisplayed[gameObject].itemID, displayInventory.itemsDisplayed[gameObject].item, displayInventory.itemsDisplayed[gameObject].itemAmount);
+                _itemStack.UpdateStack(0, null, 0);
             }
         } else if(eventData.button == PointerEventData.InputButton.Right)
         {
             if (_itemStack.itemID > 0 && !displayInventory.mouseItem.gameObject && _itemStack.itemAmount > 1)
             {
                 var mouseObject = new GameObject();
-                InstatiateHoverObject(mouseObject);
+                InstatiateMouseObject(mouseObject);
                 displayInventory.mouseItem.itemStack = null;
                 displayInventory.mouseItem.gameObject = mouseObject;
                 displayInventory.mouseItem.itemStack = new ItemStack(_itemStack.itemID, _itemStack.item, _itemStack.itemAmount / 2);
@@ -46,7 +53,7 @@ public class ItemStackObject : MonoBehaviour, IPointerClickHandler
             } else if (_itemStack.itemID > 0 && !displayInventory.mouseItem.gameObject && _itemStack.itemAmount == 1)
             {
                 var mouseObject = new GameObject();
-                InstatiateHoverObject(mouseObject);
+                InstatiateMouseObject(mouseObject);
                 displayInventory.mouseItem.itemStack = null;
                 displayInventory.mouseItem.gameObject = mouseObject;
                 displayInventory.mouseItem.itemStack = displayInventory.itemsDisplayed[gameObject];
@@ -54,7 +61,7 @@ public class ItemStackObject : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public void InstatiateHoverObject(GameObject mouseObject )
+    public void InstatiateMouseObject(GameObject mouseObject )
     {
         var rectTransform = mouseObject.AddComponent<RectTransform>();
         rectTransform.sizeDelta = new Vector2(30, 30);
@@ -66,5 +73,11 @@ public class ItemStackObject : MonoBehaviour, IPointerClickHandler
             image.raycastTarget = false;
         }
         Destroy(displayInventory.mouseItem.gameObject);
+    }
+
+    public void UpdateMouseObject(GameObject mouseObject)
+    {
+        var image = mouseObject.GetComponent<Image>();
+        image.sprite = displayInventory.inventory.database.getItem[displayInventory.mouseItem.itemStack.itemID].icon;
     }
 }

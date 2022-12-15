@@ -53,9 +53,9 @@ public class InventoryObject : ScriptableObject
 
     public void MoveItem(ItemStack item1, ItemStack item2)
     {
-        ItemStack temp = new ItemStack(item2.itemID, item2.item, item2.itemAmount);
-        item2.UpdateStack(item1.itemID, item1.item, item1.itemAmount);
-        item1.UpdateStack(temp.itemID, temp.item, temp.itemAmount);
+        ItemStack temp = new ItemStack(item1.itemID, item1.item, item1.itemAmount);
+        item1.UpdateStack(item2.itemID, item2.item, item2.itemAmount);
+        item2.UpdateStack(temp.itemID, temp.item, temp.itemAmount);
     }
 
 
