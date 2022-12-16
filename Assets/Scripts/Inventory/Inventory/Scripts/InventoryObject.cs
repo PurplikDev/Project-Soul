@@ -20,19 +20,21 @@ public class InventoryObject : ScriptableObject
 
         for(int i = 0; i < inventory.items.Length; i++)
         {
-
-            if (inventory.items[i].item.ID == _item.ID && inventory.items[i].item.maxStackSize < inventory.items[i].itemAmount + _itemAmount)
+            if (inventory.items[i].item.ID == _item.ID)
             {
-                int overflow = inventory.items[i].item.maxStackSize - inventory.items[i].itemAmount;
-                inventory.items[i].AddItemAmount(overflow);
-                _itemAmount -= overflow;
+                if (inventory.items[i].item.maxStackSize < inventory.items[i].itemAmount + _itemAmount)
+                {
+                    int overflow = inventory.items[i].item.maxStackSize - inventory.items[i].itemAmount;
+                    inventory.items[i].AddItemAmount(overflow);
+                    _itemAmount -= overflow;
 
+                } else if (inventory.items[i].item.maxStackSize > inventory.items[i].itemAmount + _itemAmount)
+                {
+                    inventory.items[i].AddItemAmount(_itemAmount);
+                    return;
+                }
             }
-            if (inventory.items[i].item.ID == _item.ID && inventory.items[i].item.maxStackSize > inventory.items[i].itemAmount + _itemAmount)
-            {
-                inventory.items[i].AddItemAmount(_itemAmount);
-                return;
-            }
+            
         }
         SetEmptySlot(_item, _itemAmount);
 

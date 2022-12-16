@@ -18,7 +18,6 @@ public class ItemStackObject : MonoBehaviour, IPointerClickHandler
         var mouseItem = displayInventory.mouseItem;
         displayInventory.itemsDisplayed.TryGetValue(gameObject, out _itemStack);
         if (eventData.button == PointerEventData.InputButton.Left) {
-            
             if (mouseItem.gameObject)
             {
                 displayInventory.inventory.MoveItem(mouseItem.itemStack, displayInventory.itemsDisplayed[gameObject]);
@@ -29,7 +28,7 @@ public class ItemStackObject : MonoBehaviour, IPointerClickHandler
                 } else if (mouseItem.itemStack.itemID == _itemStack.itemID)
                 {
                     _itemStack.AddItemAmount(mouseItem.itemStack.itemAmount);
-                    if(_itemStack.itemAmount > _itemStack.item.maxStackSize)
+                    if (_itemStack.itemAmount > _itemStack.item.maxStackSize)
                     {
                         int overflow = _itemStack.itemAmount - _itemStack.item.maxStackSize;
                         mouseItem.itemStack.itemAmount = overflow;
@@ -53,8 +52,9 @@ public class ItemStackObject : MonoBehaviour, IPointerClickHandler
                 mouseItem.itemStack = new ItemStack(displayInventory.itemsDisplayed[gameObject].itemID, displayInventory.itemsDisplayed[gameObject].item, displayInventory.itemsDisplayed[gameObject].itemAmount);
                 _itemStack.UpdateStack(0, null, 0);
             }
-        } else if(eventData.button == PointerEventData.InputButton.Right)
+        } else if (eventData.button == PointerEventData.InputButton.Right)
         {
+            // ItemStack Splitting
             if (_itemStack.itemID > 0 && !mouseItem.gameObject && _itemStack.itemAmount > 1)
             {
                 var mouseObject = new GameObject();
@@ -63,17 +63,27 @@ public class ItemStackObject : MonoBehaviour, IPointerClickHandler
                 mouseItem.gameObject = mouseObject;
                 mouseItem.itemStack = new ItemStack(_itemStack.itemID, _itemStack.item, _itemStack.itemAmount / 2);
                 _itemStack.itemAmount -= mouseItem.itemStack.itemAmount;
-            } else if (_itemStack.itemID > 0 && !mouseItem.gameObject && _itemStack.itemAmount == 1)
+            }
+            //Normal item movement when an item amount is value of one
+            else if (_itemStack.itemID > 0 && !mouseItem.gameObject && _itemStack.itemAmount == 1)
             {
                 var mouseObject = new GameObject();
                 InstatiateMouseObject(mouseObject);
                 mouseItem.itemStack = null;
                 mouseItem.gameObject = mouseObject;
-                mouseItem.itemStack = displayInventory.itemsDisplayed[gameObject];
-            } else if(_itemStack.itemID == mouseItem.itemStack.itemID && _itemStack.itemAmount < _itemStack.item.maxStackSize)
+                mouseItem.itemStack = new ItemStack(displayInventory.itemsDisplayed[gameObject].itemID, displayInventory.itemsDisplayed[gameObject].item, displayInventory.itemsDisplayed[gameObject].itemAmount);
+                _itemStack.UpdateStack(0, null, 0);
+
+            } else if (( _itemStack.itemID == mouseItem.itemStack.itemID && _itemStack.itemAmount < _itemStack.item.maxStackSize) || _itemStack.itemID == 0)
             {
-                _itemStack.AddItemAmount(1);
                 mouseItem.itemStack.AddItemAmount(-1);
+                if (_itemStack.itemID == 0)
+                {
+                    _itemStack.UpdateStack(mouseItem.itemStack.itemID, mouseItem.itemStack.item, 1);
+                }
+                else {
+                    _itemStack.AddItemAmount(1);
+                }
                 if(mouseItem.itemStack.itemAmount == 0)
                 {
                     mouseItem.itemStack = null;
