@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1059,6 +1059,37 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6007873725403915221, guid: a60e55649470ead40a19826e6306c72b, type: 3}
   m_PrefabInstance: {fileID: 835152316}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1075148964
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1075148965}
+  m_Layer: 0
+  m_Name: PlayerSpawnPoint
+  m_TagString: SpawnPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1075148965
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075148964}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.2697983, y: 4.436195, z: -2.8220687}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1082805172
 GameObject:
   m_ObjectHideFlags: 0
@@ -1541,7 +1572,7 @@ GameObject:
   m_Layer: 0
   m_Name: DungeonGenerationController
   m_TagString: Untagged
-  m_Icon: {fileID: 2800000, guid: afddc64ce70c14d0fa5312a1ba6e8cbe, type: 3}
+  m_Icon: {fileID: 2800000, guid: 2b3293f051e5df344bf1f8b161f02c76, type: 3}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1807,12 +1838,12 @@ GameObject:
   - component: {fileID: 1830914432}
   - component: {fileID: 1830914431}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Inventory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1830914431
 MonoBehaviour:
   m_ObjectHideFlags: 0
