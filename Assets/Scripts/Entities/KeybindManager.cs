@@ -10,6 +10,7 @@ public class KeybindManager : ScriptableObject
     public KeyCode left = KeyCode.A;
     public KeyCode right = KeyCode.D;
     public KeyCode jump = KeyCode.Space;
+    public KeyCode sprint = KeyCode.LeftShift;
 
     [Header("Attack Keybinds")]
     public KeyCode primaryAction = KeyCode.Mouse0;
@@ -20,5 +21,6 @@ public class KeybindManager : ScriptableObject
     public KeyCode switchBackSlot = KeyCode.F;
     public KeyCode switchFocus = KeyCode.R;
 
-    //[Header("Misc Keybinds")]
+    [Header("Misc Keybinds")]
+    public KeyCode pauseGame = KeyCode.Escape;
 }

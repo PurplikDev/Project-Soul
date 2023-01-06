@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EntityDatabase : MonoBehaviour
+[CreateAssetMenu(fileName = "New Entity Database", menuName = "Entity/Entity Database")]
+public class EntityDatabase : ScriptableObject, ISerializationCallbackReceiver
 {
-    // Start is called before the first frame update
-    void Start()
+    public EntityObject[] entities;
+    public Dictionary<int, EntityObject> getEntity = new Dictionary<int, EntityObject>();
+
+    public void OnAfterDeserialize()
     {
-        
+        for (int i = 0; i < entities.Length; i++)
+        {
+            entities[i].entityID = i;
+            getEntity.Add(i, entities[i]);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnBeforeSerialize()
     {
-        
+        getEntity = new Dictionary<int, EntityObject>();
     }
 }
