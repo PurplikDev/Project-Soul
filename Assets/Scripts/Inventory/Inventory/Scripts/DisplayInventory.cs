@@ -186,11 +186,3 @@ public class DisplayInventory : MonoBehaviour
 
     
 }
-
-public class MouseItem
-{
-    public GameObject gameObject;
-    public ItemStack itemStack;
-    public ItemStack hoverStack;
-    public GameObject hoverObject;
-}

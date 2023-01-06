@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 
 public class TestPlayer : MonoBehaviour
 {
+    public MouseItem mouseItem = new MouseItem();
     public InventoryObject inventory;
 
     void OnTriggerEnter(Collider collider)

@@ -92,6 +92,7 @@ public class InventoryObject : ScriptableObject
 [System.Serializable]
 public class ItemStack
 {
+    public Container parentContainer;
     public int itemID;
     public Item item;
     public int itemAmount;
@@ -116,6 +117,9 @@ public class ItemStack
         itemAmount = _itemAmount;
     }
 
+    /// <summary>
+    /// Add amount of items to the stack
+    /// </summary>
     public void AddItemAmount(int amount)
     {
         itemAmount += amount;
