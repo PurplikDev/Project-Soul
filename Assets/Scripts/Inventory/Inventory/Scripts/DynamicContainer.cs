@@ -23,7 +23,8 @@ public class DynamicContainer : Container
 
             AddEvent(obj, EventTriggerType.PointerEnter, delegate { OnEnter(obj); });
             AddEvent(obj, EventTriggerType.PointerExit, delegate { OnExit(obj); });
-
+            AddEvent(obj, EventTriggerType.BeginDrag, delegate { OnBeginDrag(obj); });
+            AddEvent(obj, EventTriggerType.EndDrag, delegate { OnStopDrag(obj); });
 
             itemsDisplayed.Add(obj, inventory.inventory.items[i]);
         }

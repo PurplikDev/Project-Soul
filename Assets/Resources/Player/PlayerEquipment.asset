@@ -26,12 +26,12 @@ MonoBehaviour:
       itemAmount: 0
     - allowedItems: 02000000
       parentContainer: {fileID: 0}
-      itemID: 3
+      itemID: 0
       item:
-        name: Gauntlet
-        ID: 3
-        maxStackSize: 32
-      itemAmount: 2
+        name: 
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
     - allowedItems: 03000000
       parentContainer: {fileID: 0}
       itemID: 0
@@ -56,7 +56,7 @@ MonoBehaviour:
         ID: 0
         maxStackSize: 0
       itemAmount: 0
-    - allowedItems: 
+    - allowedItems: 05000000
       parentContainer: {fileID: 0}
       itemID: 0
       item:

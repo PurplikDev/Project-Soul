@@ -1,15 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class ItemStackObject : MonoBehaviour, IPointerClickHandler
+public class ItemStackObject : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     private Container container;
+
+    public GameObject tooltipPrefab;
+
     private void Awake()
     {
         container = transform.GetComponentInParent<Container>();
+    }
+
+    private void Update()
+    {
+        UpdateTooltip();
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -96,7 +105,7 @@ public class ItemStackObject : MonoBehaviour, IPointerClickHandler
 
             } else 
             // If a player is "holding" an item and left clicked itemStack matches the item in player's hand it deposits one item into the stack
-            if (( _itemStack.itemID == mouseItem.itemStack.itemID && _itemStack.itemAmount < _itemStack.item.maxStackSize) || _itemStack.itemID == 0)
+            if ((_itemStack.itemID == mouseItem.itemStack.itemID && _itemStack.itemAmount < _itemStack.item.maxStackSize) || _itemStack.itemID == 0)
             {
                 mouseItem.itemStack.AddItemAmount(-1);
                 if (_itemStack.itemID == 0)
@@ -141,6 +150,35 @@ public class ItemStackObject : MonoBehaviour, IPointerClickHandler
         if(mouseItem.itemStack.itemAmount == 0)
         {
             Destroy(mouseObject);
+        }
+    }
+
+    void UpdateTooltip()
+    {
+        var tooltip = GameObject.Find("Item Tooltip");
+        if (tooltip == null) return;
+        tooltip.transform.position = Input.mousePosition + new Vector3((tooltip.transform.GetComponent<RectTransform>().rect.width / 2) + 10, ((tooltip.transform.GetComponent<RectTransform>().rect.height / 2) + 10) * -1, 0);
+
+        if (container.player.mouseItem.itemStack != null) { Destroy(tooltip); }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        ItemStack _itemStack;
+        var mouseItem = container.player.mouseItem;
+        container.itemsDisplayed.TryGetValue(gameObject, out _itemStack);
+
+        if (_itemStack.itemID <= 0 || GameObject.Find("Item Tooltip")) return;
+        var tooltip = Instantiate(tooltipPrefab, new Vector3(-9999, -9999, -9999), Quaternion.identity, transform);
+        tooltip.name = "Item Tooltip";
+        tooltip.transform.SetParent(transform.parent);
+        //tooltip.GetComponentInChildren<>
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (!eventData.pointerCurrentRaycast.gameObject.transform.IsChildOf(transform)) { 
+            Destroy(GameObject.Find("Item Tooltip"));
         }
     }
 }

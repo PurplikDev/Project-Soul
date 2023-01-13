@@ -10,6 +10,11 @@ public abstract class Container : MonoBehaviour
 {
     public TestPlayer player;
 
+    public GameObject tooltipPrefab;
+
+    private bool dragging = false;
+    private List<GameObject> draggedSlots = new List<GameObject>();
+
     public InventoryObject inventory;
     public Dictionary<GameObject, ItemStack> itemsDisplayed = new Dictionary<GameObject, ItemStack>();
 
@@ -53,64 +58,38 @@ public abstract class Container : MonoBehaviour
 
     public void OnEnter(GameObject gameObject)
     {
+        AddDraggingSlot(gameObject);
         player.mouseItem.hoverObject = gameObject;
+
         if (itemsDisplayed.ContainsKey(gameObject))
             player.mouseItem.hoverStack = itemsDisplayed[gameObject];
     }
 
     public void OnExit(GameObject gameObject)
     {
+        AddDraggingSlot(gameObject);
+
         player.mouseItem.hoverObject = null;
         player.mouseItem.hoverStack = null;
     }
-    /*
-    public void BeginDrag(GameObject gameObject)
+
+    public void OnBeginDrag(GameObject gameObject)
     {
-        var mouseObject = new GameObject();
-        var rectTransform = mouseObject.AddComponent<RectTransform>();
-        rectTransform.sizeDelta = new Vector2(30, 30);
-        mouseObject.transform.SetParent(transform.parent);
-        if (itemsDisplayed[gameObject].itemID > 0)
+        dragging = true;
+    }
+
+    public void OnStopDrag(GameObject gameObject)
+    {
+        dragging = false;
+        player.mouseItem.itemStack.itemAmount = player.mouseItem.itemStack.itemAmount % draggedSlots.Count;
+        if(player.mouseItem.itemStack.itemAmount == 0)
         {
-            var image = mouseObject.AddComponent<Image>();
-            image.sprite = inventory.database.getItem[itemsDisplayed[gameObject].itemID].icon;
-            image.raycastTarget = false;
+            player.mouseItem.itemStack = null;
+            Destroy(player.mouseItem.gameObject);
         }
-        player.mouseItem.gameObject = mouseObject;
-        player.mouseItem.itemStack = itemsDisplayed[gameObject];
+        draggedSlots = new List<GameObject>();
     }
     
-    public void OnClick(GameObject gameObject)
-    {
-            ItemStack _itemStack;
-            itemsDisplayed.TryGetValue(gameObject, out _itemStack);
-            if (player.mouseItem.gameObject)
-            {
-                inventory.MoveItem(itemsDisplayed[gameObject], player.mouseItem.itemStack);
-            player.mouseItem.itemStack = null;
-                Destroy(player.mouseItem.gameObject);
-
-            }
-            else if (_itemStack.itemID > 0)
-            {
-                var mouseObject = new GameObject();
-                var rectTransform = mouseObject.AddComponent<RectTransform>();
-                rectTransform.sizeDelta = new Vector2(30, 30);
-                mouseObject.transform.SetParent(transform.parent);
-                if (itemsDisplayed[gameObject].itemID > 0)
-                {
-                    var image = mouseObject.AddComponent<Image>();
-                    image.sprite = inventory.database.getItem[itemsDisplayed[gameObject].itemID].icon;
-                    image.raycastTarget = false;
-                }
-                Destroy(player.mouseItem.gameObject);
-                player.mouseItem.itemStack = null;
-                player.mouseItem.gameObject = mouseObject;
-                player.mouseItem.itemStack = itemsDisplayed[gameObject];
-        }
-
-    }
-    */
     public void MoveItem()
     {
         player.mouseItem.gameObject.GetComponent<RectTransform>().position = Input.mousePosition;
@@ -125,6 +104,19 @@ public abstract class Container : MonoBehaviour
         trigger.triggers.Add(eventTrigger);
     }
 
+    private void AddDraggingSlot(GameObject gameObject)
+    {
+        if (dragging && itemsDisplayed[gameObject].itemID == 0 && !draggedSlots.Contains(gameObject) && player.mouseItem.itemStack != null && draggedSlots.Count < player.mouseItem.itemStack.itemAmount)
+        {
+            draggedSlots.Add(gameObject);
+            draggedSlots.ForEach(SplitStack);
+        }
+    }
+
+    void SplitStack(GameObject gameObject)
+    {
+        itemsDisplayed[gameObject].UpdateStack(player.mouseItem.itemStack.itemID, player.mouseItem.itemStack.item, player.mouseItem.itemStack.itemAmount / draggedSlots.Count);
+    }
 
 }
 
