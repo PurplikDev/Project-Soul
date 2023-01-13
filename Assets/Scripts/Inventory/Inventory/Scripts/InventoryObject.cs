@@ -92,6 +92,7 @@ public class InventoryObject : ScriptableObject
 [System.Serializable]
 public class ItemStack
 {
+    public SlotType[] allowedItems = new SlotType[0];
     public Container parentContainer;
     public int itemID;
     public Item item;
@@ -124,6 +125,25 @@ public class ItemStack
     {
         itemAmount += amount;
     }
+
+    /// <summary>
+    /// Check if an item can be placed in a slot
+    /// </summary>
+    public bool IsValidItem(ItemObject _itemObject)
+    {
+        if(allowedItems.Length <= 0)
+        {
+            return true;
+        }
+        for(int i = 0; i < allowedItems.Length; i++)
+        {
+            if (_itemObject.slotType == allowedItems[i])
+            {
+                return true;
+            }
+        }
+        return false;
+    } 
 }
 
 [System.Serializable]

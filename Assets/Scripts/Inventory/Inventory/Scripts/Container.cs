@@ -63,7 +63,7 @@ public abstract class Container : MonoBehaviour
         player.mouseItem.hoverObject = null;
         player.mouseItem.hoverStack = null;
     }
-
+    /*
     public void BeginDrag(GameObject gameObject)
     {
         var mouseObject = new GameObject();
@@ -110,7 +110,7 @@ public abstract class Container : MonoBehaviour
         }
 
     }
-
+    */
     public void MoveItem()
     {
         player.mouseItem.gameObject.GetComponent<RectTransform>().position = Input.mousePosition;

@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: RedSugar
   m_EditorClassIdentifier: 
   ID: 1
-  icon: {fileID: 21300000, guid: 2b3293f051e5df344bf1f8b161f02c76, type: 3}
+  icon: {fileID: 21300000, guid: 303d7ac25a9a096409032c31adc7a2cd, type: 3}
   type: 2
+  slotType: 0
   maxStackSize: 32
   desc: 'idk
 

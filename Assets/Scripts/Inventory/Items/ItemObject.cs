@@ -12,11 +12,23 @@ public enum ItemType
     EQUIPMENT
 }
 
+public enum SlotType
+{
+    GENERIC,
+    HELMET,
+    CHESTPLATE,
+    LEGGINGS,
+    BOOTS,
+    WEAPON,
+    BAUBLE
+}
+
 public abstract class ItemObject : ScriptableObject
 {
     public int ID;
     public Sprite icon;
     public ItemType type;
+    public SlotType slotType;
     [Range(1, 32)]
     public int maxStackSize = 32;
 

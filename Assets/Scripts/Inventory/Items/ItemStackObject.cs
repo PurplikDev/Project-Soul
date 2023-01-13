@@ -23,6 +23,11 @@ public class ItemStackObject : MonoBehaviour, IPointerClickHandler
             // Check if player is already holding an item
             if (mouseItem.gameObject)
             {
+                // If an item's assigned slot type does not correspond to the slot nothing happens
+                if (!_itemStack.IsValidItem(container.inventory.database.getItem[mouseItem.itemStack.itemID])) {
+                    return;
+                }
+
                 container.inventory.MoveItem(mouseItem.itemStack, container.itemsDisplayed[gameObject]);
 
                 // Reset player holding an item if it is empty (literally deleting air lol)
@@ -58,10 +63,11 @@ public class ItemStackObject : MonoBehaviour, IPointerClickHandler
             if (_itemStack.itemID > 0)
             {
                 var mouseObject = new GameObject();
+                var clickedItem = container.itemsDisplayed[gameObject];
                 InstatiateMouseObject(mouseObject);
                 mouseItem.itemStack = null;
                 mouseItem.gameObject = mouseObject;
-                mouseItem.itemStack = new ItemStack(container.itemsDisplayed[gameObject].itemID, container.itemsDisplayed[gameObject].item, container.itemsDisplayed[gameObject].itemAmount);
+                mouseItem.itemStack = new ItemStack(clickedItem.itemID, clickedItem.item, clickedItem.itemAmount);
                 _itemStack.UpdateStack(0, null, 0);
             }
         } else
@@ -89,7 +95,7 @@ public class ItemStackObject : MonoBehaviour, IPointerClickHandler
                 _itemStack.UpdateStack(0, null, 0);
 
             } else 
-            // 
+            // If a player is "holding" an item and left clicked itemStack matches the item in player's hand it deposits one item into the stack
             if (( _itemStack.itemID == mouseItem.itemStack.itemID && _itemStack.itemAmount < _itemStack.item.maxStackSize) || _itemStack.itemID == 0)
             {
                 mouseItem.itemStack.AddItemAmount(-1);
@@ -117,7 +123,7 @@ public class ItemStackObject : MonoBehaviour, IPointerClickHandler
         var rectTransform = mouseObject.AddComponent<RectTransform>();
         var mouseItem = container.player.mouseItem;
         rectTransform.sizeDelta = new Vector2(30, 30);
-        mouseObject.transform.SetParent(transform.parent);
+        mouseObject.transform.SetParent(transform.parent.parent);
         if (container.itemsDisplayed[gameObject].itemID > 0)
         {
             var image = mouseObject.AddComponent<Image>();

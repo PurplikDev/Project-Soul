@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e88fa0dbfdb94272a6506d0edb1cfe4, type: 3}
   m_Name: Gauntlet
   m_EditorClassIdentifier: 
-  ID: 0
-  icon: {fileID: 0}
-  type: 0
-  maxStackSize: 32
+  ID: 3
+  icon: {fileID: 21300000, guid: 5f49e7be195d25e4c9d2b3d1ac013abc, type: 3}
+  type: 3
+  slotType: 5
+  maxStackSize: 1
   desc: 
   speed: 0
   storage: 0
   discount: 0
-  casterType: 1
   corePart: 0
   conductorPart: 0
