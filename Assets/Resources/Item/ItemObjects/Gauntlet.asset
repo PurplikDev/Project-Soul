@@ -17,7 +17,8 @@ MonoBehaviour:
   type: 3
   slotType: 5
   maxStackSize: 1
-  desc: 
+  desc: A tool I think, it might be food, or something, I have no idea what I am
+    writing here, this is just a test after all
   speed: 0
   storage: 0
   discount: 0

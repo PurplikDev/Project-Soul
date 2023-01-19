@@ -40,11 +40,13 @@ public abstract class ItemObject : ScriptableObject
 public class Item
 {
     public string name;
+    public string description;
     public int ID;
     public int maxStackSize;
     public Item(ItemObject item)
     {
         name = item.name;
+        description = item.desc;
         ID = item.ID;
         maxStackSize = item.maxStackSize;
     }

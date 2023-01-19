@@ -17,7 +17,5 @@ MonoBehaviour:
   type: 2
   slotType: 0
   maxStackSize: 32
-  desc: 'idk
-
-'
+  desc: sugar but red
   healthRestore: 50
