@@ -16,12 +16,10 @@ public class EntityObject : ScriptableObject
     public int entityID;
     public EntityType entityType;
 
-    [TextArea(15, 20)]
-    public string description;
+    [Header("Stats")]
 
-    [Header("Default Entity Stats")]
-    public int health = 20;
-    public int attack = 4;
+    public float health;
+    public float attack;
 }
 
 [System.Serializable]

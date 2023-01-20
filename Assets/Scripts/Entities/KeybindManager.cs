@@ -5,22 +5,22 @@ using UnityEngine;
 public class KeybindManager : ScriptableObject
 {
     [Header("Movement Keybinds")]
-    public KeyCode forward = KeyCode.W;
-    public KeyCode backwards = KeyCode.S;
-    public KeyCode left = KeyCode.A;
-    public KeyCode right = KeyCode.D;
-    public KeyCode jump = KeyCode.Space;
-    public KeyCode sprint = KeyCode.LeftShift;
+    public static KeyCode forward = KeyCode.W;
+    public static KeyCode backwards = KeyCode.S;
+    public static KeyCode left = KeyCode.A;
+    public static KeyCode right = KeyCode.D;
+    public static KeyCode jump = KeyCode.Space;
+    public static KeyCode sprint = KeyCode.LeftShift;
 
     [Header("Attack Keybinds")]
-    public KeyCode primaryAction = KeyCode.Mouse0;
-    public KeyCode secondaryAction = KeyCode.Mouse1;
+    public static KeyCode primaryAction = KeyCode.Mouse0;
+    public static KeyCode secondaryAction = KeyCode.Mouse1;
 
     [Header("Functional Keybinds")]
-    public KeyCode openInventory = KeyCode.E;
-    public KeyCode switchBackSlot = KeyCode.F;
-    public KeyCode switchFocus = KeyCode.R;
+    public static KeyCode openInventory = KeyCode.E;
+    public static KeyCode switchBackSlot = KeyCode.F;
+    public static KeyCode switchFocus = KeyCode.R;
 
     [Header("Misc Keybinds")]
-    public KeyCode pauseGame = KeyCode.Escape;
+    public static KeyCode pauseGame = KeyCode.Escape;
 }

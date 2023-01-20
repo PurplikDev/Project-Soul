@@ -8,12 +8,15 @@ using UnityEngine.EventSystems;
 public class ItemStackObject : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     private Container container;
-
     public GameObject tooltipPrefab;
+    public static GameObject tooltip;
+    public static GameObject emptySampleStack;
+    private static ItemStack _itemStack;
 
     private void Awake()
     {
         container = transform.GetComponentInParent<Container>();
+        emptySampleStack = GameObject.Find("EMPTY_ITEM_STACK");
     }
 
     private void Update()
@@ -23,7 +26,7 @@ public class ItemStackObject : MonoBehaviour, IPointerClickHandler, IPointerEnte
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        ItemStack _itemStack;
+        
         var mouseItem = container.player.mouseItem;
         container.itemsDisplayed.TryGetValue(gameObject, out _itemStack);
 
@@ -131,7 +134,10 @@ public class ItemStackObject : MonoBehaviour, IPointerClickHandler, IPointerEnte
     {
         var rectTransform = mouseObject.AddComponent<RectTransform>();
         var mouseItem = container.player.mouseItem;
-        rectTransform.sizeDelta = new Vector2(30, 30);
+
+        var sampleScale = emptySampleStack.GetComponent<RectTransform>().rect;
+
+        rectTransform.sizeDelta = new Vector2(sampleScale.height, sampleScale.width);
         mouseObject.transform.SetParent(transform.parent.parent);
         if (container.itemsDisplayed[gameObject].itemID > 0)
         {
@@ -153,32 +159,36 @@ public class ItemStackObject : MonoBehaviour, IPointerClickHandler, IPointerEnte
         }
     }
 
+    //This updated the tooltip's position
     void UpdateTooltip()
     {
-        var tooltip = GameObject.Find("Item Tooltip");
         if (tooltip == null) return;
-        tooltip.transform.position = Input.mousePosition + new Vector3((tooltip.transform.GetComponent<RectTransform>().rect.width / 2) + 10, ((tooltip.transform.GetComponent<RectTransform>().rect.height / 2) + 10) * -1, 0);
-
-        if (container.player.mouseItem.itemStack != null) { Destroy(tooltip); }
+        tooltip.transform.position = Input.mousePosition + new Vector3(
+            (tooltip.transform.GetComponent<RectTransform>().rect.width / 2) + emptySampleStack.GetComponent<RectTransform>().rect.width / 2,
+            ((tooltip.transform.GetComponent<RectTransform>().rect.height / 2) + emptySampleStack.GetComponent<RectTransform>().rect.width / 2) * -1, 0);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         ItemStack _itemStack;
-        var mouseItem = container.player.mouseItem;
         container.itemsDisplayed.TryGetValue(gameObject, out _itemStack);
 
-        if (_itemStack.itemID <= 0 || GameObject.Find("Item Tooltip")) return;
-        var tooltip = Instantiate(tooltipPrefab, new Vector3(-9999, -9999, -9999), Quaternion.identity, transform);
-        tooltip.name = "Item Tooltip";
-        tooltip.transform.SetParent(transform.parent);
-        //tooltip.GetComponentInChildren<>
+        if (_itemStack.itemID <= 0 || tooltip != null || container.player.mouseItem.itemStack != null) return;
+        var tooltipObject = Instantiate(tooltipPrefab, new Vector3(-9999, -9999, -9999), Quaternion.identity, transform);
+        tooltipObject.name = "Item Tooltip";
+        tooltipObject.transform.SetParent(transform.parent);
+
+        tooltip = tooltipObject.gameObject;
+        tooltip.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _itemStack.item.name;
+        Debug.Log(tooltip.transform.GetChild(0).name);
+        tooltip.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _itemStack.item.description;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (!eventData.pointerCurrentRaycast.gameObject.transform.IsChildOf(transform)) { 
-            Destroy(GameObject.Find("Item Tooltip"));
+        if (!eventData.pointerCurrentRaycast.gameObject.transform.IsChildOf(transform) && tooltip != null) { 
+            Destroy(tooltip);
+            tooltip = null;
         }
     }
 }
