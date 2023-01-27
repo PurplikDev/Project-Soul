@@ -21,7 +21,7 @@ public class ItemStackObject : MonoBehaviour, IPointerClickHandler, IPointerEnte
 
     private void Update()
     {
-        UpdateTooltip();
+        //UpdateTooltip();
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -158,7 +158,7 @@ public class ItemStackObject : MonoBehaviour, IPointerClickHandler, IPointerEnte
             Destroy(mouseObject);
         }
     }
-
+    /*
     //This updated the tooltip's position
     void UpdateTooltip()
     {
@@ -167,12 +167,12 @@ public class ItemStackObject : MonoBehaviour, IPointerClickHandler, IPointerEnte
             (tooltip.transform.GetComponent<RectTransform>().rect.width / 2) + emptySampleStack.GetComponent<RectTransform>().rect.width / 2,
             ((tooltip.transform.GetComponent<RectTransform>().rect.height / 2) + emptySampleStack.GetComponent<RectTransform>().rect.width / 2) * -1, 0);
     }
-
+    */
     public void OnPointerEnter(PointerEventData eventData)
     {
         ItemStack _itemStack;
         container.itemsDisplayed.TryGetValue(gameObject, out _itemStack);
-
+        /*
         if (_itemStack.itemID <= 0 || tooltip != null || container.player.mouseItem.itemStack != null) return;
         var tooltipObject = Instantiate(tooltipPrefab, new Vector3(-9999, -9999, -9999), Quaternion.identity, transform);
         tooltipObject.name = "Item Tooltip";
@@ -182,13 +182,16 @@ public class ItemStackObject : MonoBehaviour, IPointerClickHandler, IPointerEnte
         tooltip.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _itemStack.item.name;
         Debug.Log(tooltip.transform.GetChild(0).name);
         tooltip.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _itemStack.item.description;
+        */
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        /*
         if (!eventData.pointerCurrentRaycast.gameObject.transform.IsChildOf(transform) && tooltip != null) { 
             Destroy(tooltip);
             tooltip = null;
         }
+        */
     }
 }
