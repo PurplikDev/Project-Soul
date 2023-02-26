@@ -21,4 +21,12 @@ public class ItemEntity : MonoBehaviour
     {
         model.transform.rotation = Quaternion.Euler(0, itemRotationY += Time.deltaTime * 50, 0);
     }
+
+    private void OnTriggerEnter(Collider collider)
+    {
+        if(collider.CompareTag("Player")) { 
+            collider.GetComponent<PlayerInventory>().inventory.AddItem(new Item(item), itemAmount);
+            Destroy(gameObject);
+        }
+    }
 }

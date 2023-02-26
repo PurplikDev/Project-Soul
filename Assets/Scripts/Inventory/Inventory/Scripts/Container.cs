@@ -5,52 +5,50 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
+using static Inventory;
 
 public abstract class Container : MonoBehaviour
 {
-    public TestPlayer player;
-
-    public GameObject tooltipPrefab;
-
     private bool dragging = false;
     private List<GameObject> draggedSlots = new List<GameObject>();
 
     public InventoryObject inventory;
     public Dictionary<GameObject, ItemStack> itemsDisplayed = new Dictionary<GameObject, ItemStack>();
 
+    
+
     void Start()
     {
-        for(int i = 0; i < inventory.inventory.items.Length; i++)
+        for(int i = 0; i < inventory.GetSlots.Length; i++)
         {
-            inventory.inventory.items[i].parentContainer = this;
+            inventory.GetSlots[i].parentContainer = this;
+            inventory.GetSlots[i].OnAfterUpdate += OnSlotUpdate;
         }
         CreateSlots();
     }
-    void Update()
+
+    private void OnSlotUpdate(ItemStack _stack)
     {
-        UpdateSlots();
-        if (player.mouseItem.gameObject != null)
+        if (_stack.item.ID > 0)
         {
-            MoveItem();
+            _stack.displaySlot.transform.GetChild(0).GetComponentInChildren<Image>().sprite = _stack.ItemObject.icon;
+            _stack.displaySlot.transform.GetChild(0).GetComponentInChildren<Image>().color = new Color(1, 1, 1, 1);
+            _stack.displaySlot.GetComponentInChildren<TextMeshProUGUI>().text = _stack.itemAmount == 1 ? "" : _stack.itemAmount.ToString("n0");
+        }
+        else
+        {
+            _stack.displaySlot.transform.GetChild(0).GetComponentInChildren<Image>().sprite = null;
+            _stack.displaySlot.transform.GetChild(0).GetComponentInChildren<Image>().color = new Color(1, 1, 1, 0);
+            _stack.displaySlot.GetComponentInChildren<TextMeshProUGUI>().text = "";
         }
     }
 
-    public void UpdateSlots()
+    void Update()
     {
-        foreach (KeyValuePair<GameObject, ItemStack> _slot in itemsDisplayed)
+        if (MouseItem.gameObject != null)
         {
-            if (_slot.Value.itemID > 0)
-            {
-                _slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().sprite = inventory.database.getItem[_slot.Value.item.ID].icon;
-                _slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().color = new Color(1, 1, 1, 1);
-                _slot.Key.GetComponentInChildren<TextMeshProUGUI>().text = _slot.Value.itemAmount == 1 ? "" : _slot.Value.itemAmount.ToString("n0");
-            }
-            else
-            {
-                _slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().sprite = null;
-                _slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().color = new Color(1, 1, 1, 0);
-                _slot.Key.GetComponentInChildren<TextMeshProUGUI>().text = "";
-            }
+            MouseItem.gameObject.transform.SetParent(GameObject.Find("ItemHoverUI").transform);
+            MoveItem();
         }
     }
 
@@ -59,18 +57,18 @@ public abstract class Container : MonoBehaviour
     public void OnEnter(GameObject gameObject)
     {
         AddDraggingSlot(gameObject);
-        player.mouseItem.hoverObject = gameObject;
+        MouseItem.hoverObject = gameObject;
 
         if (itemsDisplayed.ContainsKey(gameObject))
-            player.mouseItem.hoverStack = itemsDisplayed[gameObject];
+            MouseItem.hoverStack = itemsDisplayed[gameObject];
     }
 
     public void OnExit(GameObject gameObject)
     {
         AddDraggingSlot(gameObject);
 
-        player.mouseItem.hoverObject = null;
-        player.mouseItem.hoverStack = null;
+        MouseItem.hoverObject = null;
+        MouseItem.hoverStack = null;
     }
 
     public void OnBeginDrag(GameObject gameObject)
@@ -81,18 +79,18 @@ public abstract class Container : MonoBehaviour
     public void OnStopDrag(GameObject gameObject)
     {
         dragging = false;
-        player.mouseItem.itemStack.itemAmount = player.mouseItem.itemStack.itemAmount % draggedSlots.Count;
-        if(player.mouseItem.itemStack.itemAmount == 0)
+        MouseItem.itemStack.itemAmount = MouseItem.itemStack.itemAmount % draggedSlots.Count;
+        if(MouseItem.itemStack.itemAmount == 0)
         {
-            player.mouseItem.itemStack = null;
-            Destroy(player.mouseItem.gameObject);
+            MouseItem.itemStack = null;
+            Destroy(MouseItem.gameObject);
         }
         draggedSlots = new List<GameObject>();
     }
     
     public void MoveItem()
     {
-        player.mouseItem.gameObject.GetComponent<RectTransform>().position = Input.mousePosition;
+        MouseItem.gameObject.GetComponent<RectTransform>().position = Input.mousePosition;
     }
 
     protected void AddEvent(GameObject gameObject, EventTriggerType triggerType, UnityAction<BaseEventData> action)
@@ -106,7 +104,7 @@ public abstract class Container : MonoBehaviour
 
     private void AddDraggingSlot(GameObject gameObject)
     {
-        if (dragging && itemsDisplayed[gameObject].itemID == 0 && !draggedSlots.Contains(gameObject) && player.mouseItem.itemStack != null && draggedSlots.Count < player.mouseItem.itemStack.itemAmount)
+        if (dragging && itemsDisplayed[gameObject].item.ID == 0 && !draggedSlots.Contains(gameObject) && MouseItem.itemStack != null && draggedSlots.Count < MouseItem.itemStack.itemAmount)
         {
             draggedSlots.Add(gameObject);
             draggedSlots.ForEach(SplitStack);
@@ -115,15 +113,38 @@ public abstract class Container : MonoBehaviour
 
     void SplitStack(GameObject gameObject)
     {
-        itemsDisplayed[gameObject].UpdateStack(player.mouseItem.itemStack.itemID, player.mouseItem.itemStack.item, player.mouseItem.itemStack.itemAmount / draggedSlots.Count);
+        itemsDisplayed[gameObject].UpdateStack(MouseItem.itemStack.item, MouseItem.itemStack.itemAmount / draggedSlots.Count);
     }
 
 }
 
-public class MouseItem
+public static class MouseItem
 {
-    public GameObject gameObject;
-    public ItemStack itemStack;
-    public ItemStack hoverStack;
-    public GameObject hoverObject;
+    public static GameObject gameObject;
+    public static ItemStack itemStack;
+    public static ItemStack hoverStack;
+    public static GameObject hoverObject;
+}
+
+
+public static class ExtensionMethods
+{
+    public static void UpdateSlotDisplay(this Dictionary<GameObject, ItemStack> _slotsOnInterface)
+    {
+        foreach (KeyValuePair<GameObject, ItemStack> _slot in _slotsOnInterface)
+        {
+            if (_slot.Value.item.ID > 0)
+            {
+                _slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().sprite = _slot.Value.ItemObject.icon;
+                _slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().color = new Color(1, 1, 1, 1);
+                _slot.Key.GetComponentInChildren<TextMeshProUGUI>().text = _slot.Value.itemAmount == 1 ? "" : _slot.Value.itemAmount.ToString("n0");
+            }
+            else
+            {
+                _slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().sprite = null;
+                _slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().color = new Color(1, 1, 1, 0);
+                _slot.Key.GetComponentInChildren<TextMeshProUGUI>().text = "";
+            }
+        }
+    }
 }

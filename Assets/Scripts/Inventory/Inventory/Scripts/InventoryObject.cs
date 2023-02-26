@@ -8,29 +8,29 @@ using System.Runtime.Serialization;
 using System.ComponentModel;
 using static UnityEditor.Progress;
 
-[CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory")]
+[CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory/Inventory")]
 public class InventoryObject : ScriptableObject
 {
     public string savePath;
     public ItemDatabase database;
     public Inventory inventory;
-
+    public ItemStack[] GetSlots { get { return inventory.inventorySlots; } }
     public void AddItem(Item _item, int _itemAmount)
     {
 
-        for(int i = 0; i < inventory.items.Length; i++)
+        for(int i = 0; i < GetSlots.Length; i++)
         {
-            if (inventory.items[i].item.ID == _item.ID)
+            if (GetSlots[i].item.ID == _item.ID)
             {
-                if (inventory.items[i].item.maxStackSize < inventory.items[i].itemAmount + _itemAmount)
+                if (GetSlots[i].item.maxStackSize < GetSlots[i].itemAmount + _itemAmount)
                 {
-                    int overflow = inventory.items[i].item.maxStackSize - inventory.items[i].itemAmount;
-                    inventory.items[i].AddItemAmount(overflow);
+                    int overflow = GetSlots[i].item.maxStackSize - GetSlots[i].itemAmount;
+                    GetSlots[i].AddItemAmount(overflow);
                     _itemAmount -= overflow;
 
-                } else if (inventory.items[i].item.maxStackSize > inventory.items[i].itemAmount + _itemAmount)
+                } else if (GetSlots[i].item.maxStackSize > GetSlots[i].itemAmount + _itemAmount)
                 {
-                    inventory.items[i].AddItemAmount(_itemAmount);
+                    GetSlots[i].AddItemAmount(_itemAmount);
                     return;
                 }
             }
@@ -42,12 +42,12 @@ public class InventoryObject : ScriptableObject
 
     public ItemStack SetEmptySlot(Item _item, int itemAmount)
     {
-        for (int i = 0; i < inventory.items.Length; i++)
+        for (int i = 0; i < GetSlots.Length; i++)
         {
-            if (inventory.items[i].itemID == 0)
+            if (GetSlots[i].item.ID == 0)
             {
-                inventory.items[i].UpdateStack(_item.ID, _item, itemAmount);
-                return inventory.items[i];
+                GetSlots[i].UpdateStack(_item, itemAmount);
+                return GetSlots[i];
             }
         }
         return null;
@@ -55,9 +55,9 @@ public class InventoryObject : ScriptableObject
 
     public void MoveItem(ItemStack item1, ItemStack item2)
     {
-        ItemStack temp = new ItemStack(item1.itemID, item1.item, item1.itemAmount);
-        item1.UpdateStack(item2.itemID, item2.item, item2.itemAmount);
-        item2.UpdateStack(temp.itemID, temp.item, temp.itemAmount);
+        ItemStack temp = new ItemStack(item1.item, item1.itemAmount);
+        item1.UpdateStack(item2.item, item2.itemAmount);
+        item2.UpdateStack(temp.item, temp.itemAmount);
     }
 
 
@@ -89,33 +89,57 @@ public class InventoryObject : ScriptableObject
     }
 }
 
+public delegate void UpdateSlot(ItemStack _stack);
+
 [System.Serializable]
 public class ItemStack
 {
     public SlotType[] allowedItems = new SlotType[0];
+    [System.NonSerialized]
     public Container parentContainer;
-    public int itemID;
-    public Item item;
+    [System.NonSerialized]
+    public GameObject displaySlot;
+    [System.NonSerialized]
+    public UpdateSlot OnAfterUpdate;
+    [System.NonSerialized]
+    public UpdateSlot OnBeforeUpdate;
+    public Item item = new Item();
     public int itemAmount;
+
+    public ItemObject ItemObject
+    {
+        get
+        {
+            if (item.ID >= 0)
+            {
+                return parentContainer.inventory.database.itemObjects[item.ID];
+            }
+            return null;
+        }
+    }
+
     public ItemStack()
     {
-        itemID = 0;
-        item = null;
-        itemAmount = 0;
+        UpdateStack(new Item(), 0);
     }
 
-    public ItemStack(int _itemID, Item _item, int _itemAmount)
+    public ItemStack(Item _item, int _itemAmount)
     {
-        itemID = _itemID;
-        item = _item;
-        itemAmount = _itemAmount;
+        UpdateStack(_item, _itemAmount);
     }
 
-    public void UpdateStack(int _itemID, Item _item, int _itemAmount)
+    public void UpdateStack(Item _item, int _itemAmount)
     {
-        itemID = _itemID;
+        if(OnBeforeUpdate != null)
+        {
+            OnBeforeUpdate.Invoke(this);
+        }
         item = _item;
         itemAmount = _itemAmount;
+        if(OnAfterUpdate != null)
+        {
+            OnAfterUpdate.Invoke(this);
+        }
     }
 
     /// <summary>
@@ -123,7 +147,7 @@ public class ItemStack
     /// </summary>
     public void AddItemAmount(int amount)
     {
-        itemAmount += amount;
+        UpdateStack(item, itemAmount += amount);
     }
 
     /// <summary>
@@ -149,5 +173,21 @@ public class ItemStack
 [System.Serializable]
 public class Inventory
 {
-    public ItemStack[] items = new ItemStack[28];
+    public ItemStack[] inventorySlots = new ItemStack[36];
+
+    public enum Slot
+    {
+        Helmet = 25,
+        Chestplate = 26,
+        Leggings = 27,
+        Boots = 28,
+        Primary = 29,
+        Secondary = 30,
+        Accessory = 31,
+        Charm = 32,
+        Belt = 33,
+        Pouch = 34,
+        Back = 35,
+        Ring = 36
+    }
 }
