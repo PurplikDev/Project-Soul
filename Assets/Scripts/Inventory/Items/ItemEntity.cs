@@ -5,7 +5,7 @@ using UnityEngine;
 public class ItemEntity : MonoBehaviour
 {
     public ItemObject item;
-    private Transform model;
+    private GameObject model;
 
     [Range(1, 32)]
     public int itemAmount = 1;
@@ -14,7 +14,7 @@ public class ItemEntity : MonoBehaviour
 
     void Awake()
     {
-        model = gameObject.GetComponentInChildren<Transform>();
+        model = Instantiate(item.itemModel, transform.position, transform.rotation, transform);
     }
 
     void Update()

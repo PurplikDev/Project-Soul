@@ -21,7 +21,7 @@ MonoBehaviour:
         name: Rock
         ID: 1
         maxStackSize: 32
-      itemAmount: 16
+      itemAmount: 32
     - allowedItems: 
       item:
         name: Rock
@@ -30,28 +30,22 @@ MonoBehaviour:
       itemAmount: 32
     - allowedItems: 
       item:
-        name: air
-        ID: 0
-        maxStackSize: 0
-      itemAmount: 0
-    - allowedItems: 
-      item:
-        name: air
-        ID: 0
-        maxStackSize: 0
-      itemAmount: 0
-    - allowedItems: 
-      item:
-        name: air
-        ID: 0
-        maxStackSize: 0
-      itemAmount: 0
-    - allowedItems: 
-      item:
         name: Rock
         ID: 1
         maxStackSize: 32
-      itemAmount: 11
+      itemAmount: 27
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
     - allowedItems: 
       item:
         name: air
@@ -197,6 +191,12 @@ MonoBehaviour:
         maxStackSize: 0
       itemAmount: 0
     - allowedItems: 05000000
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 06000000
       item:
         name: air
         ID: 0

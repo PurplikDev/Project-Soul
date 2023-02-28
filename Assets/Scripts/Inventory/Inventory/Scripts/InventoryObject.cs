@@ -18,7 +18,7 @@ public class InventoryObject : ScriptableObject
     public void AddItem(Item _item, int _itemAmount)
     {
 
-        for(int i = 0; i < GetSlots.Length; i++)
+        for(int i = 0; i < 24; i++)
         {
             if (GetSlots[i].item.ID == _item.ID)
             {
@@ -36,8 +36,17 @@ public class InventoryObject : ScriptableObject
             }
             
         }
-        SetEmptySlot(_item, _itemAmount);
 
+        for (int i = 0; i < 24; i++)
+        {
+            if (GetSlots[i].item.ID == 0)
+            {
+                SetEmptySlot(_item, _itemAmount);
+                return;
+            }
+        }
+
+        Debug.Log("Found no valid slot!");
     }
 
     public ItemStack SetEmptySlot(Item _item, int itemAmount)

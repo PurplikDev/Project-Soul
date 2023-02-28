@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f64de1cc72d39a41a7478c742bbf186, type: 3}
-  m_Name: Rock
+  m_Name: Goggles of Revealing
   m_EditorClassIdentifier: 
-  ID: 1
-  icon: {fileID: 21300000, guid: 37e4cb955572cc2499eca05d8963a1ba, type: 3}
-  itemModel: {fileID: 919132149155446097, guid: 6d83a0a8c13ccc640b28d8e9d8d9d25b, type: 3}
-  description: 
-  type: 0
-  slotType: 0
-  maxStackSize: 32
+  ID: 2
+  icon: {fileID: 21300000, guid: 054db15dfbca98c4f81820113c8b201c, type: 3}
+  itemModel: {fileID: 919132149155446097, guid: 42f0068d46905124184bc6958fe1267a, type: 3}
+  description: Thingy :]
+  type: 1
+  slotType: 1
+  maxStackSize: 1

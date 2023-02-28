@@ -23,15 +23,22 @@ public enum SlotType
 
 public abstract class ItemObject : ScriptableObject
 {
+    [Header("Item Details")]
     public int ID;
     public Sprite icon;
+    public GameObject itemModel;
+
+    [TextArea(15, 20)]
+    public string description;
+
+    [Header("Item Type")]
     public ItemType type;
+
+    [Header("Slot Type")]
     public SlotType slotType;
+    [Header("Item Stack Size")]
     [Range(1, 32)]
     public int maxStackSize = 32;
-
-    [TextArea(15,20)]
-    public string desc;
 }
 
 [System.Serializable]
