@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName = "New Keybind Manager", menuName = "Player/Keybinds")]
+[CreateAssetMenu(fileName = "New Keybind Manager", menuName = "Entity/Player/Keybinds")]
 public class KeybindManager : ScriptableObject
 {
     [Header("Movement Keybinds")]

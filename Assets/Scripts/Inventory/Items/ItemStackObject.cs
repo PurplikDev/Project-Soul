@@ -17,7 +17,10 @@ public class ItemStackObject : MonoBehaviour, IPointerClickHandler, IPointerEnte
 
     private void Update()
     {
-        //UpdateTooltip();
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            //DROP ITEM HERE
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
