@@ -97,18 +97,13 @@ public class InventoryObject : ScriptableObject
         inventory = new Inventory();
     }
 
-    /*
-     
-
-    IDK KINDA CONFUSED BY THIS RN, WILL LOOK INTO IT LATER
-
-
-    public void DropStack(int index, GameObject placeOfSpawn)
+    public void DropStack(int index)
     {
         if (inventory.inventorySlots[index] == null || inventory.inventorySlots[index].item.ID == 0)
         {
             return;
         }
+
         var spawnedItem = new GameObject();
         var itemEntity = spawnedItem.AddComponent<ItemEntity>();
         var rigidBody = spawnedItem.AddComponent<Rigidbody>();
@@ -118,17 +113,17 @@ public class InventoryObject : ScriptableObject
         inventory.inventorySlots[index].item = null;
         inventory.inventorySlots[index].itemAmount = 0;
 
-        rigidBody.AddExplosionForce(0.5f, placeOfSpawn.transform.position, 5f, 0.5f);
+        //rigidBody.AddExplosionForce(0.5f, placeOfSpawn.transform.position, 5f, 0.5f);
     }
 
-    public void DropAll(GameObject placeOfSpawn)
+    public void DropAll()
     {
         for (int i = 0; i < inventory.inventorySlots.Length; i++)
         {
-            DropStack(i, placeOfSpawn);
+            DropStack(i);
         }
     }
-    */
+    
 }
 
 public delegate void UpdateSlot(ItemStack _stack);

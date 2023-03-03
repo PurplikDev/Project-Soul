@@ -17,6 +17,4 @@ public class PlayerEntity : LivingEntity
 
     [Header("Keybinds")]
     public KeybindManager keybindManager;
-
-
 }
