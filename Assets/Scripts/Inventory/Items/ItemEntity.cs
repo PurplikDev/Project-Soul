@@ -24,8 +24,9 @@ public class ItemEntity : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if(collider.CompareTag("Player")) { 
-            collider.GetComponent<PlayerInventory>().inventory.AddItem(new Item(item), itemAmount);
+        var playerInventory = collider.GetComponent<PlayerEntity>();
+        if(playerInventory != null) { 
+            playerInventory.inventory.AddItem(new Item(item), itemAmount);
             Destroy(gameObject);
         }
     }

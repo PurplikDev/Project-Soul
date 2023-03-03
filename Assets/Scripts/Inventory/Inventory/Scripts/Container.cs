@@ -5,7 +5,6 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
-using static Inventory;
 
 public abstract class Container : MonoBehaviour
 {
@@ -19,12 +18,17 @@ public abstract class Container : MonoBehaviour
 
     void Start()
     {
-        for(int i = 0; i < inventory.GetSlots.Length; i++)
+        CreateSlots();
+        for (int i = 0; i < inventory.GetSlots.Length; i++)
         {
             inventory.GetSlots[i].parentContainer = this;
             inventory.GetSlots[i].OnAfterUpdate += OnSlotUpdate;
+
+            inventory.GetSlots[i].UpdateStack(inventory.GetSlots[i].item, inventory.GetSlots[i].itemAmount);
         }
-        CreateSlots();
+        
+
+
     }
 
     private void OnSlotUpdate(ItemStack _stack)

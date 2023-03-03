@@ -16,9 +16,9 @@ public class Behavior
 
     public enum BehaviorType
     {
+        IDLE,
         FOLLOW,
         WANDER,
-        GUARD,
-        IDLE
+        GUARD        
     }
 }

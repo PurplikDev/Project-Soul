@@ -219,17 +219,17 @@ public class Inventory
 
     public enum Slot
     {
-        Helmet = 25,
-        Chestplate = 26,
-        Leggings = 27,
-        Boots = 28,
-        Primary = 29,
-        Secondary = 30,
-        Accessory = 31,
-        Charm = 32,
-        Belt = 33,
-        Pouch = 34,
-        Back = 35,
-        Ring = 36
+        Helmet = 24,
+        Chestplate = 25,
+        Leggings = 26,
+        Boots = 27,
+        Primary = 28,
+        Secondary = 29,
+        Accessory = 30,
+        Charm = 31,
+        Belt = 32,
+        Pouch = 33,
+        Back = 34,
+        Ring = 35
     }
 }

@@ -6,6 +6,16 @@ public class InventoryDisplay : MonoBehaviour
 {
     [SerializeField] GameObject equipmentSlots;
     [SerializeField] GameObject trinketSlots;
+    [SerializeField] GameObject invetoryUI;
+    GameObject pouchSlot;
+
+    PlayerEntity playerEntity;
+
+    private void Awake()
+    {
+        playerEntity = GetComponent<PlayerEntity>();
+        pouchSlot = trinketSlots.transform.GetChild(5).gameObject;
+    }
 
     public void DisplayEquipment()
     {
@@ -19,4 +29,18 @@ public class InventoryDisplay : MonoBehaviour
         trinketSlots.SetActive(true);
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(playerEntity.keybindManager.openInventory)) {
+            invetoryUI.SetActive(!invetoryUI.activeInHierarchy);
+        }
+
+        if (playerEntity.inventory.GetSlots[33].item.ID > 0)
+        {
+            pouchSlot.SetActive(true);
+        } else
+        {
+            pouchSlot.SetActive(false);
+        }
+    }
 }

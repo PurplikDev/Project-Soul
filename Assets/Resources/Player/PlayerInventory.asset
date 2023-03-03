@@ -208,7 +208,7 @@ MonoBehaviour:
         ID: 0
         maxStackSize: 0
       itemAmount: 0
-    - allowedItems: 06000000
+    - allowedItems: 08000000
       item:
         name: air
         ID: 0

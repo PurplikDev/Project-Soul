@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &239809435300594589
 MonoBehaviour:
@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   behavior:
-  - behaviorType: 0
-    intenfity: 0
+  - behaviorType: 1
+    intenfity: 19.7
 --- !u!114 &4622436862706629632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,3 +65,223 @@ MonoBehaviour:
   defence: 0
   damage: 0
   speed: 0
+  entityInventory:
+    inventorySlots:
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+    - allowedItems: 
+      item:
+        name: air
+        ID: 0
+        maxStackSize: 0
+      itemAmount: 0
+  model: {fileID: 919132149155446097, guid: 492051f739546944c84d65b00a541016, type: 3}
+  animator: {fileID: 0}

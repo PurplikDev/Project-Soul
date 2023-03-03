@@ -131,9 +131,8 @@ public class ItemStackObject : MonoBehaviour, IPointerClickHandler, IPointerEnte
     {
         var rectTransform = mouseObject.AddComponent<RectTransform>();
         rectTransform.sizeDelta = new Vector2(Screen.width / 25, Screen.width / 25);
-        mouseObject.name = ("MouseObject");
+        mouseObject.name = "MouseObject";
         mouseObject.layer = 5;
-        mouseObject.transform.SetParent(transform.parent.parent);
         if (container.itemsDisplayed[gameObject].item.ID > 0)
         {
             var image = mouseObject.AddComponent<Image>();

@@ -18,7 +18,12 @@ public enum SlotType
     LEGGINGS,
     BOOTS,
     WEAPON,
-    TRINKET
+    ACCESSORY,
+    CHARM,
+    BELT,
+    POUCH,
+    BACK,
+    RING
 }
 
 public abstract class ItemObject : ScriptableObject
