@@ -13,7 +13,8 @@ public abstract class Container : MonoBehaviour
 
     public InventoryObject inventory;
     public Dictionary<GameObject, ItemStack> itemsDisplayed = new Dictionary<GameObject, ItemStack>();
-    public GameObject player;    
+    public GameObject player;
+    private ItemStack itemStack;
 
     void Start()
     {
@@ -52,6 +53,12 @@ public abstract class Container : MonoBehaviour
         {
             MouseItem.gameObject.transform.SetParent(GameObject.Find("ItemHoverUI").transform);
             MoveItem();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            itemsDisplayed.TryGetValue(MouseItem.hoverObject, out itemStack);
+            inventory.DropStack(itemStack, player);
         }
     }
 

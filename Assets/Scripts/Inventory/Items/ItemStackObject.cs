@@ -15,15 +15,6 @@ public class ItemStackObject : MonoBehaviour, IPointerClickHandler, IPointerEnte
         container = transform.GetComponentInParent<Container>();
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Q))
-        {
-            container.itemsDisplayed.TryGetValue(gameObject, out _itemStack);
-            container.inventory.DropStack(_itemStack, container.player);
-        }
-    }
-
     public void OnPointerClick(PointerEventData eventData)
     {
         container.itemsDisplayed.TryGetValue(gameObject, out _itemStack);

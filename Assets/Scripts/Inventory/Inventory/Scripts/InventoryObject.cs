@@ -105,8 +105,9 @@ public class InventoryObject : ScriptableObject
         }
 
         var spawnedItem = new GameObject();
-        spawnedItem.AddComponent<SphereCollider>().isTrigger = true;
-        spawnedItem.AddComponent<BoxCollider>().size = new Vector3(1.25f, 1.25f, 1.25f);
+        var sphereCollider = spawnedItem.AddComponent<SphereCollider>();
+        sphereCollider.isTrigger = true;
+        spawnedItem.AddComponent<BoxCollider>().size = new Vector3(0.5f, 0.5f, 0.5f);
         spawnedItem.transform.position = placeOfSpawn.transform.position;
         var itemEntity = spawnedItem.AddComponent<ItemEntity>();
         var rigidBody = spawnedItem.AddComponent<Rigidbody>();
