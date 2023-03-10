@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 public class ItemStackObject : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     private Container container;
-    private static ItemStack _itemStack;
+    private ItemStack _itemStack;
 
     private void Awake()
     {
@@ -19,7 +19,8 @@ public class ItemStackObject : MonoBehaviour, IPointerClickHandler, IPointerEnte
     {
         if(Input.GetKeyDown(KeyCode.Q))
         {
-            //DROP ITEM HERE
+            container.itemsDisplayed.TryGetValue(gameObject, out _itemStack);
+            container.inventory.DropStack(_itemStack, container.player);
         }
     }
 

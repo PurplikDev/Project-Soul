@@ -97,25 +97,28 @@ public class InventoryObject : ScriptableObject
         inventory = new Inventory();
     }
 
-    public void DropStack(int index)
+    public void DropStack(ItemStack itemStack, GameObject placeOfSpawn)
     {
-        if (inventory.inventorySlots[index] == null || inventory.inventorySlots[index].item.ID == 0)
+        if (itemStack == null || itemStack.item.ID == 0)
         {
             return;
         }
 
         var spawnedItem = new GameObject();
+        spawnedItem.AddComponent<SphereCollider>().isTrigger = true;
+        spawnedItem.AddComponent<BoxCollider>().size = new Vector3(1.25f, 1.25f, 1.25f);
+        spawnedItem.transform.position = placeOfSpawn.transform.position;
         var itemEntity = spawnedItem.AddComponent<ItemEntity>();
         var rigidBody = spawnedItem.AddComponent<Rigidbody>();
+        
 
-        itemEntity.item = inventory.inventorySlots[index].ItemObject;
-        itemEntity.itemAmount = inventory.inventorySlots[index].itemAmount;
-        inventory.inventorySlots[index].item = null;
-        inventory.inventorySlots[index].itemAmount = 0;
+        itemEntity.item = database.getItem[itemStack.item.ID];
+        itemEntity.itemAmount = itemStack.itemAmount;
+        itemStack.UpdateStack(new Item(), 0);
 
-        //rigidBody.AddExplosionForce(0.5f, placeOfSpawn.transform.position, 5f, 0.5f);
+        rigidBody.AddExplosionForce(0.5f, placeOfSpawn.transform.position, 50f, 5f);
     }
-
+    /*
     public void DropAll()
     {
         for (int i = 0; i < inventory.inventorySlots.Length; i++)
@@ -123,7 +126,7 @@ public class InventoryObject : ScriptableObject
             DropStack(i);
         }
     }
-    
+    */
 }
 
 public delegate void UpdateSlot(ItemStack _stack);
@@ -132,14 +135,19 @@ public delegate void UpdateSlot(ItemStack _stack);
 public class ItemStack
 {
     public SlotType[] allowedItems = new SlotType[0];
+
     [System.NonSerialized]
     public Container parentContainer;
+
     [System.NonSerialized]
     public GameObject displaySlot;
+
     [System.NonSerialized]
     public UpdateSlot OnAfterUpdate;
+
     [System.NonSerialized]
     public UpdateSlot OnBeforeUpdate;
+
     public Item item = new Item();
     public int itemAmount;
 

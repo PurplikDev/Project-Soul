@@ -11,8 +11,14 @@ public class ItemEntity : MonoBehaviour
     public int itemAmount = 1;
 
     private float itemRotationY;
+    private bool pickable = false;
 
-    void Awake()
+    private void Awake()
+    {
+        Invoke("MakePickable", 2.5f);
+    }
+
+    void Start()
     {
         model = Instantiate(item.itemModel, transform.position, transform.rotation, transform);
     }
@@ -24,10 +30,18 @@ public class ItemEntity : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
+        if (!pickable) {
+            return;
+        }
         var playerInventory = collider.GetComponent<PlayerEntity>();
         if(playerInventory != null) { 
             playerInventory.inventory.AddItem(new Item(item), itemAmount);
             Destroy(gameObject);
         }
     }
+
+    private void MakePickable() {
+        pickable = true;
+    }
+
 }

@@ -13,8 +13,7 @@ public abstract class Container : MonoBehaviour
 
     public InventoryObject inventory;
     public Dictionary<GameObject, ItemStack> itemsDisplayed = new Dictionary<GameObject, ItemStack>();
-
-    
+    public GameObject player;    
 
     void Start()
     {
@@ -26,8 +25,8 @@ public abstract class Container : MonoBehaviour
 
             inventory.GetSlots[i].UpdateStack(inventory.GetSlots[i].item, inventory.GetSlots[i].itemAmount);
         }
-        
 
+        player = GetComponentInParent<PlayerEntity>().gameObject;
 
     }
 
