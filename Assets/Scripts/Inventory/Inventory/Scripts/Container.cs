@@ -58,7 +58,7 @@ public abstract class Container : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             itemsDisplayed.TryGetValue(MouseItem.hoverObject, out itemStack);
-            inventory.DropStack(itemStack, player);
+            inventory.DropStack(itemStack, player, Input.GetKey(KeyCode.K));
         }
     }
 

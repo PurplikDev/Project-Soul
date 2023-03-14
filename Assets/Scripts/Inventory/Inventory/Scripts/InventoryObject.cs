@@ -34,19 +34,20 @@ public class InventoryObject : ScriptableObject
                     return;
                 }
             }
-            
         }
+    }
 
+    public bool CheckForEmptySlot()
+    {
         for (int i = 0; i < 24; i++)
         {
             if (GetSlots[i].item.ID == 0)
             {
-                SetEmptySlot(_item, _itemAmount);
-                return;
+                return true;
             }
         }
 
-        Debug.Log("Found no valid slot!");
+        return false;
     }
 
     public ItemStack SetEmptySlot(Item _item, int itemAmount)
@@ -97,7 +98,7 @@ public class InventoryObject : ScriptableObject
         inventory = new Inventory();
     }
 
-    public void DropStack(ItemStack itemStack, GameObject placeOfSpawn)
+    public void DropStack(ItemStack itemStack, GameObject placeOfSpawn, bool wholeStack)
     {
         if (itemStack == null || itemStack.item.ID == 0)
         {
@@ -107,15 +108,26 @@ public class InventoryObject : ScriptableObject
         var spawnedItem = new GameObject();
         var sphereCollider = spawnedItem.AddComponent<SphereCollider>();
         sphereCollider.isTrigger = true;
-        spawnedItem.AddComponent<BoxCollider>().size = new Vector3(0.5f, 0.5f, 0.5f);
+        spawnedItem.AddComponent<BoxCollider>().size = new Vector3(0, 0, 0);
+        spawnedItem.GetComponent<BoxCollider>().center = new Vector3(0, -0.5f, 0);
         spawnedItem.transform.position = placeOfSpawn.transform.position;
         var itemEntity = spawnedItem.AddComponent<ItemEntity>();
         var rigidBody = spawnedItem.AddComponent<Rigidbody>();
+        rigidBody.freezeRotation = true;
         
 
-        itemEntity.item = database.getItem[itemStack.item.ID];
-        itemEntity.itemAmount = itemStack.itemAmount;
-        itemStack.UpdateStack(new Item(), 0);
+        if(wholeStack) {
+            itemEntity.item = database.getItem[itemStack.item.ID];
+            itemEntity.itemAmount = itemStack.itemAmount;
+            itemStack.UpdateStack(new Item(), 0);
+        } else
+        {
+            itemEntity.item = database.getItem[itemStack.item.ID];
+            itemEntity.itemAmount = 1;
+            itemStack.UpdateStack(itemStack.item, itemStack.itemAmount--);
+        }
+
+        
 
         rigidBody.AddExplosionForce(0.5f, placeOfSpawn.transform.position, 50f, 5f);
     }

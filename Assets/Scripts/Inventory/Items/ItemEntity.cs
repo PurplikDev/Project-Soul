@@ -34,7 +34,7 @@ public class ItemEntity : MonoBehaviour
             return;
         }
         var playerInventory = collider.GetComponent<PlayerEntity>();
-        if(playerInventory != null) { 
+        if(playerInventory != null && playerInventory.inventory.CheckForEmptySlot()) {
             playerInventory.inventory.AddItem(new Item(item), itemAmount);
             Destroy(gameObject);
         }
