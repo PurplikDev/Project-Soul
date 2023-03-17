@@ -10,12 +10,13 @@ public class LivingEntity : MonoBehaviour, IDamagable
     public int defence;
     public int damage;
     public int speed;
+    public int visionRange;
     
     //[Header("Inventory")]
     //public Inventory entityInventory;
 
     [Header("Rendering")]
-    public GameObject model;
+    //public GameObject model;
     public Animator animator;
 
     private void Awake()
@@ -25,7 +26,7 @@ public class LivingEntity : MonoBehaviour, IDamagable
         damage = entityStats.damage;
         speed = entityStats.speed;
 
-        Instantiate(model, transform.position - new Vector3(0,1,0), transform.rotation, transform);
+        //Instantiate(model, transform.position - new Vector3(0,1,0), transform.rotation, transform);
     }
 
     public void Damage(int damage, DamageType damageType)

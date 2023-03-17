@@ -124,12 +124,18 @@ public class InventoryObject : ScriptableObject
         {
             itemEntity.item = database.getItem[itemStack.item.ID];
             itemEntity.itemAmount = 1;
-            itemStack.UpdateStack(itemStack.item, itemStack.itemAmount--);
+            itemStack.itemAmount--;
+            if(itemStack.itemAmount <= 0)
+            {
+                itemStack.UpdateStack(new Item(), 0);
+                return;
+            }
+            itemStack.UpdateStack(itemStack.item, itemStack.itemAmount);
         }
 
         
 
-        rigidBody.AddExplosionForce(0.5f, placeOfSpawn.transform.position, 50f, 5f);
+        //rigidBody.AddExplosionForce(10.0f, placeOfSpawn.transform.position + new Vector3(1, 0, 0), 50.0f, 0.5f, ForceMode.Impulse);
     }
     /*
     public void DropAll()
