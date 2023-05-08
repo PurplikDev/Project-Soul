@@ -5,7 +5,8 @@ namespace io.purplik.ProjectSoul.Entity.Stats
     {
         FLAT = 100,
         PERCENTAGEADD = 200,
-        PERCENTAGEMULT = 300
+        PERCENTAGEMULT = 300,
+        OVERRIDE = 400
         
     }
 

@@ -10,7 +10,4 @@ public class PlayerEntity : LivingEntity
 
     [Header("Madness")]
     public int madness;
-
-    [Header("Inventory")]
-    public Inventory inventory;
 }

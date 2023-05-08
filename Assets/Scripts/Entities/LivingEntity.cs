@@ -5,7 +5,6 @@ using UnityEngine;
 public class LivingEntity : MonoBehaviour, IDamagable
 {
     [Header("Entity Stats")]
-    public EntityStats entityStats;
     public int health;
     public int defence;
     public int damage;
@@ -20,11 +19,7 @@ public class LivingEntity : MonoBehaviour, IDamagable
     public Animator animator;
 
     private void Awake()
-    {
-        health = entityStats.health;
-        defence = entityStats.defence;
-        damage = entityStats.damage;
-        speed = entityStats.speed;
+    { 
 
         //Instantiate(model, transform.position - new Vector3(0,1,0), transform.rotation, transform);
     }

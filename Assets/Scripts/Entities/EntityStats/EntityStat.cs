@@ -110,6 +110,9 @@ namespace io.purplik.ProjectSoul.Entity.Stats
                         finalValue *= 1 + sumPrecentAdd;
                         sumPrecentAdd = 0;
                     }
+                } else if (modifier.type == StatType.OVERRIDE)
+                {
+                    finalValue = statModifiers[i].value;
                 }
 
             }
