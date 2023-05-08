@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using io.purplik.ProjectSoul.InventorySystem;
 
 public class PlayerEntity : LivingEntity
 {
@@ -13,8 +12,5 @@ public class PlayerEntity : LivingEntity
     public int madness;
 
     [Header("Inventory")]
-    public InventoryObject inventory;
-
-    [Header("Keybinds")]
-    public KeybindManager keybindManager;
+    public Inventory inventory;
 }
