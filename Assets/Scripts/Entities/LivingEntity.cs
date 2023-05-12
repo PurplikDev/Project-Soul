@@ -47,8 +47,3 @@ public class LivingEntity : MonoBehaviour, IDamagable
         MAGIC
     }
 }
-
-public interface IDamagable
-{
-    void Damage(int damage, LivingEntity.DamageType damageType);
-}
