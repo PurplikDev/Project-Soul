@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace io.purplik.ProjectSoul.Entity {
+
+
 public class LivingEntity : MonoBehaviour, IDamagable
 {
     [Header("Entity Stats")]
@@ -46,4 +49,5 @@ public class LivingEntity : MonoBehaviour, IDamagable
         MELE,
         MAGIC
     }
+}
 }
