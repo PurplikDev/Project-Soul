@@ -1,54 +1,72 @@
-using System.Collections;
-using System.Collections.Generic;
+using io.purplik.ProjectSoul.Entity.Stats;
+using io.purplik.ProjectSoul.InventorySystem;
 using UnityEngine;
 
-public class LivingEntity : MonoBehaviour, IDamagable
-{
-    [Header("Entity Stats")]
-    public int health;
-    public int defence;
-    public int damage;
-    public int speed;
-    public int visionRange;
-    
-    //[Header("Inventory")]
-    //public Inventory entityInventory;
-
-    [Header("Rendering")]
-    //public GameObject model;
-    public Animator animator;
-
-    private void Awake()
-    { 
-
-        //Instantiate(model, transform.position - new Vector3(0,1,0), transform.rotation, transform);
-    }
-
-    public void Damage(int damage, DamageType damageType)
+namespace io.purplik.ProjectSoul.Entity {
+    public class LivingEntity : MonoBehaviour, IDamagable
     {
-        switch (damageType) {
-            case DamageType.TRUE:
-            default:
-                health -= damage;
-                break;
-        }
 
-        if(health <= 0)
+
+        [Header("Rendering")]
+        public Animator animator;
+
+        [Header("Stats")]
+        public EntityStat templar;
+        public EntityStat thaumaturge;
+        public EntityStat rogue;
+        [Space]
+        public EntityStat health;
+        public EntityStat defence;
+        public EntityStat speed;
+
+        [Header("<color=#80FF75>Active Stats")]
+        public int activeHealth;
+        public int maxActiveHealth;
+
+        [Header("Misc Stuff")]
+        public EntityState entityState;
+
+        private void Awake()
         {
-            // Drop inventory on death here
+            maxActiveHealth = Mathf.FloorToInt(health.Value);
+        }
+
+        public void UpdateMaxHealth() => maxActiveHealth = Mathf.FloorToInt(health.Value);
+
+        public void Damage(int damage, DamageType damageType)
+        {
+            switch (damageType) {
+                case DamageType.TRUE:
+                default:
+                    activeHealth -= damage;
+                    break;
+            }
+
+            if (activeHealth <= 0)
+            {
+                // Drop inventory on death here
+            }
+        }
+
+
+        public enum DamageType
+        {
+            TRUE,
+            MELE,
+            MAGIC
+        }
+
+        public enum EntityState
+        {
+            IDLE,
+            BLOCKING,
+            ATTACKING,
+            MOVING
         }
     }
 
-
-    public enum DamageType
+    public interface IDamagable
     {
-        TRUE,
-        MELE,
-        MAGIC
-    }
-}
-
-public interface IDamagable
-{
-    void Damage(int damage, LivingEntity.DamageType damageType);
+        void Damage(int damage, LivingEntity.DamageType damageType);
+    } 
 }

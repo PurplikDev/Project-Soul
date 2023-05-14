@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29a49102d866f654fb3ffea44aa2364a, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
+  id: 0969d00d0579f2543acaebd2ceef3c64
   itemName: Test
-  icon: {fileID: 21300000, guid: f09eae8c0ea04254b90c5386a034a225, type: 3}
+  maxStackSize: 32
+  icon: {fileID: 21300000, guid: 303d7ac25a9a096409032c31adc7a2cd, type: 3}

@@ -8,5 +8,16 @@ namespace io.purplik.ProjectSoul.InventorySystem {
             base.OnValidate();
             gameObject.name = equipmentType.ToString() + " Slot";
         }
+
+        public override bool IsValidItem(Item item)
+        {
+            if(item == null)
+            {
+                return true;
+            }
+
+            EquipmentItem equipmentItem = item as EquipmentItem;
+            return equipmentItem != null && equipmentItem.equipmentType == equipmentType;
+        }
     } 
 }

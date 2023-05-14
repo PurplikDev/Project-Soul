@@ -1,15 +1,18 @@
 using UnityEngine;
+using static io.purplik.ProjectSoul.Entity.LivingEntity;
 
 namespace io.purplik.ProjectSoul.Entity.Player
 {
     public class PlayerMovement : MonoBehaviour
     {
         [Header("Movement")]
-        public float movementSpeed;
+        private float movementSpeed;
+        public float sprintSpeedMultiplier, crouchSpeedMultiplier;
+        [Space]
         float horizontalInput, verticalInput;
-
+        [Space]
         public float groundDrag;
-
+        [Space]
         public float jumpForce;
         public float jumpCooldown;
         public float airMultiplier;
@@ -20,15 +23,29 @@ namespace io.purplik.ProjectSoul.Entity.Player
         public LayerMask groundMask;
         private bool grounded;
 
+        [Header("Crouching Stuff")]
+        public float crouchYScale;
+        private float startYScale;
+        private CapsuleCollider hitbox;
+
+        [Space]
         public Transform orientation;
-        Rigidbody rigidbody;
+        private new Rigidbody rigidbody;
+
+        [Space] 
+        public LivingEntity livingEntity;
+        public MovementState movementState;
 
         Vector3 moveDirection;
 
-        void Awake()
+        private void OnValidate()
         {
             rigidbody = GetComponent<Rigidbody>();
             rigidbody.freezeRotation = true;
+            livingEntity = GetComponent<LivingEntity>();
+
+            hitbox = GetComponentInChildren<CapsuleCollider>();
+            startYScale = hitbox.height;
         }
 
         void Update()
@@ -37,6 +54,7 @@ namespace io.purplik.ProjectSoul.Entity.Player
 
             ProcessInputs();
             SpeedCap();
+            StateHandler();
 
             rigidbody.drag = grounded ? groundDrag : 0;
         }
@@ -56,6 +74,13 @@ namespace io.purplik.ProjectSoul.Entity.Player
                 readyToJump = false;
                 Jump();
                 Invoke(nameof(ResetJump), jumpCooldown);
+            }
+
+            if(Input.GetKeyDown(PlayerKeybinds.crouch)) {
+                hitbox.height = crouchYScale;
+            }
+            if (Input.GetKeyUp(PlayerKeybinds.crouch)) {
+                hitbox.height = startYScale;
             }
         }
 
@@ -95,7 +120,47 @@ namespace io.purplik.ProjectSoul.Entity.Player
             readyToJump = true;
         }
 
+        private void StateHandler()
+        {
+            // SETTING STATE TO SPRINTING
+            if(grounded && Input.GetKey(PlayerKeybinds.sprint))
+            {
+                movementState = MovementState.SPRINTING;
+                movementSpeed = livingEntity.speed.Value * sprintSpeedMultiplier;
+            } 
+            
+            // SETTING STATE TO CROUCHING
+            else if(grounded && Input.GetKey(PlayerKeybinds.crouch))
+            {
+                movementState = MovementState.CROUCHING;
+                movementSpeed = livingEntity.speed.Value * crouchSpeedMultiplier;
+            }
+            
+            // SETTING STATE TO WALKING
+            else if(grounded) 
+            {
+                movementState = MovementState.WALKING;
+                movementSpeed = livingEntity.speed.Value;
+            }
+            
+            // SETTING STATE TO AIR
+            else if (!grounded)
+            {
+                movementState = MovementState.AIR;
+            } else
+            {
+                livingEntity.entityState = EntityState.IDLE;
+            }
+        }
 
+        public enum MovementState
+        {
+            SPRINTING,
+            WALKING,
+            CROUCHING,
+            AIR,
+            IDLE
+        }
     }
 
     public static class PlayerKeybinds
@@ -107,6 +172,7 @@ namespace io.purplik.ProjectSoul.Entity.Player
         public static KeyCode right = KeyCode.D;
         public static KeyCode jump = KeyCode.Space;
         public static KeyCode sprint = KeyCode.LeftShift;
+        public static KeyCode crouch = KeyCode.LeftControl;
 
         [Header("Attack Keybinds")]
         public static KeyCode primaryAction = KeyCode.Mouse0;
