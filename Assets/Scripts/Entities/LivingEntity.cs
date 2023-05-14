@@ -3,7 +3,35 @@ using io.purplik.ProjectSoul.InventorySystem;
 using UnityEngine;
 
 namespace io.purplik.ProjectSoul.Entity {
+<<<<<<< HEAD
     public class LivingEntity : MonoBehaviour, IDamagable
+=======
+
+
+public class LivingEntity : MonoBehaviour, IDamagable
+{
+    [Header("Entity Stats")]
+    public int health;
+    public int defence;
+    public int damage;
+    public int speed;
+    public int visionRange;
+    
+    //[Header("Inventory")]
+    //public Inventory entityInventory;
+
+    [Header("Rendering")]
+    //public GameObject model;
+    public Animator animator;
+
+    private void Awake()
+    { 
+
+        //Instantiate(model, transform.position - new Vector3(0,1,0), transform.rotation, transform);
+    }
+
+    public void Damage(int damage, DamageType damageType)
+>>>>>>> 4014e07cb0394d12341f754bd46a60b23f109116
     {
 
 
@@ -67,6 +95,14 @@ namespace io.purplik.ProjectSoul.Entity {
 
     public interface IDamagable
     {
+<<<<<<< HEAD
         void Damage(int damage, LivingEntity.DamageType damageType);
     } 
+=======
+        TRUE,
+        MELE,
+        MAGIC
+    }
+}
+>>>>>>> 4014e07cb0394d12341f754bd46a60b23f109116
 }
