@@ -10,6 +10,8 @@ namespace io.purplik.ProjectSoul.Entity.Player
 
         float xRotation, yRotation;
 
+        public bool lockRotation = false;
+
         void Start()
         {
             Cursor.lockState = CursorLockMode.Locked;
@@ -18,6 +20,11 @@ namespace io.purplik.ProjectSoul.Entity.Player
 
         void Update()
         {
+            if(lockRotation)
+            {
+                return;
+            }
+
             float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensitivityX;
             float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensitivityY;
 

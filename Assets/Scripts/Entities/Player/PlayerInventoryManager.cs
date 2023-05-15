@@ -1,6 +1,8 @@
 using io.purplik.ProjectSoul.Entity;
+using io.purplik.ProjectSoul.Entity.Player;
 using UnityEngine;
 using UnityEngine.UI;
+using static io.purplik.ProjectSoul.Entity.LivingEntity;
 
 namespace io.purplik.ProjectSoul.InventorySystem
 {
@@ -58,6 +60,26 @@ namespace io.purplik.ProjectSoul.InventorySystem
             inventory.OnDropEvent += Drop;
             equipmentInventory.OnDropEvent += Drop;
         }
+
+        private void Update()
+        {
+            if(Input.GetKeyDown(PlayerKeybinds.openInventory))
+            {
+                bool canvasEnabled = GetComponent<Canvas>().enabled;
+                if (canvasEnabled)
+                {
+                    Cursor.lockState = CursorLockMode.Locked;
+                } else
+                {
+                    Cursor.lockState = CursorLockMode.None;
+                }
+                Camera.main.GetComponent<PlayerCamera>().lockRotation = !canvasEnabled;
+                Cursor.visible = !canvasEnabled;
+                GetComponent<Canvas>().enabled = !GetComponent<Canvas>().enabled;
+            }
+        }
+
+        
 
         private void Equip(ItemSlot slot)
         {
@@ -195,7 +217,7 @@ namespace io.purplik.ProjectSoul.InventorySystem
         }
         public void Unequip(EquipmentItem item)
         {
-            if (!inventory.IsFull() && equipmentInventory.RemoveItem(item))
+            if (!inventory.CanAddItem(item) && equipmentInventory.RemoveItem(item))
             {
                 item.Unequip(livingEntity);
                 statDisplayInventory.UpdateStatValues();

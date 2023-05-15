@@ -24,13 +24,13 @@ namespace io.purplik.ProjectSoul.InventorySystem
         {
             for (int i = 0; i < equipmentSlots.Length; i++)
             {
-                equipmentSlots[i].OnRightClickEvent += OnRightClickEvent;
-                equipmentSlots[i].OnPointerEnterEvent += OnPointerEnterEvent;
-                equipmentSlots[i].OnPointerExitEvent += OnPointerExitEvent;
-                equipmentSlots[i].OnBeginDragEvent += OnBeginDragEvent;
-                equipmentSlots[i].OnEndDragEvent += OnEndDragEvent;
-                equipmentSlots[i].OnDragEvent += OnDragEvent;
-                equipmentSlots[i].OnDropEvent += OnDropEvent;
+                equipmentSlots[i].OnRightClickEvent += slot => OnRightClickEvent(slot);
+                equipmentSlots[i].OnPointerEnterEvent += slot => OnPointerEnterEvent(slot);
+                equipmentSlots[i].OnPointerExitEvent += slot => OnPointerExitEvent(slot);
+                equipmentSlots[i].OnBeginDragEvent += slot => OnBeginDragEvent(slot);
+                equipmentSlots[i].OnEndDragEvent += slot => OnEndDragEvent(slot);
+                equipmentSlots[i].OnDragEvent += slot => OnDragEvent(slot);
+                equipmentSlots[i].OnDropEvent += slot => OnDropEvent(slot);
             }
         }
         private void OnValidate()

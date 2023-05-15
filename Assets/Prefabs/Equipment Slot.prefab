@@ -55,7 +55,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 2304261551548526031}
   amountText: {fileID: 0}
-  _itemAmount: 0
   equipmentType: 3
 --- !u!222 &2385497072118868802
 CanvasRenderer:

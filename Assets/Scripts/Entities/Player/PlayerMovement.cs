@@ -180,8 +180,8 @@ namespace io.purplik.ProjectSoul.Entity.Player
 
         [Header("Functional Keybinds")]
         public static KeyCode openInventory = KeyCode.E;
-        public static KeyCode switchBackSlot = KeyCode.F;
-        public static KeyCode switchFocus = KeyCode.R;
+        //public static KeyCode switchBackSlot = KeyCode.F;
+        //public static KeyCode switchFocus = KeyCode.R;
 
         [Header("Misc Keybinds")]
         public static KeyCode pauseGame = KeyCode.Escape;

@@ -22,7 +22,6 @@ namespace io.purplik.ProjectSoul.InventorySystem
 
 
         private Color visibleColor = new Color(1, 1, 1, 1);
-        private Color dragColor = new Color(1, 1, 1, 0.5f);
         private Color hiddenColor = new Color(0, 0, 0, 0);
         private Item _item;
         public Item item
@@ -31,6 +30,9 @@ namespace io.purplik.ProjectSoul.InventorySystem
             set
             {
                 _item = value;
+
+                if (_item == null && itemAmount != 0) itemAmount = 0;
+
                 if(_item == null)
                 {
                     image.color = hiddenColor;
@@ -54,7 +56,8 @@ namespace io.purplik.ProjectSoul.InventorySystem
             {
                 _itemAmount = value;
                 if (_itemAmount < 0) _itemAmount = 0;
-                if (_itemAmount == 0) item = null;
+                if (_itemAmount == 0 && _item != null) item = null;
+
 
                 if (amountText != null)
                 {
@@ -121,7 +124,6 @@ namespace io.purplik.ProjectSoul.InventorySystem
         {
             if (OnBeginDragEvent != null)
             {
-                image.color = dragColor;
                 OnBeginDragEvent(this);
             }
         }
