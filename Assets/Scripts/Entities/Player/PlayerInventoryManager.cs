@@ -2,7 +2,6 @@ using io.purplik.ProjectSoul.Entity;
 using io.purplik.ProjectSoul.Entity.Player;
 using UnityEngine;
 using UnityEngine.UI;
-using static io.purplik.ProjectSoul.Entity.LivingEntity;
 
 namespace io.purplik.ProjectSoul.InventorySystem
 {

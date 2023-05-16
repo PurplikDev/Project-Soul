@@ -1,6 +1,4 @@
-using io.purplik.ProjectSoul.InventorySystem;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -131,7 +129,7 @@ namespace io.purplik.ProjectSoul.InventorySystem
             {
                 if (itemSlots[i].item != null && Application.isPlaying)
                 {
-                    itemSlots[i].item.Destroy();
+                    itemSlots[i].item.Destory();
                 }
                 itemSlots[i].item = null;
                 itemSlots[i].itemAmount = 0;

@@ -1330,7 +1330,7 @@ GameObject:
   - component: {fileID: 63438247329780986}
   - component: {fileID: 3687553462782444266}
   m_Layer: 5
-  m_Name: Inventory
+  m_Name: _Inventory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1369,8 +1369,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42d981d41f0a6b74993d0a408e514410, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingItems: []
-  itemsParent: {fileID: 3289302392540693119}
   itemSlots:
   - {fileID: 249861284419536794}
   - {fileID: 5774848671656969365}
@@ -1396,6 +1394,8 @@ MonoBehaviour:
   - {fileID: 8889427256006642275}
   - {fileID: 2728506953468760188}
   - {fileID: 7248418687529075283}
+  startingItems: []
+  itemsParent: {fileID: 3289302392540693119}
 --- !u!222 &63438247329780986
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1582,7 +1582,7 @@ GameObject:
   - component: {fileID: 1347941071157466853}
   - component: {fileID: 6734263886092103203}
   m_Layer: 5
-  m_Name: Stats
+  m_Name: _Stats
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3473,7 +3473,7 @@ GameObject:
   - component: {fileID: 3592657959185496171}
   - component: {fileID: 2359314483654342661}
   m_Layer: 5
-  m_Name: Equipment
+  m_Name: _Equipment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
