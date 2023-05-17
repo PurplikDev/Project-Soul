@@ -1,46 +1,74 @@
+using io.purplik.ProjectSoul.Entity;
+using io.purplik.ProjectSoul.Entity.Player;
 using UnityEngine;
 
 namespace io.purplik.ProjectSoul.InventorySystem { 
-    public class ItemChest : ItemContainer
+    public class ItemChest : ItemContainer, ITileEntity
     {
+        [SerializeField] Animator animator;
         [SerializeField] Transform itemsParent;
+        [SerializeField] Item[] startingItems;
+        bool isOpen = false;
+
+        public PlayerInventoryManager playerInventory;
+        private PlayerEntity playerEntity;
+
+        public void Interact()
+        {
+            itemsParent.gameObject.SetActive(true);
+            isOpen = true;
+            playerInventory.OpenItemContainer(this);
+        }
 
         protected override void OnValidate()
         {
-
+            playerEntity = GameObject.Find("Player").GetComponent<PlayerEntity>();
             if (itemsParent != null)
             {
                 itemsParent.GetComponentsInChildren(includeInactive: true, result: itemSlots);
             }
         }
 
-        private void Update()
+        private void Awake()
         {
-            
+            itemsParent.gameObject.SetActive(false);
+            SetStartingItems();
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void Update()
         {
-            CheckCollision(other.gameObject, true);
+            if ((Input.GetKeyDown(PlayerKeybinds.openInventory) || Input.GetKeyDown(PlayerKeybinds.pauseGame)) && isOpen)
+            {
+                CloseUI();
+            }
+
+            playerInventory = playerEntity.GetComponentInChildren<PlayerInventoryManager>();
         }
 
         private void OnTriggerExit(Collider other)
         {
-            CheckCollision(other.gameObject, false);
+            var player = other.GetComponentInParent<PlayerEntity>();
+            if(player != null && isOpen)
+            {
+                CloseUI();
+                player.GetComponentInChildren<PlayerUIController>().ToggleAllUI(false);
+            }
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        public void CloseUI()
         {
-            CheckCollision(collision.gameObject, true);
+            playerInventory.CloseItemContainer(this);
+            itemsParent.gameObject.SetActive(false);
+            isOpen = false;
+            playerInventory = null;
         }
 
-        private void OnTriggerExit2D(Collider2D collision)
+        private void SetStartingItems()
         {
-            CheckCollision(collision.gameObject, false);
-        }
-
-        private void CheckCollision(GameObject gameObject, bool state)
-        {
+            for (int i = 0; i < startingItems.Length; i++)
+            {
+                AddItem(startingItems[i].GetCopy());
+            }
         }
     }
 }

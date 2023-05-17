@@ -17,24 +17,22 @@ namespace io.purplik.ProjectSoul.Entity.Player
         public float jumpCooldown;
         public float airMultiplier;
         bool readyToJump = true;
-
         [Header("Ground Check")]
         public float playerHeight;
         public LayerMask groundMask;
         private bool grounded;
-
         [Header("Crouching Stuff")]
         public float crouchYScale;
         private float startYScale;
         private CapsuleCollider hitbox;
-
         [Space]
         public Transform orientation;
         private new Rigidbody rigidbody;
-
         [Space] 
         public LivingEntity livingEntity;
         public MovementState movementState;
+        [Space]
+        public bool lockMovement = false;
 
         Vector3 moveDirection;
 
@@ -66,6 +64,8 @@ namespace io.purplik.ProjectSoul.Entity.Player
 
         private void ProcessInputs()
         {
+            if(lockMovement) { return; }
+
             horizontalInput = Input.GetAxisRaw("Horizontal");
             verticalInput = Input.GetAxisRaw("Vertical");
 
@@ -115,10 +115,7 @@ namespace io.purplik.ProjectSoul.Entity.Player
             rigidbody.AddForce(transform.up * jumpForce, ForceMode.Impulse);
         }
 
-        private void ResetJump()
-        {
-            readyToJump = true;
-        }
+        private void ResetJump() => readyToJump = true;
 
         private void StateHandler()
         {

@@ -32,6 +32,8 @@ namespace io.purplik.ProjectSoul.InventorySystem
                 equipmentSlots[i].OnDragEvent += slot => OnDragEvent(slot);
                 equipmentSlots[i].OnDropEvent += slot => OnDropEvent(slot);
             }
+
+            gameObject.SetActive(false);
         }
         private void OnValidate()
         {

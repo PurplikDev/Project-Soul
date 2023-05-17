@@ -18,6 +18,11 @@ namespace io.purplik.ProjectSoul.InventorySystem
             UpdateStatNames();
         }
 
+        private void Start()
+        {
+            gameObject.SetActive(false);
+        }
+
         public void SetStats(params EntityStat[] charStats)
         {
             stats = charStats;

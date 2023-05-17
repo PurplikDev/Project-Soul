@@ -16,6 +16,8 @@ namespace io.purplik.ProjectSoul.InventorySystem
         [Space]
         [SerializeField] ItemTooltip itemTooltip;
         [SerializeField] Image dragItem;
+        [Space]
+        [SerializeField] DropItem dropItem;
 
         private ItemSlot dragSlot;
 
@@ -27,7 +29,7 @@ namespace io.purplik.ProjectSoul.InventorySystem
             equipmentInventory = GetComponentInChildren<EquipmentInventory>();
             statDisplayInventory = GetComponentInChildren<StatDisplayInventory>();
 
-            if(itemTooltip == null)
+            if (itemTooltip == null)
             {
                 itemTooltip = FindObjectOfType<ItemTooltip>();
             }
@@ -38,46 +40,36 @@ namespace io.purplik.ProjectSoul.InventorySystem
             statDisplayInventory.SetStats(livingEntity.templar, livingEntity.thaumaturge, livingEntity.rogue, livingEntity.health, livingEntity.defence, livingEntity.speed);
             statDisplayInventory.UpdateStatValues();
 
+            //OnRightClickEvent
             inventory.OnRightClickEvent += Equip;
             equipmentInventory.OnRightClickEvent += Unequip;
 
+            //OnPointerEnterEvent
             inventory.OnPointerEnterEvent += ShowTooltip;
             equipmentInventory.OnPointerEnterEvent += ShowTooltip;
 
+            //OnPointerExitEvent
             inventory.OnPointerExitEvent += HideTooltip;
             equipmentInventory.OnPointerExitEvent += HideTooltip;
 
+            //OnBeginDragEvent
             inventory.OnBeginDragEvent += BeginDrag;
             equipmentInventory.OnBeginDragEvent += BeginDrag;
 
+            //OnEndDragEvent
             inventory.OnEndDragEvent += EndDrag;
             equipmentInventory.OnEndDragEvent += EndDrag;
 
+            //OnDragEvent
             inventory.OnDragEvent += Drag;
             equipmentInventory.OnDragEvent += Drag;
 
+            //OnDropEvent
             inventory.OnDropEvent += Drop;
             equipmentInventory.OnDropEvent += Drop;
-        }
+            dropItem.OnDropEvent += DropItemOnGround;
 
-        private void Update()
-        {
-            if(Input.GetKeyDown(PlayerKeybinds.openInventory))
-            {
-                bool canvasEnabled = GetComponent<Canvas>().enabled;
-                if (canvasEnabled)
-                {
-                    Cursor.lockState = CursorLockMode.Locked;
-                } else
-                {
-                    Cursor.lockState = CursorLockMode.None;
-                }
-                Camera.main.GetComponent<PlayerCamera>().lockRotation = !canvasEnabled;
-                Cursor.visible = !canvasEnabled;
-                GetComponent<Canvas>().enabled = !GetComponent<Canvas>().enabled;
-            }
         }
-
         
 
         private void Equip(ItemSlot slot)
@@ -154,6 +146,14 @@ namespace io.purplik.ProjectSoul.InventorySystem
             }
         }
 
+        private void DropItemOnGround()
+        {
+            if(dragItem == null)
+            {
+                return;
+            }
+        }
+
         private void SwapItems(ItemSlot dropSlot)
         {
             EquipmentItem __dragItem = dragSlot.item as EquipmentItem;
@@ -223,6 +223,62 @@ namespace io.purplik.ProjectSoul.InventorySystem
                 livingEntity.UpdateMaxHealth();
                 inventory.AddItem(item);
             }
+        }
+
+        private ItemContainer openContainer;
+
+        private void TransferToContainer(ItemSlot itemSlot)
+        {
+            Item item = itemSlot.item;
+            if (item != null && openContainer.CanAddItem(item))
+            {
+                inventory.RemoveItem(item);
+                openContainer.AddItem(item);
+            }
+        }
+
+        private void TransferToInventory(ItemSlot itemSlot)
+        {
+            Item item = itemSlot.item;
+            if (item != null && openContainer.CanAddItem(item))
+            {
+                openContainer.RemoveItem(item);
+                inventory.AddItem(item);
+            }
+        }
+
+        public void OpenItemContainer(ItemContainer itemContainer)
+        {
+            openContainer = itemContainer;
+
+            inventory.OnRightClickEvent -= Equip;
+
+            inventory.OnRightClickEvent += TransferToContainer;
+            itemContainer.OnRightClickEvent += TransferToInventory;
+
+            itemContainer.OnPointerEnterEvent += ShowTooltip;
+            itemContainer.OnPointerExitEvent += HideTooltip;
+            itemContainer.OnBeginDragEvent += BeginDrag;
+            itemContainer.OnEndDragEvent += EndDrag;
+            itemContainer.OnDragEvent += Drag;
+            itemContainer.OnDropEvent += Drop;
+        }
+
+        public void CloseItemContainer(ItemContainer itemContainer)
+        {
+            openContainer = null;
+
+            inventory.OnRightClickEvent += Equip;
+
+            inventory.OnRightClickEvent -= TransferToContainer;
+            itemContainer.OnRightClickEvent -= TransferToInventory;
+
+            itemContainer.OnPointerEnterEvent -= ShowTooltip;
+            itemContainer.OnPointerExitEvent -= HideTooltip;
+            itemContainer.OnBeginDragEvent -= BeginDrag;
+            itemContainer.OnEndDragEvent -= EndDrag;
+            itemContainer.OnDragEvent -= Drag;
+            itemContainer.OnDropEvent -= Drop;
         }
     }
 }

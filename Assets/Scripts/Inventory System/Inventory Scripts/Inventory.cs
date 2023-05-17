@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 namespace io.purplik.ProjectSoul.InventorySystem
 {
@@ -10,10 +7,11 @@ namespace io.purplik.ProjectSoul.InventorySystem
         [SerializeField] Item[] startingItems;
         [SerializeField] Transform itemsParent;
 
-        protected override void Awake()
+        protected override void Start()
         {
-            base.Awake();
+            base.Start();
             SetStartingItems();
+            gameObject.SetActive(false);
         }
 
         protected override void OnValidate()
@@ -22,8 +20,6 @@ namespace io.purplik.ProjectSoul.InventorySystem
             {
                 itemsParent.GetComponentsInChildren(includeInactive: true, result: itemSlots);
             }
-
-            SetStartingItems();
         }
 
         private void SetStartingItems()
