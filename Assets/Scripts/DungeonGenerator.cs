@@ -20,6 +20,6 @@ public class DungeonGenerator : MonoBehaviour
         spawnRooms.Add(DungeonStorage.DungeonThemes.ICE, dungeonStorage.spawnRooms[2]);
         spawnRooms.Add(DungeonStorage.DungeonThemes.CLASSIC, dungeonStorage.spawnRooms[3]);
 
-        Instantiate(spawnRooms[dungeonStorage.selectedDungeonTheme], transform.position, Quaternion.identity);
+        Instantiate(spawnRooms[dungeonStorage.selectedDungeonTheme], transform.position, transform.rotation);
     }
 }

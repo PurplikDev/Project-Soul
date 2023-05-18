@@ -39,6 +39,11 @@ public class DungeonStorage : MonoBehaviour
     public GameObject[] iceRooms;
     public GameObject[] classicRooms;
 
+    [Header("Corridors")]
+    public GameObject[] plagueCorridors;
+    public GameObject[] iceCorridors;
+    public GameObject[] classicCorridors;
+
     [Header("Dead Ends")]
     public GameObject[] plagueDeadEnds;
     public GameObject[] iceDeadEnds;
@@ -81,6 +86,8 @@ public class DungeonStorage : MonoBehaviour
 
         // PARTS
         plagueParts.Add(GeneratorType.LAYOUT, plagueLayouts);
+        plagueParts.Add(GeneratorType.ROOM, plagueRooms);
+        plagueParts.Add(GeneratorType.CORRIDOR, plagueCorridors);
         plagueParts.Add(GeneratorType.DEADEND, plagueDeadEnds);
 
     }

@@ -354,6 +354,17 @@ Transform:
   m_Father: {fileID: 532512494}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &246861575 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4032139413680104850, guid: 928fc129536e5654d859666f00bbea4f, type: 3}
+  m_PrefabInstance: {fileID: 1229797153}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &296158321
 GameObject:
   m_ObjectHideFlags: 0
@@ -1819,6 +1830,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4176188250061435139, guid: 928fc129536e5654d859666f00bbea4f, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4197489630374074224, guid: 928fc129536e5654d859666f00bbea4f, type: 3}
       propertyPath: m_Name
       value: PlayerUICanvas
@@ -2087,6 +2102,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7092576562936483113, guid: 928fc129536e5654d859666f00bbea4f, type: 3}
+      propertyPath: m_Name
+      value: _DragItem
+      objectReference: {fileID: 0}
+    - target: {fileID: 7534477828861050988, guid: 928fc129536e5654d859666f00bbea4f, type: 3}
+      propertyPath: title
+      value: 
+      objectReference: {fileID: 246861575}
     - target: {fileID: 7598039623568856890, guid: 928fc129536e5654d859666f00bbea4f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2200,7 +2223,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7092576562936483113, guid: 928fc129536e5654d859666f00bbea4f, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 928fc129536e5654d859666f00bbea4f, type: 3}
@@ -2770,7 +2794,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &5238904228551927619
 MonoBehaviour:
   m_ObjectHideFlags: 0

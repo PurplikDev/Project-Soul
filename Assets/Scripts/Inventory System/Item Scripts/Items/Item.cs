@@ -11,7 +11,9 @@ namespace io.purplik.ProjectSoul.InventorySystem
         public string itemName;
         [Range(1, 32)]
         public int maxStackSize = 1;
+        [Space]
         public Sprite icon;
+        public Transform model;
 
         private void OnValidate()
         {

@@ -17,9 +17,9 @@ TagManager:
   - UI
   - Walkable
   - PostProcessing
-  - 
-  - 
-  - 
+  - ItemEntity
+  - PlayerEntity
+  - HostileEntity
   - 
   - 
   - 

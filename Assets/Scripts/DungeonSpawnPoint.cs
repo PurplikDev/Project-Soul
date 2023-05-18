@@ -28,7 +28,7 @@ public class DungeonSpawnPoint : MonoBehaviour
 
         if(selectedGeneratorType != DungeonStorage.GeneratorType.DEADEND) {
             selectedPart = selectedType[selectedGeneratorType];
-            Instantiate(selectedPart[Random.Range(0, selectedPart.Length)], transform.position, Quaternion.identity);
+            Instantiate(selectedPart[Random.Range(0, selectedPart.Length)], transform.position, transform.rotation);
         } else { 
             dungeonGenerator.amountOfExits++;
         }
@@ -52,22 +52,22 @@ public class DungeonSpawnPoint : MonoBehaviour
                 if (randomChance != 2) {
                     if (dungeonGenerator.amountOfExits == 1)
                     {
-                        Instantiate(dungeonStorage.endRoomThemes[dungeonStorage.selectedDungeonTheme], transform.position, Quaternion.identity);
+                        Instantiate(dungeonStorage.endRoomThemes[dungeonStorage.selectedDungeonTheme], transform.position, transform.rotation);
                         dungeonGenerator.hasExit = true;
                     }
                     else
                     {
-                        Instantiate(selectedPart[Random.Range(0, selectedPart.Length)], transform.position, Quaternion.identity);
+                        Instantiate(selectedPart[Random.Range(0, selectedPart.Length)], transform.position, transform.rotation);
                     }
                 } else
                 {
-                    Instantiate(dungeonStorage.endRoomThemes[dungeonStorage.selectedDungeonTheme], transform.position, Quaternion.identity);
+                    Instantiate(dungeonStorage.endRoomThemes[dungeonStorage.selectedDungeonTheme], transform.position, transform.rotation);
                     dungeonGenerator.hasExit = true;
                 }
             }
             else
             {
-                Instantiate(selectedPart[Random.Range(0, selectedPart.Length)], transform.position, Quaternion.identity);
+                Instantiate(selectedPart[Random.Range(0, selectedPart.Length)], transform.position, transform.rotation);
             }
 
             dungeonGenerator.amountOfExits--;

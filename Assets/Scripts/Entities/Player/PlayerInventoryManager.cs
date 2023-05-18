@@ -10,14 +10,12 @@ namespace io.purplik.ProjectSoul.InventorySystem
         LivingEntity livingEntity;
         [Space]
         [Header("<color=#6F90FF>Inventory")]
-        [SerializeField] Inventory inventory;
+        [SerializeField] public Inventory inventory;
         [SerializeField] EquipmentInventory equipmentInventory;
         [SerializeField] StatDisplayInventory statDisplayInventory;
         [Space]
         [SerializeField] ItemTooltip itemTooltip;
         [SerializeField] Image dragItem;
-        [Space]
-        [SerializeField] DropItem dropItem;
 
         private ItemSlot dragSlot;
 
@@ -67,7 +65,6 @@ namespace io.purplik.ProjectSoul.InventorySystem
             //OnDropEvent
             inventory.OnDropEvent += Drop;
             equipmentInventory.OnDropEvent += Drop;
-            dropItem.OnDropEvent += DropItemOnGround;
 
         }
         
@@ -143,14 +140,6 @@ namespace io.purplik.ProjectSoul.InventorySystem
             if (dropSlot.IsValidItem(dragSlot.item) && dragSlot.IsValidItem(dropSlot.item))
             {
                 SwapItems(dropSlot);
-            }
-        }
-
-        private void DropItemOnGround()
-        {
-            if(dragItem == null)
-            {
-                return;
             }
         }
 

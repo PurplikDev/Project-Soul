@@ -1,6 +1,7 @@
 using io.purplik.ProjectSoul.Entity.Stats;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace io.purplik.ProjectSoul.InventorySystem
@@ -9,6 +10,8 @@ namespace io.purplik.ProjectSoul.InventorySystem
     {
         [SerializeField] StatDisplay[] statDisplays;
         [SerializeField] string[] statDisplayNames;
+
+        [SerializeField] TextMeshProUGUI title;
 
         private EntityStat[] stats;
 
@@ -41,9 +44,21 @@ namespace io.purplik.ProjectSoul.InventorySystem
 
         public void UpdateStatValues()
         {
+            float highestValue = 0;
+
             for (int i = 0; i < stats.Length; i++)
             {
                 statDisplays[i].valueText.text = stats[i].Value.ToString();
+                if (highestValue < stats[i].Value && i <= 3)
+                {
+                    highestValue = stats[i].Value;
+                    title.text = "The Legendary " + statDisplayNames[i];
+                }
+            }
+
+            if (highestValue == 0)
+            {
+                title.text = "The Nomad";
             }
         }
 

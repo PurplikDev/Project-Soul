@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f24451e43650ee49a0871e4d3c32c93, type: 3}
   m_Name: Test Equipment
   m_EditorClassIdentifier: 
+  id: 12c10c402ea157b4181520a3e6d28ee3
   itemName: Test Equipment
+  maxStackSize: 1
   icon: {fileID: 21300000, guid: 054db15dfbca98c4f81820113c8b201c, type: 3}
+  model: {fileID: 2429869486333107042, guid: 38540e47d1eabc04b844b98edd24cfce, type: 3}
   rogueStat: 1
   thaumaturgeStat: 2
   templarStat: -5
