@@ -67,7 +67,7 @@ namespace io.purplik.ProjectSoul.InventorySystem
             //OnDropEvent
             inventory.OnDropEvent += Drop;
             equipmentInventory.OnDropEvent += Drop;
-            dropItem.OnDropEvent += DropItemOnGround;
+            //dropItem.OnDropEvent += DropItemOnGround;
 
         }
         
