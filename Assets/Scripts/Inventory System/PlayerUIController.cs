@@ -12,26 +12,25 @@ namespace io.purplik.ProjectSoul.InventorySystem
         [SerializeField] GameObject inventoryPanel;
         [SerializeField] GameObject equipmentPanel;
         [SerializeField] GameObject statsPanel;
+        [SerializeField] GameObject tooltip;
         [Space]
         [Header("<color=red>Misc UIs")]
         [SerializeField] GameObject pauseMenu;
 
         private GameObject[] allElements;
 
-        private void OnValidate()
+        private void Awake()
         {
             inventoryPanel = GameObject.Find("_InventoryPanel");
             equipmentPanel = GameObject.Find("_EquipmentPanel");
             statsPanel = GameObject.Find("_StatsPanel");
+            tooltip = GameObject.Find("_ItemTooltip");
 
             pauseMenu = GameObject.Find("_PausePanel");
 
             allElements = new GameObject[] { inventoryPanel, equipmentPanel, statsPanel, pauseMenu };
-        }
 
-        private void Awake()
-        {
-            pauseMenu.SetActive(false);
+            ToggleAllUI(false);
         }
 
         void Update()
@@ -96,6 +95,11 @@ namespace io.purplik.ProjectSoul.InventorySystem
             ToggleUIElement(toggle, inventoryPanel);
             ToggleUIElement(toggle, equipmentPanel);
             ToggleUIElement(toggle, statsPanel);
+
+            if(toggle == false)
+            {
+                ToggleUIElement(toggle, tooltip);
+            }
         }
 
         public void ToggleAllUI(bool toggle)
@@ -104,6 +108,7 @@ namespace io.purplik.ProjectSoul.InventorySystem
             {
                 ToggleUIElement(toggle, allElements[i]);
             }
+            ToggleUIElement(false, tooltip);
         }
 
         private bool AnyUIActive()

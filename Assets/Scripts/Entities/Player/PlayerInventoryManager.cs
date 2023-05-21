@@ -1,5 +1,7 @@
 using io.purplik.ProjectSoul.Entity;
 using io.purplik.ProjectSoul.Entity.Player;
+using io.purplik.ProjectSoul.SaveSystem;
+using UnityEditor.Playables;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,30 +9,24 @@ namespace io.purplik.ProjectSoul.InventorySystem
 {
     public class PlayerInventoryManager : MonoBehaviour
     {
-        LivingEntity livingEntity;
+        public LivingEntity livingEntity;
         [Space]
         [Header("<color=#6F90FF>Inventory")]
-        [SerializeField] public Inventory inventory;
-        [SerializeField] EquipmentInventory equipmentInventory;
-        [SerializeField] StatDisplayInventory statDisplayInventory;
+        public Inventory inventory;
+        public EquipmentInventory equipmentInventory;
         [Space]
+        [SerializeField] StatDisplayInventory statDisplayInventory;
         [SerializeField] ItemTooltip itemTooltip;
         [SerializeField] Image dragItem;
+        [Space]
+        [SerializeField] ItemSaveManager itemSaveManager;
 
         private ItemSlot dragSlot;
 
         private void OnValidate()
         {
-            livingEntity = GetComponentInParent<PlayerEntity>();
-
-            inventory = GetComponentInChildren<Inventory>();
-            equipmentInventory = GetComponentInChildren<EquipmentInventory>();
-            statDisplayInventory = GetComponentInChildren<StatDisplayInventory>();
-
             if (itemTooltip == null)
-            {
                 itemTooltip = FindObjectOfType<ItemTooltip>();
-            }
         }
 
         private void Awake()
@@ -38,36 +34,55 @@ namespace io.purplik.ProjectSoul.InventorySystem
             statDisplayInventory.SetStats(livingEntity.templar, livingEntity.thaumaturge, livingEntity.rogue, livingEntity.health, livingEntity.defence, livingEntity.speed);
             statDisplayInventory.UpdateStatValues();
 
-            //OnRightClickEvent
+            // Right Click
             inventory.OnRightClickEvent += Equip;
             equipmentInventory.OnRightClickEvent += Unequip;
 
-            //OnPointerEnterEvent
+            // Pointer Enter
             inventory.OnPointerEnterEvent += ShowTooltip;
             equipmentInventory.OnPointerEnterEvent += ShowTooltip;
 
-            //OnPointerExitEvent
+            // Pointer Exit
             inventory.OnPointerExitEvent += HideTooltip;
             equipmentInventory.OnPointerExitEvent += HideTooltip;
 
-            //OnBeginDragEvent
+            // Begin Drag
             inventory.OnBeginDragEvent += BeginDrag;
             equipmentInventory.OnBeginDragEvent += BeginDrag;
 
-            //OnEndDragEvent
+            // End Drag
             inventory.OnEndDragEvent += EndDrag;
             equipmentInventory.OnEndDragEvent += EndDrag;
 
-            //OnDragEvent
+            // Drag
             inventory.OnDragEvent += Drag;
             equipmentInventory.OnDragEvent += Drag;
 
-            //OnDropEvent
+            // Drop
             inventory.OnDropEvent += Drop;
             equipmentInventory.OnDropEvent += Drop;
 
+            itemSaveManager = GameObject.Find("ItemSaveManager").GetComponent<ItemSaveManager>();
         }
-        
+
+        private void Start()
+        {
+            if (itemSaveManager != null)
+            {
+                itemSaveManager.LoadEquipment(this);
+                itemSaveManager.LoadInventory(this);
+            }
+        }
+
+        private void OnDestroy()
+        {
+            if (itemSaveManager != null)
+            {
+                itemSaveManager.SaveEquipment(this);
+                itemSaveManager.SaveInventory(this);
+            }
+        }
+
 
         private void Equip(ItemSlot slot)
         {
@@ -84,7 +99,9 @@ namespace io.purplik.ProjectSoul.InventorySystem
             if (item != null)
             {
                 Unequip(item);
+                equipmentInventory.DeleteModel();
             }
+
         }
 
         private void ShowTooltip(ItemSlot slot)
@@ -116,6 +133,15 @@ namespace io.purplik.ProjectSoul.InventorySystem
         {
             dragSlot = null;
             dragItem.enabled = false;
+
+            if (slot is EquipmentSlot)
+            {
+                EquipmentSlot equipSlot = (EquipmentSlot)slot;
+                if (equipSlot.equipmentType == EquipmentType.WEAPON_MAIN)
+                {
+                    equipmentInventory.DeleteModel();
+                }
+            }
         }
 
         private void Drag(ItemSlot slot)
@@ -140,6 +166,16 @@ namespace io.purplik.ProjectSoul.InventorySystem
             if (dropSlot.IsValidItem(dragSlot.item) && dragSlot.IsValidItem(dropSlot.item))
             {
                 SwapItems(dropSlot);
+            }
+
+            if(dropSlot is EquipmentSlot)
+            {
+                EquipmentSlot equipSlot = (EquipmentSlot)dropSlot;
+                if(equipSlot.equipmentType == EquipmentType.WEAPON_MAIN)
+                {
+                    equipmentInventory.DeleteModel();
+                    equipmentInventory.CreateModel(dropSlot.item);
+                }
             }
         }
 
@@ -205,7 +241,7 @@ namespace io.purplik.ProjectSoul.InventorySystem
         }
         public void Unequip(EquipmentItem item)
         {
-            if (!inventory.CanAddItem(item) && equipmentInventory.RemoveItem(item))
+            if (inventory.CanAddItem(item) && equipmentInventory.RemoveItem(item))
             {
                 item.Unequip(livingEntity);
                 statDisplayInventory.UpdateStatValues();
@@ -238,11 +274,11 @@ namespace io.purplik.ProjectSoul.InventorySystem
 
         public void OpenItemContainer(ItemContainer itemContainer)
         {
-            openContainer = itemContainer;
+             openContainer = itemContainer;
 
             inventory.OnRightClickEvent -= Equip;
-
             inventory.OnRightClickEvent += TransferToContainer;
+
             itemContainer.OnRightClickEvent += TransferToInventory;
 
             itemContainer.OnPointerEnterEvent += ShowTooltip;
@@ -258,8 +294,8 @@ namespace io.purplik.ProjectSoul.InventorySystem
             openContainer = null;
 
             inventory.OnRightClickEvent += Equip;
-
             inventory.OnRightClickEvent -= TransferToContainer;
+
             itemContainer.OnRightClickEvent -= TransferToInventory;
 
             itemContainer.OnPointerEnterEvent -= ShowTooltip;
@@ -268,6 +304,11 @@ namespace io.purplik.ProjectSoul.InventorySystem
             itemContainer.OnEndDragEvent -= EndDrag;
             itemContainer.OnDragEvent -= Drag;
             itemContainer.OnDropEvent -= Drop;
+        }
+
+        public void UpdateStatValues()
+        {
+            statDisplayInventory.UpdateStatValues();
         }
     }
 }

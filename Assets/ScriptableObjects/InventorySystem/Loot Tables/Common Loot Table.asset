@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b5af782db83a0340be6576ba61f9b4e, type: 3}
+  m_Name: Common Loot Table
+  m_EditorClassIdentifier: 
+  itemTable:
+  - {fileID: 11400000, guid: 59aa5931508ee574a9d80cd06035f809, type: 2}
+  - {fileID: 11400000, guid: 557136d6c3bf6554da087b50f6065559, type: 2}
+  - {fileID: 11400000, guid: d0b4e0be44124d7428cbf05d0eb7da01, type: 2}
+  - {fileID: 11400000, guid: 59aa5931508ee574a9d80cd06035f809, type: 2}
+  - {fileID: 11400000, guid: 139276ae449759542b3fa9d2114de398, type: 2}
+  - {fileID: 11400000, guid: 557136d6c3bf6554da087b50f6065559, type: 2}
+  - {fileID: 11400000, guid: e99311f220260d141957197a75fdf6ce, type: 2}
+  - {fileID: 11400000, guid: bb17226d5084d744088783c779f456ab, type: 2}

@@ -13,7 +13,6 @@ namespace io.purplik.ProjectSoul.InventorySystem
         public int maxStackSize = 1;
         [Space]
         public Sprite icon;
-        public Transform model;
 
         private void OnValidate()
         {

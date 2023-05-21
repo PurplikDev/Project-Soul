@@ -36,7 +36,7 @@ namespace io.purplik.ProjectSoul.Entity.Player
 
         Vector3 moveDirection;
 
-        private void OnValidate()
+        private void Awake()
         {
             rigidbody = GetComponent<Rigidbody>();
             rigidbody.freezeRotation = true;
@@ -53,6 +53,8 @@ namespace io.purplik.ProjectSoul.Entity.Player
             ProcessInputs();
             SpeedCap();
             StateHandler();
+
+            livingEntity.animator.SetFloat("Speed", rigidbody.velocity.magnitude);
 
             rigidbody.drag = grounded ? groundDrag : 0;
         }

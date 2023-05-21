@@ -20,28 +20,46 @@ namespace io.purplik.ProjectSoul.InventorySystem
 
         public event Action<ItemSlot> OnDropEvent;
 
-
-
         protected virtual void OnValidate()
         {
             GetComponentsInChildren(includeInactive: true, result: itemSlots);
         }
 
-        protected virtual void Start()
+        protected virtual void Awake()
         {
             for (int i = 0; i < itemSlots.Count; i++)
             {
-                itemSlots[i].OnRightClickEvent += slot => OnRightClickEvent(slot);
-                itemSlots[i].OnPointerEnterEvent += slot => OnPointerEnterEvent(slot);
-                itemSlots[i].OnPointerExitEvent += slot => OnPointerExitEvent(slot);
-                itemSlots[i].OnBeginDragEvent += slot => OnBeginDragEvent(slot);
-                itemSlots[i].OnEndDragEvent += slot => OnEndDragEvent(slot);
-                itemSlots[i].OnDragEvent += slot => OnDragEvent(slot);
-                itemSlots[i].OnDropEvent += slot => OnDropEvent(slot);
+                itemSlots[i].OnPointerEnterEvent += slot => EventHelper(slot, OnPointerEnterEvent);
+                itemSlots[i].OnPointerExitEvent += slot => EventHelper(slot, OnPointerExitEvent);
+                itemSlots[i].OnRightClickEvent += slot => EventHelper(slot, OnRightClickEvent);
+                itemSlots[i].OnBeginDragEvent += slot => EventHelper(slot, OnBeginDragEvent);
+                itemSlots[i].OnEndDragEvent += slot => EventHelper(slot, OnEndDragEvent);
+                itemSlots[i].OnDragEvent += slot => EventHelper(slot, OnDragEvent);
+                itemSlots[i].OnDropEvent += slot => EventHelper(slot, OnDropEvent);
             }
         }
 
-        public bool AddItem(Item item)
+        private void EventHelper(ItemSlot itemSlot, Action<ItemSlot> action)
+        {
+            if (action != null)
+                action(itemSlot);
+        }
+
+        public virtual bool CanAddItem(Item item, int amount = 1)
+        {
+            int freeSpaces = 0;
+
+            foreach (ItemSlot itemSlot in itemSlots)
+            {
+                if (itemSlot.item == null || itemSlot.item.ID == item.ID)
+                {
+                    freeSpaces += item.maxStackSize - itemSlot.itemAmount;
+                }
+            }
+            return freeSpaces >= amount;
+        }
+
+        public virtual bool AddItem(Item item)
         {
             for (int i = 0; i < itemSlots.Count; i++)
             {
@@ -65,65 +83,49 @@ namespace io.purplik.ProjectSoul.InventorySystem
             return false;
         }
 
-        public virtual bool CanAddItem(Item item, int amount = 1)
-        {
-            int freeSpace = 0;
-
-            foreach (ItemSlot slot in itemSlots)
-            {
-                if (slot.item == null || slot.item.ID == item.ID)
-                {
-                    freeSpace += item.maxStackSize - slot.itemAmount;
-                }
-            }
-
-            return freeSpace >= amount;
-        }
-
-        public bool RemoveItem(Item item)
+        public virtual bool RemoveItem(Item item)
         {
             for (int i = 0; i < itemSlots.Count; i++)
             {
                 if (itemSlots[i].item == item)
                 {
                     itemSlots[i].itemAmount--;
-
                     return true;
                 }
             }
             return false;
         }
 
-        public Item RemoveItem(string itemID)
+        public virtual Item RemoveItem(string itemID)
         {
             for (int i = 0; i < itemSlots.Count; i++)
             {
                 Item item = itemSlots[i].item;
                 if (item != null && item.ID == itemID)
                 {
-                    itemSlots[i].itemAmount--; ;
+                    itemSlots[i].itemAmount--;
                     return item;
                 }
             }
             return null;
         }
 
-        public int ItemCount(string itemID)
+        public virtual int ItemCount(string itemID)
         {
-            int amount = 0;
+            int number = 0;
 
             for (int i = 0; i < itemSlots.Count; i++)
             {
-                if (itemSlots[i].item.ID == itemID)
+                Item item = itemSlots[i].item;
+                if (item != null && item.ID == itemID)
                 {
-                    amount += itemSlots[i].itemAmount;
+                    number += itemSlots[i].itemAmount;
                 }
             }
-
-            return amount;
+            return number;
         }
 
-        public virtual void Clear()
+        public void Clear()
         {
             for (int i = 0; i < itemSlots.Count; i++)
             {

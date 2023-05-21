@@ -4,9 +4,13 @@ namespace io.purplik.ProjectSoul.Entity.Player
 {
     public class PlayerCamera : MonoBehaviour
     {
-        public float sensitivityX, sensitivityY;
+        float sensitivityX, sensitivityY;
+
+        [Range(0f, 500f)]
+        public float sensitivity;
 
         public Transform orientation;
+        public Transform head;
 
         float xRotation, yRotation;
 
@@ -25,6 +29,9 @@ namespace io.purplik.ProjectSoul.Entity.Player
                 return;
             }
 
+            sensitivityX = sensitivity;
+            sensitivityY = sensitivity;
+
             float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensitivityX;
             float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensitivityY;
 
@@ -33,6 +40,7 @@ namespace io.purplik.ProjectSoul.Entity.Player
 
             xRotation = Mathf.Clamp(xRotation, -80, 80);
 
+            head.rotation = Quaternion.Euler(xRotation, yRotation, 0);
             transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
             orientation.rotation = Quaternion.Euler(0, yRotation, 0);
         }

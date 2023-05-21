@@ -19,6 +19,8 @@ public class LivingEntity : MonoBehaviour, IDamagable
         public EntityStat health;
         public EntityStat defence;
         public EntityStat speed;
+        [Space]
+        public EntityStat damage;
 
         [Header("<color=#80FF75>Active Stats")]
         public int activeHealth;
@@ -30,6 +32,7 @@ public class LivingEntity : MonoBehaviour, IDamagable
         private void Awake()
         {
             maxActiveHealth = Mathf.FloorToInt(health.Value);
+            activeHealth = maxActiveHealth;
         }
 
         public void UpdateMaxHealth() => maxActiveHealth = Mathf.FloorToInt(health.Value);
@@ -45,7 +48,19 @@ public class LivingEntity : MonoBehaviour, IDamagable
 
             if (activeHealth <= 0)
             {
-                // Drop inventory on death here
+                Die();
+            }
+        }
+
+        public virtual void Attack()
+        {
+            RaycastHit hit;
+            Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 2.5f);
+            if (hit.transform == null) { return; }
+            var damagableEntity = hit.transform.gameObject.GetComponent<IDamagable>();
+            if (damagableEntity != null)
+            {
+                damagableEntity.Damage(5 ,DamageType.MELE);
             }
         }
 
@@ -63,6 +78,18 @@ public class LivingEntity : MonoBehaviour, IDamagable
             BLOCKING,
             ATTACKING,
             MOVING
+        }
+
+        private void Die()
+        {
+            speed.baseValue = 0;
+            Debug.Log("I'm dead");
+            Invoke(nameof(SelfDestruct), 5f);
+        }
+
+        private void SelfDestruct()
+        {
+            Destroy(gameObject);
         }
     }
 

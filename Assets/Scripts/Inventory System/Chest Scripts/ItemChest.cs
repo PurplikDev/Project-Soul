@@ -1,16 +1,19 @@
 using io.purplik.ProjectSoul.Entity;
 using io.purplik.ProjectSoul.Entity.Player;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
+using static UnityEditor.Progress;
 
 namespace io.purplik.ProjectSoul.InventorySystem { 
     public class ItemChest : ItemContainer, ITileEntity
     {
         [SerializeField] Animator animator;
+        [Space]
         [SerializeField] Transform itemsParent;
-        [SerializeField] Item[] startingItems;
         bool isOpen = false;
 
         public PlayerInventoryManager playerInventory;
+        [Space]
         private PlayerEntity playerEntity;
 
         public void Interact()
@@ -22,17 +25,14 @@ namespace io.purplik.ProjectSoul.InventorySystem {
 
         protected override void OnValidate()
         {
-            playerEntity = GameObject.Find("Player").GetComponent<PlayerEntity>();
             if (itemsParent != null)
-            {
                 itemsParent.GetComponentsInChildren(includeInactive: true, result: itemSlots);
-            }
         }
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             itemsParent.gameObject.SetActive(false);
-            SetStartingItems();
         }
 
         private void Update()
@@ -41,17 +41,24 @@ namespace io.purplik.ProjectSoul.InventorySystem {
             {
                 CloseUI();
             }
+        }
 
-            playerInventory = playerEntity.GetComponentInChildren<PlayerInventoryManager>();
+        private void OnTriggerEnter(Collider other)
+        {
+            var player = other.GetComponent<PlayerEntity>();
+            if(player != null)
+            {
+                playerEntity = player;
+                playerInventory = playerEntity.GetComponentInChildren<PlayerInventoryManager>();
+            }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            var player = other.GetComponentInParent<PlayerEntity>();
-            if(player != null && isOpen)
+            if(playerEntity != null && isOpen)
             {
                 CloseUI();
-                player.GetComponentInChildren<PlayerUIController>().ToggleAllUI(false);
+                playerEntity.GetComponentInChildren<PlayerUIController>().ToggleAllUI(false);
             }
         }
 
@@ -61,14 +68,6 @@ namespace io.purplik.ProjectSoul.InventorySystem {
             itemsParent.gameObject.SetActive(false);
             isOpen = false;
             playerInventory = null;
-        }
-
-        private void SetStartingItems()
-        {
-            for (int i = 0; i < startingItems.Length; i++)
-            {
-                AddItem(startingItems[i].GetCopy());
-            }
         }
     }
 }

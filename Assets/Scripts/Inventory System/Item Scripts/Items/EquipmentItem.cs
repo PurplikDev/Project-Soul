@@ -29,6 +29,8 @@ namespace io.purplik.ProjectSoul.InventorySystem
         public float speedPercentBonus;
         [Space]
         public EquipmentType equipmentType;
+        [Space]
+        [SerializeField] MeshRenderer mesh;
 
         public override Item GetCopy()
         {
@@ -40,7 +42,7 @@ namespace io.purplik.ProjectSoul.InventorySystem
             Destroy(this);
         }
 
-        public void Equip(LivingEntity livingEntity)
+        public virtual void Equip(LivingEntity livingEntity)
         {
             if (templarStat != 0)
                 livingEntity.templar.AddModifier(new StatModifier(templarStat, StatType.FLAT, this));
@@ -64,7 +66,7 @@ namespace io.purplik.ProjectSoul.InventorySystem
                 livingEntity.speed.AddModifier(new StatModifier(speedPercentBonus, StatType.PERCENTAGEMULT, this));
         }
 
-        public void Unequip(LivingEntity livingEntity)
+        public virtual void Unequip(LivingEntity livingEntity)
         {
             livingEntity.templar.RemoveAllModifiersFromSource(this);
             livingEntity.rogue.RemoveAllModifiersFromSource(this);
