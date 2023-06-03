@@ -15,8 +15,7 @@ MonoBehaviour:
   id: 59aa5931508ee574a9d80cd06035f809
   itemName: Rogue's Tunic
   maxStackSize: 1
-  icon: {fileID: 21300000, guid: 303d7ac25a9a096409032c31adc7a2cd, type: 3}
-  model: {fileID: 0}
+  icon: {fileID: 21300000, guid: 82b508dcb1898e345807c2e5836631e7, type: 3}
   rogueStat: 3
   thaumaturgeStat: 1
   templarStat: 0

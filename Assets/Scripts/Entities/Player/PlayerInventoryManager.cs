@@ -1,7 +1,6 @@
 using io.purplik.ProjectSoul.Entity;
 using io.purplik.ProjectSoul.Entity.Player;
 using io.purplik.ProjectSoul.SaveSystem;
-using UnityEditor.Playables;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +19,8 @@ namespace io.purplik.ProjectSoul.InventorySystem
         [SerializeField] Image dragItem;
         [Space]
         [SerializeField] ItemSaveManager itemSaveManager;
+        [Space]
+        HealthBar healthBar;
 
         private ItemSlot dragSlot;
 
@@ -63,6 +64,8 @@ namespace io.purplik.ProjectSoul.InventorySystem
             equipmentInventory.OnDropEvent += Drop;
 
             itemSaveManager = GameObject.Find("ItemSaveManager").GetComponent<ItemSaveManager>();
+            healthBar = GetComponentInChildren<HealthBar>();
+            healthBar.SetMaxHealth(livingEntity.activeHealth, livingEntity.maxActiveHealth);
         }
 
         private void Start()
@@ -72,6 +75,10 @@ namespace io.purplik.ProjectSoul.InventorySystem
                 itemSaveManager.LoadEquipment(this);
                 itemSaveManager.LoadInventory(this);
             }
+
+            statDisplayInventory.UpdateStatValues();
+            livingEntity.UpdateMaxHealth();
+            healthBar.SetMaxHealth(livingEntity.activeHealth, livingEntity.maxActiveHealth);
         }
 
         private void OnDestroy()
@@ -90,6 +97,7 @@ namespace io.purplik.ProjectSoul.InventorySystem
             if (item != null)
             {
                 Equip(item);
+                healthBar.SetMaxHealth(livingEntity.activeHealth, livingEntity.maxActiveHealth);
             }
         }
 
@@ -100,6 +108,7 @@ namespace io.purplik.ProjectSoul.InventorySystem
             {
                 Unequip(item);
                 equipmentInventory.DeleteModel();
+                healthBar.SetMaxHealth(livingEntity.activeHealth, livingEntity.maxActiveHealth);
             }
 
         }
@@ -232,6 +241,7 @@ namespace io.purplik.ProjectSoul.InventorySystem
                     item.Equip(livingEntity);
                     statDisplayInventory.UpdateStatValues();
                     livingEntity.UpdateMaxHealth();
+                    healthBar.SetMaxHealth(livingEntity.activeHealth, livingEntity.maxActiveHealth);
                 }
                 else
                 {
@@ -247,6 +257,7 @@ namespace io.purplik.ProjectSoul.InventorySystem
                 statDisplayInventory.UpdateStatValues();
                 livingEntity.UpdateMaxHealth();
                 inventory.AddItem(item);
+                healthBar.SetMaxHealth(livingEntity.activeHealth, livingEntity.maxActiveHealth);
             }
         }
 

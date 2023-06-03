@@ -15,8 +15,7 @@ MonoBehaviour:
   id: bb17226d5084d744088783c779f456ab
   itemName: Saibot's Flippers
   maxStackSize: 1
-  icon: {fileID: 0}
-  model: {fileID: 0}
+  icon: {fileID: 21300000, guid: 07b5abc34c28c5941917db8c072ba5f7, type: 3}
   rogueStat: 5
   thaumaturgeStat: 1
   templarStat: 0

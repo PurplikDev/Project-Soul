@@ -18,7 +18,8 @@ public class DungeonStorage : MonoBehaviour
         ROOMT,
         ROOML,
         CORRIDOR,
-        DEADEND
+        DEADEND,
+        DUNGEON_OBJECT
     }
 
     [SerializeField]
@@ -48,6 +49,9 @@ public class DungeonStorage : MonoBehaviour
 
     [Header("Dead Ends")]
     public GameObject[] plagueDeadEnds;
+
+    [Header("Dungeon Objects")]
+    public GameObject[] dungeonObjects;
 
     public Dictionary<DungeonThemes, Dictionary<GeneratorType, GameObject[]>> themeTypes = new Dictionary<DungeonThemes, Dictionary<GeneratorType, GameObject[]>>();
 
@@ -91,6 +95,7 @@ public class DungeonStorage : MonoBehaviour
         plagueParts.Add(GeneratorType.ROOML, plagueRoomsL);
         plagueParts.Add(GeneratorType.CORRIDOR, plagueCorridors);
         plagueParts.Add(GeneratorType.DEADEND, plagueDeadEnds);
+        plagueParts.Add(GeneratorType.DUNGEON_OBJECT, dungeonObjects);
 
     }
     /*

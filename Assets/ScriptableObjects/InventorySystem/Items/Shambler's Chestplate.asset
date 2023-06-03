@@ -15,8 +15,7 @@ MonoBehaviour:
   id: 139276ae449759542b3fa9d2114de398
   itemName: Shambler's Chestplate
   maxStackSize: 1
-  icon: {fileID: 0}
-  model: {fileID: 0}
+  icon: {fileID: 21300000, guid: 85d74818562f5c44aac67531615c77a0, type: 3}
   rogueStat: 0
   thaumaturgeStat: 1
   templarStat: 5

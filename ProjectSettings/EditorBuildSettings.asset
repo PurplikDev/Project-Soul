@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DungeonGeneratorRewrite.unity
     guid: 724c5ad4819df403697c11df0397f70b
+  - enabled: 1
+    path: Assets/Scenes/Final Boss.unity
+    guid: ab7758f5b80b04445ad6e70dbe39a463
   m_configObjects: {}

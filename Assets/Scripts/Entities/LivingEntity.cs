@@ -28,18 +28,33 @@ public class LivingEntity : MonoBehaviour, IDamagable
 
         [Header("Misc Stuff")]
         public EntityState entityState;
+        public AudioSource source;
+        [Space]
+        public AudioClip hitSound;
+        public AudioClip attackSound;
 
-        private void Awake()
+        private void Start()
         {
-            maxActiveHealth = Mathf.FloorToInt(health.Value);
+            UpdateMaxHealth();
             activeHealth = maxActiveHealth;
         }
 
         public void UpdateMaxHealth() => maxActiveHealth = Mathf.FloorToInt(health.Value);
 
-        public void Damage(int damage, DamageType damageType)
+        public virtual void Damage(int damage, DamageType damageType = DamageType.TRUE)
         {
+            source.PlayOneShot(hitSound);
             switch (damageType) {
+                case DamageType.MELE:
+                    if((damage - (int)defence.Value) < 10)
+                    {
+                        activeHealth -= 10;
+                    } else
+                    {
+                        activeHealth -= damage - (int)defence.Value;
+                    }
+                    break;
+
                 case DamageType.TRUE:
                 default:
                     activeHealth -= damage;
@@ -52,15 +67,17 @@ public class LivingEntity : MonoBehaviour, IDamagable
             }
         }
 
-        public virtual void Attack()
+
+    public virtual void Attack()
         {
             RaycastHit hit;
             Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 2.5f);
+            source.PlayOneShot(attackSound);
             if (hit.transform == null) { return; }
-            var damagableEntity = hit.transform.gameObject.GetComponent<IDamagable>();
-            if (damagableEntity != null)
+            var entity = hit.transform.gameObject.GetComponent<LivingEntity>();
+            if (entity != null)
             {
-                damagableEntity.Damage(5 ,DamageType.MELE);
+                entity.Damage((int)damage.Value, DamageType.MELE);
             }
         }
 
@@ -68,8 +85,7 @@ public class LivingEntity : MonoBehaviour, IDamagable
         public enum DamageType
         {
             TRUE,
-            MELE,
-            MAGIC
+            MELE
         }
 
         public enum EntityState
@@ -80,7 +96,7 @@ public class LivingEntity : MonoBehaviour, IDamagable
             MOVING
         }
 
-        private void Die()
+        protected virtual void Die()
         {
             speed.baseValue = 0;
             Debug.Log("I'm dead");

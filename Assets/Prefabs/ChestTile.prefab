@@ -244,7 +244,7 @@ MonoBehaviour:
   animator: {fileID: 6528843089667796951}
   itemsParent: {fileID: 835131623085924122}
   playerInventory: {fileID: 0}
-  lootTable: {fileID: 0}
+  lootTable: {fileID: 11400000, guid: d810817f0635e37418475a03d38dde5f, type: 2}
 --- !u!1 &8031019886183377945
 GameObject:
   m_ObjectHideFlags: 0

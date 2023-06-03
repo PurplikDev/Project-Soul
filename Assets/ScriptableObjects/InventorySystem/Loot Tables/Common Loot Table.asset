@@ -13,11 +13,8 @@ MonoBehaviour:
   m_Name: Common Loot Table
   m_EditorClassIdentifier: 
   itemTable:
-  - {fileID: 11400000, guid: 59aa5931508ee574a9d80cd06035f809, type: 2}
-  - {fileID: 11400000, guid: 557136d6c3bf6554da087b50f6065559, type: 2}
   - {fileID: 11400000, guid: d0b4e0be44124d7428cbf05d0eb7da01, type: 2}
-  - {fileID: 11400000, guid: 59aa5931508ee574a9d80cd06035f809, type: 2}
-  - {fileID: 11400000, guid: 139276ae449759542b3fa9d2114de398, type: 2}
   - {fileID: 11400000, guid: 557136d6c3bf6554da087b50f6065559, type: 2}
-  - {fileID: 11400000, guid: e99311f220260d141957197a75fdf6ce, type: 2}
-  - {fileID: 11400000, guid: bb17226d5084d744088783c779f456ab, type: 2}
+  - {fileID: 11400000, guid: cadcf5e9f335ca4479ba153399f588ab, type: 2}
+  - {fileID: 11400000, guid: 31f570d7c3a28994c9618642f2018d72, type: 2}
+  - {fileID: 11400000, guid: c2c509f32995f3b4db019c713bdac944, type: 2}

@@ -15,8 +15,7 @@ MonoBehaviour:
   id: 557136d6c3bf6554da087b50f6065559
   itemName: Shamgler's Helmet
   maxStackSize: 1
-  icon: {fileID: 21300000, guid: 054db15dfbca98c4f81820113c8b201c, type: 3}
-  model: {fileID: 0}
+  icon: {fileID: 21300000, guid: 3109258b50b70a541bdf2a6ab0bb7ffe, type: 3}
   rogueStat: 0
   thaumaturgeStat: 2
   templarStat: 5

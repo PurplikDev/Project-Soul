@@ -1,6 +1,8 @@
 using UnityEngine;
 using io.purplik.ProjectSoul.Entity;
 using UnityEngine.SceneManagement;
+using io.purplik.ProjectSoul.SaveSystem;
+using io.purplik.ProjectSoul.InventorySystem;
 
 public class DungeonEndRoom : MonoBehaviour
 {
@@ -16,7 +18,11 @@ public class DungeonEndRoom : MonoBehaviour
         var player = other.GetComponent<PlayerEntity>();
         if(player != null)
         {
-            if(dungeonController.IsItTimeToEnd())
+
+            GameObject.Find("ItemSaveManager").GetComponent<ItemSaveManager>().SaveInventory(player.GetComponentInChildren<PlayerInventoryManager>());
+            GameObject.Find("ItemSaveManager").GetComponent<ItemSaveManager>().SaveEquipment(player.GetComponentInChildren<PlayerInventoryManager>());
+
+            if (dungeonController.IsItTimeToEnd())
             {
                 dungeonController.Increase();
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -24,7 +30,7 @@ public class DungeonEndRoom : MonoBehaviour
             else
             {
                 dungeonController.loops = 0;
-                SceneManager.LoadScene(1);
+                SceneManager.LoadScene(3);
             }
         }
     }

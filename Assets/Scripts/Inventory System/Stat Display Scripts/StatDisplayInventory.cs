@@ -49,7 +49,7 @@ namespace io.purplik.ProjectSoul.InventorySystem
             for (int i = 0; i < stats.Length; i++)
             {
                 statDisplays[i].valueText.text = stats[i].Value.ToString();
-                if (highestValue < stats[i].Value && i <= 3)
+                if (highestValue < stats[i].Value && i < 3)
                 {
                     highestValue = stats[i].Value;
                     title.text = "The Legendary " + statDisplayNames[i];

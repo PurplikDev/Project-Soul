@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 namespace io.purplik.ProjectSoul.InventorySystem
 {
@@ -95,6 +94,19 @@ namespace io.purplik.ProjectSoul.InventorySystem
             if (weaponModel != null)
             {
                 Destroy(weaponModel.gameObject);
+            }
+        }
+
+        public void Clear()
+        {
+            for (int i = 0; i < equipmentSlots.Length; i++)
+            {
+                if (equipmentSlots[i].item != null && Application.isPlaying)
+                {
+                    equipmentSlots[i].item.Destory();
+                }
+                equipmentSlots[i].item = null;
+                equipmentSlots[i].itemAmount = 0;
             }
         }
     }

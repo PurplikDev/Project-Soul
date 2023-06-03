@@ -66,9 +66,13 @@ namespace io.purplik.ProjectSoul.InventorySystem
                 Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 2.5f);
                 if(hit.transform == null) { return; }
                 var tileEntity = hit.transform.gameObject.GetComponent<ITileEntity>();
-                if(tileEntity != null) { 
+                if (tileEntity != null) { 
                     tileEntity.Interact();
-                    ToggleUIElement(true, inventoryPanel);
+                    if(hit.transform.GetComponent<MimicChest>() == null)
+                    {
+                        ToggleUIElement(true, inventoryPanel);
+                    }
+
                 }
                 return;
             }

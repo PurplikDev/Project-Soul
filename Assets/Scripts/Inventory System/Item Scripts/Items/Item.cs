@@ -1,4 +1,6 @@
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 namespace io.purplik.ProjectSoul.InventorySystem
@@ -14,12 +16,13 @@ namespace io.purplik.ProjectSoul.InventorySystem
         [Space]
         public Sprite icon;
 
+#if UNITY_EDITOR
         private void OnValidate()
         {
             string path = AssetDatabase.GetAssetPath(this);
             id = AssetDatabase.AssetPathToGUID(path);
         }
-
+#endif
         public virtual Item GetCopy()
         {
             return this;

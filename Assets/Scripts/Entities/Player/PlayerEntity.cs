@@ -1,29 +1,49 @@
 using io.purplik.ProjectSoul.Entity.Player;
 using io.purplik.ProjectSoul.InventorySystem;
+using io.purplik.ProjectSoul.SaveSystem;
+using System.Collections;
 using UnityEngine;
 
 namespace io.purplik.ProjectSoul.Entity { 
     public class PlayerEntity : LivingEntity
     {
+        [SerializeField] Transform deathScreen;
+        private bool canAttack = true;
+        [SerializeField] HealthBar healthBar;
+
         private void Update()
         {
             if(Input.GetKeyDown(PlayerKeybinds.primaryAction))
             {
-                animator.SetTrigger("Attack");
+                if(canAttack)
+                {
+                    Attack();
+                    animator.Play("Attack");
+                    canAttack = false;
+                    StartCoroutine(AttackCooldown());
+                }
             }
+            
+            healthBar.SetHealth(activeHealth);
         }
 
-        public override void Attack()
+        IEnumerator AttackCooldown()
         {
-            RaycastHit hit;
-            Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 2.5f);
-            if (hit.transform == null) { return; }
-            var damagableEntity = hit.transform.gameObject.GetComponent<IDamagable>();
-            if (damagableEntity != null)
-            {
-                damagableEntity.Damage((int) damage.Value, DamageType.MELE);
-                Debug.Log(damage.Value);
-            }
+            yield return new WaitForSecondsRealtime(1.5f);
+            canAttack = true;
+        }
+
+        protected override void Die()
+        {
+            //animator.Play("Death");
+            GetComponent<PlayerMovement>().lockMovement = true;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Camera.main.GetComponent<PlayerCamera>().lockRotation = true;
+
+            GetComponentInChildren<PlayerInventoryManager>().equipmentInventory.Clear();
+            GetComponentInChildren<PlayerInventoryManager>().inventory.Clear();
+            deathScreen.gameObject.SetActive(true);
         }
     }
 }

@@ -1,8 +1,6 @@
 using io.purplik.ProjectSoul.Entity;
 using io.purplik.ProjectSoul.Entity.Player;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
-using static UnityEditor.Progress;
 
 namespace io.purplik.ProjectSoul.InventorySystem { 
     public class ItemChest : ItemContainer, ITileEntity
@@ -16,7 +14,7 @@ namespace io.purplik.ProjectSoul.InventorySystem {
         [Space]
         private PlayerEntity playerEntity;
 
-        public void Interact()
+        public virtual void Interact()
         {
             itemsParent.gameObject.SetActive(true);
             isOpen = true;
