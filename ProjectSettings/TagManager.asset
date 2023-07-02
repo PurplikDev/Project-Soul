@@ -3,11 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - SpawnPoint
-  - RoomSpawn
-  - SpawnRoom
-  - Enemy
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -15,12 +11,12 @@ TagManager:
   - 
   - Water
   - UI
-  - Walkable
-  - PostProcessing
-  - ItemEntity
-  - PlayerEntity
-  - HostileEntity
-  - DoNotRenderFirstPerson
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -44,10 +40,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: UI
-    uniqueID: 171249093
-    locked: 0
-  - name: UI Background
-    uniqueID: 1172747823
     locked: 0
