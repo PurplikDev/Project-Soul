@@ -11,4 +11,4 @@ ScriptedImporter:
   generateWrapperCode: 1
   wrapperCodePath: Assets/_Scripts/Input/GameInput
   wrapperClassName: GameInput
-  wrapperCodeNamespace: Purplik.PixelRoguelike.Input
+  wrapperCodeNamespace: Roguelike.System.PlayerInput

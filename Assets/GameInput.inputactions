@@ -33,9 +33,18 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "AimTrigger",
+                    "type": "Button",
+                    "id": "251e917e-8b49-48a6-8c62-7aa57e515684",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Aim",
                     "type": "Value",
-                    "id": "251e917e-8b49-48a6-8c62-7aa57e515684",
+                    "id": "4d53fc3c-3d77-4ac4-89f4-0f0a10e2f044",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -123,6 +132,17 @@
                 {
                     "name": "",
                     "id": "544bd81c-18d8-49d1-a5d5-2fc169df2948",
+                    "path": "<Keyboard>/leftAlt",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "AimTrigger",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a81603ab-11b4-487a-a4e7-fe2c8f0070dd",
                     "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",

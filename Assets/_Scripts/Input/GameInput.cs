@@ -15,13 +15,10 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-namespace Purplik.PixelRoguelike.Input
-{
-    public partial class @GameInput: IInputActionCollection2, IDisposable
-    {
+namespace Roguelike.System.PlayerInput {
+    public partial class @GameInput : IInputActionCollection2, IDisposable {
         public InputActionAsset asset { get; }
-        public @GameInput()
-        {
+        public @GameInput() {
             asset = InputActionAsset.FromJson(@"{
     ""name"": ""GameInput"",
     ""maps"": [
@@ -57,9 +54,18 @@ namespace Purplik.PixelRoguelike.Input
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""AimTrigger"",
+                    ""type"": ""Button"",
+                    ""id"": ""251e917e-8b49-48a6-8c62-7aa57e515684"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Aim"",
                     ""type"": ""Value"",
-                    ""id"": ""251e917e-8b49-48a6-8c62-7aa57e515684"",
+                    ""id"": ""4d53fc3c-3d77-4ac4-89f4-0f0a10e2f044"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -147,6 +153,17 @@ namespace Purplik.PixelRoguelike.Input
                 {
                     ""name"": """",
                     ""id"": ""544bd81c-18d8-49d1-a5d5-2fc169df2948"",
+                    ""path"": ""<Keyboard>/leftAlt"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""AimTrigger"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a81603ab-11b4-487a-a4e7-fe2c8f0070dd"",
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -241,6 +258,7 @@ namespace Purplik.PixelRoguelike.Input
             m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
             m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
             m_Gameplay_Inventory = m_Gameplay.FindAction("Inventory", throwIfNotFound: true);
+            m_Gameplay_AimTrigger = m_Gameplay.FindAction("AimTrigger", throwIfNotFound: true);
             m_Gameplay_Aim = m_Gameplay.FindAction("Aim", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
@@ -248,59 +266,49 @@ namespace Purplik.PixelRoguelike.Input
             m_UI_CloseInventory = m_UI.FindAction("CloseInventory", throwIfNotFound: true);
         }
 
-        public void Dispose()
-        {
+        public void Dispose() {
             UnityEngine.Object.Destroy(asset);
         }
 
-        public InputBinding? bindingMask
-        {
+        public InputBinding? bindingMask {
             get => asset.bindingMask;
             set => asset.bindingMask = value;
         }
 
-        public ReadOnlyArray<InputDevice>? devices
-        {
+        public ReadOnlyArray<InputDevice>? devices {
             get => asset.devices;
             set => asset.devices = value;
         }
 
         public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
 
-        public bool Contains(InputAction action)
-        {
+        public bool Contains(InputAction action) {
             return asset.Contains(action);
         }
 
-        public IEnumerator<InputAction> GetEnumerator()
-        {
+        public IEnumerator<InputAction> GetEnumerator() {
             return asset.GetEnumerator();
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
+        IEnumerator IEnumerable.GetEnumerator() {
             return GetEnumerator();
         }
 
-        public void Enable()
-        {
+        public void Enable() {
             asset.Enable();
         }
 
-        public void Disable()
-        {
+        public void Disable() {
             asset.Disable();
         }
 
         public IEnumerable<InputBinding> bindings => asset.bindings;
 
-        public InputAction FindAction(string actionNameOrId, bool throwIfNotFound = false)
-        {
+        public InputAction FindAction(string actionNameOrId, bool throwIfNotFound = false) {
             return asset.FindAction(actionNameOrId, throwIfNotFound);
         }
 
-        public int FindBinding(InputBinding bindingMask, out InputAction action)
-        {
+        public int FindBinding(InputBinding bindingMask, out InputAction action) {
             return asset.FindBinding(bindingMask, out action);
         }
 
@@ -310,22 +318,22 @@ namespace Purplik.PixelRoguelike.Input
         private readonly InputAction m_Gameplay_Move;
         private readonly InputAction m_Gameplay_Pause;
         private readonly InputAction m_Gameplay_Inventory;
+        private readonly InputAction m_Gameplay_AimTrigger;
         private readonly InputAction m_Gameplay_Aim;
-        public struct GameplayActions
-        {
+        public struct GameplayActions {
             private @GameInput m_Wrapper;
             public GameplayActions(@GameInput wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Gameplay_Move;
             public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
             public InputAction @Inventory => m_Wrapper.m_Gameplay_Inventory;
+            public InputAction @AimTrigger => m_Wrapper.m_Gameplay_AimTrigger;
             public InputAction @Aim => m_Wrapper.m_Gameplay_Aim;
             public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
             public bool enabled => Get().enabled;
             public static implicit operator InputActionMap(GameplayActions set) { return set.Get(); }
-            public void AddCallbacks(IGameplayActions instance)
-            {
+            public void AddCallbacks(IGameplayActions instance) {
                 if (instance == null || m_Wrapper.m_GameplayActionsCallbackInterfaces.Contains(instance)) return;
                 m_Wrapper.m_GameplayActionsCallbackInterfaces.Add(instance);
                 @Move.started += instance.OnMove;
@@ -337,13 +345,15 @@ namespace Purplik.PixelRoguelike.Input
                 @Inventory.started += instance.OnInventory;
                 @Inventory.performed += instance.OnInventory;
                 @Inventory.canceled += instance.OnInventory;
+                @AimTrigger.started += instance.OnAimTrigger;
+                @AimTrigger.performed += instance.OnAimTrigger;
+                @AimTrigger.canceled += instance.OnAimTrigger;
                 @Aim.started += instance.OnAim;
                 @Aim.performed += instance.OnAim;
                 @Aim.canceled += instance.OnAim;
             }
 
-            private void UnregisterCallbacks(IGameplayActions instance)
-            {
+            private void UnregisterCallbacks(IGameplayActions instance) {
                 @Move.started -= instance.OnMove;
                 @Move.performed -= instance.OnMove;
                 @Move.canceled -= instance.OnMove;
@@ -353,19 +363,20 @@ namespace Purplik.PixelRoguelike.Input
                 @Inventory.started -= instance.OnInventory;
                 @Inventory.performed -= instance.OnInventory;
                 @Inventory.canceled -= instance.OnInventory;
+                @AimTrigger.started -= instance.OnAimTrigger;
+                @AimTrigger.performed -= instance.OnAimTrigger;
+                @AimTrigger.canceled -= instance.OnAimTrigger;
                 @Aim.started -= instance.OnAim;
                 @Aim.performed -= instance.OnAim;
                 @Aim.canceled -= instance.OnAim;
             }
 
-            public void RemoveCallbacks(IGameplayActions instance)
-            {
+            public void RemoveCallbacks(IGameplayActions instance) {
                 if (m_Wrapper.m_GameplayActionsCallbackInterfaces.Remove(instance))
                     UnregisterCallbacks(instance);
             }
 
-            public void SetCallbacks(IGameplayActions instance)
-            {
+            public void SetCallbacks(IGameplayActions instance) {
                 foreach (var item in m_Wrapper.m_GameplayActionsCallbackInterfaces)
                     UnregisterCallbacks(item);
                 m_Wrapper.m_GameplayActionsCallbackInterfaces.Clear();
@@ -379,8 +390,7 @@ namespace Purplik.PixelRoguelike.Input
         private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
         private readonly InputAction m_UI_CloseAllUI;
         private readonly InputAction m_UI_CloseInventory;
-        public struct UIActions
-        {
+        public struct UIActions {
             private @GameInput m_Wrapper;
             public UIActions(@GameInput wrapper) { m_Wrapper = wrapper; }
             public InputAction @CloseAllUI => m_Wrapper.m_UI_CloseAllUI;
@@ -390,8 +400,7 @@ namespace Purplik.PixelRoguelike.Input
             public void Disable() { Get().Disable(); }
             public bool enabled => Get().enabled;
             public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
-            public void AddCallbacks(IUIActions instance)
-            {
+            public void AddCallbacks(IUIActions instance) {
                 if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
                 m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
                 @CloseAllUI.started += instance.OnCloseAllUI;
@@ -402,8 +411,7 @@ namespace Purplik.PixelRoguelike.Input
                 @CloseInventory.canceled += instance.OnCloseInventory;
             }
 
-            private void UnregisterCallbacks(IUIActions instance)
-            {
+            private void UnregisterCallbacks(IUIActions instance) {
                 @CloseAllUI.started -= instance.OnCloseAllUI;
                 @CloseAllUI.performed -= instance.OnCloseAllUI;
                 @CloseAllUI.canceled -= instance.OnCloseAllUI;
@@ -412,14 +420,12 @@ namespace Purplik.PixelRoguelike.Input
                 @CloseInventory.canceled -= instance.OnCloseInventory;
             }
 
-            public void RemoveCallbacks(IUIActions instance)
-            {
+            public void RemoveCallbacks(IUIActions instance) {
                 if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
                     UnregisterCallbacks(instance);
             }
 
-            public void SetCallbacks(IUIActions instance)
-            {
+            public void SetCallbacks(IUIActions instance) {
                 foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
                     UnregisterCallbacks(item);
                 m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
@@ -428,23 +434,20 @@ namespace Purplik.PixelRoguelike.Input
         }
         public UIActions @UI => new UIActions(this);
         private int m_PCSchemeIndex = -1;
-        public InputControlScheme PCScheme
-        {
-            get
-            {
+        public InputControlScheme PCScheme {
+            get {
                 if (m_PCSchemeIndex == -1) m_PCSchemeIndex = asset.FindControlSchemeIndex("PC");
                 return asset.controlSchemes[m_PCSchemeIndex];
             }
         }
-        public interface IGameplayActions
-        {
+        public interface IGameplayActions {
             void OnMove(InputAction.CallbackContext context);
             void OnPause(InputAction.CallbackContext context);
             void OnInventory(InputAction.CallbackContext context);
+            void OnAimTrigger(InputAction.CallbackContext context);
             void OnAim(InputAction.CallbackContext context);
         }
-        public interface IUIActions
-        {
+        public interface IUIActions {
             void OnCloseAllUI(InputAction.CallbackContext context);
             void OnCloseInventory(InputAction.CallbackContext context);
         }
