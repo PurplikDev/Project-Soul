@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Roguelike.Enviroment.Entity.Player.StateMachine {
+namespace roguelike.enviroment.entity.player.StateMachine {
     public class PlayerIdleState : PlayerBaseState {
         public PlayerIdleState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory) : base(currentContext, playerStateFactory) {
             IsRootState = true;
@@ -8,7 +8,7 @@ namespace Roguelike.Enviroment.Entity.Player.StateMachine {
         }
 
         public override void EnterState() {
-            Debug.Log("Entered idle");
+            //Debug.Log("Entered idle");
         }
 
         public override void UpdateState() {

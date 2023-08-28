@@ -1,6 +1,6 @@
 using UnityEditor.Build;
 
-namespace Roguelike.Enviroment.Entity.Player.StateMachine {
+namespace roguelike.enviroment.entity.player.StateMachine {
     public abstract class PlayerBaseState {
         private bool _isRootState = false;
         private PlayerStateMachine _ctx;

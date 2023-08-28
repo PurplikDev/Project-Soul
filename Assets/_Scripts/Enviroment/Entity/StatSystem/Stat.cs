@@ -1,37 +1,32 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Roguelike.Enviroment.Entity.StatSystem {
+namespace roguelike.enviroment.entity.StatSystem {
     [SerializeField]
     public class Stat {
-        private float _value;
         private float _baseValue;
 
-        protected StatType type;
         protected List<StatModifier> statModifiers;
 
         public float Value { get { return ApplyModifiers(); } }
-        public float BaseValue { get { return _baseValue; } }
+        public float BaseValue { get { return _baseValue; } } // no idea why i would need this, but still, just in case
 
         public float ApplyModifiers() {
 
-            float returnValue = BaseValue; // YES I KNOW I CAN JUST REFERENCE THE _baseValue VARIABLE BUT I JUST WANT TO DO IT LIKE THIS
+            float returnValue = _baseValue;
 
             statModifiers.Sort(SortModifiers);
 
             foreach (StatModifier modifier in statModifiers) {
-                    if (modifier.statType == type) {
-                    switch (modifier.modifierType) {
+                switch (modifier.modifierType) {
 
-                        case StatModifier.StatModifierType.FLAT: 
-                            returnValue += modifier.ModifierValue;
-                            break;
+                    case StatModifier.StatModifierType.FLAT: 
+                        returnValue += modifier.ModifierValue;
+                        break;
 
-                        case StatModifier.StatModifierType.ADDITIONAL:
-                            returnValue *= 1 + modifier.ModifierValue;
-                            break;
-                    }
+                    case StatModifier.StatModifierType.ADDITIONAL:
+                        returnValue *= 1 + modifier.ModifierValue;
+                        break;
                 }
             }
 

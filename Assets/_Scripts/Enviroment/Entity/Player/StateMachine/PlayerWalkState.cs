@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Roguelike.Enviroment.Entity.Player.StateMachine {
+namespace roguelike.enviroment.entity.player.StateMachine {
     public class PlayerWalkState : PlayerBaseState {
 
         float _turnSmoothVelocity;

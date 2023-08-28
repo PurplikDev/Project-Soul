@@ -1,12 +1,20 @@
-using Roguelike.System.PlayerInput;
+using roguelike.enviroment.item;
+using roguelike.system.playerinput;
+using System;
 using UnityEngine;
 
-namespace Roguelike.System.GameManager
+namespace roguelike.system.gamemanager
 {
     public class GameManager : MonoBehaviour
     {
+        public static GameManager Instance;
+
         [SerializeField] private InputReader _input;
         [SerializeField] private GameObject pauseMenu;
+
+        private void Awake() {
+            TranslationManager.getTranslationFromFile();
+        }
 
         private void Start()
         {
@@ -17,6 +25,8 @@ namespace Roguelike.System.GameManager
             // UI Events
             _input.CloseUIEvent += CloseAllUI;
             _input.CloseInvetoryEvent += CloseInventory;
+
+            Debug.Log(Items.TEST_ITEM.ItemName);
         }
 
         private void HandlePause()

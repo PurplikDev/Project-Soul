@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Roguelike.Enviroment.Entity.StatSystem {
+namespace roguelike.enviroment.entity.StatSystem {
     [SerializeField]
     public class StatModifier {
         public StatModifierType modifierType;

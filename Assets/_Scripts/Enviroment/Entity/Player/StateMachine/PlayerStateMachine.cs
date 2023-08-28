@@ -1,9 +1,9 @@
-using Roguelike.System.PlayerInput;
+using roguelike.system.playerinput;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Roguelike.Enviroment.Entity.Player.StateMachine {
+namespace roguelike.enviroment.entity.player.StateMachine {
     public class PlayerStateMachine : MonoBehaviour {
         [SerializeField] private InputReader _input;
         private CharacterController _chc;

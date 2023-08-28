@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Roguelike.Enviroment.Entity {
+namespace roguelike.enviroment.entity {
     public class Entity : MonoBehaviour {
         
     }

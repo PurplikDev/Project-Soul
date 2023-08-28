@@ -1,4 +1,4 @@
-namespace Roguelike.Enviroment.Entity.Player.StateMachine {
+namespace roguelike.enviroment.entity.player.StateMachine {
     public class PlayerAttackState : PlayerBaseState {
         public PlayerAttackState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
             : base(currentContext, playerStateFactory) { }

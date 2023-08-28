@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Roguelike.Enviroment.Entity.Player.StateMachine {
+namespace roguelike.enviroment.entity.player.StateMachine {
     public class PlayerMovementState : PlayerBaseState {
         public PlayerMovementState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory) : base(currentContext, playerStateFactory) {
             IsRootState = true;

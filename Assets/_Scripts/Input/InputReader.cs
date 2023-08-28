@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Roguelike.System.PlayerInput {
+namespace roguelike.system.playerinput {
     [CreateAssetMenu(menuName = "Input Reader")]
     public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInput.IUIActions {
         private GameInput _gameInput;

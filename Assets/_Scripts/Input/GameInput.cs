@@ -15,7 +15,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-namespace Roguelike.System.PlayerInput {
+namespace roguelike.system.playerinput {
     public partial class @GameInput : IInputActionCollection2, IDisposable {
         public InputActionAsset asset { get; }
         public @GameInput() {
@@ -45,7 +45,7 @@ namespace Roguelike.System.PlayerInput {
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Inventory"",
+                    ""name"": ""inventory"",
                     ""type"": ""Button"",
                     ""id"": ""607bcb7f-aba2-4ca9-ab21-5fbb28ce9804"",
                     ""expectedControlType"": ""Button"",
@@ -146,7 +146,7 @@ namespace Roguelike.System.PlayerInput {
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""PC"",
-                    ""action"": ""Inventory"",
+                    ""action"": ""inventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -257,7 +257,7 @@ namespace Roguelike.System.PlayerInput {
             m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
             m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
             m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
-            m_Gameplay_Inventory = m_Gameplay.FindAction("Inventory", throwIfNotFound: true);
+            m_Gameplay_Inventory = m_Gameplay.FindAction("inventory", throwIfNotFound: true);
             m_Gameplay_AimTrigger = m_Gameplay.FindAction("AimTrigger", throwIfNotFound: true);
             m_Gameplay_Aim = m_Gameplay.FindAction("Aim", throwIfNotFound: true);
             // UI
