@@ -35,7 +35,7 @@ namespace roguelike.enviroment.entity.player.StateMachine {
 
         void HandleMovement() {
             float targetAngle = Mathf.Atan2(Ctx.MoveDir.x, Ctx.MoveDir.z) * Mathf.Rad2Deg;
-            Ctx.Chc.Move(Ctx.MoveDir * Time.deltaTime * Ctx.PlayerSpeed);
+            Ctx.CharController.Move(Ctx.MoveDir * Time.deltaTime * Ctx.PlayerSpeed);
         }
 
         private void Aim() {

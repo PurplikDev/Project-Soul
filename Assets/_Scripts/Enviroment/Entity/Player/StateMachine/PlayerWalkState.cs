@@ -38,7 +38,7 @@ namespace roguelike.enviroment.entity.player.StateMachine {
             float angle = Mathf.SmoothDampAngle(Ctx.transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, 0.125f);
 
             Ctx.transform.rotation = Quaternion.Euler(0, angle, 0);
-            Ctx.Chc.Move(Ctx.MoveDir * Time.deltaTime * Ctx.PlayerSpeed);
+            Ctx.CharController.Move(Ctx.MoveDir * Time.deltaTime * Ctx.PlayerSpeed);
         }
     }
 }

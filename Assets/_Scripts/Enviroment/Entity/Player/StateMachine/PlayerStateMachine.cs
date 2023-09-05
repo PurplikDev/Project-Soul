@@ -6,7 +6,7 @@ using UnityEngine;
 namespace roguelike.enviroment.entity.player.StateMachine {
     public class PlayerStateMachine : MonoBehaviour {
         [SerializeField] private InputReader _input;
-        private CharacterController _chc;
+        private CharacterController _charController;
 
         [SerializeField] private float _playerSpeed;
         [SerializeField] private float _turnSmothTime = 0.125f;
@@ -33,7 +33,7 @@ namespace roguelike.enviroment.entity.player.StateMachine {
             // Variables
                 public PlayerBaseState CurrentState { get { return _currentState; } set { _currentState = value; } }
                 public InputReader Input { get { return _input; } }
-                public CharacterController Chc { get { return _chc; } }
+                public CharacterController CharController { get { return _charController; } }
                 public Vector3 MoveDir { get { return _moveDir; } }
                 public float PlayerSpeed { get { return _playerSpeed; } }
                 public float TurnSmothTime { get { return _turnSmothTime; } }
@@ -46,7 +46,7 @@ namespace roguelike.enviroment.entity.player.StateMachine {
         // Monobehaviour methods
 
         private void Awake() {
-            _chc = GetComponent<CharacterController>();
+            _charController = GetComponent<CharacterController>();
             _input.MoveEvent += HandleMove;
             _input.AimEvent += InitiateAim;
             _input.AimCancelEvent += CancelAim;
