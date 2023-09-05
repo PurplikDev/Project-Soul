@@ -1,5 +1,5 @@
 using roguelike.enviroment.item;
-using roguelike.system.playerinput;
+using roguelike.system.input;
 using System;
 using UnityEngine;
 
