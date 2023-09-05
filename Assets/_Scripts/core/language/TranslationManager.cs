@@ -8,7 +8,13 @@ public static class TranslationManager {
     public static Dictionary<string, string> language = new Dictionary<string, string>();
 
     public static string getTranslation(string key) {
-        return language[key];
+        try {
+            return language[key];
+        } catch (KeyNotFoundException) {
+            Debug.LogWarning("[" + key + "] isn't present in the lang file. Adding a placeholder into the cache!");
+            language.Add(key, key);
+            return key;
+        }
     }
 
     // todo: event that calls this method when player changes their language or start the game

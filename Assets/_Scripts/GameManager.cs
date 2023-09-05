@@ -25,8 +25,6 @@ namespace roguelike.system.gamemanager
             // UI Events
             _input.CloseUIEvent += CloseAllUI;
             _input.CloseInvetoryEvent += CloseInventory;
-
-            Debug.Log(Items.TEST_ITEM.ItemName);
         }
 
         private void HandlePause()

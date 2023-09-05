@@ -21,5 +21,12 @@ namespace roguelike.enviroment.item {
 
         public static ItemStack EMPTY = new ItemStack(Items.AIR);
 
+        public void shrinkStackBy(int amount) {
+            _itemAmount -= amount;
+        }
+
+        public void shrinkStackTo(int amount) {
+            _itemAmount = amount;
+        }
     }
 }

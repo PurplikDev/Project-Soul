@@ -1,4 +1,4 @@
 {
-      "item-test_item" : "Test Item",
-      "item-air" : "Air"
+      "air" : "Air",
+      "test_item" : "Test Item"
 }
