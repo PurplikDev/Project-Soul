@@ -1,10 +1,10 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="ItemSlot" src="project://database/Assets/Resources/ui/itemslot/ItemSlot.uxml?fileID=9197481963319205126&amp;guid=ec1261fecd6ea47fe8e2d3b391584317&amp;type=3#ItemSlot" />
-    <Style src="project://database/Assets/Resources/ui/inventory/Inventory.uss?fileID=7433441132597879392&amp;guid=3d9b1821c12db4c828403e198276c0e3&amp;type=3#Inventory" />
-    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); justify-content: center; align-items: center; flex-direction: row;">
-        <ui:VisualElement name="StatPanel" class="inventoryPanel" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0.2); flex-direction: row; height: 60%; width: 35%; justify-content: flex-start; align-items: auto; align-self: auto;" />
-        <ui:VisualElement name="MainPanel" class="inventoryPanel" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0.2); flex-direction: row; height: 75%; width: 40%; justify-content: flex-start; align-items: auto;" />
-        <ui:VisualElement name="InventoryPanel" class="inventoryPanel" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0.2); flex-direction: row; height: 60%; width: 35%; justify-content: flex-start; align-items: auto;">
+    <ui:Template name="ItemSlot" src="project://database/Assets/Resources/ui/itemslot/ItemSlot.uxml?fileID=9197481963319205126&amp;guid=6673e2f31c369674a9aa6895317c0b83&amp;type=3#ItemSlot" />
+    <Style src="project://database/Assets/Resources/ui/inventory/Inventory.uss?fileID=7433441132597879392&amp;guid=01fd8427035fa3b47b63ca7264cec847&amp;type=3#Inventory" />
+    <ui:VisualElement style="flex-grow: 1; justify-content: center; align-items: center; flex-direction: row; padding-left: 75px; padding-right: 75px; padding-top: 75px; padding-bottom: 75px;">
+        <ui:VisualElement name="StatPanel" class="inventoryPanel" style="flex-grow: 0; flex-direction: row; height: 60%; width: 35%; justify-content: flex-start; align-items: auto; align-self: auto;" />
+        <ui:VisualElement name="MainPanel" class="inventoryPanel" style="flex-grow: 0; flex-direction: row; height: 75%; width: 40%; justify-content: flex-start; align-items: auto;" />
+        <ui:VisualElement name="InventoryPanel" class="inventoryPanel" style="flex-grow: 0; flex-direction: row; height: 60%; width: 35%; justify-content: flex-start; align-items: auto;">
             <ui:Instance template="ItemSlot" name="ItemSlot" style="width: 100px; height: 100px;" />
         </ui:VisualElement>
     </ui:VisualElement>

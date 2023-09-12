@@ -8,6 +8,4 @@ public class InventoryRenderer : MonoBehaviour
     private void Awake() {
             _itemSlot = Resources.Load<VisualTreeAsset>("ui/itemslot.uxml");
     }
-
-
 }

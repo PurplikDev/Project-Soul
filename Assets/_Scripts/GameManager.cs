@@ -11,6 +11,7 @@ namespace roguelike.system.gamemanager
 
         [SerializeField] private InputReader _input;
         [SerializeField] private GameObject pauseMenu;
+        [SerializeField] private GameObject inventoryMenu;
 
         private void Awake() {
             TranslationManager.getTranslationFromFile();
@@ -35,19 +36,20 @@ namespace roguelike.system.gamemanager
         // TODO: Correct implementation, current one is only for testing
         private void HandleInventory()
         {
-            pauseMenu.SetActive(true);
+            inventoryMenu.SetActive(true);
         }
 
         // TODO: Correct implementation, current one is only for testing
         private void CloseAllUI()
         {
             pauseMenu.SetActive(false);
+            inventoryMenu.SetActive(false);
         }
 
         // TODO: Correct implementation, current one is only for testing
         private void CloseInventory()
         {
-            pauseMenu.SetActive(false);
+            inventoryMenu.SetActive(false);
         }
     }
 }
