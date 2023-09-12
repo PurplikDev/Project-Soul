@@ -1,7 +1,23 @@
-.inventoryPanel {
-    margin-left: 25px;
-    margin-right: 25px;
-    margin-top: 25px;
-    margin-bottom: 25px;
-    background-color: rgba(0, 0, 0, 0.47);
+.panel {
+    background-color: rgba(0, 0, 0, 0.29);
+    width: auto;
+    height: 75%;
+    margin-left: 35px;
+    margin-right: 35px;
+    margin-top: 35px;
+    margin-bottom: 35px;
+}
+
+.itemSlot {
+    width: 21.5%;
+    height: 14.5%;
+    margin-left: 7.5px;
+    margin-right: 7.5px;
+    margin-top: 7.5px;
+    margin-bottom: 7.5px;
+}
+
+.equipmentItemSlot {
+    width: 125px;
+    height: 125px;
 }
