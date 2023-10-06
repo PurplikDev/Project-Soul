@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "CameraAdjustTrigger",
+                    "type": "Button",
+                    "id": "9986869e-94e8-4cab-af32-d1fc70b505ed",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -132,7 +141,7 @@
                 {
                     "name": "",
                     "id": "544bd81c-18d8-49d1-a5d5-2fc169df2948",
-                    "path": "<Keyboard>/leftAlt",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
@@ -148,6 +157,17 @@
                     "processors": "",
                     "groups": "PC",
                     "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e1253bfd-b1dd-4091-9d98-0e84dcacee63",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraAdjustTrigger",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

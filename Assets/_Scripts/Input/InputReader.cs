@@ -42,6 +42,9 @@ namespace roguelike.system.input {
         public event Action AimEvent;
         public event Action AimCancelEvent;
 
+        public event Action AdjustCameraEvent;
+        public event Action AdjustCameraCancelEvent;
+
         public void OnMove(InputAction.CallbackContext context) {
             MoveEvent?.Invoke(context.ReadValue<Vector2>());
         }
@@ -57,6 +60,15 @@ namespace roguelike.system.input {
             }
             if (context.phase == InputActionPhase.Canceled) {
                 AimCancelEvent?.Invoke();
+            }
+        }
+
+        public void OnCameraAdjustTrigger(InputAction.CallbackContext context) {
+            if (context.phase == InputActionPhase.Performed) {
+                AdjustCameraEvent?.Invoke();
+            }
+            if (context.phase == InputActionPhase.Canceled) {
+                AdjustCameraCancelEvent?.Invoke();
             }
         }
 

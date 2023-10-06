@@ -22,6 +22,8 @@ namespace roguelike.system.gamemanager
             // Gameplay UI Events
             _input.PauseEvent += HandlePause;
             _input.InventoryEvent += HandleInventory;
+	    _input.AdjustCameraEvent += UnlockCamera;
+	    _input.AdjustCameraCancelEvent += LockCamera;
 
             // UI Events
             _input.CloseUIEvent += CloseAllUI;
@@ -51,5 +53,13 @@ namespace roguelike.system.gamemanager
         {
             inventoryMenu.SetActive(false);
         }
+
+	private void UnlockCamera() {
+	    Debug.Log("Camera Unlocked");
+    	}
+
+	private void LockCamera() {
+	    Debug.Log("Camera Locked");
+    	}
     }
 }

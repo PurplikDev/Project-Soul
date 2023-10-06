@@ -90,3 +90,12 @@ Update Mode: updateDependencies
 The following packages were updated:
   com.unity.inputsystem from version 1.5.1 to 1.6.1
   com.unity.netcode.gameobjects from version 1.4.0 to 1.5.1
+
+=== Fri Oct  6 09:00:04 2023
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.inputsystem from version 1.6.1 to 1.7.0
+  com.unity.netcode.gameobjects from version 1.5.1 to 1.6.0

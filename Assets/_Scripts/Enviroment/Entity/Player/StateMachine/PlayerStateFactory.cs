@@ -16,8 +16,13 @@ namespace roguelike.enviroment.entity.player.StateMachine {
         public PlayerBaseState Attack() {
             return new PlayerAttackState(_context, this);
         }
+
         public PlayerBaseState Walk() {
             return new PlayerWalkState(_context, this);
+        }
+
+        public PlayerBaseState Aim() {
+            return new PlayerAimState(_context, this);
         }
     }
 }
