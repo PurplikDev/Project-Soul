@@ -23,6 +23,6 @@ namespace roguelike.enviroment.item {
             public string ItemName { get { return TranslationManager.getTranslation(ID); } }
             public string ID { get { return _id; } }
             public int MaxStackSize { get { return _maxStackSize; } }
-            public Sprite Icon { get { return Resources.Load<Sprite>("/items/" + _id); } }
+            public Sprite Icon { get { return Resources.Load<Sprite>("/sprites/items/" + _id); } }
     }
 }

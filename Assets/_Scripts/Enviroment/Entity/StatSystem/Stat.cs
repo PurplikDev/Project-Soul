@@ -1,11 +1,12 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace roguelike.enviroment.entity.StatSystem {
-    [SerializeField]
+    [Serializable]
     public class Stat {
-        private float _baseValue;
-
+        [SerializeField] private float _baseValue;
+        
         protected List<StatModifier> statModifiers;
 
         public float Value { get { return ApplyModifiers(); } }

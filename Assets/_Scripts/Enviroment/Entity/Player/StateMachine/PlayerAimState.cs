@@ -41,14 +41,8 @@ namespace roguelike.enviroment.entity.player.StateMachine {
         private void Aim() {
             var (success, position) = GetMousePosition();
             if (success) {
-                // Calculate the direction
                 var direction = position - Ctx.transform.position;
-
-                // You might want to delete this line.
-                // Ignore the height difference.
                 direction.y = 0;
-
-                // Make the transform look in the direction.
                 Ctx.transform.forward = direction;
             }
         }
@@ -57,10 +51,8 @@ namespace roguelike.enviroment.entity.player.StateMachine {
             var ray = Ctx.MainCamera.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, Ctx.GroundMask)) {
-                // The Raycast hit something, return with the position.
                 return (success: true, position: hitInfo.point);
             } else {
-                // The Raycast did not hit anything.
                 return (success: false, position: Vector3.zero);
             }
         }

@@ -5,14 +5,13 @@ using UnityEngine;
 
 namespace roguelike.enviroment.entity.player {
     public class Player : Entity {
-
+        [Header("Inventory")]
         public Inventory inventory;
         public InventoryMenu menu;
 
         public Player() {
             inventory = new Inventory();
             menu = new InventoryMenu(inventory);
-    }
-
+        }
     }
 }
