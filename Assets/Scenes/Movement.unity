@@ -294,7 +294,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 307692373}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d59168cbcf8fd46b382647272836d909, type: 3}
+  m_Script: {fileID: 11500000, guid: 970037beb97344e449e63059dbdd2be6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _input: {fileID: 11400000, guid: 7f2b55f536c7c6045a406709e8273791, type: 2}
@@ -659,202 +659,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 889691998}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 055e37f6b2aed4500a4907a02d285ae1, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f277ff1c3e3fca4c9361b0b1b55d8f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Health:
+    _baseValue: 0
+  Speed:
+    _baseValue: 0
+  Defence:
+    _baseValue: 0
+  Templar:
+    _baseValue: 0
+  Rogue:
+    _baseValue: 0
+  Thaumaturge:
+    _baseValue: 0
   inventory:
-    Items:
-      _list:
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-    Equipment:
-      _list:
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-    Trinkets:
-      _list:
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
-      - _item:
-          _id: air
-        _itemAmount: 1
+    InventoryItems: []
+    EquipmentItems: []
+    TrinketItems: []
 --- !u!114 &889692005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -864,15 +687,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 889691998}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8184f22ff58c431aa37cc26ce793a3a, type: 3}
+  m_Script: {fileID: 11500000, guid: f59ed67dfc8bb1348b009cc76afa364b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _input: {fileID: 11400000, guid: 7f2b55f536c7c6045a406709e8273791, type: 2}
   _playerSpeed: 6
-  _turnSmothTime: 0.25
+  _turnSmothTime: 0.125
   _groundMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
 --- !u!1 &897802922
 GameObject:
   m_ObjectHideFlags: 0
@@ -1271,7 +1094,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: 2f812d9b32cb67f41bea1784a07d3f63, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 8965b7ef8f2312e448d1d0203c6a8881,
+  sourceAsset: {fileID: 9197481963319205126, guid: 7f12818f85e95e1429ad3dab36e4c9e7,
     type: 3}
   m_SortingOrder: 0
 --- !u!1 &1702225176

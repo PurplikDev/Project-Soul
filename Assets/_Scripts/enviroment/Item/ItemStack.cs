@@ -16,17 +16,35 @@ namespace roguelike.enviroment.item {
         public ItemStack(Item item) : this(item, 1) { }
 
         // getters
-            public Item Item { get { return _item; } }
-            public int ItemAmount { get { return _itemAmount; } }
+        public Item Item { get { return _item; } }
+        public int ItemAmount { get { return _itemAmount; } }
 
-        public static ItemStack EMPTY = new ItemStack(Items.AIR);
+        public string ItemAmountDisplay {
+            get {
+                if(_itemAmount > 1) {
+                    return _itemAmount.ToString();
+                } else {
+                    return "";
+                }
+            }
+        }
+
+
+
+        public void increaseStackBy(int amount) {
+            _itemAmount += amount;
+        }
 
         public void shrinkStackBy(int amount) {
             _itemAmount -= amount;
         }
 
-        public void shrinkStackTo(int amount) {
+        public void setStackTo(int amount) {
             _itemAmount = amount;
+        }
+
+        public bool IsEmpty() {
+            return Item.ID == "air";
         }
     }
 }
