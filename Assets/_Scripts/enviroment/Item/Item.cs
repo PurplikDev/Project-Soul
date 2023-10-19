@@ -3,12 +3,15 @@ using UnityEngine;
 
 namespace roguelike.enviroment.item {
     [Serializable]
-    [CreateAssetMenu(fileName = "New Item", menuName ="Data/Item")]
-    public class Item : ScriptableObject {
+    public class Item {
 
-        [SerializeField] string _id;
-        [SerializeField] [Range(1, 32)] int _maxStackSize;
-        [SerializeField] Sprite _sprite;
+        string _id;
+        int _maxStackSize;
+        Sprite _sprite;
+
+        public Item(string id) {
+            _id = id;
+        }
 
         // getters and setters
         public string ItemName { get { return TranslationManager.getTranslation(ID); } }

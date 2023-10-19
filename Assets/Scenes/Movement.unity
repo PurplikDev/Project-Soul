@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -185,74 +185,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &162176386
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 162176389}
-  - component: {fileID: 162176388}
-  - component: {fileID: 162176387}
-  m_Layer: 0
-  m_Name: EventSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &162176387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 162176386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
---- !u!114 &162176388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 162176386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
---- !u!4 &162176389
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 162176386}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &307692373
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,12 +226,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 307692373}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 970037beb97344e449e63059dbdd2be6, type: 3}
+  m_Script: {fileID: 11500000, guid: d59168cbcf8fd46b382647272836d909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _input: {fileID: 11400000, guid: 7f2b55f536c7c6045a406709e8273791, type: 2}
   pauseMenu: {fileID: 0}
-  inventoryMenu: {fileID: 0}
+  inventoryMenu: {fileID: 1644411542}
 --- !u!1 &367245051
 GameObject:
   m_ObjectHideFlags: 0
@@ -659,7 +591,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 889691998}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f277ff1c3e3fca4c9361b0b1b55d8f1, type: 3}
+  m_Script: {fileID: 11500000, guid: 055e37f6b2aed4500a4907a02d285ae1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Health:
@@ -675,9 +607,88 @@ MonoBehaviour:
   Thaumaturge:
     _baseValue: 0
   inventory:
-    InventoryItems: []
-    EquipmentItems: []
-    TrinketItems: []
+    InventoryItems:
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    EquipmentItems:
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    TrinketItems:
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+    - _item: {fileID: 0}
+      _itemAmount: 0
+  inventoryDocument: {fileID: 1644411544}
 --- !u!114 &889692005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -687,7 +698,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 889691998}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f59ed67dfc8bb1348b009cc76afa364b, type: 3}
+  m_Script: {fileID: 11500000, guid: f8184f22ff58c431aa37cc26ce793a3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _input: {fileID: 11400000, guid: 7f2b55f536c7c6045a406709e8273791, type: 2}
@@ -695,7 +706,7 @@ MonoBehaviour:
   _turnSmothTime: 0.125
   _groundMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
 --- !u!1 &897802922
 GameObject:
   m_ObjectHideFlags: 0
@@ -1092,9 +1103,9 @@ MonoBehaviour:
   m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PanelSettings: {fileID: 11400000, guid: 2f812d9b32cb67f41bea1784a07d3f63, type: 2}
+  m_PanelSettings: {fileID: 11400000, guid: b444bfdf113184baab5c506106244038, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 7f12818f85e95e1429ad3dab36e4c9e7,
+  sourceAsset: {fileID: 9197481963319205126, guid: 28f87c15e7b8f42dd9911026dabff51e,
     type: 3}
   m_SortingOrder: 0
 --- !u!1 &1702225176
@@ -1544,7 +1555,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 115363491}
   - {fileID: 307692374}
-  - {fileID: 162176389}
   - {fileID: 119588558}
   - {fileID: 1740903986}
   - {fileID: 2034785003}

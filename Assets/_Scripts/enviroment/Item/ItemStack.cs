@@ -44,7 +44,9 @@ namespace roguelike.enviroment.item {
         }
 
         public bool IsEmpty() {
-            return Item.ID == "air";
+            return Item == Items.AIR;
         }
+
+        public static ItemStack EMPTY = new ItemStack(Items.AIR);
     }
 }

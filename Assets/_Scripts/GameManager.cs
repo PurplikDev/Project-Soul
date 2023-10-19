@@ -22,8 +22,8 @@ namespace roguelike.system.gamemanager
             // Gameplay UI Events
             _input.PauseEvent += HandlePause;
             _input.InventoryEvent += HandleInventory;
-	    _input.AdjustCameraEvent += UnlockCamera;
-	    _input.AdjustCameraCancelEvent += LockCamera;
+	        _input.AdjustCameraEvent += UnlockCamera;
+	        _input.AdjustCameraCancelEvent += LockCamera;
 
             // UI Events
             _input.CloseUIEvent += CloseAllUI;

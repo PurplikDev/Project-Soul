@@ -7,7 +7,7 @@
 
 .inventory {
     flex-grow: 1;
-    background-color: rgb(28, 32, 36);
+    background-color: rgba(41, 41, 41, 0.78);
     width: 50%;
     height: 75%;
     max-width: 50%;
@@ -16,16 +16,14 @@
     padding-right: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
-    border-top-color: rgb(255, 197, 0);
-    border-top-width: 5px;
 }
 
 .header {
-    color: rgb(255, 197, 0);
+    color: rgb(197, 197, 197);
     font-size: 24px;
     margin-bottom: 10px;
-    border-bottom-color: rgb(64, 74, 82);
-    border-bottom-width: 2.5px;
+    border-bottom-width: 5px;
+    border-bottom-color: rgb(255, 255, 255);
 }
 
 .slotContainer {
@@ -43,4 +41,14 @@
     flex-grow: 1;
     width: 100%;
     height: 100%;
+}
+
+.itemSlot {
+    width: 128px;
+    height: 128px;
+    background-color: rgba(33, 33, 33, 0.59);
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
