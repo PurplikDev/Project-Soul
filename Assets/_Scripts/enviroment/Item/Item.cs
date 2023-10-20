@@ -9,9 +9,13 @@ namespace roguelike.enviroment.item {
         int _maxStackSize;
         Sprite _sprite;
 
-        public Item(string id) {
+        public Item(string id, int maxStackSize)
+        {
             _id = id;
+            _maxStackSize = maxStackSize;
         }
+
+        public Item(string id) : this(id, 1) {}
 
         // getters and setters
         public string ItemName { get { return TranslationManager.getTranslation(ID); } }

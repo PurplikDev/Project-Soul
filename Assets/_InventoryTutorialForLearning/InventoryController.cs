@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using roguelike.enviroment.entity.player.inventory;
+using roguelike.enviroment.item.container;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -10,7 +11,7 @@ namespace roguelike.enviroment.item.renderer {
 
         public List<ItemSlot> InventoryItemSlots, EquipmentItemSlots, TrinketItemSlot = new List<ItemSlot>();
 
-        public Dictionary<ItemSlot, ItemStack> slots = new Dictionary<ItemSlot, ItemStack>();
+        public Dictionary<ItemSlot, Slot> slots = new Dictionary<ItemSlot, Slot>();
 
         public ItemSlot MouseSlot;
 
@@ -21,7 +22,7 @@ namespace roguelike.enviroment.item.renderer {
             _inventorySlotContainer = _root.Q<VisualElement>("InventorySlotContainer");
             _equipmentSlotContainer = _root.Q<VisualElement>("EquipmentSlotContainer");
             _trinketSlotContainer = _root.Q<VisualElement>("TrinketSlotContainer");
-
+            /*
             _registerSlots(inventory.InventoryItems, _inventorySlotContainer, InventoryItemSlots);
             _registerSlots(inventory.EquipmentItems, _equipmentSlotContainer, EquipmentItemSlots);
             _registerSlots(inventory.TrinketItems, _trinketSlotContainer, TrinketItemSlot);
@@ -30,16 +31,17 @@ namespace roguelike.enviroment.item.renderer {
             Debug.Log(_inventorySlotContainer.childCount);
             Debug.Log(_equipmentSlotContainer.childCount);
             Debug.Log(_trinketSlotContainer.childCount);
+            */
         }
 
-        private void _registerSlots(List<ItemStack> itemList, VisualElement root, List<ItemSlot> itemSlots) {
-            foreach(ItemStack stack in itemList) {
+        private void _registerSlots(List<Slot> inventorySlotList, VisualElement root, List<ItemSlot> itemSlots) {
+            foreach(Slot slot in inventorySlotList) {
                 ItemSlot itemSlot = new ItemSlot();
 
                 root.Add(itemSlot);
                 itemSlots.Add(itemSlot);
 
-                slots.Add(itemSlot, stack);
+                slots.Add(itemSlot, slot);
             }
         }
     }
