@@ -1,4 +1,5 @@
 using System;
+using System.Xml.Serialization;
 using UnityEngine;
 
 namespace roguelike.enviroment.item.equipment {
@@ -16,11 +17,11 @@ namespace roguelike.enviroment.item.equipment {
 
     public enum EquipmentType
     {
-        WEAPON,
-        HELMET,
-        CHESTPLATE,
-        LEGS,
-        BOOTS,
-        TRINKET
+        [XmlEnum(Name = "Weapon")] WEAPON,
+        [XmlEnum(Name = "Helmet")] HELMET,
+        [XmlEnum(Name = "Chestplate")] CHESTPLATE,
+        [XmlEnum(Name = "Legs")] LEGS,
+        [XmlEnum(Name = "Boots")] BOOTS,
+        [XmlEnum(Name = "Trinket")] TRINKET
     }
 }

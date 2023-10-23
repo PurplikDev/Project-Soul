@@ -1,15 +1,17 @@
 using roguelike.enviroment.entity.player.inventory;
+using roguelike.enviroment.item.renderer;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace roguelike.enviroment.entity.player {
     public class Player : Entity {
         [Header("Inventory")]
-        public Inventory inventory;
-        [SerializeField] private UIDocument inventoryDocument;
+        public Inventory PlayerInventory;
+        public InventoryController PlayerInventoryController;
 
         private void Awake() {
-            inventory = new Inventory(inventoryDocument);
+            PlayerInventory = new Inventory();
+            PlayerInventoryController = new InventoryController(PlayerInventory);
         }
     }
 }

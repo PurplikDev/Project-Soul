@@ -1,17 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using UnityEngine;
 using UnityEngine.Scripting;
 using UnityEngine.UIElements;
 
 namespace roguelike.enviroment.item.renderer {
     public class ItemSlot : VisualElement {
-
-        public ItemStack SlotItemStack;
 
         public Image ItemImage;
         public Label ItemLabel;
@@ -26,7 +18,8 @@ namespace roguelike.enviroment.item.renderer {
         }
 
         public void OnPointerDown(PointerDownEvent _event) {
-
+            Debug.Log(_event.localPosition);
+            InventoryController.DragItem(this);
         }
 
         #region UXML

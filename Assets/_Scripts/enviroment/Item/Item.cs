@@ -5,8 +5,8 @@ namespace roguelike.enviroment.item {
     [Serializable]
     public class Item {
 
-        string _id;
-        int _maxStackSize;
+        [SerializeField] string _id;
+        [SerializeField] int _maxStackSize;
         Sprite _sprite;
 
         public Item(string id, int maxStackSize)

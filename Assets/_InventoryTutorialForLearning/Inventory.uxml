@@ -1,16 +1,18 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <Style src="project://database/Assets/_InventoryTutorialForLearning/Inventory.uss?fileID=7433441132597879392&amp;guid=8dd38d4c17be74f1baa19b9c760f8269&amp;type=3#Inventory" />
+    <Style src="project://database/Assets/_InventoryTutorialForLearning/Inventory.uss?fileID=7433441132597879392&amp;guid=c062f3ea075ee6e46a2ea01d9409ffb0&amp;type=3#Inventory" />
     <ui:VisualElement name="Container" class="container">
         <ui:VisualElement name="Inventory" class="inventory" style="flex-direction: row; width: 75%; max-width: 75%; flex-wrap: nowrap; flex-grow: 0; justify-content: center; align-items: stretch;">
-            <ui:VisualElement name="Trinket" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; width: 80%; justify-content: flex-start;">
-                <ui:Label text="Trinkets" display-tooltip-when-elided="true" name="Header" class="header" />
-                <ui:VisualElement name="TrinketSlotContainer" class="slotsContainer" style="align-items: center; justify-content: center; flex-direction: row; margin-top: 0; margin-left: 0; margin-right: 0; margin-bottom: 0; flex-shrink: 1; flex-wrap: wrap; align-self: center;" />
+            <ui:VisualElement name="CharacterSlots" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; width: 100%; justify-content: flex-start;">
+                <ui:VisualElement name="Trinket" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; width: auto; justify-content: flex-start; height: auto;">
+                    <ui:Label text="Trinkets" display-tooltip-when-elided="true" name="Header" class="header" />
+                    <ui:VisualElement name="TrinketSlotContainer" class="slotsContainer" style="align-items: center; justify-content: center; flex-direction: row; margin-top: 0; margin-left: 0; margin-right: 0; margin-bottom: 0; flex-shrink: 1; flex-wrap: wrap; height: auto;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Equipment" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; width: auto; justify-content: flex-start; height: auto;">
+                    <ui:Label text="Equipment" display-tooltip-when-elided="true" name="Header" class="header" />
+                    <ui:VisualElement name="EquipmentSlotContainer" class="slotsContainer" style="align-items: center; justify-content: center; flex-direction: row; margin-top: 0; margin-left: 0; margin-right: 0; margin-bottom: 0; flex-shrink: 1; flex-wrap: wrap; height: auto;" />
+                </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="Equipment" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; width: 80%; justify-content: flex-start;">
-                <ui:Label text="Equipment" display-tooltip-when-elided="true" name="Header" class="header" />
-                <ui:VisualElement name="EquipmentSlotContainer" class="slotsContainer" style="align-items: center; justify-content: center; flex-direction: row; margin-top: 0; margin-left: 0; margin-right: 0; margin-bottom: 0; flex-shrink: 1; flex-wrap: wrap;" />
-            </ui:VisualElement>
-            <ui:VisualElement name="Inventory" style="flex-grow: 3; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; width: 190%;">
+            <ui:VisualElement name="Inventory" style="flex-grow: 3; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; width: 140%;">
                 <ui:Label text="Inventory" display-tooltip-when-elided="true" name="Header" class="header" />
                 <ui:VisualElement name="InventorySlotContainer" class="slotsContainer" style="align-items: center; justify-content: center; flex-direction: row; margin-top: 0; margin-left: 0; margin-right: 0; margin-bottom: 0; flex-shrink: 1; flex-wrap: wrap;" />
             </ui:VisualElement>

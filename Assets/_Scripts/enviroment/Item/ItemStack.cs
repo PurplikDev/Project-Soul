@@ -4,8 +4,7 @@ using UnityEngine;
 namespace roguelike.enviroment.item {
     [Serializable]
     public class ItemStack {
-
-        [SerializeField] private Item _item;
+        private Item _item;
         [SerializeField] private int _itemAmount;
 
         public ItemStack(Item item, int itemAmount) {
