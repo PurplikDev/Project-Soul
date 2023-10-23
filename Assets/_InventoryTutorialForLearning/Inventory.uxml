@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <Style src="project://database/Assets/_InventoryTutorialForLearning/Inventory.uss?fileID=7433441132597879392&amp;guid=c062f3ea075ee6e46a2ea01d9409ffb0&amp;type=3#Inventory" />
+    <Style src="project://database/Assets/_InventoryTutorialForLearning/Inventory.uss?fileID=7433441132597879392&amp;guid=e7f2dd81ef4021b4484a8e0fc76fe031&amp;type=3#Inventory" />
     <ui:VisualElement name="Container" class="container">
         <ui:VisualElement name="Inventory" class="inventory" style="flex-direction: row; width: 75%; max-width: 75%; flex-wrap: nowrap; flex-grow: 0; justify-content: center; align-items: stretch;">
             <ui:VisualElement name="CharacterSlots" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; width: 100%; justify-content: flex-start;">
@@ -17,7 +17,6 @@
                 <ui:VisualElement name="InventorySlotContainer" class="slotsContainer" style="align-items: center; justify-content: center; flex-direction: row; margin-top: 0; margin-left: 0; margin-right: 0; margin-bottom: 0; flex-shrink: 1; flex-wrap: wrap;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ItemSlot name="MouseSlot" style="visibility: hidden; position: absolute;" />
-        <roguelike.enviroment.item.renderer.ItemSlot name="MouseSlot" style="position: absolute; visibility: hidden;" />
+        <InventorySlot name="GhostIcon" style="opacity: 1; visibility: hidden; position: absolute;" />
     </ui:VisualElement>
 </ui:UXML>
