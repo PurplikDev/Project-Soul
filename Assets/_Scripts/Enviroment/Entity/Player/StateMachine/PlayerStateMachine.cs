@@ -1,6 +1,4 @@
 using roguelike.system.input;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace roguelike.enviroment.entity.player.StateMachine {
@@ -8,8 +6,7 @@ namespace roguelike.enviroment.entity.player.StateMachine {
         [SerializeField] private InputReader _input;
         private CharacterController _charController;
 
-        [SerializeField] private float _playerSpeed;
-        [SerializeField] private float _turnSmothTime = 0.125f;
+        private Player _playerEntity;
 
         private Vector3 _moveDir;
 
@@ -35,8 +32,8 @@ namespace roguelike.enviroment.entity.player.StateMachine {
                 public InputReader Input { get { return _input; } }
                 public CharacterController CharController { get { return _charController; } }
                 public Vector3 MoveDir { get { return _moveDir; } }
-                public float PlayerSpeed { get { return _playerSpeed; } }
-                public float TurnSmothTime { get { return _turnSmothTime; } }
+                public float PlayerSpeed { get { return 6; } }
+                public float TurnSmothTime { get { return 0.0625f; } }
                 public Camera MainCamera { get { return _mainCamera; } }
                 public LayerMask GroundMask { get { return _groundMask; } }
                 public bool IsAiming { get { return _isAiming; } }
@@ -47,6 +44,8 @@ namespace roguelike.enviroment.entity.player.StateMachine {
 
         private void Awake() {
             _charController = GetComponent<CharacterController>();
+            _playerEntity = GetComponent<Player>();
+
             _input.MoveEvent += HandleMove;
             _input.AimEvent += InitiateAim;
             _input.AimCancelEvent += CancelAim;
@@ -55,10 +54,6 @@ namespace roguelike.enviroment.entity.player.StateMachine {
             _currentState = _states.Idle();
             _currentState.EnterState();
             _mainCamera = Camera.main;
-        }
-
-        private void Start() {
-
         }
 
         private void Update() {

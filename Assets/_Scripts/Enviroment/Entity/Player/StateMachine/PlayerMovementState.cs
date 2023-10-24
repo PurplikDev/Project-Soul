@@ -19,11 +19,11 @@ namespace roguelike.enviroment.entity.player.StateMachine {
         }
 
         public override void InitializeSubState() {
-	    if(Ctx.IsAiming) {
-		SetSubState(Factory.Aim());
-	    } else {
+	        if(Ctx.IsAiming) {
+		        SetSubState(Factory.Aim());
+	        } else {
                 SetSubState(Factory.Walk());
-	    }
+	        }
         }
 
         public override void CheckSwitchStates() {

@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEditor.Build;
+using UnityEngine;
 
 namespace roguelike.enviroment.entity.player.StateMachine {
     public abstract class PlayerBaseState {
