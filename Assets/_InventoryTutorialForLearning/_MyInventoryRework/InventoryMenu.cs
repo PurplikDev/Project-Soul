@@ -1,12 +1,10 @@
-using UnityEngine;
-using UnityEngine.UIElements;
+using roguelike.core.item;
+using roguelike.enviroment.entity.player;
 
-public class InventoryMenu : MonoBehaviour
-{
-    private VisualElement _root;
-    [SerializeField] private VisualElement _uiDocument;
-
-    private void Awake() {
-
+namespace roguelike.core.item.ui {
+    public class InventoryMenu {
+        public InventoryMenu(Player player, Inventory inventory) {
+            
+        }
     }
 }

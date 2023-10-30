@@ -1,21 +1,26 @@
+using roguelike.system.singleton;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace roguelike.core.item {
-    public class ItemManager : MonoBehaviour {
-        public static ItemManager Instance;
+    public class ItemManager : PersistentSingleton<ItemManager> {
 
         private static Dictionary<string, Item> _itemDatabase = new Dictionary<string, Item>();
 
         public static List<Sprite> ItemIcons;
         public static Sprite MissingTexture;
 
-        private void Awake() {
+        protected override void Awake() {
+            base.Awake();
             MissingTexture = Resources.Load<Sprite>("sprites/missing_texture");
             ItemIcons = Resources.LoadAll<Sprite>("sprites/items").ToList();
 
             RegisterItems();
+
+            foreach(var item in _itemDatabase) {
+                Debug.Log(item.Value.Name);
+            }
         }
 
         private void Register(string id) {
@@ -34,17 +39,17 @@ namespace roguelike.core.item {
 
         public static Item GetItemByID(string id) {
             var item = _itemDatabase[id];
-            if(item == null) {
-                item = _itemDatabase["air"];
-            }
             return item;
         }
 
 
 
         private void RegisterItems() {
-            Register("air");
+            Register("coins", 32);
             Register("cum", 32);
+            Register("cum2");
+            Register("cum3");
+            Register("cum4", 16);
         }
     }
 }

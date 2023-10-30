@@ -12,6 +12,10 @@ namespace roguelike.enviroment.entity.StatSystem {
         public float Value { get { return ApplyModifiers(); } }
         public float BaseValue { get { return _baseValue; } } // no idea why i would need this, but still, just in case
 
+        public Stat(int baseValue) {
+            _baseValue = baseValue;
+        }
+
         public float ApplyModifiers() {
 
             float returnValue = _baseValue;

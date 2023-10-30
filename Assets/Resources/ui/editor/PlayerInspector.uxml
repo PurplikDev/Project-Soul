@@ -1,17 +1,18 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
     <ui:Label tabindex="-1" text="Player" display-tooltip-when-elided="true" style="font-size: 20px; -unity-font-style: bold; -unity-text-align: upper-left; color: rgb(255, 255, 255); background-color: rgba(0, 0, 0, 0.39); border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px; padding-left: 10px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; flex-grow: 0;" />
-    <ui:VisualElement name="StatDisplay" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column;">
+    <ui:VisualElement name="StatDisplay" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; height: 100%;">
         <ui:VisualElement name="Stats" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: auto;">
             <ui:Label tabindex="-1" text="Stats" display-tooltip-when-elided="true" style="font-size: 15px; -unity-font-style: bold; -unity-text-align: upper-left; color: rgb(255, 255, 255); background-color: rgba(0, 0, 0, 0.39); border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px; padding-left: 10px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; flex-grow: 0;" />
             <uie:PropertyField binding-path="Health" />
-            <uie:PropertyField binding-path="Health" />
-            <uie:PropertyField binding-path="Health" />
+            <uie:PropertyField binding-path="Speed" />
+            <uie:PropertyField binding-path="Defence" />
         </ui:VisualElement>
         <ui:VisualElement name="ClassStats" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: auto;">
             <ui:Label tabindex="-1" text="Class" display-tooltip-when-elided="true" style="font-size: 15px; -unity-font-style: bold; -unity-text-align: upper-left; color: rgb(255, 255, 255); background-color: rgba(0, 0, 0, 0.39); border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px; padding-left: 10px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; flex-grow: 0;" />
-            <uie:PropertyField binding-path="Health" />
-            <uie:PropertyField binding-path="Health" />
-            <uie:PropertyField binding-path="Health" />
+            <uie:PropertyField binding-path="Templar" />
+            <uie:PropertyField binding-path="Rogue" />
+            <uie:PropertyField binding-path="Thaumaturge" />
         </ui:VisualElement>
     </ui:VisualElement>
+    <uie:ObjectField label="Object Field" type="roguelike.system.input.InputReader, Assembly-CSharp" binding-path="_input" />
 </ui:UXML>

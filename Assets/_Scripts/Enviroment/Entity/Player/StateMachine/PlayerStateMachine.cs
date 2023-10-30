@@ -2,8 +2,9 @@ using roguelike.system.input;
 using UnityEngine;
 
 namespace roguelike.enviroment.entity.player.StateMachine {
-    public class PlayerStateMachine : MonoBehaviour {
-        [SerializeField] private InputReader _input;
+    public class PlayerStateMachine {
+        private InputReader _input;
+
         private CharacterController _charController;
 
         private Player _playerEntity;
@@ -29,22 +30,22 @@ namespace roguelike.enviroment.entity.player.StateMachine {
 
             // Variables
                 public PlayerBaseState CurrentState { get { return _currentState; } set { _currentState = value; } }
-                public InputReader Input { get { return _input; } }
                 public CharacterController CharController { get { return _charController; } }
                 public Vector3 MoveDir { get { return _moveDir; } }
-                public float PlayerSpeed { get { return 6; } }
+                public float PlayerSpeed { get { return _playerEntity.Speed.Value; } }
                 public float TurnSmothTime { get { return 0.0625f; } }
                 public Camera MainCamera { get { return _mainCamera; } }
                 public LayerMask GroundMask { get { return _groundMask; } }
                 public bool IsAiming { get { return _isAiming; } }
 
-
+                public Transform transform { get { return _playerEntity.transform; } }
 
         // Monobehaviour methods
 
-        private void Awake() {
-            _charController = GetComponent<CharacterController>();
-            _playerEntity = GetComponent<Player>();
+        public PlayerStateMachine(Player player, InputReader input) {
+            _playerEntity = player;
+            _input = input;
+            _charController = player.GetComponent<CharacterController>();
 
             _input.MoveEvent += HandleMove;
             _input.AimEvent += InitiateAim;
@@ -56,7 +57,7 @@ namespace roguelike.enviroment.entity.player.StateMachine {
             _mainCamera = Camera.main;
         }
 
-        private void Update() {
+        public void UpdateStateMachine() {
             _currentState.UpdateStates();
         }
 

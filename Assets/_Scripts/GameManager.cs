@@ -1,64 +1,29 @@
 using roguelike.system.input;
+using roguelike.system.singleton;
 using System;
 using UnityEngine;
 
-namespace roguelike.system.gamemanager
-{
-    public class GameManager : MonoBehaviour
-    {
-        public static GameManager Instance;
+namespace roguelike.system.gamemanager {
+    public class GameManager : Singleton<GameManager> {
+        private static bool _isSingleplayer = true; // THIS VALUE IS  NOT AFFECTED RN, I JUST HAVE IT HERE FOR THE FUTURE:TM:
+        public static bool IsSinglePlayer { get { return _isSingleplayer; } }
 
-        [SerializeField] private InputReader _input;
-        [SerializeField] private GameObject pauseMenu;
-        [SerializeField] private GameObject inventoryMenu;
+        public Action StartGame;
 
-        private void Awake() {
-            TranslationManager.getTranslationFromFile();
+        private void Start() {
+            StartGame += spawnPlayer;
+            StartGame.Invoke();
         }
 
-        private void Start()
-        {
-            // Gameplay UI Events
-            _input.PauseEvent += HandlePause;
-            _input.InventoryEvent += HandleInventory;
-	        _input.AdjustCameraEvent += UnlockCamera;
-	        _input.AdjustCameraCancelEvent += LockCamera;
+        private void spawnPlayer() {
 
-            // UI Events
-            _input.CloseUIEvent += CloseAllUI;
-            _input.CloseInvetoryEvent += CloseInventory;
         }
 
-        private void HandlePause()
-        {
-            pauseMenu.SetActive(true);
+        public enum GameState {
+            LOADING,
+            MAINMENU,
+            TOWN,
+            DUNGEON
         }
-
-        // TODO: Correct implementation, current one is only for testing
-        private void HandleInventory()
-        {
-            inventoryMenu.SetActive(true);
-        }
-
-        // TODO: Correct implementation, current one is only for testing
-        private void CloseAllUI()
-        {
-            pauseMenu.SetActive(false);
-            inventoryMenu.SetActive(false);
-        }
-
-        // TODO: Correct implementation, current one is only for testing
-        private void CloseInventory()
-        {
-            inventoryMenu.SetActive(false);
-        }
-
-	private void UnlockCamera() {
-	    Debug.Log("Camera Unlocked");
-    	}
-
-	private void LockCamera() {
-	    Debug.Log("Camera Locked");
-    	}
     }
 }
