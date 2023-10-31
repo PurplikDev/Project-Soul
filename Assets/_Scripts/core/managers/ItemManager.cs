@@ -17,10 +17,6 @@ namespace roguelike.core.item {
             ItemIcons = Resources.LoadAll<Sprite>("sprites/items").ToList();
 
             RegisterItems();
-
-            foreach(var item in _itemDatabase) {
-                Debug.Log(item.Value.Name);
-            }
         }
 
         private void Register(string id) {

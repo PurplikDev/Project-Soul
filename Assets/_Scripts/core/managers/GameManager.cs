@@ -3,7 +3,7 @@ using roguelike.system.singleton;
 using System;
 using UnityEngine;
 
-namespace roguelike.system.gamemanager {
+namespace roguelike.system.manager {
     public class GameManager : Singleton<GameManager> {
         private static bool _isSingleplayer = true; // THIS VALUE IS  NOT AFFECTED RN, I JUST HAVE IT HERE FOR THE FUTURE:TM:
         public static bool IsSinglePlayer { get { return _isSingleplayer; } }

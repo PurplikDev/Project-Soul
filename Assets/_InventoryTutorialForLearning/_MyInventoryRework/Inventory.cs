@@ -11,6 +11,9 @@ namespace roguelike.core.item {
 
         public Inventory(Player player) {
             _player = player;
+            for(int i = 0; i < 20; i++) {
+                Items.Add(new ItemStack(ItemManager.GetItemByID("cum2")));
+            }
         }
     }
 }

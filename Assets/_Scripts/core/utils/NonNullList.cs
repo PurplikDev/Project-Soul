@@ -1,25 +1,57 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace roguelike.core.utils {
-    [Serializable]
-    public class NonNullList<T> {
 
-        public List<T> Container;
-        private T _defaultValue;
+    // WHAT?!
+    // i'll add this later, hopefully
 
-        public NonNullList(int size, T defaultValue) { 
-            _defaultValue = defaultValue;
-            Container = new List<T>(size);
+    public class NonNullList<T> : IList<T> {
+        public T this[int index] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-            for (int i = 0; i < size; i++) {
-                Container.Insert(i, _defaultValue);
-            }
+        public int Count => throw new NotImplementedException();
+
+        public bool IsReadOnly => throw new NotImplementedException();
+
+        public void Add(T item) {
+            throw new NotImplementedException();
+        }
+
+        public void Clear() {
+            throw new NotImplementedException();
+        }
+
+        public bool Contains(T item) {
+            throw new NotImplementedException();
+        }
+
+        public void CopyTo(T[] array, int arrayIndex) {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerator<T> GetEnumerator() {
+            throw new NotImplementedException();
+        }
+
+        public int IndexOf(T item) {
+            throw new NotImplementedException();
+        }
+
+        public void Insert(int index, T item) {
+            throw new NotImplementedException();
+        }
+
+        public bool Remove(T item) {
+            throw new NotImplementedException();
         }
 
         public void RemoveAt(int index) {
-            Container.Insert(index, _defaultValue);
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() {
+            throw new NotImplementedException();
         }
     }
 }

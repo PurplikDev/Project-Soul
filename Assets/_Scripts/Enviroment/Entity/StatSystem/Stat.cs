@@ -6,10 +6,11 @@ namespace roguelike.enviroment.entity.StatSystem {
     [Serializable]
     public class Stat {
         [SerializeField] private float _baseValue;
+        private float _value;
         
         protected List<StatModifier> statModifiers;
 
-        public float Value { get { return ApplyModifiers(); } }
+        public float Value { get { return _baseValue; } } //ApplyModifiers(); } }
         public float BaseValue { get { return _baseValue; } } // no idea why i would need this, but still, just in case
 
         public Stat(int baseValue) {

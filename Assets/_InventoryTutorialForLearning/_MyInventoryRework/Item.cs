@@ -36,10 +36,11 @@ namespace roguelike.core.item {
 
         public int IncreaseStack(int amount) {
             int overflow = Mathematicus.OverflowFromAddition(_stackSize, amount, _stackItem.MaxStackSize);
-            _stackSize += (amount - overflow);
+            _stackSize += amount; //(amount - overflow);
             return amount - overflow;
         }
 
         public Item Item { get { return _stackItem; } }
+        public int StackSize { get { return _stackSize; } }
     }
 }

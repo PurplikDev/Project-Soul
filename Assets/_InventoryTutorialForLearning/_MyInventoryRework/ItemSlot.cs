@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using roguelike.core.item;
-using UnityEngine;
+using roguelike.rendering.ui;
 using UnityEngine.Scripting;
 using UnityEngine.UIElements;
 
@@ -17,10 +15,11 @@ public class ItemSlot : VisualElement {
     public ItemSlot() {
         Icon = new Image();
         StackSize = new Label();
+        Icon.Add(StackSize);
         Add(Icon);
-        Add(StackSize);
 
         Icon.AddToClassList("slotIcon");
+        StackSize.AddToClassList("stackSizeDisplay");
         AddToClassList("slotContainer");
 
         RegisterCallback<PointerDownEvent>(OnPointerDown);
@@ -29,11 +28,12 @@ public class ItemSlot : VisualElement {
     }
 
     private void OnPointerDown(PointerDownEvent evt) {
-
+        InventoryRenderer.ClickSlot(evt.position, this);
     }
 
     private void UpdateSlot() {
         Icon.image = SlotStack.Item.Icon.texture;
+        StackSize.text = SlotStack.StackSize.ToString();
     }
     
     #region UXML
