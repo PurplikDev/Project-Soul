@@ -200,7 +200,6 @@ GameObject:
   - component: {fileID: 2468093002932676958}
   - component: {fileID: 2266543363147973702}
   - component: {fileID: 1152108761858538947}
-  - component: {fileID: 6013025951036619003}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -287,9 +286,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health:
-    _baseValue: 0
+    _baseValue: 100
   Speed:
-    _baseValue: 0
+    _baseValue: 10
   Defence:
     _baseValue: 0
   Templar:
@@ -298,19 +297,5 @@ MonoBehaviour:
     _baseValue: 0
   Thaumaturge:
     _baseValue: 0
---- !u!114 &6013025951036619003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8111650899813401520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8184f22ff58c431aa37cc26ce793a3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _input: {fileID: 11400000, guid: 7f2b55f536c7c6045a406709e8273791, type: 2}
-  _groundMask:
-    serializedVersion: 2
-    m_Bits: 64
+  inputReader: {fileID: 0}
+  PlayerStateMachine: {fileID: 0}
