@@ -30,15 +30,16 @@
     width: 128px;
     height: 128px;
     margin: 5px;
-    border-left-color: rgb(48, 48, 48);
-    border-right-color: rgb(48, 48, 48);
-    border-top-color: rgb(48, 48, 48);
-    border-bottom-color: rgb(48, 48, 48);
-    background-color: rgba(9, 19, 21, 0.5);
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(157, 157, 157);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(156, 156, 156);
+    background-color: rgba(0, 0, 0, 0.25);
+    border-left-width: 2.5px;
+    border-right-width: 2.5px;
+    border-top-width: 2.5px;
+    border-bottom-width: 2.5px;
+    visibility: visible;
 }
 
 .slotIcon {
@@ -48,6 +49,10 @@
     width: 100%;
     height: 100%;
     justify-content: flex-end;
+    padding-left: 7.5px;
+    padding-right: 7.5px;
+    padding-top: 7.5px;
+    padding-bottom: 7.5px;
 }
 
 .stackSizeDisplay {

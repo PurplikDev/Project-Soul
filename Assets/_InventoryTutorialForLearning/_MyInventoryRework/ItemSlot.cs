@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 public class ItemSlot : VisualElement {
     public Image Icon;
-    public Label StackSize;
+    private Label _stackSize;
 
     public ItemStack SlotStack;
 
@@ -14,26 +14,24 @@ public class ItemSlot : VisualElement {
 
     public ItemSlot() {
         Icon = new Image();
-        StackSize = new Label();
-        Icon.Add(StackSize);
+        _stackSize = new Label();
+        Icon.Add(_stackSize);
         Add(Icon);
 
         Icon.AddToClassList("slotIcon");
-        StackSize.AddToClassList("stackSizeDisplay");
+        _stackSize.AddToClassList("stackSizeDisplay");
         AddToClassList("slotContainer");
-
-        RegisterCallback<PointerDownEvent>(OnPointerDown);
 
         UpdateSlotEvent += UpdateSlot;
     }
 
-    private void OnPointerDown(PointerDownEvent evt) {
+    public void OnPointerDown(PointerDownEvent evt) {
         InventoryRenderer.ClickSlot(evt.position, this);
     }
 
     private void UpdateSlot() {
         Icon.image = SlotStack.Item.Icon.texture;
-        StackSize.text = SlotStack.StackSize.ToString();
+        _stackSize.text = SlotStack.StackSize > 1 ? SlotStack.StackSize.ToString() : "";
     }
     
     #region UXML

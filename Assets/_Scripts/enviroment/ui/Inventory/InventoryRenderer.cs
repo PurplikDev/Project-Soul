@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using roguelike.core.item;
+using roguelike.core.utils;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -26,12 +27,14 @@ namespace roguelike.rendering.ui {
 
             _mouseSlot = _root.Q<ItemSlot>("MouseSlot");
             _mouseSlot.RegisterCallback<PointerMoveEvent>(OnPointerMove);
+            _mouseSlot.SlotStack = ItemStack.EMPTY;
         }
 
         private void createSlots(Inventory inventory) {
             foreach(ItemStack stack in inventory.Items) {
                 ItemSlot itemSlot = new ItemSlot();
                 itemSlot.SlotStack = stack;
+                itemSlot.RegisterCallback<PointerDownEvent>(itemSlot.OnPointerDown);
                 inventorySlots.Add(itemSlot);
                 _inventoryAnchor.Add(itemSlot);
             }
@@ -39,21 +42,51 @@ namespace roguelike.rendering.ui {
 
         public static void ClickSlot(Vector2 position, ItemSlot originalSlot) {
 
-            var clickedSlot = originalSlot;
-
-            if(originalSlot.SlotStack.Item == ItemManager.GetItemByID("cum3")) {
-                originalSlot.SlotStack.IncreaseStack(1);
-                _mouseSlot.style.visibility = Visibility.Hidden;
+            if(originalSlot.SlotStack.IsEmpty()) {
+                Debug.Log("Clicked slot is empty!");
             } else {
-                originalSlot.SlotStack = new ItemStack(ItemManager.GetItemByID("cum3"));
-                _mouseSlot.SlotStack = clickedSlot.SlotStack;
-                _mouseSlot.style.visibility = Visibility.Visible;
+                Debug.Log("Clicked slot contains " + originalSlot.SlotStack.Item.Name);
             }
 
-            _mouseSlot.style.top = position.y - _mouseSlot.layout.height / 2;
-            _mouseSlot.style.left = position.x - _mouseSlot.layout.width / 2;
+
+            // this has issues, need to fix the math
+            if(originalSlot.SlotStack.Item != _mouseSlot.SlotStack.Item) {
+                SwapSlots(originalSlot);
+            } else {
+                FillSlot(originalSlot);
+            }
+
+
 
             originalSlot.UpdateSlotEvent.Invoke();
+
+            if(_mouseSlot.SlotStack.IsEmpty()) {
+                _mouseSlot.style.visibility = Visibility.Hidden;
+            } else {
+                _mouseSlot.style.visibility = Visibility.Visible;
+                _mouseSlot.UpdateSlotEvent.Invoke();
+            }
+        }
+
+        private static void SwapSlots(ItemSlot clickedSlot) {
+            var tempStack = _mouseSlot.SlotStack;
+            _mouseSlot.SlotStack = clickedSlot.SlotStack;
+            clickedSlot.SlotStack = tempStack;
+        }
+
+        private static void FillSlot(ItemSlot clickedSlot) {
+            int value = Mathematicus.OverflowFromAddition(
+                clickedSlot.SlotStack.StackSize,
+                _mouseSlot.SlotStack.StackSize,
+                clickedSlot.SlotStack.Item.MaxStackSize);
+            if(value == 0) {
+                clickedSlot.SlotStack.IncreaseStack(_mouseSlot.SlotStack.StackSize);
+                _mouseSlot.SlotStack = ItemStack.EMPTY;
+            } else {
+                clickedSlot.SlotStack.IncreaseStack(_mouseSlot.SlotStack.StackSize);
+                int value2 = _mouseSlot.SlotStack.StackSize - value;
+                _mouseSlot.SlotStack.IncreaseStack(-1 * value);
+            }
         }
 
         private void OnPointerMove(PointerMoveEvent evt) {

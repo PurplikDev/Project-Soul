@@ -27,7 +27,7 @@ namespace roguelike.core.item {
 
         public ItemStack(Item item, int amount) {
             _stackItem = item;
-            _stackSize = amount;
+            _stackSize = amount > _stackItem.MaxStackSize ? _stackItem.MaxStackSize : amount;
         }
 
         public ItemStack(Item item) : this(item, 1) {
@@ -42,5 +42,11 @@ namespace roguelike.core.item {
 
         public Item Item { get { return _stackItem; } }
         public int StackSize { get { return _stackSize; } }
+
+        public bool IsEmpty() {
+            return _stackItem == ItemManager.GetItemByID("air");
+        }
+
+        public static readonly ItemStack EMPTY = new ItemStack(ItemManager.GetItemByID("air"));
     }
 }

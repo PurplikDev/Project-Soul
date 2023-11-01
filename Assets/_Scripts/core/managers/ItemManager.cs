@@ -41,11 +41,12 @@ namespace roguelike.core.item {
 
 
         private void RegisterItems() {
+            Register("air");
             Register("coins", 32);
-            Register("cum", 32);
-            Register("cum2");
-            Register("cum3");
-            Register("cum4", 16);
+            Register("test", 32);
+            Register("test2");
+            Register("test3");
+            Register("test4", 6);
         }
     }
 }

@@ -17,7 +17,6 @@
                 <ui:VisualElement name="InventorySlotContainer" class="slotsContainer" style="align-items: center; justify-content: center; flex-direction: row; margin-top: 0; margin-left: 0; margin-right: 0; margin-bottom: 0; flex-shrink: 1; flex-wrap: wrap;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <InventorySlot name="GhostIcon" style="opacity: 1; visibility: hidden; position: absolute;" />
-        <ItemSlot name="MouseSlot" style="position: absolute; visibility: visible;" />
+        <ItemSlot name="MouseSlot" style="position: absolute; visibility: hidden;" />
     </ui:VisualElement>
 </ui:UXML>
