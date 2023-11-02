@@ -5,22 +5,25 @@ using UnityEngine.Scripting;
 using UnityEngine.UIElements;
 
 public class ItemSlot : VisualElement {
-    public Image Icon;
+    private Image _icon;
     private Label _stackSize;
-
-    public ItemStack SlotStack;
+    private ItemStack _slotStack;
 
     public Action UpdateSlotEvent;
 
-    public ItemSlot() {
-        Icon = new Image();
-        _stackSize = new Label();
-        Icon.Add(_stackSize);
-        Add(Icon);
+    public ItemStack SlotStack { get { return _slotStack; } }
 
-        Icon.AddToClassList("slotIcon");
+    public ItemSlot() {
+        _icon = new Image();
+        _stackSize = new Label();
+        _icon.Add(_stackSize);
+        Add(_icon);
+
+        _icon.AddToClassList("slotIcon");
         _stackSize.AddToClassList("stackSizeDisplay");
         AddToClassList("slotContainer");
+
+        RegisterCallback<PointerDownEvent>(OnPointerDown);
 
         UpdateSlotEvent += UpdateSlot;
     }
@@ -30,8 +33,13 @@ public class ItemSlot : VisualElement {
     }
 
     private void UpdateSlot() {
-        Icon.image = SlotStack.Item.Icon.texture;
-        _stackSize.text = SlotStack.StackSize > 1 ? SlotStack.StackSize.ToString() : "";
+        _icon.image = _slotStack.Item.Icon.texture;
+        _stackSize.text = _slotStack.StackSize > 1 ? _slotStack.StackSize.ToString() : "";
+    }
+
+    public void SetStack(ItemStack stack) {
+        _slotStack = stack;
+        UpdateSlotEvent.Invoke();
     }
     
     #region UXML

@@ -34,10 +34,28 @@ namespace roguelike.core.item {
             // hi again :3
         }
 
-        public int IncreaseStack(int amount) {
-            int overflow = Mathematicus.OverflowFromAddition(_stackSize, amount, _stackItem.MaxStackSize);
-            _stackSize += amount; //(amount - overflow);
-            return amount - overflow;
+        public int IncreaseStackSize(int amount) {
+            int combined = _stackSize + amount;
+            if(combined > _stackItem.MaxStackSize) {
+                int overflow = combined - _stackItem.MaxStackSize;
+                _stackSize = combined - overflow;
+                return overflow;
+            } else {
+                _stackSize = combined;
+                return 0;
+            }
+        }
+
+        public void SetStackSize(int amount) {
+            if(amount <= 0) {
+                _stackItem = ItemManager.GetItemByID("air");
+            }
+            if(amount > _stackItem.MaxStackSize) {
+                _stackSize = _stackItem.MaxStackSize;
+            } else {
+                _stackSize = amount;
+            }
+
         }
 
         public Item Item { get { return _stackItem; } }
