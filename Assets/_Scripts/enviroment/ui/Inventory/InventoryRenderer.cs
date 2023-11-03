@@ -31,16 +31,21 @@ namespace roguelike.rendering.ui {
             _root.RegisterCallback<PointerMoveEvent>(OnPointerMove);
         }
 
+
+
         private void createSlots(Inventory inventory) {
-            foreach(ItemStack stack in inventory.Items) {
+            for(int i = 0; i < Inventory.InventorySize; i++) {
                 ItemSlot itemSlot = new ItemSlot();
-                itemSlot.SetStack(stack);
+                itemSlot.SlotIndex = i;
+                itemSlot.SetStack(inventory.Items[i]);
                 itemSlot.RegisterCallback<PointerDownEvent>(itemSlot.OnPointerDown);
                 inventorySlots.Add(itemSlot);
                 _inventoryAnchor.Add(itemSlot);
                 itemSlot.UpdateSlotEvent.Invoke();
             }
         }
+
+
 
         public static void ClickSlot(Vector2 position, ItemSlot originalSlot) {
 
@@ -70,6 +75,14 @@ namespace roguelike.rendering.ui {
             // todo: LINK VISUAL SLOTS TO ACTUAL ITEM STACKS IN THE INVENTORY
             //       AND MOVE ITEMS AROUND CORRECTLY :|
 
+            UpdateInventory(clickedSlot);
+
+            foreach(ItemStack stack in _inventory.Items) {
+                Debug.Log(stack.Item.Name);
+            }
+            Debug.Log("=======================");
+
+
             if(_mouseSlot.SlotStack.IsEmpty()) {
                 _mouseSlot.style.visibility = Visibility.Hidden;
                 _mouseSlot.style.top = 0;
@@ -96,6 +109,10 @@ namespace roguelike.rendering.ui {
             }
             _mouseSlot.style.top = evt.position.y - _mouseSlot.layout.height / 2;
             _mouseSlot.style.left = evt.position.x - _mouseSlot.layout.width / 2;
+        }
+
+        private static void UpdateInventory(ItemSlot clickedSlot) {
+            _inventory.Items[clickedSlot.SlotIndex] = clickedSlot.SlotStack;
         }
     }
 }

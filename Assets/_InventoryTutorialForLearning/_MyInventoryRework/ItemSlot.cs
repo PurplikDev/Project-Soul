@@ -8,14 +8,16 @@ public class ItemSlot : VisualElement {
     private Image _icon;
     private Label _stackSize;
     private ItemStack _slotStack;
+    public int SlotIndex;
 
     public Action UpdateSlotEvent;
 
     public ItemStack SlotStack { get { return _slotStack; } }
 
     public ItemSlot() {
-        _icon = new Image();
         _stackSize = new Label();
+        _icon = new Image();
+
         _icon.Add(_stackSize);
         Add(_icon);
 
