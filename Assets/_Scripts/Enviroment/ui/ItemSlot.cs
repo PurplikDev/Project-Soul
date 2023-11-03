@@ -39,9 +39,10 @@ public class ItemSlot : VisualElement {
         _stackSize.text = _slotStack.StackSize > 1 ? _slotStack.StackSize.ToString() : "";
     }
 
-    public void SetStack(ItemStack stack) {
+    public virtual bool SetStack(ItemStack stack) {
         _slotStack = stack;
         UpdateSlotEvent.Invoke();
+        return true;
     }
     
     #region UXML

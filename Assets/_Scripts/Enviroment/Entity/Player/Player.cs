@@ -17,7 +17,6 @@ namespace roguelike.enviroment.entity.player {
         public UIDocument playerInventoryUI;
 
         private void Awake() {
-
             this.InputReader = Resources.LoadAll<InputReader>("data/player").First();
             PlayerInventory = new Inventory(this);
             PlayerStateMachine = new PlayerStateMachine(this, InputReader);

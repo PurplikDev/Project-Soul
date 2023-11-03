@@ -79,6 +79,7 @@ namespace roguelike.system.input {
 
 
         // Gameplay UI Events
+
         public event Action InventoryEvent;
         public event Action PauseEvent;
 

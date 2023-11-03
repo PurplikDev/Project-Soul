@@ -12,7 +12,7 @@ namespace roguelike.rendering.ui {
 
         public Action UpdateUIEvent;
 
-        private VisualElement _root, _inventoryAnchor;
+        private VisualElement _root, _inventoryRoot, _equipmentRoot, _trinketRoot;
         private static ItemSlot _mouseSlot;
 
         private static Inventory _inventory;
@@ -21,9 +21,18 @@ namespace roguelike.rendering.ui {
             _inventory = playerInventory;
 
             _root = inventoryUI.rootVisualElement;
-            _inventoryAnchor = _root.Q<VisualElement>("InventorySlotContainer");
+            _inventoryRoot = _root.Q<VisualElement>("InventorySlotContainer");
+            _equipmentRoot = _root.Q<VisualElement>("EquipmentSlotContainer");
+            _trinketRoot = _root.Q<VisualElement>("TrinketSlotContainer");
 
             createSlots(playerInventory);
+
+            foreach(EquipmentSlot equipmentSlot in _equipmentRoot.Children())
+            {
+                
+                inventorySlots.Add(equipmentSlot);
+                equipmentSlot.SlotStack = 
+            }
 
             _mouseSlot = _root.Q<ItemSlot>("MouseSlot");
             _mouseSlot.SetStack(ItemStack.EMPTY);
@@ -40,7 +49,7 @@ namespace roguelike.rendering.ui {
                 itemSlot.SetStack(inventory.Items[i]);
                 itemSlot.RegisterCallback<PointerDownEvent>(itemSlot.OnPointerDown);
                 inventorySlots.Add(itemSlot);
-                _inventoryAnchor.Add(itemSlot);
+                _inventoryRoot.Add(itemSlot);
                 itemSlot.UpdateSlotEvent.Invoke();
             }
         }
@@ -72,16 +81,7 @@ namespace roguelike.rendering.ui {
             originalSlot = clickedSlot;
             originalSlot.UpdateSlotEvent.Invoke();
 
-            // todo: LINK VISUAL SLOTS TO ACTUAL ITEM STACKS IN THE INVENTORY
-            //       AND MOVE ITEMS AROUND CORRECTLY :|
-
             UpdateInventory(clickedSlot);
-
-            foreach(ItemStack stack in _inventory.Items) {
-                Debug.Log(stack.Item.Name);
-            }
-            Debug.Log("=======================");
-
 
             if(_mouseSlot.SlotStack.IsEmpty()) {
                 _mouseSlot.style.visibility = Visibility.Hidden;
@@ -95,8 +95,9 @@ namespace roguelike.rendering.ui {
 
         private static void SwapSlots(ItemSlot clickedSlot) {
             var tempStack = _mouseSlot.SlotStack;
-            _mouseSlot.SetStack(clickedSlot.SlotStack);
-            clickedSlot.SetStack(tempStack);
+            if(_mouseSlot.SetStack(clickedSlot.SlotStack)) {
+                clickedSlot.SetStack(tempStack);
+            }
         }
 
         private static void FillSlot(ItemSlot clickedSlot) {
@@ -111,6 +112,9 @@ namespace roguelike.rendering.ui {
             _mouseSlot.style.left = evt.position.x - _mouseSlot.layout.width / 2;
         }
 
+        /// <summary>
+        /// Method that syncs item slot that was clicked with it's internal counterpart.
+        /// </summary>
         private static void UpdateInventory(ItemSlot clickedSlot) {
             _inventory.Items[clickedSlot.SlotIndex] = clickedSlot.SlotStack;
         }

@@ -27,6 +27,10 @@ namespace roguelike.core.item {
             _itemDatabase.Add(id, new Item(id, maxStackSize));
         }
 
+        private void RegisterEquipment(string id, EquipmentType type) {
+            _itemDatabase.Add(id, new EquipmentItem(id, type));
+        }
+
         public static Sprite GetSpriteByID(string id) {
             var sprite =  ItemIcons.FirstOrDefault(sprite => sprite.name.Equals(id));
             if(sprite == null) { sprite = MissingTexture; }
@@ -47,6 +51,8 @@ namespace roguelike.core.item {
             Register("test2");
             Register("test3");
             Register("test4", 6);
+
+            RegisterEquipment("test_equipment", EquipmentType.MAIN_HAND);
         }
     }
 }

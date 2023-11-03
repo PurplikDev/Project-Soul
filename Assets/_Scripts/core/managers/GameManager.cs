@@ -1,6 +1,7 @@
 using roguelike.system.input;
 using roguelike.system.singleton;
 using System;
+using System.Linq;
 using UnityEngine;
 
 namespace roguelike.system.manager {
@@ -9,14 +10,34 @@ namespace roguelike.system.manager {
         public static bool IsSinglePlayer { get { return _isSingleplayer; } }
 
         public Action StartGame;
+        public Action GlobalPauseEvent;
 
-        private void Start() {
-            StartGame += spawnPlayer;
+        private InputReader _inputReader;
+
+        protected override void Awake()
+        {
+            _inputReader = Resources.LoadAll<InputReader>("data/player").First();
+
+            StartGame += SpawnPlayer;
             StartGame.Invoke();
+
+            // if the game is in singleplayer it will actually pause stuff in game
+            // but when ur in multiplayer the game won't pause (for example entities will still move and stuff)
+            _inputReader.PauseEvent += HandlePause;
+
+            base.Awake();
         }
 
-        private void spawnPlayer() {
+        private void SpawnPlayer() {
+            
+        }
 
+        private void HandlePause()
+        {
+            if (IsSinglePlayer)
+            {
+                GlobalPauseEvent.Invoke();
+            }
         }
 
         public enum GameState {
