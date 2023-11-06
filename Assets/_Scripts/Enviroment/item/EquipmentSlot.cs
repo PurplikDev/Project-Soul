@@ -6,13 +6,12 @@ public class EquipmentSlot : ItemSlot
 {
     public EquipmentType SlotEquipmentType { get; set; }
 
-    public EquipmentSlot() : base() {
-        //style.backgroundImage = Resources.Load<Sprite>("sprites/missing_texture").texture;
-    }
+    public EquipmentSlot() : base() {} // todo: add background images for equipment slot to show what equipment type it is
 
     public override bool SetStack(ItemStack stack) {
         if (stack.IsEmpty() || stack.Item is EquipmentItem equipmentItem && equipmentItem.ItemEquipmentType == SlotEquipmentType)
         {
+            
             return base.SetStack(stack);
         }
         return false;

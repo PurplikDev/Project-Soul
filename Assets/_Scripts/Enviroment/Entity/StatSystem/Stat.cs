@@ -6,24 +6,28 @@ namespace roguelike.enviroment.entity.StatSystem {
     [Serializable]
     public class Stat {
         [SerializeField] private float _baseValue;
-        private float _value;
         
         protected List<StatModifier> statModifiers;
 
-        public float Value { get { return _baseValue; } } //ApplyModifiers(); } }
+        public float Value { get { return ApplyModifiers(); } }
         public float BaseValue { get { return _baseValue; } } // no idea why i would need this, but still, just in case
 
         public Stat(int baseValue) {
             _baseValue = baseValue;
         }
 
+        public void AddModifier(StatModifier modifier) { 
+            statModifiers.Add(modifier);
+            statModifiers.Sort(SortModifiers);
+        }
+
         public float ApplyModifiers() {
 
             float returnValue = _baseValue;
 
-            statModifiers.Sort(SortModifiers);
+            for(int i = 0; i < statModifiers.Count; i++) {
+                StatModifier modifier = statModifiers[i];
 
-            foreach (StatModifier modifier in statModifiers) {
                 switch (modifier.modifierType) {
 
                     case StatModifier.StatModifierType.FLAT: 
@@ -40,9 +44,9 @@ namespace roguelike.enviroment.entity.StatSystem {
         }
 
         private int SortModifiers(StatModifier firstModifier, StatModifier secondModifier) {
-            if ((int) firstModifier.statType < (int) secondModifier.statType) {
+            if ((int) firstModifier.modifierType < (int) secondModifier.modifierType) {
                 return -1;
-            } else if ((int)firstModifier.statType > (int)secondModifier.statType) {
+            } else if ((int)firstModifier.modifierType > (int)secondModifier.modifierType) {
                 return 1;
             }
             return 0;
@@ -50,7 +54,11 @@ namespace roguelike.enviroment.entity.StatSystem {
 
         public enum StatType {
             HEALTH,
-            SPEED
+            SPEED,
+            DEFENCE,
+            TEMPLAR,
+            ROGUE,
+            THAUMATURGE
         }
     }
 }

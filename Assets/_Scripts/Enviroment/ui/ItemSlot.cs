@@ -9,6 +9,7 @@ public class ItemSlot : VisualElement {
     protected Image _icon;
     protected Label _stackSize;
     protected ItemStack _slotStack;
+
     public int SlotIndex;
 
     public Action UpdateSlotEvent;
@@ -35,7 +36,7 @@ public class ItemSlot : VisualElement {
         InventoryRenderer.ClickSlot(evt.position, this);
     }
 
-    protected void UpdateSlot() {
+    protected virtual void UpdateSlot() {
         _icon.image = _slotStack.Item.Icon.texture;
         _stackSize.text = _slotStack.StackSize > 1 ? _slotStack.StackSize.ToString() : "";
     }

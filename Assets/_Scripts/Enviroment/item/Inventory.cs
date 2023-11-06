@@ -1,8 +1,6 @@
 using roguelike.enviroment.entity.player;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
-using System.Linq;
 
 namespace roguelike.core.item {
     public class Inventory {
@@ -19,7 +17,6 @@ namespace roguelike.core.item {
             _player = player;
 
             FillAllSlots();
-            Debug.Log(Items.Count);
         }
 
         private void FillAllSlots() {
@@ -30,7 +27,6 @@ namespace roguelike.core.item {
                     } else {
                         Items.Add(ItemStack.EMPTY);
                     }
-                    
                 } else {
                     if (i % 4 == 0) {
                         Items.Add(new ItemStack(ItemManager.GetItemByID("test2"), i));
@@ -50,6 +46,13 @@ namespace roguelike.core.item {
 
             for (int i = 0; i < TrinketSize; i++) {
                 Items.Add(ItemStack.EMPTY);
+            }
+        }
+
+        public void UpdateItemStack(ItemStack itemStack, int index) {
+            Items[index] = itemStack;
+            if(index >= InventorySize) {
+                // recalculate stats
             }
         }
     }

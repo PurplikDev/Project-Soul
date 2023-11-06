@@ -2,6 +2,10 @@ namespace roguelike.core.item
 {
     public class EquipmentItem : Item
     {
+        private int _rogueStat;
+        private int _thaumaturgeStat;
+        private int _templarStat;
+
         private EquipmentType _itemEquipmentType;
 
         public EquipmentType ItemEquipmentType { get { return _itemEquipmentType; } }

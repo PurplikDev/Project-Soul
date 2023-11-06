@@ -9,7 +9,7 @@
                         <EquipmentSlot slot-equipment-type="HELMET" />
                         <EquipmentSlot slot-equipment-type="CHESTPLATE" />
                         <EquipmentSlot slot-equipment-type="PANTS" />
-                        <EquipmentSlot slot-equipment-type="BOOTS" name="EquipmentSlot" />
+                        <EquipmentSlot slot-equipment-type="BOOTS" />
                         <EquipmentSlot slot-equipment-type="MAIN_HAND" />
                         <EquipmentSlot slot-equipment-type="OFF_HAND" />
                     </ui:VisualElement>

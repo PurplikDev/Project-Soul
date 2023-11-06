@@ -40,6 +40,7 @@
     border-top-width: 2.5px;
     border-bottom-width: 2.5px;
     visibility: visible;
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.38);
 }
 
 .slotIcon {
