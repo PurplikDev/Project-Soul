@@ -10,10 +10,10 @@ public class EquipmentSlot : ItemSlot
         //style.backgroundImage = Resources.Load<Sprite>("sprites/missing_texture").texture;
     }
 
-    public override bool SetStack(ItemStack stack) { 
-        if(stack.IsEmpty() || stack.Item is EquipmentItem)
+    public override bool SetStack(ItemStack stack) {
+        if (stack.IsEmpty() || stack.Item is EquipmentItem equipmentItem && equipmentItem.ItemEquipmentType == SlotEquipmentType)
         {
-            base.SetStack(stack);
+            return base.SetStack(stack);
         }
         return false;
     }

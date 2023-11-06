@@ -117,10 +117,7 @@ namespace roguelike.rendering.ui {
         private static void SwapSlots(ItemSlot clickedSlot) {
             ItemStack tempStack = clickedSlot.SlotStack;
             if (clickedSlot.SetStack(_mouseSlot.SlotStack)) {
-                Debug.Log("giving the mouse: " + tempStack.Item.Name);
-                if(_mouseSlot.SetStack(tempStack)) {
-                    Debug.Log("mouse received slot successfully");
-                }
+                _mouseSlot.SetStack(tempStack);
             }
         }
 
