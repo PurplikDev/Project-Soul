@@ -14,6 +14,7 @@ namespace roguelike.enviroment.entity.StatSystem {
 
         public Stat(int baseValue) {
             _baseValue = baseValue;
+            statModifiers = new List<StatModifier>();
         }
 
         public void AddModifier(StatModifier modifier) { 
@@ -24,7 +25,7 @@ namespace roguelike.enviroment.entity.StatSystem {
         public float ApplyModifiers() {
 
             float returnValue = _baseValue;
-
+            /*
             for(int i = 0; i < statModifiers.Count; i++) {
                 StatModifier modifier = statModifiers[i];
 
@@ -38,7 +39,7 @@ namespace roguelike.enviroment.entity.StatSystem {
                         returnValue *= 1 + modifier.ModifierValue;
                         break;
                 }
-            }
+            }*/
 
             return returnValue;
         }
