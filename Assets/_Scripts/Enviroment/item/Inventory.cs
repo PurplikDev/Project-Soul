@@ -2,40 +2,54 @@ using roguelike.enviroment.entity.player;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using System.Linq;
 
 namespace roguelike.core.item {
-    [Serializable]
     public class Inventory {
 
-        public static readonly int InventorySize = 20;
-        [SerializeField] public List<ItemStack> Items = new List<ItemStack>(20);
+        public static readonly int InventorySize = 20; // this reffers to the size of the generic item storage, not the amount of all the slots
+        public static readonly int EquipmentSize = 6;
+        public static readonly int TrinketSize = 8;
+
+        public List<ItemStack> Items = new List<ItemStack>(34);
 
         private Player _player;
 
         public Inventory(Player player) {
             _player = player;
 
-            // todo: register equipment and trinket slots and link them with their visual counterparts
+            FillAllSlots();
+            Debug.Log(Items.Count);
+        }
 
-            for(int i = 0; i < 20; i++) {
-                if(i == 2)
-                {
-                    Items.Add(new ItemStack(ItemManager.GetItemByID("test_equipment")));
-                }
-
-                if(i % 2 != 0) {
-                    Items.Add(ItemStack.EMPTY);
+        private void FillAllSlots() {
+            for (int i = 0; i < InventorySize; i++) {
+                if (i % 2 != 0) {
+                    if(i == 1) {
+                        Items.Add(new ItemStack(ItemManager.GetItemByID("test_equipment")));
+                    } else {
+                        Items.Add(ItemStack.EMPTY);
+                    }
+                    
                 } else {
-                    if(i % 4 == 0) {
+                    if (i % 4 == 0) {
                         Items.Add(new ItemStack(ItemManager.GetItemByID("test2"), i));
                     } else {
-                        if(i % 3 == 0) {
+                        if (i % 3 == 0) {
                             Items.Add(new ItemStack(ItemManager.GetItemByID("test"), i));
                         } else {
                             Items.Add(new ItemStack(ItemManager.GetItemByID("test4"), i));
                         }
                     }
                 }
+            }
+
+            for (int i = 0; i < EquipmentSize; i++) {
+                Items.Add(ItemStack.EMPTY);
+            }
+
+            for (int i = 0; i < TrinketSize; i++) {
+                Items.Add(ItemStack.EMPTY);
             }
         }
     }

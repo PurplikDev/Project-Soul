@@ -1,13 +1,14 @@
 using System;
 using roguelike.core.item;
 using roguelike.rendering.ui;
+using UnityEngine;
 using UnityEngine.Scripting;
 using UnityEngine.UIElements;
 
 public class ItemSlot : VisualElement {
-    private Image _icon;
-    private Label _stackSize;
-    private ItemStack _slotStack;
+    protected Image _icon;
+    protected Label _stackSize;
+    protected ItemStack _slotStack;
     public int SlotIndex;
 
     public Action UpdateSlotEvent;
@@ -34,7 +35,7 @@ public class ItemSlot : VisualElement {
         InventoryRenderer.ClickSlot(evt.position, this);
     }
 
-    private void UpdateSlot() {
+    protected void UpdateSlot() {
         _icon.image = _slotStack.Item.Icon.texture;
         _stackSize.text = _slotStack.StackSize > 1 ? _slotStack.StackSize.ToString() : "";
     }

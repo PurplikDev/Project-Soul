@@ -25,14 +25,15 @@ namespace roguelike.rendering.ui {
             _equipmentRoot = _root.Q<VisualElement>("EquipmentSlotContainer");
             _trinketRoot = _root.Q<VisualElement>("TrinketSlotContainer");
 
-            createSlots(playerInventory);
 
-            foreach(EquipmentSlot equipmentSlot in _equipmentRoot.Children())
-            {
-                
-                inventorySlots.Add(equipmentSlot);
-                equipmentSlot.SlotStack = 
-            }
+
+            // todo: rewrite
+
+            CreateSlots();
+            RegisterEquipmentSlots();
+            RegisterTrinketSlots();
+
+            
 
             _mouseSlot = _root.Q<ItemSlot>("MouseSlot");
             _mouseSlot.SetStack(ItemStack.EMPTY);
@@ -42,15 +43,37 @@ namespace roguelike.rendering.ui {
 
 
 
-        private void createSlots(Inventory inventory) {
+        private void CreateSlots() {
             for(int i = 0; i < Inventory.InventorySize; i++) {
                 ItemSlot itemSlot = new ItemSlot();
                 itemSlot.SlotIndex = i;
-                itemSlot.SetStack(inventory.Items[i]);
+                itemSlot.SetStack(_inventory.Items[i]);
                 itemSlot.RegisterCallback<PointerDownEvent>(itemSlot.OnPointerDown);
                 inventorySlots.Add(itemSlot);
                 _inventoryRoot.Add(itemSlot);
                 itemSlot.UpdateSlotEvent.Invoke();
+            }
+        }
+
+        private void RegisterEquipmentSlots() {
+            foreach(EquipmentSlot equipmentSlot in _equipmentRoot.Children().ToList()) {
+                equipmentSlot.SlotIndex = (int)equipmentSlot.SlotEquipmentType;
+                equipmentSlot.SetStack(_inventory.Items[equipmentSlot.SlotIndex]);
+
+                inventorySlots.Add(equipmentSlot);
+                equipmentSlot.UpdateSlotEvent.Invoke();
+            }
+        }
+
+        private void RegisterTrinketSlots() {
+            int index = 0;
+            foreach (EquipmentSlot equipmentSlot in _trinketRoot.Children().ToList()) {
+                equipmentSlot.SlotIndex = (int)equipmentSlot.SlotEquipmentType + index;
+                equipmentSlot.SetStack(_inventory.Items[equipmentSlot.SlotIndex]);
+
+                inventorySlots.Add(equipmentSlot);
+                equipmentSlot.UpdateSlotEvent.Invoke();
+                index++; // yes i know a for loop this exact thing, but using that would make this a bit more stupider
             }
         }
 
@@ -70,13 +93,11 @@ namespace roguelike.rendering.ui {
                 clickedSlot = originalSlot;
             }
 
-            if(clickedSlot.SlotStack.Item == _mouseSlot.SlotStack.Item &&
-                clickedSlot.SlotStack.Item.MaxStackSize != 1) {
+            if(clickedSlot.SlotStack.Item == _mouseSlot.SlotStack.Item && clickedSlot.SlotStack.Item.MaxStackSize != 1) {
                 FillSlot(clickedSlot);
             } else {
                 SwapSlots(clickedSlot);
             }
-
 
             originalSlot = clickedSlot;
             originalSlot.UpdateSlotEvent.Invoke();
@@ -94,13 +115,17 @@ namespace roguelike.rendering.ui {
         }
 
         private static void SwapSlots(ItemSlot clickedSlot) {
-            var tempStack = _mouseSlot.SlotStack;
-            if(_mouseSlot.SetStack(clickedSlot.SlotStack)) {
-                clickedSlot.SetStack(tempStack);
+            ItemStack tempStack = clickedSlot.SlotStack;
+            if (clickedSlot.SetStack(_mouseSlot.SlotStack)) {
+                Debug.Log("giving the mouse: " + tempStack.Item.Name);
+                if(_mouseSlot.SetStack(tempStack)) {
+                    Debug.Log("mouse received slot successfully");
+                }
             }
         }
 
         private static void FillSlot(ItemSlot clickedSlot) {
+            Debug.Log("filling");
             _mouseSlot.SlotStack.SetStackSize(clickedSlot.SlotStack.IncreaseStackSize(_mouseSlot.SlotStack.StackSize));
         }
 

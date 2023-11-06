@@ -7,12 +7,11 @@ public class EquipmentSlot : ItemSlot
     public EquipmentType SlotEquipmentType { get; set; }
 
     public EquipmentSlot() : base() {
-        style.backgroundImage = Resources.Load<Sprite>("sprites/missing_texture").texture;
+        //style.backgroundImage = Resources.Load<Sprite>("sprites/missing_texture").texture;
     }
 
-    public override bool SetStack(ItemStack stack)
-    {
-        if(stack.Item is EquipmentItem item && item.ItemEquipmentType == SlotEquipmentType)
+    public override bool SetStack(ItemStack stack) { 
+        if(stack.IsEmpty() || stack.Item is EquipmentItem)
         {
             base.SetStack(stack);
         }
@@ -20,8 +19,6 @@ public class EquipmentSlot : ItemSlot
     }
 
     public new class UxmlFactory : UxmlFactory<EquipmentSlot, UxmlTraits> { }
-
-    // Add the two custom UXML attributes.
     public new class UxmlTraits : VisualElement.UxmlTraits
     {
         protected UxmlEnumAttributeDescription<EquipmentType> slotEquipmentType = new UxmlEnumAttributeDescription<EquipmentType>
