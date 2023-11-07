@@ -33,7 +33,7 @@ public class ItemSlot : VisualElement {
     }
 
     public void OnPointerDown(PointerDownEvent evt) {
-        InventoryRenderer.ClickSlot(evt.position, this);
+        InventoryRenderer.ClickSlot(evt.position, this, evt.isPrimary);
     }
 
     protected virtual void UpdateSlot() {

@@ -1,17 +1,21 @@
+using System.Collections.Generic;
+using System.Linq;
+using roguelike.enviroment.entity.StatSystem;
+using UnityEngine;
+
 namespace roguelike.core.item
 {
     public class EquipmentItem : Item
     {
-        private int _rogueStat;
-        private int _thaumaturgeStat;
-        private int _templarStat;
+        public List<StatModifier> StatModifiers;
 
         private EquipmentType _itemEquipmentType;
 
         public EquipmentType ItemEquipmentType { get { return _itemEquipmentType; } }
 
-        public EquipmentItem(string id, EquipmentType type) : base(id) {
+        public EquipmentItem(string id, EquipmentType type, params StatModifier[] modifiers) : base(id) {
             _itemEquipmentType = type;
+            StatModifiers = modifiers.ToList();
         }
     }
 

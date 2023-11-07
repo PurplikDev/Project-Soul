@@ -6,12 +6,12 @@
                 <ui:VisualElement name="Equipment" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; width: auto; justify-content: flex-start; height: auto;">
                     <ui:Label text="Equipment" display-tooltip-when-elided="true" name="Header" class="header" />
                     <ui:VisualElement name="EquipmentSlotContainer" class="slotsContainer" style="align-items: center; justify-content: center; flex-direction: row; margin-top: 0; margin-left: 0; margin-right: 0; margin-bottom: 0; flex-shrink: 1; flex-wrap: wrap; height: auto;">
-                        <EquipmentSlot slot-equipment-type="HELMET" />
-                        <EquipmentSlot slot-equipment-type="CHESTPLATE" />
-                        <EquipmentSlot slot-equipment-type="PANTS" />
-                        <EquipmentSlot slot-equipment-type="BOOTS" />
-                        <EquipmentSlot slot-equipment-type="MAIN_HAND" />
-                        <EquipmentSlot slot-equipment-type="OFF_HAND" />
+                        <EquipmentSlot slot-equipment-type="HELMET" style="background-image: resource(&apos;sprites/missing_texture&apos;);" />
+                        <EquipmentSlot slot-equipment-type="CHESTPLATE" style="background-image: resource(&apos;sprites/missing_texture&apos;);" />
+                        <EquipmentSlot slot-equipment-type="PANTS" style="background-image: resource(&apos;sprites/missing_texture&apos;);" />
+                        <EquipmentSlot slot-equipment-type="BOOTS" style="background-image: resource(&apos;sprites/missing_texture&apos;);" />
+                        <EquipmentSlot slot-equipment-type="MAIN_HAND" style="background-image: resource(&apos;sprites/missing_texture&apos;);" />
+                        <EquipmentSlot slot-equipment-type="OFF_HAND" style="background-image: resource(&apos;sprites/missing_texture&apos;);" />
                     </ui:VisualElement>
                 </ui:VisualElement>
                 <ui:VisualElement name="Trinket" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; width: auto; justify-content: flex-start; height: auto;">

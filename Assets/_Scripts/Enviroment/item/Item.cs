@@ -1,4 +1,3 @@
-using roguelike.core.utils;
 using UnityEngine;
 
 namespace roguelike.core.item {
@@ -43,6 +42,16 @@ namespace roguelike.core.item {
             } else {
                 _stackSize = combined;
                 return 0;
+            }
+        }
+
+        public void Decrease(int amount) {
+            int removed = _stackSize - amount;
+            if(removed == 0) {
+                _stackItem = ItemManager.GetItemByID("air");
+                _stackSize = 1;
+            } else {
+                _stackSize = removed;
             }
         }
 

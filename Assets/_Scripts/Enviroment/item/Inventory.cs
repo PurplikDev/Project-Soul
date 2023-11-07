@@ -1,4 +1,6 @@
+using roguelike.enviroment.entity;
 using roguelike.enviroment.entity.player;
+using roguelike.enviroment.entity.StatSystem;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,10 +13,10 @@ namespace roguelike.core.item {
 
         public List<ItemStack> Items = new List<ItemStack>(34);
 
-        private Player _player;
+        private Entity _entity;
 
-        public Inventory(Player player) {
-            _player = player;
+        public Inventory(Entity entity) {
+            _entity = entity;
 
             FillAllSlots();
         }
@@ -50,9 +52,23 @@ namespace roguelike.core.item {
         }
 
         public void UpdateItemStack(ItemStack itemStack, int index) {
+            ItemStack oldStack = Items[index];
             Items[index] = itemStack;
+
+            // The purpose of this check is to update stats only when necesseary.
+            // There is no reason to update stats when an item in placed in a storage slot
             if(index >= InventorySize) {
-                // recalculate stats
+                if(itemStack.Item is EquipmentItem item) {
+                    foreach(StatModifier statModifier in item.StatModifiers) {
+                        _entity.StatByType[statModifier.StatType].AddModifier(statModifier);
+                        Debug.Log(_entity.StatByType[statModifier.StatType].Value);
+                    }
+                } else if(itemStack.IsEmpty()) {
+                    foreach(StatModifier statModifier in ((EquipmentItem)oldStack.Item).StatModifiers) {
+                        _entity.StatByType[statModifier.StatType].RemoveModifier(statModifier);
+                        Debug.Log(_entity.StatByType[statModifier.StatType].Value);
+                    }
+                }
             }
         }
     }

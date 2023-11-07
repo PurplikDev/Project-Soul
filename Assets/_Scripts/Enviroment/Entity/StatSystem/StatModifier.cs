@@ -1,14 +1,18 @@
 using UnityEngine;
+using static roguelike.enviroment.entity.StatSystem.Stat;
 
 namespace roguelike.enviroment.entity.StatSystem {
     [SerializeField]
     public class StatModifier {
-        public StatModifierType modifierType;
-        public Stat.StatType statType;
+        public float ModifierValue { get; private set; }
+        public StatModifierType ModifierType { get; private set; }
+        public StatType StatType { get; private set; }
 
-        private float _modifierValue;
-
-        public float ModifierValue { get { return _modifierValue; } }
+        public StatModifier(float value, StatModifierType modifierType, StatType statType) {
+            ModifierValue = value;
+            ModifierType = modifierType;
+            StatType = statType;
+        }
 
         public enum StatModifierType {
             FLAT = 0,

@@ -1,3 +1,4 @@
+using roguelike.enviroment.entity.StatSystem;
 using roguelike.system.singleton;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,6 @@ namespace roguelike.core.item {
             base.Awake();
             MissingTexture = Resources.Load<Sprite>("sprites/missing_texture");
             ItemIcons = Resources.LoadAll<Sprite>("sprites/items").ToList();
-
             RegisterItems();
         }
 
@@ -27,8 +27,8 @@ namespace roguelike.core.item {
             _itemDatabase.Add(id, new Item(id, maxStackSize));
         }
 
-        private void RegisterEquipment(string id, EquipmentType type) {
-            _itemDatabase.Add(id, new EquipmentItem(id, type));
+        private void RegisterEquipment(string id, EquipmentType type, params StatModifier[] modifiers) {
+            _itemDatabase.Add(id, new EquipmentItem(id, type, modifiers));
         }
 
         public static Sprite GetSpriteByID(string id) {
@@ -52,7 +52,9 @@ namespace roguelike.core.item {
             Register("test3");
             Register("test4", 6);
 
-            RegisterEquipment("test_equipment", EquipmentType.MAIN_HAND);
+            RegisterEquipment("test_equipment", EquipmentType.MAIN_HAND,
+                new StatModifier(0.5f, StatModifier.StatModifierType.FLAT, Stat.StatType.SPEED),
+                new StatModifier(0.5f, StatModifier.StatModifierType.ADDITIONAL, Stat.StatType.HEALTH));
         }
     }
 }
