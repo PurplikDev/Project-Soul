@@ -13,10 +13,10 @@ namespace roguelike.core.item {
 
         public List<ItemStack> Items = new List<ItemStack>(34);
 
-        private Entity _entity;
+        public Entity Entity;
 
         public Inventory(Entity entity) {
-            _entity = entity;
+            Entity = entity;
 
             FillAllSlots();
         }
@@ -60,13 +60,11 @@ namespace roguelike.core.item {
             if(index >= InventorySize) {
                 if(itemStack.Item is EquipmentItem item) {
                     foreach(StatModifier statModifier in item.StatModifiers) {
-                        _entity.StatByType[statModifier.StatType].AddModifier(statModifier);
-                        Debug.Log(_entity.StatByType[statModifier.StatType].Value);
+                        Entity.StatByType[statModifier.StatType].AddModifier(statModifier);
                     }
                 } else if(itemStack.IsEmpty()) {
                     foreach(StatModifier statModifier in ((EquipmentItem)oldStack.Item).StatModifiers) {
-                        _entity.StatByType[statModifier.StatType].RemoveModifier(statModifier);
-                        Debug.Log(_entity.StatByType[statModifier.StatType].Value);
+                        Entity.StatByType[statModifier.StatType].RemoveModifier(statModifier);
                     }
                 }
             }

@@ -16,6 +16,8 @@ public class ItemSlot : VisualElement {
 
     public ItemStack SlotStack { get { return _slotStack; } }
 
+    public ContainerRenderer Renderer;
+
     public ItemSlot() {
         _stackSize = new Label();
         _icon = new Image();
@@ -33,7 +35,7 @@ public class ItemSlot : VisualElement {
     }
 
     public void OnPointerDown(PointerDownEvent evt) {
-        InventoryRenderer.ClickSlot(evt.position, this, evt.isPrimary);
+        Renderer.ClickSlot(evt.position, this, evt.isPrimary);
     }
 
     protected virtual void UpdateSlot() {
