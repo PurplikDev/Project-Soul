@@ -1,8 +1,6 @@
 using roguelike.enviroment.entity;
-using roguelike.enviroment.entity.player;
 using roguelike.enviroment.entity.StatSystem;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace roguelike.core.item {
     public class Inventory {

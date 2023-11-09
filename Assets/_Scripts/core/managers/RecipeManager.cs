@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using roguelike.core.item;
 using roguelike.core.item.recipe;
 using roguelike.system.singleton;
-using UnityEngine;
+
 using static roguelike.core.item.recipe.Recipe;
 
 namespace roguelike.system.manager {

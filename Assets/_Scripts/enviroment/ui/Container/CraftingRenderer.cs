@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using roguelike.core.item;
-using roguelike.enviroment.entity.player;
+using roguelike.enviroment.world.deployable.workstation;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -9,13 +9,14 @@ namespace roguelike.rendering.ui {
     public class CraftingRenderer : ContainerRenderer {
         private VisualElement _craftingRoot;
 
-        public List<ItemStack> _craftingStacks;
         private List<ItemSlot> _craftingSlots = new List<ItemSlot>();
 
-        public CraftingRenderer(Inventory entityInventory, UIDocument inventoryUI, params ItemStack[] craftingStacks) : base(entityInventory, inventoryUI) {
+        private CraftingStation _station;
+
+        public CraftingRenderer(Inventory entityInventory, UIDocument inventoryUI, CraftingStation station) : base(entityInventory, inventoryUI) {
             _craftingRoot = _root.Q<VisualElement>("CraftingSlotContainer");
 
-            _craftingStacks = craftingStacks.ToList();
+            _station = station;
 
             RegisterCraftingSlots();
         }
@@ -35,7 +36,7 @@ namespace roguelike.rendering.ui {
         }
 
         private void RegisterSlot(ItemSlot slot, int index) {
-            slot.SetStack(_craftingStacks[index]);
+            slot.SetStack(_station.StationInventory[index]);
             slot.Renderer = this;
             slot.SlotIndex = inventorySlots.Count();
             _craftingSlots.Add(slot);
@@ -48,7 +49,15 @@ namespace roguelike.rendering.ui {
             if(clickedSlot.SlotIndex < Inventory.InventorySize) {
                 base.UpdateSlots(clickedSlot);
             } else {
-                // todo: proper logic
+                ItemStack stack = clickedSlot.SlotStack;
+                int workingIndex = clickedSlot.SlotIndex - Inventory.InventorySize;
+                Debug.Log(clickedSlot.SlotIndex);
+                Debug.Log(workingIndex);
+
+                if(!(_station.StationInventory[workingIndex].IsEmpty() && stack.IsEmpty())) {
+                    _station.StationInventory[workingIndex] = stack;
+                    Debug.Log(_station.StationInventory[workingIndex].Item.Name);
+                }
             }
         }
     }
