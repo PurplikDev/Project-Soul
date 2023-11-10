@@ -19,7 +19,7 @@
                 </ui:VisualElement>
                 <ui:VisualElement name="Result" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; width: auto; justify-content: flex-start; height: auto;">
                     <ui:VisualElement name="ResultSlotContainer" class="slotsContainer" style="align-items: center; justify-content: center; flex-direction: row; margin-top: 0; margin-left: 0; margin-right: 0; margin-bottom: 0; flex-shrink: 1; flex-wrap: wrap; height: auto;">
-                        <ItemSlot name="ResultSlot" />
+                        <ResultSlot name="ResultSlot" />
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>

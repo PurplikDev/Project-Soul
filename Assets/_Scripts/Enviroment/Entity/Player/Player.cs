@@ -26,9 +26,11 @@ namespace roguelike.enviroment.entity.player {
 
             GetComponentInChildren<UIDocument>().enabled = false;
 
-            GameObject.Find("TestStation").GetComponent<CraftingStation>().OpenUI(this);
-
             base.Awake();
+        }
+
+        private void Start() {
+            GameObject.Find("TestStation").GetComponent<CraftingStation>().OpenUI(this);
         }
 
         protected override void Update() {

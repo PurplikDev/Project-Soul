@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using roguelike.core.item;
 using roguelike.core.item.recipe;
 using roguelike.system.singleton;
-
+using UnityEngine;
 using static roguelike.core.item.recipe.Recipe;
 
 namespace roguelike.system.manager {
@@ -15,6 +15,16 @@ namespace roguelike.system.manager {
             RegisterRecipes();
         }
 
+
+
+        public Recipe FindRecipe(RecipeType type, ItemStack[] input) {
+            foreach(KeyValuePair<RecipeType, Recipe> entry in _recipeDatabase) {
+                if(entry.Key != type) { continue; }
+                if(entry.Value.CheckRecipe(input)) { return entry.Value; }
+            }
+            Debug.LogWarning("No" + type.ToString() + "recipe found with inputs:" + input);
+            return null;
+        }
 
 
         private void RegisterShapeless(List<ItemStack> ingredients) {

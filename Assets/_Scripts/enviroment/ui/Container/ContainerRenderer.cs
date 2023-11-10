@@ -7,14 +7,14 @@ using UnityEngine.UIElements;
 
 namespace roguelike.rendering.ui {
     public class ContainerRenderer {
-        protected static List<ItemSlot> inventorySlots = new List<ItemSlot>();
+        protected List<ItemSlot> inventorySlots = new List<ItemSlot>();
 
         public Action UpdateUIEvent;
 
         protected VisualElement _root, _inventoryRoot;
-        protected static ItemSlot _mouseSlot;
+        protected ItemSlot _mouseSlot;
 
-        protected static Inventory _inventory;
+        protected Inventory _inventory;
 
         public ContainerRenderer(Inventory entityInventory, UIDocument inventoryUI) {
             _inventory = entityInventory;
