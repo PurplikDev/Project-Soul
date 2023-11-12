@@ -2,26 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using roguelike.core.item;
+using roguelike.system.manager;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace roguelike.rendering.ui {
-    public class ContainerRenderer {
-        protected List<ItemSlot> inventorySlots = new List<ItemSlot>();
+    public abstract class ContainerRenderer {
+        protected List<ItemSlot> itemSlots = new List<ItemSlot>();
 
         public Action UpdateUIEvent;
 
-        protected VisualElement _root, _inventoryRoot;
+        protected VisualElement _root;
         protected ItemSlot _mouseSlot;
 
-        protected Inventory _inventory;
-
-        public ContainerRenderer(Inventory entityInventory, UIDocument inventoryUI) {
-            _inventory = entityInventory;
-
+        public ContainerRenderer(UIDocument inventoryUI) {
             _root = inventoryUI.rootVisualElement;
-            _inventoryRoot = _root.Q<VisualElement>("InventorySlotContainer");
-            CreateSlots();
 
             _mouseSlot = _root.Q<ItemSlot>("MouseSlot");
             _mouseSlot.SetStack(ItemStack.EMPTY);
@@ -29,26 +24,12 @@ namespace roguelike.rendering.ui {
 
             _root.RegisterCallback<PointerMoveEvent>(OnPointerMove);
         }
-
-        // SLOT CREATION METHODS
-
-        private void CreateSlots() {
-            for(int i = 0; i < Inventory.InventorySize; i++) {
-                ItemSlot itemSlot = new ItemSlot();
-                itemSlot.SlotIndex = i;
-                itemSlot.SetStack(_inventory.Items[i]);
-                itemSlot.Renderer = this;
-                inventorySlots.Add(itemSlot);
-                _inventoryRoot.Add(itemSlot);
-                itemSlot.UpdateSlotEvent.Invoke();
-            }
-        }
-
+               
 
 
         // POINTER EVENT METHODS
 
-        public void ClickSlot(Vector2 position, ItemSlot originalSlot, bool isPrimary) {
+        public virtual void ClickSlot(Vector2 position, ItemSlot originalSlot, bool isPrimary) {
 
             if(_mouseSlot.SlotStack.IsEmpty() && originalSlot.SlotStack.IsEmpty()) {
                 return;
@@ -58,7 +39,7 @@ namespace roguelike.rendering.ui {
             _mouseSlot.style.left = position.x - _mouseSlot.layout.width / 2;
 
             ItemSlot clickedSlot;
-            IEnumerable<ItemSlot> slots = inventorySlots.Where(x => x.worldBound.Overlaps(_mouseSlot.worldBound));
+            IEnumerable<ItemSlot> slots = itemSlots.Where(x => x.worldBound.Overlaps(_mouseSlot.worldBound));
 
             if(slots.Count() > 0) {
                 clickedSlot = slots.OrderBy(x => Vector2.Distance(x.worldBound.position, _mouseSlot.worldBound.position)).First();
@@ -79,7 +60,7 @@ namespace roguelike.rendering.ui {
             originalSlot = clickedSlot;
             originalSlot.UpdateSlotEvent.Invoke();
 
-            UpdateSlots(clickedSlot);
+            SyncVisualToInternalSingle(clickedSlot);
 
             if(_mouseSlot.SlotStack.IsEmpty()) {
                 _mouseSlot.style.visibility = Visibility.Hidden;
@@ -125,7 +106,7 @@ namespace roguelike.rendering.ui {
             if(clickedSlot.SlotStack.StackSize % 2 == 1) { split++; }
             _mouseSlot.SetStack(clickedSlot.SlotStack);
             _mouseSlot.SlotStack.SetStackSize(split);
-            clickedSlot.SlotStack.Decrease(split);
+            clickedSlot.SlotStack.DecreaseStackSize(split);
         }
 
 
@@ -135,16 +116,10 @@ namespace roguelike.rendering.ui {
         /// <summary>
         /// Method that syncs item slot that was clicked with it's internal counterpart.
         /// </summary>
-        protected virtual void UpdateSlots(ItemSlot clickedSlot) {
-            UpdateInventory(clickedSlot);
-        }
+        protected abstract void SyncInternalToVisual(); // Updates Visual inventory to be like internal
+        protected abstract void SyncVisualToInternal(); // Updates Internal inventory to be like visual
 
-        protected void UpdateInventory(ItemSlot clickedSlot) {
-            int index = clickedSlot.SlotIndex;
-            ItemStack stack = clickedSlot.SlotStack;
-            if(!(_inventory.Items[index].IsEmpty() && stack.IsEmpty())) {
-                _inventory.UpdateItemStack(stack, index);
-            }
-        }
+        protected abstract void SyncInternalToVisualSingle(ItemSlot clickedSlot); // Updates Visual inventory to be like internal
+        protected abstract void SyncVisualToInternalSingle(ItemSlot clickedSlot); // Updates Internal inventory to be like visual
     }
 }

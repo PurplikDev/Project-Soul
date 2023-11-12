@@ -45,7 +45,7 @@ namespace roguelike.core.item {
             }
         }
 
-        public void Decrease(int amount) {
+        public void DecreaseStackSize(int amount) {
             int removed = _stackSize - amount;
             if(removed == 0) {
                 _stackItem = ItemManager.GetItemByID("air");

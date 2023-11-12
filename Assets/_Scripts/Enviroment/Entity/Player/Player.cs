@@ -1,8 +1,8 @@
 using roguelike.core.item;
 using roguelike.enviroment.entity.player.StateMachine;
-using roguelike.enviroment.world.deployable.workstation;
 using roguelike.rendering.ui;
 using roguelike.system.input;
+using roguelike.system.manager;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -13,24 +13,22 @@ namespace roguelike.enviroment.entity.player {
         public InputReader InputReader;
         public Inventory PlayerInventory;
         public PlayerStateMachine PlayerStateMachine;
-        public InventoryRenderer inventoryRenderer;
 
-        public UIDocument playerInventoryUI;
+        //private UIDocument _document;
+        //private InventoryRenderer _inventoryRenderer;
 
         protected override void Awake() {
             InputReader = Resources.LoadAll<InputReader>("data/player").First();
             PlayerInventory = new Inventory(this);
             PlayerStateMachine = new PlayerStateMachine(this, InputReader);
 
-            inventoryRenderer = new InventoryRenderer(PlayerInventory, GetComponentInChildren<UIDocument>());
-
-            GetComponentInChildren<UIDocument>().enabled = false;
+            //_document = GameObject.Find("InventoryUIHolder").GetComponent<UIDocument>();
+            //_inventoryRenderer = new InventoryRenderer(this.PlayerInventory, _document);
 
             base.Awake();
         }
 
         private void Start() {
-            GameObject.Find("TestStation").GetComponent<CraftingStation>().OpenUI(this);
         }
 
         protected override void Update() {

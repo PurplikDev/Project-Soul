@@ -20,9 +20,5 @@ namespace roguelike.enviroment.entity.player.StateMachine {
         public PlayerBaseState Walk() {
             return new PlayerWalkState(_context, this);
         }
-
-        public PlayerBaseState Aim() {
-            return new PlayerAimState(_context, this);
-        }
     }
 }

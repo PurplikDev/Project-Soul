@@ -1,3 +1,4 @@
+using roguelike.enviroment.entity.player;
 using roguelike.system.input;
 using roguelike.system.singleton;
 using System;
@@ -11,6 +12,8 @@ namespace roguelike.system.manager {
 
         public Action StartGame;
         public Action GlobalPauseEvent;
+
+        public Player Player { get { return GameObject.Find("Player").GetComponent<Player>(); } }
 
         private InputReader _inputReader;
 

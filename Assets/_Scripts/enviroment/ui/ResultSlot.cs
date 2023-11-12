@@ -7,11 +7,16 @@ public class ResultSlot : ItemSlot
     public ResultSlot() : base() {} // todo: add background images for equipment slot to show what equipment type it is
 
     public override bool SetStack(ItemStack stack) {
-        if (stack.IsEmpty())
+        if(stack.IsEmpty())
         {
             return base.SetStack(stack);
         }
         return false;
+    }
+
+    // These two methods need to be separate in order to prevent the mouse item putting shit in the result slot
+    public void ForceStack(ItemStack stack) {
+        base.SetStack(stack);
     }
 
     #region UXML

@@ -12,7 +12,14 @@ namespace roguelike.core.item.recipe {
             bool isValid = false;
             var input = inputItems.ToList();
 
-            if(inputItems.Length != Ingredients.Count) {
+            int actualLength = 0;
+
+            foreach (ItemStack item in inputItems) { 
+                if(!item.IsEmpty()) { actualLength++; }
+            }
+
+
+            if(actualLength != Ingredients.Count) {
                 return false;
             }
 
