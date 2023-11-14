@@ -1,28 +1,33 @@
 using roguelike.system.singleton;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
 using static roguelike.system.manager.DungeonManager.Room;
+using Random = UnityEngine.Random;
 
 namespace roguelike.system.manager {
     public class DungeonManager : Singleton<DungeonManager> {
 
         public Room[,] dungeon;
         public List<Room> rooms;
+        public List<Room> generatedRooms;
 
 
         protected override void Awake() {
-            GenerateDungeon();
+            GenerateMain();
             LogDungeon();
             base.Awake();
         }
 
-        public void GenerateDungeon() {
+        public void GenerateMain() {
             int size = 9;
+            int limit = 0;
 
             dungeon = new Room[size, size];
             rooms = new List<Room>();
+            generatedRooms = new List<Room>();
 
             for (int i = 0; i < 9; i++) {
                 for (int j = 0; j < 9; j++) {
@@ -30,54 +35,57 @@ namespace roguelike.system.manager {
                 }
             }
 
-            var starterRoom = new Room(RoomType.SINGLE, 4, 4);
+            var starterRoom = new Room(RoomType.STARTER, 4, 4);
             dungeon[4, 4] = starterRoom;
             rooms.Add(starterRoom);
 
-            InvokeRepeating(nameof(Funny), 1f, 1f);
-        }
-
-        private void Funny() {
-            if (rooms.Count > 0) {
-                Debug.ClearDeveloperConsole();
-                LogDungeon();
-
+            while(rooms.Count > 0) {
                 var currentRoom = rooms.First();
                 rooms.Remove(currentRoom);
 
-                Room newRoom;
-
-                foreach (KeyValuePair<Door, bool> door in currentRoom.doors) {
-                    if (door.Value) {
-                        switch (door.Key) {
-                            case Door.UP:
-                                newRoom = new Room(RoomType.SINGLE, currentRoom.x, currentRoom.y + 1);
-                                dungeon[currentRoom.x, currentRoom.y + 1] = newRoom;
-                                rooms.Add(newRoom);
+                Room neighbor = null;
+                bool reroll = false;
+                do {
+                    reroll = false;
+                    try {
+                        switch ((Direction)Random.Range(0, 3)) {
+                            case Direction.UP:
+                                neighbor = dungeon[currentRoom.x, currentRoom.y + 1];
                                 break;
 
-                            case Door.DOWN:
-                                newRoom = new Room(RoomType.SINGLE, currentRoom.x, currentRoom.y - 1);
-                                dungeon[currentRoom.x, currentRoom.y - 1] = newRoom;
-                                rooms.Add(newRoom);
+                            case Direction.DOWN:
+                                neighbor = dungeon[currentRoom.x, currentRoom.y - 1];
                                 break;
 
-                            case Door.LEFT:
-                                newRoom = new Room(RoomType.SINGLE, currentRoom.x - 1, currentRoom.y);
-                                dungeon[currentRoom.x - 1, currentRoom.y] = newRoom;
-                                rooms.Add(newRoom);
+                            case Direction.LEFT:
+                                neighbor = dungeon[currentRoom.x - 1, currentRoom.y];
                                 break;
 
-                            case Door.RIGHT:
-                                newRoom = new Room(RoomType.SINGLE, currentRoom.x + 1, currentRoom.y);
-                                dungeon[currentRoom.x + 1, currentRoom.y] = newRoom;
-                                rooms.Add(newRoom);
+                            case Direction.RIGHT:
+                                neighbor = dungeon[currentRoom.x + 1, currentRoom.y];
                                 break;
-
                         }
+                    } catch(IndexOutOfRangeException) {
+                        reroll = true;
+                        continue; // ?\_(?)_/?
                     }
+                } while (reroll || neighbor.Type != 0);
+
+                if (limit < 9) {
+                    var newRoom = new Room(RoomType.NORMAL, neighbor.x, neighbor.y);
+                    dungeon[neighbor.x, neighbor.y] = newRoom;
+                    rooms.Add(newRoom);
+                    generatedRooms.Add(newRoom);
+                    limit++;
+                } else {
+                    dungeon[neighbor.x, neighbor.y] = new Room(RoomType.FINAL, neighbor.x, neighbor.y);
                 }
             }
+        }
+
+        public void GenerateSide() {
+            // todo: add generation of side rooms
+            // don't forget about doors maggot
         }
 
         private void LogDungeon() {
@@ -104,10 +112,10 @@ namespace roguelike.system.manager {
             VERYLONG
         }
 
-        public class Room { 
-            public bool Closed;
+        public class Room {
             public RoomType Type;
-            public Dictionary<Door, bool> doors = new Dictionary<Door, bool>(4);
+
+            public Direction[] doors;
 
             public int x, y;
 
@@ -116,34 +124,23 @@ namespace roguelike.system.manager {
 
                 this.x = x; 
                 this.y = y;
-
-                for(int i = 0; i < 4; i++) {
-                    doors.Add((Door)i, RandomDoor());
-                }
             }
 
             public override string ToString() {
                 return ((int)Type).ToString();
             }
 
-            private bool RandomDoor() {
-                if((Random.Range(0, 4) % 2f) == 0) {
-                    return true;
-                }
-                return false;
-            }
-
             public enum RoomType {
                 EMPTY = 0,
-                SINGLE = 1, // single element in the array
-                DOUBLE = 2, // takes up 2 elements
-                TRIPPLE = 3 // makes a turn and takes up 3 elements
+                STARTER = 1,
+                NORMAL = 2,
+                FINAL = 3
             }
 
-            public enum Door {
-                UP = 0, 
-                DOWN = 1, 
-                LEFT = 2, 
+            public enum Direction {
+                UP = 0,
+                DOWN = 1,
+                LEFT = 2,
                 RIGHT = 3
             }
         }
