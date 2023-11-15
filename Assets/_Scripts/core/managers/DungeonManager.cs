@@ -12,20 +12,13 @@ using static roguelike.core.utils.DirectionUtils;
 namespace roguelike.system.manager {
     public class DungeonManager : Singleton<DungeonManager> {
 
-        public Transform platform;
-        public Transform cube;
-
         public Room[,] dungeon; // [y,x] WHYYYY?!?!? why isn't it [x,y]?????
-        public List<Room> rooms;
-        public List<Room> generatedRooms;
-        public List<Room> sideRooms;
+        public List<Room> unvisitedRooms;
 
-        public List<Room> ALLROOMS = new List<Room>();
-
-        private DungeonLength length = DungeonLength.VERYLONG;
+        private DungeonLength length = DungeonLength.LONG;
 
         protected override void Awake() {
-            for(int i = 0; i < 5; i++) {
+            for(int i = 0; i < 1; i++) {
                 do {
                     GenerateMain();
                 } while(dungeon == null);
@@ -37,65 +30,50 @@ namespace roguelike.system.manager {
 
         public void GenerateMain() {
             int size = (int)length;
-            int limit = size / 2;
+            int limit = (int)Math.Floor(size / 1.5f);
 
-            int failsafe = 0;
-            Room possibleRoom = null;
+            Room starterRoom;
+            Room finalRoom;
 
             dungeon = new Room[size, size];
-            rooms = new List<Room>();
-            generatedRooms = new List<Room>();
+            unvisitedRooms = new List<Room>();
 
-            for (int i = 0; i < (int)length; i++) {
-                for (int j = 0; j < (int)length; j++) {
-                    dungeon[i, j] = new Room(RoomType.EMPTY, i, j);
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < size; j++) {
+                    if(Random.Range(0, 100) < 10) {
+                        dungeon[i, j] = new Room(RoomType.OBSTACLE, i ,j);
+                    } else {
+                        dungeon[i, j] = new Room(RoomType.EMPTY, i ,j);
+                    }
                 }
             }
 
-            GenerateRoom(Random.Range(2, size - 2), Random.Range(2, size - 2), RoomType.STARTER, false);
+            starterRoom = GenerateRoom(Random.Range(3, size - 3), Random.Range(2, size - 2), RoomType.STARTER);
+            finalRoom = GenerateRoom(Random.Range(1, size - 1), Random.Range(2, size - 2), RoomType.FINAL);
+
+            List<Room> rooms = new List<Room>();
+            rooms.Add(starterRoom);
 
             while(rooms.Count > 0) {
                 var currentRoom = rooms.First();
                 rooms.Remove(currentRoom);
-                bool reroll = false;
 
-                if(rooms.Count > limit) {
-                    if(Random.Range(0, 10) > rooms.Count - limit) {
-                        Debug.LogWarning("done xd");
-                        break;
-                    }
-                }
-                do {
-                    try {
-                        possibleRoom = GetRelativeRoom(currentRoom.y, currentRoom.x, (Direction) Random.Range(0, 4));
-                    } catch(IndexOutOfRangeException) {
-                        possibleRoom = null;
-                        reroll = true;
-                        failsafe++;
-                        if(failsafe > 75) {
-                            break;
-                        }
-                    }
-                } while(reroll || possibleRoom.Type != RoomType.EMPTY);
-
-                if(possibleRoom == null) {
-                    Debug.LogWarning("possible room was null");
+                if(currentRoom.x == finalRoom.x && currentRoom.y == finalRoom.y) {
+                    Debug.Log("Final room reached!");
                     break;
                 }
 
-                if(possibleRoom.Type == RoomType.EMPTY) {
-                    GenerateRoom(possibleRoom.y, possibleRoom.x, RoomType.NORMAL, false);
-                }
+                // todo: logic, don't have enough time for it rn
             }
         }
 
-        public void GenerateRoom(int y, int x, RoomType type, bool isSpecial) {
+        public Room GenerateRoom(int y, int x, RoomType type, bool isUnvisited = true) {
             var room = new Room(type, y, x);
             dungeon[y, x] = room;
-            if(!isSpecial) {
-                rooms.Add(room);
+            if(isUnvisited) {
+                unvisitedRooms.Add(room);
             }
-            generatedRooms.Add(room);
+            return room;
         }
 
         public Room GetRelativeRoom(int y, int x, Direction direction) {
@@ -114,12 +92,11 @@ namespace roguelike.system.manager {
         private void LogDungeon() {
             StringBuilder builder = new StringBuilder();
 
-            for (int i = 0; i < (int)length; i++) {
-                builder.Append("|");
-                for (int j = 0; j < (int)length; j++) {
+            for (int i = 0; i < dungeon.GetLength(0); i++) {
+                for (int j = 0; j < dungeon.GetLength(1); j++) {
                     builder.Append("[" + dungeon[i, j].ToString() + "]");
                 }
-                builder.AppendLine("|");
+                builder.AppendLine();
             }
             Debug.Log(builder);
         }
@@ -141,13 +118,13 @@ namespace roguelike.system.manager {
 
             public List<Direction> walls = new List<Direction>();
 
-            public int x, y;
+            public int value, y, x;
 
             public Room(RoomType type, int y, int x) {
                 Type = type;
-
+                value = 0;
                 this.y = y;
-                this.x = x; 
+                this.x = x;
             }
 
             public override string ToString() {
@@ -155,6 +132,7 @@ namespace roguelike.system.manager {
             }
 
             public enum RoomType {
+                OBSTACLE = -1,
                 EMPTY = 0,
                 STARTER = 1,
                 NORMAL = 2,
