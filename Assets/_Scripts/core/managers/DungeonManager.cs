@@ -13,7 +13,6 @@ namespace roguelike.system.manager {
     public class DungeonManager : Singleton<DungeonManager> {
 
         public Room[,] dungeon; // [y,x] WHYYYY?!?!? why isn't it [x,y]?????
-        public List<Room> unvisitedRooms;
 
         private DungeonLength length = DungeonLength.LONG;
 
@@ -28,7 +27,7 @@ namespace roguelike.system.manager {
             base.Awake();
         }
 
-        public void GenerateMain() {
+        public void GenerateMain() { 
             int size = (int)length;
             int limit = (int)Math.Floor(size / 1.5f);
 
@@ -36,7 +35,6 @@ namespace roguelike.system.manager {
             Room finalRoom;
 
             dungeon = new Room[size, size];
-            unvisitedRooms = new List<Room>();
 
             for (int i = 0; i < size; i++) {
                 for (int j = 0; j < size; j++) {
@@ -48,31 +46,54 @@ namespace roguelike.system.manager {
                 }
             }
 
-            starterRoom = GenerateRoom(Random.Range(3, size - 3), Random.Range(2, size - 2), RoomType.STARTER);
+            starterRoom = GenerateRoom(Random.Range(3, size - 3), Random.Range(2, size - 2), RoomType.STARTER, true);
             finalRoom = GenerateRoom(Random.Range(1, size - 1), Random.Range(2, size - 2), RoomType.FINAL);
+            finalRoom.value = 9999; // :shrug:
 
             List<Room> rooms = new List<Room>();
+            List<Room> visitedRooms = new List<Room>();
+            List<Room> path = new List<Room>();
+
             rooms.Add(starterRoom);
 
+            Room currentRoom;
+
             while(rooms.Count > 0) {
-                var currentRoom = rooms.First();
+                currentRoom = rooms.First();
                 rooms.Remove(currentRoom);
 
                 if(currentRoom.x == finalRoom.x && currentRoom.y == finalRoom.y) {
                     Debug.Log("Final room reached!");
                     break;
                 }
+                try {
+                    for (int i = 0; i < 4; i++) {
+                        Room tempRoom = GetRelativeRoom(currentRoom.y, currentRoom.x, (Direction)i);
+                        if (!tempRoom.visited) {
+                            tempRoom.visited = true;
+                            rooms.Add(tempRoom);
+                            visitedRooms.Add(tempRoom);
+                            tempRoom.value += currentRoom.value;
+                        }
+                    }
+                } catch(IndexOutOfRangeException) {
+                    Debug.Log("corner");
+                    continue;
+                }
+            }
 
-                // todo: logic, don't have enough time for it rn
+            // todo: logic, don't have enough time for it rn
+            // basically go from the final room and check for a room that is lowest in value
+
+            while (visitedRooms.Count > 0) { 
+                
             }
         }
 
-        public Room GenerateRoom(int y, int x, RoomType type, bool isUnvisited = true) {
+        public Room GenerateRoom(int y, int x, RoomType type, bool visited = false) {
             var room = new Room(type, y, x);
+            room.visited = visited;
             dungeon[y, x] = room;
-            if(isUnvisited) {
-                unvisitedRooms.Add(room);
-            }
             return room;
         }
 
@@ -119,10 +140,11 @@ namespace roguelike.system.manager {
             public List<Direction> walls = new List<Direction>();
 
             public int value, y, x;
+            public bool visited;
 
             public Room(RoomType type, int y, int x) {
                 Type = type;
-                value = 0;
+                value = 1;
                 this.y = y;
                 this.x = x;
             }
