@@ -424,7 +424,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platform: {fileID: 4438497362937775255, guid: 98f2e7de1b21a40a5b85d8582e687129,
     type: 3}
-  cube: {fileID: 5635278597267639964, guid: 687d12416170640f48060aea97853d5f, type: 3}
+  otherPlatform: {fileID: 5635278597267639964, guid: 687d12416170640f48060aea97853d5f,
+    type: 3}
 --- !u!1 &1007216554
 GameObject:
   m_ObjectHideFlags: 0
