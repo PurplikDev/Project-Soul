@@ -14,5 +14,5 @@
             <uie:PropertyField binding-path="Thaumaturge" />
         </ui:VisualElement>
     </ui:VisualElement>
-    <uie:ObjectField label="Object Field" type="roguelike.system.input.InputReader, Assembly-CSharp" binding-path="_input" allow-scene-objects="false" />
+    <uie:ObjectField label="InventoryUI Holder" type="UnityEngine.GameObject, UnityEngine.CoreModule" binding-path="PlayerInventoryUIHolder" allow-scene-objects="true" />
 </ui:UXML>

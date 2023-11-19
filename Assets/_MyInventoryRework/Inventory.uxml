@@ -30,7 +30,28 @@
             </ui:VisualElement>
             <ui:VisualElement name="Inventory" style="flex-grow: 3; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; width: 140%;">
                 <ui:Label text="Inventory" display-tooltip-when-elided="true" name="Header" class="header" />
-                <ui:VisualElement name="InventorySlotContainer" class="slotsContainer" style="align-items: center; justify-content: center; flex-direction: row; margin-top: 0; margin-left: 0; margin-right: 0; margin-bottom: 0; flex-shrink: 1; flex-wrap: wrap;" />
+                <ui:VisualElement name="InventorySlotContainer" class="slotsContainer" style="align-items: center; justify-content: center; flex-direction: row; flex-shrink: 1; flex-wrap: wrap;">
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
         <ItemSlot name="MouseSlot" style="position: absolute; visibility: hidden;" />

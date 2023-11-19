@@ -1,66 +1,65 @@
-using roguelike.system.input;
+using roguelike.core.statemachine;
+using roguelike.system.manager;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using static roguelike.enviroment.entity.player.statemachine.PlayerStateMachine;
 
-namespace roguelike.enviroment.entity.player.StateMachine {
-    public class PlayerStateMachine {
-        private InputReader _input;
-        private CharacterController _charController;
-        private Player _playerEntity;
-        private Vector3 _moveDir;
+namespace roguelike.enviroment.entity.player.statemachine {
+    public class PlayerStateMachine : StateManager<PlayerStates> {
 
-        PlayerBaseState _currentState;
-        PlayerStateFactory _states;
+        // PRIVATE/DEFAULT/PROTECTED/INTERNAL
 
-        Camera _mainCamera = Camera.main;
+        Vector2 CurrentMovementInput;
+        internal system.input.PlayerInput input { get; private set; }
 
+        // PUBLIC
 
+        public bool IsMoving { get; private set; }
+        public bool IsSprinting { get; private set; }
+        public CharacterController CharacterController { get; private set; }
+        public Vector3 GetCurrentMovement { get { return new Vector3(CurrentMovementInput.x, 0, CurrentMovementInput.y); } }
 
-        // Getters
+        
 
-        // Conditions
+        void Awake() {
+            input = GameManager.Instance.Input;
+            CharacterController = GetComponent<CharacterController>();
 
-        public bool IsMoving { get { return _moveDir.magnitude > 0.1f; } }
+            states.Add(PlayerStates.IDLE, new PlayerIdleState(this));
+            states.Add(PlayerStates.WALK, new PlayerWalkState(this));
+            states.Add(PlayerStates.RUN, new PlayerRunState(this));
 
+            currentState = states[PlayerStates.IDLE];
 
+            input.CharacterControls.Movement.started += OnMovementInput;
+            input.CharacterControls.Movement.performed += OnMovementInput;
+            input.CharacterControls.Movement.canceled += OnMovementInput;
 
-        // Variables
-
-        public PlayerBaseState CurrentState { get { return _currentState; } set { _currentState = value; } }
-        public CharacterController CharController { get { return _charController; } }
-        public Vector3 MoveDir { get { return _moveDir; } }
-        public Camera MainCamera { get { return _mainCamera; } }
-        public Transform transform { get { return _playerEntity.transform; } }
-
-
-
-        // Statistics
-
-        public float PlayerSpeed { get { return _playerEntity.Speed.Value; } }
-        public float PlayerSprintSpeed { get { return PlayerSpeed * 1.45f; } }
-
-
-        // Monobehaviour methods
-
-        public PlayerStateMachine(Player player, InputReader input) {
-            _playerEntity = player;
-            _input = input;
-            _charController = player.GetComponent<CharacterController>();
-
-            _input.MoveEvent += HandleMove;
-
-            _states = new PlayerStateFactory(this);
-            _currentState = _states.Idle();
-            _currentState.EnterState();
+            input.CharacterControls.Sprint.started += OnSpritingInput;
+            input.CharacterControls.Sprint.canceled += OnSpritingInput;
         }
 
-        public void UpdateStateMachine() {
-            _currentState.UpdateStates();
+        void OnMovementInput(InputAction.CallbackContext context) {
+            CurrentMovementInput = context.ReadValue<Vector2>();
+            IsMoving = CurrentMovementInput.x != 0 || CurrentMovementInput.y != 0;
         }
 
+        void OnSpritingInput(InputAction.CallbackContext context) {
+            IsSprinting = context.ReadValueAsButton();
+        }
 
+        void OnEnable() {
+            input.CharacterControls.Enable();
+        }
 
-        // My methods
+        void OnDisable() {
+            input.CharacterControls.Disable();
+        }
 
-        private void HandleMove(Vector2 dir) { _moveDir = new Vector3(dir.x, 0f, dir.y).normalized; }
+        public enum PlayerStates {
+            IDLE,
+            WALK,
+            RUN
+        }
     }
 }

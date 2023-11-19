@@ -18,14 +18,18 @@ namespace roguelike.rendering.ui {
 
             _inventory = entityInventory;
 
-            CreateSlots();
+            RegisterItemSlots();
 
             RegisterEquipmentSlots();
             RegisterTrinketSlots();
+
+            UpdateUIEvent += SyncInternalToVisual;
         }
 
         protected override void SyncInternalToVisual() {
-            
+            foreach(ItemSlot slot in itemSlots) {
+                slot.SetStack(_inventory.Items[slot.SlotIndex]);
+            }
         }
 
         protected override void SyncInternalToVisualSingle(ItemSlot clickedSlot) {
@@ -37,21 +41,17 @@ namespace roguelike.rendering.ui {
         }
 
         protected override void SyncVisualToInternalSingle(ItemSlot clickedSlot) {
-            throw new NotImplementedException();
+            _inventory.Items[clickedSlot.SlotIndex] = clickedSlot.SlotStack;
         }
 
+        // SLOT REGISTRATION METHODS
 
-
-        // SLOT CREATION AND REGISTRATION METHODS
-
-        private void CreateSlots() {
-            for (int i = 0; i < Inventory.InventorySize; i++) {
-                ItemSlot itemSlot = new ItemSlot();
-                itemSlot.SlotIndex = i;
-                itemSlot.SetStack(_inventory.Items[i]);
+        private void RegisterItemSlots() {
+            foreach (ItemSlot itemSlot in _inventoryRoot.Children().ToList()) {
+                itemSlot.SlotIndex = itemSlots.Count;
+                itemSlot.SetStack(_inventory.Items[itemSlot.SlotIndex]);
                 itemSlot.Renderer = this;
                 itemSlots.Add(itemSlot);
-                _inventoryRoot.Add(itemSlot);
                 itemSlot.UpdateSlotEvent.Invoke();
             }
         }

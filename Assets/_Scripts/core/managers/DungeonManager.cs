@@ -8,12 +8,14 @@ using UnityEngine;
 using static roguelike.system.manager.DungeonManager.Room;
 using Random = UnityEngine.Random;
 using static roguelike.core.utils.DirectionUtils;
+using static roguelike.system.manager.DungeonManager;
 
 namespace roguelike.system.manager {
     public class DungeonManager : Singleton<DungeonManager> {
 
         public Transform platform;
         public Transform otherPlatform;
+        public Transform cube;
 
         public Room[,] dungeon; // [y,x] WHYYYY?!?!? why isn't it [x,y]?????
 
@@ -22,7 +24,7 @@ namespace roguelike.system.manager {
         List<Room> rooms;
         List<Room> finalRooms;
 
-        private DungeonLength length = DungeonLength.LONG;
+        private DungeonLength length = DungeonLength.VERYLONG;
 
         protected override void Awake() {
             do {
@@ -45,6 +47,7 @@ namespace roguelike.system.manager {
             rooms = new List<Room>();
             visitedRooms = new List<Room>();
             path = new List<Room>();
+            finalRooms = new List<Room>();
 
             Room starterRoom;
             Room finalRoom;
@@ -60,8 +63,13 @@ namespace roguelike.system.manager {
 
             for(int i = 0; i < size; i++) {
                 for(int j = 0; j < size; j++) {
-                    if(Random.Range(0, 100) < 15) {
-                        dungeon[i, j] = new Room(RoomType.OBSTACLE, i, j);
+                    if(Random.Range(0, 100) < 35) {
+                        if(!CheckAroundForType(i, j, RoomType.OBSTACLE)) {
+                            dungeon[i, j] = new Room(RoomType.OBSTACLE, i, j);
+                            Instantiate(cube, new Vector3(i * 10, 0, j * 10), new Quaternion(0, 0, 0, 0));
+                        } else {
+                            dungeon[i, j] = new Room(RoomType.EMPTY, i, j);
+                        }
                     } else {
                         dungeon[i, j] = new Room(RoomType.EMPTY, i, j);
                     }
@@ -116,6 +124,7 @@ namespace roguelike.system.manager {
                     if(tempRoom.visited && tempRoom.value < currentRoom.value) {
                         currentRoom = tempRoom;
                         path.Add(tempRoom);
+                        finalRooms.Add(tempRoom);
                         break;
                     }
                 }
@@ -132,8 +141,6 @@ namespace roguelike.system.manager {
         /// Method for generating side branches of the main hallway.
         /// </summary>
         public void GenerateSide() {
-            finalRooms = new List<Room>();
-
             foreach(Room room in path) {
                 int neighbors = 0;
 
@@ -188,6 +195,21 @@ namespace roguelike.system.manager {
                 default: // technically this is Direction.RIGHT, i just wanted the warning to shut up
                     return dungeon[y, x + 1];
             }
+        }
+
+        public bool CheckAroundForType(int y, int x, RoomType type) {
+            for(int i = -1; i < 1; i++) {
+                for (int j = -1; j < 1; j++) {
+                    try {
+                        if (dungeon[y + i, x + j] != null && dungeon[y + i, x + j].Type == type) {
+                            return true;
+                        }
+                    } catch(IndexOutOfRangeException) {
+                        continue;
+                    }
+                }
+            }
+            return false;
         }
 
         /// <summary>

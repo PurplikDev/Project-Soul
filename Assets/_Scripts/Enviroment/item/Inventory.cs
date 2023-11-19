@@ -15,7 +15,6 @@ namespace roguelike.core.item {
 
         public Inventory(Entity entity) {
             Entity = entity;
-
             FillAllSlots();
         }
 

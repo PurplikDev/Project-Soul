@@ -14,19 +14,17 @@ namespace roguelike.system.manager {
         public Action GlobalPauseEvent;
 
         public Player Player { get { return GameObject.Find("Player").GetComponent<Player>(); } }
-
-        private InputReader _inputReader;
+        public PlayerInput Input { get { return Player.PlayerInput; } }
 
         protected override void Awake()
         {
-            _inputReader = Resources.LoadAll<InputReader>("data/player").First();
 
             StartGame += SpawnPlayer;
             StartGame.Invoke();
 
             // if the game is in singleplayer it will actually pause stuff in game
             // but when ur in multiplayer the game won't pause (for example entities will still move and stuff)
-            _inputReader.PauseEvent += HandlePause;
+            
 
             base.Awake();
         }
