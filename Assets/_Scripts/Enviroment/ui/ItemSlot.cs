@@ -35,7 +35,7 @@ public class ItemSlot : VisualElement {
     }
 
     public void OnPointerDown(PointerDownEvent evt) {
-        Renderer.ClickSlot(evt.position, this, evt.isPrimary);
+        Renderer.ClickSlot(evt.position, this, evt.pressedButtons == 1);
     }
 
     protected virtual void UpdateSlot() {

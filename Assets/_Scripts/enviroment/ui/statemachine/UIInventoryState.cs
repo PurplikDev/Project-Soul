@@ -2,7 +2,6 @@ using roguelike.rendering.ui;
 using roguelike.system.manager;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static roguelike.enviroment.ui.statemachine.UIStateMachine;
 
 namespace roguelike.enviroment.ui.statemachine { 
     public class UIInventoryState: UIBaseState {
@@ -24,8 +23,6 @@ namespace roguelike.enviroment.ui.statemachine {
             _inventoryRenderer = null;
         }
 
-        public override void UpdateState() {
-            Debug.Log("inventory");
-        }
+        public override void UpdateState() { }
     }
 }

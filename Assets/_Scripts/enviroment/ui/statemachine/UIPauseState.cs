@@ -3,18 +3,24 @@ using static roguelike.enviroment.ui.statemachine.UIStateMachine;
 
 namespace roguelike.enviroment.ui.statemachine { 
     public class UIPauseState: UIBaseState {
-        public UIPauseState(UIStateMachine uiStateMachine) : base(uiStateMachine) { }
+        private GameObject _pauseUIHolder;
 
-        public override void EnterState() { }
+        public UIPauseState(UIStateMachine uiStateMachine, GameObject pauseUIHolder) : base(uiStateMachine) {
+            _pauseUIHolder = pauseUIHolder;
+        }
 
-        public override void ExitState() { }
+        public override void EnterState() { 
+            _pauseUIHolder.SetActive(true);
+        }
+
+        public override void ExitState() {
+            _pauseUIHolder.SetActive(false);
+        }
 
         public override UIStates GetNextState() {
             return UIStates.NONE;
         }
 
-        public override void UpdateState() {
-            Debug.Log("pause");
-        }
+        public override void UpdateState() { }
     }
 }

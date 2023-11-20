@@ -29,8 +29,6 @@ namespace roguelike.enviroment.ui.statemachine {
             
         }
 
-        public override void UpdateState() {
-            Debug.Log("none");
-        }
+        public override void UpdateState() { }
     }
 }

@@ -75,3 +75,10 @@
     -unity-text-outline-width: 1px;
     -unity-text-outline-color: rgba(43, 43, 43, 0.75);
 }
+
+.inventorySlotContainer {
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}

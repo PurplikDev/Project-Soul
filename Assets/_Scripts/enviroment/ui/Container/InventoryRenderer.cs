@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using roguelike.core.item;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace roguelike.rendering.ui {
@@ -19,7 +20,6 @@ namespace roguelike.rendering.ui {
             _inventory = entityInventory;
 
             RegisterItemSlots();
-
             RegisterEquipmentSlots();
             RegisterTrinketSlots();
 
@@ -27,8 +27,8 @@ namespace roguelike.rendering.ui {
         }
 
         protected override void SyncInternalToVisual() {
-            foreach(ItemSlot slot in itemSlots) {
-                slot.SetStack(_inventory.Items[slot.SlotIndex]);
+            for(int i = 0; i < _inventory.Items.Count; i++) {
+                itemSlots[i].SetStack(_inventory.Items[i]);
             }
         }
 

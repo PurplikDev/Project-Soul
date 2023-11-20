@@ -1,9 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-using roguelike.core.item;
-using roguelike.core.item.recipe;
-using roguelike.enviroment.world.deployable.workstation;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace roguelike.rendering.ui {

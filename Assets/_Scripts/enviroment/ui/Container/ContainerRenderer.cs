@@ -24,14 +24,14 @@ namespace roguelike.rendering.ui {
 
             _root.RegisterCallback<PointerMoveEvent>(OnPointerMove);
         }
-               
+
 
 
         // POINTER EVENT METHODS
 
         public virtual void ClickSlot(Vector2 position, ItemSlot originalSlot, bool isPrimary) {
 
-            if(_mouseSlot.SlotStack.IsEmpty() && originalSlot.SlotStack.IsEmpty()) {
+            if (_mouseSlot.SlotStack.IsEmpty() && originalSlot.SlotStack.IsEmpty()) {
                 return;
             }
 
@@ -41,18 +41,19 @@ namespace roguelike.rendering.ui {
             ItemSlot clickedSlot;
             IEnumerable<ItemSlot> slots = itemSlots.Where(x => x.worldBound.Overlaps(_mouseSlot.worldBound));
 
-            if(slots.Count() > 0) {
+            if (slots.Count() > 0) {
                 clickedSlot = slots.OrderBy(x => Vector2.Distance(x.worldBound.position, _mouseSlot.worldBound.position)).First();
             } else {
                 clickedSlot = originalSlot;
             }
 
-            if(clickedSlot.SlotStack.Item == _mouseSlot.SlotStack.Item &&
-                clickedSlot.SlotStack.Item.MaxStackSize != 1) {
+            if (clickedSlot.SlotStack.Item == _mouseSlot.SlotStack.Item &&
+                clickedSlot.SlotStack.Item.MaxStackSize != 1 && isPrimary) {
                 FillSlot(clickedSlot);
 
                 // todo: add logic for splitting stacks :3
-
+            } else if (clickedSlot.SlotStack.StackSize > 1 && _mouseSlot.SlotStack.IsEmpty() && !isPrimary) {
+                SplitSlot(clickedSlot);
             } else {
                 SwapSlots(clickedSlot);
             }
@@ -103,9 +104,7 @@ namespace roguelike.rendering.ui {
         // todo: fix logic, it deletes items rn
         protected void SplitSlot(ItemSlot clickedSlot) {
             int split = clickedSlot.SlotStack.StackSize / 2;
-            if(clickedSlot.SlotStack.StackSize % 2 == 1) { split++; }
-            _mouseSlot.SetStack(clickedSlot.SlotStack);
-            _mouseSlot.SlotStack.SetStackSize(split);
+            _mouseSlot.SetStack(new ItemStack(clickedSlot.SlotStack.Item, split));
             clickedSlot.SlotStack.DecreaseStackSize(split);
         }
 

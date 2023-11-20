@@ -12,13 +12,14 @@ namespace roguelike.enviroment.ui.statemachine {
         private bool _isPause = false;
 
         public GameObject InventoryUIHolder;
+        public GameObject PauseUIHolder;
 
         void Awake() {
             input = GameManager.Instance.Input;
 
             states.Add(UIStates.NONE, new UINoneState(this));
             states.Add(UIStates.INVENTORY, new UIInventoryState(this, InventoryUIHolder));
-            states.Add(UIStates.PAUSE, new UIPauseState(this));
+            states.Add(UIStates.PAUSE, new UIPauseState(this, PauseUIHolder));
 
             currentState = states[UIStates.NONE];
             // some sort of interaction with objects logic call here
