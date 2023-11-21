@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using roguelike.core.item;
-using roguelike.system.manager;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -12,11 +11,14 @@ namespace roguelike.rendering.ui {
 
         public Action UpdateUIEvent;
 
-        protected VisualElement _root;
+        protected VisualElement _root, _inventoryRoot;
         protected ItemSlot _mouseSlot;
+        protected Inventory _inventory;
 
-        public ContainerRenderer(UIDocument inventoryUI) {
+        public ContainerRenderer(Inventory entityInventory, UIDocument inventoryUI) {
             _root = inventoryUI.rootVisualElement;
+
+            _inventoryRoot = _root.Q<VisualElement>("InventorySlotContainer");
 
             _mouseSlot = _root.Q<ItemSlot>("MouseSlot");
             _mouseSlot.SetStack(ItemStack.EMPTY);

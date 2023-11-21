@@ -6,14 +6,12 @@ using UnityEngine.UIElements;
 
 namespace roguelike.rendering.ui {
     public class InventoryRenderer : ContainerRenderer {
-        protected VisualElement _inventoryRoot, _equipmentRoot, _trinketRoot;
+        protected VisualElement _equipmentRoot, _trinketRoot;
 
-        protected Inventory _inventory;
-
-        public InventoryRenderer(Inventory entityInventory, UIDocument inventoryUI) : base(inventoryUI) {
+        public InventoryRenderer(Inventory entityInventory, UIDocument inventoryUI) : base(entityInventory, inventoryUI) {
             _root = inventoryUI.rootVisualElement;
 
-            _inventoryRoot = _root.Q<VisualElement>("InventorySlotContainer");
+            
             _equipmentRoot = _root.Q<VisualElement>("EquipmentSlotContainer");
             _trinketRoot = _root.Q<VisualElement>("TrinketSlotContainer");
 
