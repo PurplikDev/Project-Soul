@@ -2,21 +2,19 @@ using System;
 using System.Collections.Generic;
 using roguelike.core.item;
 using roguelike.core.item.recipe;
+using roguelike.enviroment.entity.player;
 using roguelike.rendering.ui;
 using roguelike.system.manager;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace roguelike.enviroment.world.deployable.workstation {
-    public class CraftingStation : MonoBehaviour {
+    public class CraftingStation : Deployable {
 
-        public CraftingRenderer craftingRenderer;
-        public List<ItemStack> StationInventory;
+        public Recipe LastRecipe { get; private set; }
+
         public ItemStack ResultStack;
-
-        public Action SlotUpdateEvent;
         public Action RecipeTakenEvent;
-
-        private Recipe lastRecipe;
 
         protected virtual void Awake() {
             StationInventory = new List<ItemStack>();
@@ -26,35 +24,34 @@ namespace roguelike.enviroment.world.deployable.workstation {
 
             ResultStack = ItemStack.EMPTY;
 
-            SlotUpdateEvent += CheckForRecipes;
             RecipeTakenEvent += Craft;
         }
 
-        protected virtual void CheckForRecipes() {
+        public override DeployableRenderer GetRenderer(Player interactor) {
+            return new CraftingRenderer(interactor.Inventory, this, StationUIHolder.GetComponent<UIDocument>());
+        }
 
+        public virtual Recipe CheckForRecipes() {
             if(IsStationEmpty()) { // no idea why, but empty table has a recipe????
-                return;
+                return null;
             }
 
             var recipe = RecipeManager.FindRecipe(Recipe.RecipeType.SHAPELESS_CRAFTING, StationInventory.ToArray());
-            if(recipe != null) { 
-                
-                lastRecipe = recipe;
-                return;
+            if(recipe == null) {
+                recipe = RecipeManager.FindRecipe(Recipe.RecipeType.SHAPED_CRAFTING, StationInventory.ToArray());
             }
 
-            recipe = RecipeManager.FindRecipe(Recipe.RecipeType.SHAPED_CRAFTING, StationInventory.ToArray());
-            
-            lastRecipe = recipe;
+            LastRecipe = recipe;
+            return LastRecipe;
         }
 
         protected virtual void Craft() {
 
-            if(lastRecipe == null) {
+            if(LastRecipe == null) {
                 return;
             }
 
-            var ingredients = lastRecipe.Ingredients;
+            var ingredients = LastRecipe.Ingredients;
             foreach (ItemStack currentItem in StationInventory) {
                 for (int i = ingredients.Count - 1; i > -1; i--) {
                     if (currentItem.Item == ingredients[i].Item && currentItem.StackSize >= ingredients[i].StackSize) {

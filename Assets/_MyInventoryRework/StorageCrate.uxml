@@ -1,0 +1,50 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/_MyInventoryRework/ContainerStyle.uss?fileID=7433441132597879392&amp;guid=8dd38d4c17be74f1baa19b9c760f8269&amp;type=3#ContainerStyle" />
+    <ui:VisualElement name="Container" class="container">
+        <ui:VisualElement name="Inventory" class="inventory" style="flex-direction: row; width: 75%; max-width: 75%; flex-wrap: nowrap; flex-grow: 0; justify-content: center; align-items: stretch;">
+            <ui:VisualElement name="Storage" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; width: 100%;">
+                <ui:Label text="Storage Crate" display-tooltip-when-elided="true" name="Header" class="header" />
+                <ui:VisualElement name="StorageSlotContainer" class="slotsContainer inventorySlotContainer" style="align-items: center; justify-content: center; flex-direction: row; margin-top: 0; margin-left: 0; margin-right: 0; margin-bottom: 0; flex-shrink: 1; flex-wrap: wrap;">
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="Inventory" style="flex-grow: 3; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; width: 140%;">
+                <ui:Label text="Inventory" display-tooltip-when-elided="true" name="Header" class="header" />
+                <ui:VisualElement name="InventorySlotContainer" class="slotsContainer inventorySlotContainer" style="align-items: center; justify-content: center; flex-direction: row; margin-top: 0; margin-left: 0; margin-right: 0; margin-bottom: 0; flex-shrink: 1; flex-wrap: wrap;">
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                    <ItemSlot />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ItemSlot name="MouseSlot" style="position: absolute; visibility: hidden;" />
+    </ui:VisualElement>
+</ui:UXML>

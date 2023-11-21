@@ -1,27 +1,32 @@
+using roguelike.enviroment.world.deployable;
+using roguelike.rendering.ui;
+using roguelike.system.manager;
 using UnityEngine;
 
 namespace roguelike.enviroment.ui.statemachine { 
     public class UIDeployableState: UIBaseState {
 
-        private GameObject _deployable;
+        private Deployable deployable;
+        private DeployableRenderer renderer;
 
         public UIDeployableState(UIStateMachine uiStateMachine) : base(uiStateMachine) { }
 
         public override void EnterState() {
-            //_deployable.GetComponent
-            //_deployable.SetActive(true);
+
+            // todo: replace with logic that takes in a deployable that is being currently interacted with
+
+            deployable = GameObject.Find("StorageCrate").GetComponent<Deployable>();
+            deployable.StationUIHolder.SetActive(true);
+            renderer = deployable.GetRenderer(GameManager.Instance.Player);
         }
 
         public override void ExitState() {
-            _deployable.SetActive(false);
-        }
-
-        public override UIStateMachine.UIStates GetNextState() {
-            throw new System.NotImplementedException();
+            deployable.StationUIHolder.SetActive(false);
+            renderer = null;
         }
 
         public override void UpdateState() {
-            Debug.Log("inventory");
+            Debug.Log("deployable");
         }
     }
 }

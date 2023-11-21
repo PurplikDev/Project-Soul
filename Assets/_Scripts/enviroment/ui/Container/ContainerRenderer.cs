@@ -16,6 +16,8 @@ namespace roguelike.rendering.ui {
         protected Inventory _inventory;
 
         public ContainerRenderer(Inventory entityInventory, UIDocument inventoryUI) {
+            _inventory = entityInventory;
+
             _root = inventoryUI.rootVisualElement;
 
             _inventoryRoot = _root.Q<VisualElement>("InventorySlotContainer");
@@ -25,9 +27,19 @@ namespace roguelike.rendering.ui {
             _mouseSlot.Renderer = this;
 
             _root.RegisterCallback<PointerMoveEvent>(OnPointerMove);
+
+            RegisterItemSlots();
         }
 
-
+        protected void RegisterItemSlots() {
+            foreach(ItemSlot itemSlot in _inventoryRoot.Children().ToList()) {
+                itemSlot.SlotIndex = itemSlots.Count;
+                itemSlot.SetStack(_inventory.Items[itemSlot.SlotIndex]);
+                itemSlot.Renderer = this;
+                itemSlots.Add(itemSlot);
+                itemSlot.UpdateSlotEvent.Invoke();
+            }
+        }
 
         // POINTER EVENT METHODS
 
@@ -117,10 +129,10 @@ namespace roguelike.rendering.ui {
         /// <summary>
         /// Method that syncs item slot that was clicked with it's internal counterpart.
         /// </summary>
-        protected abstract void SyncInternalToVisual(); // Updates Visual inventory to be like internal
-        protected abstract void SyncVisualToInternal(); // Updates Internal inventory to be like visual
+        //protected abstract void SyncInternalToVisual(); // Updates Visual inventory to be like internal
+        //protected abstract void SyncVisualToInternal(); // Updates Internal inventory to be like visual
 
-        protected abstract void SyncInternalToVisualSingle(ItemSlot clickedSlot); // Updates Visual inventory to be like internal
+        //protected abstract void SyncInternalToVisualSingle(ItemSlot clickedSlot); // Updates Visual inventory to be like internal
         protected abstract void SyncVisualToInternalSingle(ItemSlot clickedSlot); // Updates Internal inventory to be like visual
     }
 }

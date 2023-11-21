@@ -20,12 +20,14 @@ namespace roguelike.enviroment.ui.statemachine {
             states.Add(UIStates.NONE, new UINoneState(this));
             states.Add(UIStates.INVENTORY, new UIInventoryState(this, InventoryUIHolder));
             states.Add(UIStates.PAUSE, new UIPauseState(this, PauseUIHolder));
+            states.Add(UIStates.DEPLOYABLE, new UIDeployableState(this));
 
             currentState = states[UIStates.NONE];
             // some sort of interaction with objects logic call here
 
             input.UIControls.Inventory.performed += OnInventory;
             input.UIControls.Pause.performed += OnPause;
+            input.UIControls.Test.performed += OnTest;
         }
 
         void OnInventory(InputAction.CallbackContext context) {
@@ -49,7 +51,14 @@ namespace roguelike.enviroment.ui.statemachine {
             }
         }
 
-        void OnEnable() {
+        void OnTest(InputAction.CallbackContext context) {
+
+            // todo: replace with proper logic for walking up to a station and using it
+
+            TransitionToState(UIStates.DEPLOYABLE);
+        }
+
+            void OnEnable() {
             input.UIControls.Enable();
         }
 
@@ -64,7 +73,8 @@ namespace roguelike.enviroment.ui.statemachine {
         public enum UIStates {
             NONE,
             INVENTORY,
-            PAUSE
+            PAUSE,
+            DEPLOYABLE
         }
     }
 }
