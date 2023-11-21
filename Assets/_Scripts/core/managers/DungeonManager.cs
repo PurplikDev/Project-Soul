@@ -8,7 +8,6 @@ using UnityEngine;
 using static roguelike.system.manager.DungeonManager.Room;
 using Random = UnityEngine.Random;
 using static roguelike.core.utils.DirectionUtils;
-using static roguelike.system.manager.DungeonManager;
 
 namespace roguelike.system.manager {
     public class DungeonManager : Singleton<DungeonManager> {
@@ -24,7 +23,7 @@ namespace roguelike.system.manager {
         List<Room> rooms;
         List<Room> finalRooms;
 
-        private DungeonLength length = DungeonLength.VERYLONG;
+        private DungeonLength length = DungeonLength.SHORT;
 
         protected override void Awake() {
             do {
@@ -258,10 +257,10 @@ namespace roguelike.system.manager {
         }
 
         public enum DungeonLength {
-            SHORT = 5,
-            MEDIUM = 9,
-            LONG = 11,
-            VERYLONG = 15
+            SHORT = 11,
+            MEDIUM = 15,
+            LONG = 21,
+            VERYLONG = 31
         }
 
         public class Room {

@@ -25,8 +25,6 @@ namespace roguelike.enviroment.ui.statemachine {
             renderer = null;
         }
 
-        public override void UpdateState() {
-            Debug.Log("deployable");
-        }
+        public override void UpdateState() { }
     }
 }
