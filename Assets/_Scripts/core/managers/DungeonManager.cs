@@ -1,9 +1,7 @@
-using roguelike.core.utils;
 using roguelike.system.singleton;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UnityEngine;
 using static roguelike.system.manager.DungeonManager.Room;
 using Random = UnityEngine.Random;
@@ -18,9 +16,6 @@ namespace roguelike.system.manager {
 
         public Room[,] dungeon; // [y,x] WHYYYY?!?!? why isn't it [x,y]?????
 
-        List<Room> path;
-        List<Room> visitedRooms;
-        List<Room> rooms;
         List<Room> finalRooms;
 
         private DungeonLength length = DungeonLength.SHORT;
@@ -29,7 +24,6 @@ namespace roguelike.system.manager {
             do {
                 GenerateMain();
             } while(dungeon == null);
-            GenerateSide();
             SpawnDungeon();
             base.Awake();
         }
@@ -42,21 +36,13 @@ namespace roguelike.system.manager {
         /// Method for generating the main hallway of the dungeon.
         /// </summary>
         public void GenerateMain() {
-
-            rooms = new List<Room>();
-            visitedRooms = new List<Room>();
-            path = new List<Room>();
             finalRooms = new List<Room>();
+            List<Room> deadEnds = new List<Room>();
 
             Room starterRoom;
-            Room finalRoom;
-            Room currentRoom;
 
             int size = (int)length;
             int center = (int)Math.Floor(size / 2f) + 1;
-            int failsafe = 0;
-
-            bool pathFound = false;
 
             dungeon = new Room[size, size];
 
@@ -75,93 +61,21 @@ namespace roguelike.system.manager {
                 }
             }
 
-            starterRoom = GenerateRoom(Random.Range(1, center), Random.Range(1, center - 1), RoomType.STARTER, true);
-            finalRoom = GenerateRoom(Random.Range(center, size - 1), Random.Range(center, size - 1), RoomType.FINAL);           
-
-            rooms.Add(starterRoom);
-            path.Add(starterRoom);
-            path.Add(finalRoom);            
-
-            while(rooms.Count > 0) {
-                currentRoom = rooms.First();
-                rooms.Remove(currentRoom);
-
-                if(currentRoom.x == finalRoom.x && currentRoom.y == finalRoom.y) {
-                    break;
-                }
-                try {
-                    for(int i = 0; i < 4; i++) {
-                        Room tempRoom = GetRelativeRoom(currentRoom.y, currentRoom.x, (Direction)i);
-                        if(!tempRoom.visited && tempRoom.Type != RoomType.OBSTACLE) {
-                            tempRoom.visited = true;
-                            rooms.Add(tempRoom);
-                            visitedRooms.Add(tempRoom);
-                            tempRoom.value = currentRoom.value + 1;
-                            failsafe = 0;
-                        }
-                    }
-                } catch(IndexOutOfRangeException) {
-                    continue;
-                }
-                failsafe++;
-                if(failsafe > 100) {
-                    return;
-                }
+            starterRoom = GenerateRoom(center, center, RoomType.STARTER, true);
+            
+            for(int i = 0; i < 5; i++) {
+                deadEnds.Add(GenerateRoom(Random.Range(1, size - 1), Random.Range(1, size - 1), RoomType.FINAL));
             }
 
-            currentRoom = finalRoom;
+            Debug.Log(deadEnds.Count);
 
-            while(!pathFound) {
-                for(int i = 0; i < 4; i++) {
-                    var tempRoom = GetRelativeRoom(currentRoom.y, currentRoom.x, (Direction)i);
-
-                    if(tempRoom.x == starterRoom.x && tempRoom.y == starterRoom.y) {
-                        pathFound = true;
-                        break;
-                    }
-
-                    if(tempRoom.visited && tempRoom.value < currentRoom.value) {
-                        currentRoom = tempRoom;
-                        path.Add(tempRoom);
-                        finalRooms.Add(tempRoom);
-                        break;
-                    }
-                }
+            foreach(Room room in deadEnds) {
+                GeneratePath(starterRoom, room);
             }
 
-            foreach(Room room in path) {
-                if(room.Type == RoomType.EMPTY) {
-                    dungeon[room.y, room.x] = new Room(RoomType.NORMAL, room.y, room.x);
-                }
-            }
         }
 
-        /// <summary>
-        /// Method for generating side branches of the main hallway.
-        /// </summary>
-        public void GenerateSide() {
-            foreach(Room room in path) {
-                int neighbors = 0;
 
-                List<Direction> directionCache = new List<Direction>();
-
-                for(int i = 0; i < 4; i++) {
-                    var relativeRoom = GetRelativeRoom(room.y, room.x, (Direction) i);
-                    if(!(relativeRoom.Type == RoomType.EMPTY || relativeRoom.Type == RoomType.OBSTACLE)) {
-                        neighbors++;
-                        directionCache.Add((Direction)i);
-                    }
-                }
-                
-                if(neighbors == 2) {
-                    if(Random.Range(0, 4) == (int) directionCache.First()) {
-                        var relativeRoom = GetRelativeRoom(room.y, room.x, directionCache.First());
-                        var newRoom = GenerateRoom(relativeRoom.y, relativeRoom.x, RoomType.NORMAL);
-                        finalRooms.Add(newRoom);
-                    }
-                }
-            }
-        }
 
         /// <summary>
         /// Method for spawning tiles of the dungeon int the scene.
@@ -183,6 +97,83 @@ namespace roguelike.system.manager {
             return room;
         }
 
+        public void ResetValues() {
+            for(int i = 0; i < (int)length; i++) {
+                for(int j = 0; j < (int)length; j++) {
+                    dungeon[i, j].value = (int) dungeon[i, j].Type;
+                    if(dungeon[i, j].Type != RoomType.STARTER) {
+                        dungeon[i, j].visited = false;
+                    }
+                }
+            }
+        }
+
+        public void GeneratePath(Room startRoom, Room finalRoom) {
+
+            ResetValues();
+
+            List<Room> rooms = new List<Room>();
+            List<Room> path = new List<Room>();
+            Room currentRoom = startRoom;
+
+            rooms.Add(startRoom);
+
+            int failsafe = 0;
+            bool pathFound = false;
+
+            while(rooms.Count > 0) {
+                currentRoom = rooms.First();
+                rooms.Remove(currentRoom);
+
+                if(currentRoom.x == finalRoom.x && currentRoom.y == finalRoom.y) {
+                    break;
+                }
+
+                try {
+                    for(int i = 0; i < 4; i++) {
+                        Room tempRoom = GetRelativeRoom(currentRoom.y, currentRoom.x, (Direction)i);
+                        if(!tempRoom.visited && tempRoom.Type != RoomType.OBSTACLE) {
+                            tempRoom.visited = true;
+                            rooms.Add(tempRoom);
+                            tempRoom.value += currentRoom.value;
+                            failsafe = 0;
+                        }
+                    }
+                } catch(IndexOutOfRangeException) {
+                    continue;
+                }
+                failsafe++;
+                if(failsafe > 100) {
+                    return;
+                }
+            }
+
+            currentRoom = finalRoom;
+
+            while(!pathFound) {
+                for(int i = 0; i < 4; i++) {
+                    var tempRoom = GetRelativeRoom(currentRoom.y, currentRoom.x, (Direction)i);
+
+                    if(tempRoom.x == startRoom.x && tempRoom.y == startRoom.y) {
+                        pathFound = true;
+                        break;
+                    }
+
+                    if(tempRoom.visited && tempRoom.value < currentRoom.value) {
+                        currentRoom = tempRoom;
+                        path.Add(tempRoom);
+                        break;
+                    }
+                }
+            }
+
+            foreach(Room room in path) {
+                if(room.Type == RoomType.EMPTY) {
+                    dungeon[room.y, room.x] = new Room(RoomType.NORMAL, room.y, room.x);
+                }
+            }
+        }
+
         public Room GetRelativeRoom(int y, int x, Direction direction) {
             switch(direction) {
                 case Direction.UP:
@@ -198,9 +189,9 @@ namespace roguelike.system.manager {
 
         public bool CheckAroundForType(int y, int x, RoomType type) {
             for(int i = -1; i < 1; i++) {
-                for (int j = -1; j < 1; j++) {
+                for(int j = -1; j < 1; j++) {
                     try {
-                        if (dungeon[y + i, x + j] != null && dungeon[y + i, x + j].Type == type) {
+                        if(dungeon[y + i, x + j] != null && dungeon[y + i, x + j].Type == type) {
                             return true;
                         }
                     } catch(IndexOutOfRangeException) {
@@ -209,43 +200,6 @@ namespace roguelike.system.manager {
                 }
             }
             return false;
-        }
-
-        /// <summary>
-        /// Method that logs a visualisation in the console. 
-        /// </summary>
-        private void LogDungeon() {
-            StringBuilder builder = new StringBuilder();
-
-            for (int i = 0; i < dungeon.GetLength(0); i++) {
-                for (int j = 0; j < dungeon.GetLength(1); j++) {
-                    var room = dungeon[i, j];
-
-                    switch(room.Type) {
-                        case RoomType.STARTER:
-                            builder.Append("[S]");
-                            break;
-
-                        case RoomType.FINAL:
-                            builder.Append("[F]");
-                            break;
-
-                        case RoomType.NORMAL:
-                            builder.Append("[N]");
-                            break;
-
-                        case RoomType.EMPTY:
-                            builder.Append("[" + dungeon[i, j].value + "]");
-                            break;
-
-                        case RoomType.OBSTACLE:
-                            builder.Append("[O]");
-                            break;
-                    }
-                }
-                builder.AppendLine();
-            }
-            Debug.Log(builder);
         }
 
 
@@ -273,7 +227,7 @@ namespace roguelike.system.manager {
 
             public Room(RoomType type, int y, int x) {
                 Type = type;
-                value = 1;
+                value = (int)type;
                 this.y = y;
                 this.x = x;
             }
@@ -283,12 +237,12 @@ namespace roguelike.system.manager {
             }
 
             public enum RoomType {
-                OBSTACLE = -1,
-                EMPTY = 0,
                 STARTER = 1,
-                NORMAL = 2,
-                FINAL = 3,
-                SPECIAL = 4
+                NORMAL = 1,
+                FINAL = 1,
+                SPECIAL = 2,
+                EMPTY = 2,
+                OBSTACLE = 999
             }
         }
     }
