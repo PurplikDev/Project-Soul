@@ -7,40 +7,36 @@
 
 .inventory {
     flex-grow: 1;
-    background-color: rgba(41, 41, 41, 0.78);
     width: 50%;
     height: 75%;
     max-width: 50%;
     max-height: 75%;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    background-image: resource('sprites/ui/container_background');
+    -unity-background-scale-mode: scale-and-crop;
 }
 
 .header {
-    color: rgb(197, 197, 197);
-    font-size: 24px;
+    color: rgb(255, 255, 255);
+    font-size: 35px;
     margin-bottom: 10px;
     border-bottom-width: 5px;
     border-bottom-color: rgb(255, 255, 255);
+    -unity-font-style: bold;
+    -unity-text-outline-width: 2px;
+    -unity-text-outline-color: rgb(0, 0, 0);
 }
 
 .slotContainer {
     width: 128px;
     height: 128px;
     margin: 5px;
-    border-left-color: rgb(255, 255, 255);
-    border-right-color: rgb(157, 157, 157);
-    border-top-color: rgb(255, 255, 255);
-    border-bottom-color: rgb(156, 156, 156);
-    background-color: rgba(0, 0, 0, 0.25);
-    border-left-width: 2.5px;
-    border-right-width: 2.5px;
-    border-top-width: 2.5px;
-    border-bottom-width: 2.5px;
     visibility: visible;
-    -unity-background-image-tint-color: rgba(255, 255, 255, 0.38);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    background-image: resource('sprites/ui/item_slot');
 }
 
 .slotIcon {

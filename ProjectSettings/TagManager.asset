@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: EquipmentTrinkets
+    uniqueID: 709027329
+    locked: 0
+  - name: EquipmentArmor
+    uniqueID: 866315675
+    locked: 0
+  - name: PlayerCharacter
+    uniqueID: 180855149
+    locked: 0

@@ -1,22 +1,23 @@
+using Mono.Cecil;
 using roguelike.core.item;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 public class EquipmentSlot : ItemSlot
 {
+    Image _equipmentTypeIcon;
     public EquipmentType SlotEquipmentType { get; set; }
 
-    public EquipmentSlot() : base() {} // todo: add background images for equipment slot to show what equipment type it is
+    public EquipmentSlot() : base() {
+        _equipmentTypeIcon = new Image();
+        Add(_equipmentTypeIcon);
+    } 
+    
+    // todo: add background images for equipment slot to show what equipment type it is
 
     public override bool SetStack(ItemStack stack) {
         if (stack.IsEmpty() || stack.Item is EquipmentItem equipmentItem && equipmentItem.ItemEquipmentType == SlotEquipmentType)
         {
-            // a small thing, but it makes the equipment slot visual feel better (making the background trinket type indicator invisible)
-
-            // todo: trinket slot types
-
-            StyleColor imageTint = new StyleColor();
-            imageTint.value = new UnityEngine.Color(255, 255, 255, stack.IsEmpty() ? 0.25f : 0); // swag code :3
-            style.unityBackgroundImageTintColor = imageTint;
             return base.SetStack(stack);
         }
         return false;

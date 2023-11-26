@@ -1,23 +1,31 @@
+using roguelike.core.utils;
+using roguelike.core.utils.mathematicus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using Random = UnityEngine.Random;
+using static roguelike.core.utils.DirectionUtils;
 
 public class DungeonGenerator : MonoBehaviour
 {
 
     private Room[,] dungeon = new Room[9,9];
     private List<Room> rooms;
+    private List<Room> generatedRooms;
+    private int amountOfrooms;
 
     void Start() {
-        GenerateDungeon();
+        do {
+            GenerateDungeon();
+        } while (amountOfrooms < 8);
         LogDungeon();
     }
 
     void GenerateDungeon() {
         rooms = new List<Room>(); // just to make sure that the list is empty
+        generatedRooms = new List<Room>(); // just to make sure that the list is empty
+        amountOfrooms = 0;
 
         InstantiateTiles();
 
@@ -34,15 +42,31 @@ public class DungeonGenerator : MonoBehaviour
             rooms.Remove(currentRoom);
 
             for(int i = 0; i < 3; i++) {
-                Direction randomDirection = (Direction)Random.Range(1, 5);
-                if(CheckForBranch(curY, curX, randomDirection)) {
-                    CreateBranch(curY, curX, randomDirection);
+                Direction sourceDirection = RandomDirection();
+                switch (sourceDirection) {
+                    case Direction.UP: CheckAndGenerate(curY - 2, curX, sourceDirection); break;
+                    case Direction.DOWN: CheckAndGenerate(curY + 2, curX, sourceDirection); break;
+                    case Direction.LEFT: CheckAndGenerate(curY, curX - 2, sourceDirection); break;
+                    case Direction.RIGHT: CheckAndGenerate(curY, curX + 2, sourceDirection); break;
                 }
             }
         }
     }
 
-    void InstantiateTiles() {
+    private void CheckAndGenerate(int y, int x, Direction direction) {
+        bool doubleRoom = Mathematicus.ChanceIn(50f);
+        Direction randomDirection = RandomDirection();
+        while(randomDirection == direction) { randomDirection = RandomDirection(); }
+        try {
+            if (CheckAroundRoom(y, x, doubleRoom, randomDirection)) {
+                CreateRoom(y, x, doubleRoom, direction, randomDirection);
+            }
+        } catch (IndexOutOfRangeException) {
+            Debug.LogWarning("Coordinates out of range");
+        }
+    }
+
+        void InstantiateTiles() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 dungeon[i, j] = new Room(i, j, TileType.EMPTY);
@@ -60,64 +84,16 @@ public class DungeonGenerator : MonoBehaviour
         }
         Debug.Log(builder);
     }
-    /// <summary>
-    /// Method that checks if there is enough space to spawn a room and a corridor in an area.
-    /// </summary>
-    /// <param name="y">Y cordinate of the room you are checking from.</param>
-    /// <param name="x">X cordinate of the room you are checking from.</param>
-    /// <param name="direction">Direction you want to check in.</param>
-    private bool CheckForBranch(int y, int x, Direction direction) {
-        switch(direction) {
-            case Direction.UP:
-                return CheckAroundRoom(y - 2, x);
-
-            case Direction.DOWN:
-                return CheckAroundRoom(y + 2, x);
-
-            case Direction.LEFT:
-                return CheckAroundRoom(y, x - 2);
-
-            case Direction.RIGHT:
-                return CheckAroundRoom(y, x + 2);
-
-            default:
-                Debug.LogWarning("Invalid input direction");
-                return false;
-        }
-    }
-    private void CreateBranch(int y, int x, Direction direction) {
-        switch (direction) {
-            case Direction.UP:
-                dungeon[y - 1, x] = new Room(y - 1, x, TileType.CORRIDOR);
-                CreateRoom(y - 2, x);
-                break;
-
-            case Direction.DOWN:
-                dungeon[y + 1, x] = new Room(y + 1, x, TileType.CORRIDOR);
-                CreateRoom(y + 2, x);
-                break;
-
-            case Direction.LEFT:
-                dungeon[y, x - 1] = new Room(y, x - 1, TileType.CORRIDOR);
-                CreateRoom(y, x - 2);
-                break;
-
-            case Direction.RIGHT:
-                dungeon[y, x + 1] = new Room(y, x + 1, TileType.CORRIDOR);
-                CreateRoom(y, x + 2);
-                break;
-
-            default:
-                Debug.LogWarning("Invalid input direction");
-                return;
-        }
-    }
-    private bool CheckAroundRoom(int y, int x) {
+    
+    private bool CheckAroundRoom(int y, int x, bool doubleRoom, Direction direction) {
         int failsafe = 0;
-        for(int i = -1; i < 2; i++) {
-            for(int j = -1; j < 2; j++) {
+        int limitI = doubleRoom == true && direction == Direction.UP || direction == Direction.DOWN ? 3 : 2;
+        int limitJ = doubleRoom == true && direction == Direction.LEFT || direction == Direction.RIGHT ? 3 : 2;
+
+        for (int i = -1; i < limitI; i++) {
+            for(int j = -1; j < limitJ; j++) {
                 try {
-                    if (dungeon[y - i, x - j].Type != TileType.EMPTY) {
+                    if (dungeon[y + i, x + j].Type != TileType.EMPTY) {
                         return false;
                     }
                 } catch(IndexOutOfRangeException) {
@@ -129,26 +105,36 @@ public class DungeonGenerator : MonoBehaviour
         }
         return failsafe > 3 ? false : true;
     }
-    private void CreateRoom(int y, int x) {
+
+    private void CreateRoom(int y, int x, bool doubleRoom, Direction sourceDirection, Direction roomDirection) {
+        if (Mathematicus.ChanceIn(5f)) { return; }
+        switch (getOpposite(sourceDirection)) {
+            case Direction.UP: GenerateRoom(y - 1, x, TileType.CORRIDOR); break;
+            case Direction.DOWN: GenerateRoom(y + 1, x, TileType.CORRIDOR); break;
+            case Direction.LEFT: GenerateRoom(y, x - 1, TileType.CORRIDOR); break;
+            case Direction.RIGHT: GenerateRoom(y, x + 1, TileType.CORRIDOR); break;
+            default: Debug.LogWarning("Invalid input direction"); return;
+        }
         GenerateRoom(y, x);
-        try {
-            if (Random.Range(1, 11) % 2 == 0) {
-                Direction randomDirection = (Direction)Random.Range(1, 5);
-                switch (randomDirection) {
-                    case Direction.UP: GenerateRoom(y - 1, x); break;
-                    case Direction.DOWN: GenerateRoom(y - 1, x); break;
-                    case Direction.LEFT: CreateRoom(y, x - 1); break;
-                    case Direction.RIGHT: CreateRoom(y, x + 1); break;
-                    default: Debug.LogWarning("Invalid input direction"); return;
-                }
+        if(doubleRoom) {
+            switch (roomDirection) {
+                case Direction.UP: GenerateRoom(y - 1, x); break;
+                case Direction.DOWN: GenerateRoom(y - 1, x); break;
+                case Direction.LEFT: GenerateRoom(y, x - 1); break;
+                case Direction.RIGHT: GenerateRoom(y, x + 1); break;
+                default: Debug.LogWarning("Invalid input direction"); return;
             }
-        } catch { }
-        
+        }
     }
-    private void GenerateRoom(int y, int x) {
-        Room newRoom = new Room(y, x, TileType.ROOM);
+
+    private void GenerateRoom(int y, int x, TileType type = TileType.ROOM) {
+        Room newRoom = new Room(y, x, type);
         dungeon[y, x] = newRoom;
-        rooms.Add(newRoom);
+        if(type == TileType.ROOM) { 
+            rooms.Add(newRoom);
+            generatedRooms.Add(newRoom);
+            amountOfrooms++;
+        }
     }
 
     class Room {
@@ -170,9 +156,5 @@ public class DungeonGenerator : MonoBehaviour
         EMPTY,
         ROOM,
         CORRIDOR
-    }
-
-    public enum Direction {
-        UP = 1, DOWN = 2, LEFT = 3, RIGHT = 4
     }
 }

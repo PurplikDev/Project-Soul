@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using roguelike.core.item;
@@ -22,9 +23,13 @@ namespace roguelike.rendering.ui {
 
             _inventoryRoot = _root.Q<VisualElement>("InventorySlotContainer");
 
+            StyleColor imageTint = new StyleColor();
+            imageTint.value = new Color(255, 255, 255, 0);
+
             _mouseSlot = _root.Q<ItemSlot>("MouseSlot");
             _mouseSlot.SetStack(ItemStack.EMPTY);
             _mouseSlot.Renderer = this;
+            _mouseSlot.style.unityBackgroundImageTintColor = imageTint;
 
             _root.RegisterCallback<PointerMoveEvent>(OnPointerMove);
 

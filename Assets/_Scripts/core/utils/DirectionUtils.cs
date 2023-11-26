@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace roguelike.core.utils {
     public static class DirectionUtils {
         public static Direction getOpposite(Direction direction) {
@@ -8,6 +10,10 @@ namespace roguelike.core.utils {
                 case Direction.RIGHT: return Direction.LEFT;
             }
             return Direction.UP;
+        }
+
+        public static Direction RandomDirection() {
+            return (Direction) Random.Range(0, 4);
         }
 
         public enum Direction {
