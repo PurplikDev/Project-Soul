@@ -17,9 +17,10 @@ namespace roguelike.enviroment.entity.player.statemachine {
         public bool IsMoving { get; private set; }
         public bool IsSprinting { get; private set; }
         public CharacterController CharacterController { get; private set; }
-        public Vector3 GetCurrentMovement { get { return new Vector3(CurrentMovementInput.x, 0, CurrentMovementInput.y); } }
+        public Vector3 GetCurrentMovementSpeed { get { return new Vector3(CurrentMovementInput.x, 0, CurrentMovementInput.y) * 5; } }
+        public Vector3 GetCurrentSprintSpeed { get { return GetCurrentMovementSpeed * 1.45f; } }
 
-        
+
 
         void Awake() {
             input = GameManager.Instance.Input;

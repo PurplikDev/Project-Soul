@@ -10,7 +10,7 @@ namespace roguelike.enviroment.entity.player.statemachine {
         }
 
         public override void UpdateState() {
-            playerStateMachine.CharacterController.SimpleMove(playerStateMachine.GetCurrentMovement * 20);
+            playerStateMachine.CharacterController.SimpleMove(playerStateMachine.GetCurrentSprintSpeed);
         }
 
         public override void ExitState() {

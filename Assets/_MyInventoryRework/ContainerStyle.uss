@@ -7,14 +7,14 @@
 
 .inventory {
     flex-grow: 1;
-    width: 50%;
+    width: 80%;
     height: 75%;
-    max-width: 50%;
+    max-width: 80%;
     max-height: 75%;
     padding-left: 32px;
     padding-right: 32px;
-    padding-top: 24px;
-    padding-bottom: 24px;
+    padding-top: 32px;
+    padding-bottom: 32px;
     background-image: resource('sprites/ui/container_background');
     -unity-background-scale-mode: scale-and-crop;
 }

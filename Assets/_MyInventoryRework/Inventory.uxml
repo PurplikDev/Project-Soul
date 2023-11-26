@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/_MyInventoryRework/ContainerStyle.uss?fileID=7433441132597879392&amp;guid=8dd38d4c17be74f1baa19b9c760f8269&amp;type=3#ContainerStyle" />
     <ui:VisualElement name="Container" class="container">
-        <ui:VisualElement name="Inventory" class="inventory" style="flex-direction: row; width: 77%; max-width: 100%; flex-wrap: nowrap; flex-grow: 1; justify-content: center; align-items: stretch; height: 74%; max-height: 75%;">
+        <ui:VisualElement name="Inventory" class="inventory" style="flex-direction: row; flex-wrap: nowrap; flex-grow: 1; justify-content: center; align-items: stretch;">
             <ui:VisualElement name="CharacterSlots" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; width: 100%; justify-content: flex-start;">
                 <ui:VisualElement name="Equipment" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; width: auto; justify-content: flex-start; height: auto;">
                     <ui:Label text="Equipment" display-tooltip-when-elided="true" name="Header" class="header" />

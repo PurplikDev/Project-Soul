@@ -1,11 +1,13 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/_MyInventoryRework/GenericUI.uss?fileID=7433441132597879392&amp;guid=ed10c5c2a46b611438e83ec12f00ff40&amp;type=3#GenericUI" />
-    <ui:VisualElement name="Pause" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.29); width: 30%; font-size: 75px; padding-left: 35px; padding-right: 35px; padding-top: 35px; padding-bottom: 35px; justify-content: center; align-items: flex-start; -unity-font-style: bold; color: rgb(255, 255, 255); margin-left: 35px; margin-right: 35px; margin-top: 35px; margin-bottom: 35px;">
-        <ui:Label tabindex="-1" text="Pause" display-tooltip-when-elided="true" name="PauseLabel" style="position: absolute; top: 275px; font-size: 100px; flex-grow: 0;" />
-        <ui:VisualElement name="ButtonHolder" style="background-color: rgba(0, 0, 0, 0); width: 100%; height: auto; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; align-items: flex-start; -unity-font-style: bold;">
-            <ui:Button text="Resume" display-tooltip-when-elided="true" name="ResumeButton" class="button" style="-unity-font-style: bold;" />
-            <ui:Button text="Options" display-tooltip-when-elided="true" name="OptionsButton" class="button" />
-            <ui:Button text="Quit" display-tooltip-when-elided="true" name="QuitButton" class="button" />
+    <ui:VisualElement name="Background" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.75); width: 100%; height: 100px;">
+        <ui:VisualElement name="PausePanel" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.75); width: 30%; font-size: 75px; padding-left: 35px; padding-right: 35px; padding-top: 35px; padding-bottom: 35px; justify-content: center; align-items: flex-start; -unity-font-style: bold; color: rgb(255, 255, 255); margin-left: 35px; margin-right: 35px; margin-top: 35px; margin-bottom: 35px;">
+            <ui:Label tabindex="-1" text="Pause" display-tooltip-when-elided="true" name="PauseLabel" style="position: absolute; top: 275px; font-size: 100px; flex-grow: 0;" />
+            <ui:VisualElement name="ButtonHolder" style="background-color: rgba(0, 0, 0, 0); width: 100%; height: auto; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; align-items: flex-start; -unity-font-style: bold;">
+                <ui:Button text="Resume" display-tooltip-when-elided="true" name="ResumeButton" class="button" style="-unity-font-style: bold; background-color: rgba(0, 0, 0, 0);" />
+                <ui:Button text="Options" display-tooltip-when-elided="true" name="OptionsButton" class="button" style="background-color: rgba(0, 0, 0, 0);" />
+                <ui:Button text="Quit" display-tooltip-when-elided="true" name="QuitButton" class="button" style="background-color: rgba(0, 0, 0, 0);" />
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
