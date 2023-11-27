@@ -87,11 +87,20 @@ public class DungeonGenerator : MonoBehaviour
     
     private bool CheckAroundRoom(int y, int x, bool doubleRoom, Direction direction) {
         int failsafe = 0;
-        int limitI = doubleRoom == true && direction == Direction.UP || direction == Direction.DOWN ? 3 : 2;
-        int limitJ = doubleRoom == true && direction == Direction.LEFT || direction == Direction.RIGHT ? 3 : 2;
+        int startY = -1;
+        int startX = -1;
+        int limitY = 2;
+        int limitX = 2;
 
-        for (int i = -1; i < limitI; i++) {
-            for(int j = -1; j < limitJ; j++) {
+        if (doubleRoom) {
+            startY = direction == Direction.UP ? -2 : -1;
+            startX = direction == Direction.LEFT ? -2 : -1;
+            limitY = direction == Direction.DOWN ? 3 : 2;
+            limitX = direction == Direction.RIGHT ? 3 : 2;
+        }
+
+        for (int i = startY; i < limitY; i++) {
+            for(int j = startX; j < limitX; j++) {
                 try {
                     if (dungeon[y + i, x + j].Type != TileType.EMPTY) {
                         return false;
