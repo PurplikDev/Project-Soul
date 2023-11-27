@@ -11,13 +11,15 @@ namespace roguelike.enviroment.entity.player.statemachine {
 
         Vector2 CurrentMovementInput;
         internal system.input.PlayerInput input { get; private set; }
+        internal Player Player { get; private set; }
+
 
         // PUBLIC
 
         public bool IsMoving { get; private set; }
         public bool IsSprinting { get; private set; }
         public CharacterController CharacterController { get; private set; }
-        public Vector3 GetCurrentMovementSpeed { get { return new Vector3(CurrentMovementInput.x, 0, CurrentMovementInput.y) * 5; } }
+        public Vector3 GetCurrentMovementSpeed { get { return new Vector3(CurrentMovementInput.x, 0, CurrentMovementInput.y) * Player.Speed.Value; } }
         public Vector3 GetCurrentSprintSpeed { get { return GetCurrentMovementSpeed * 1.45f; } }
 
 
@@ -25,6 +27,7 @@ namespace roguelike.enviroment.entity.player.statemachine {
         void Awake() {
             input = GameManager.Instance.Input;
             CharacterController = GetComponent<CharacterController>();
+            Player = GetComponent<Player>();
 
             states.Add(PlayerStates.IDLE, new PlayerIdleState(this));
             states.Add(PlayerStates.WALK, new PlayerWalkState(this));

@@ -45,6 +45,7 @@ namespace roguelike.rendering.ui {
 
                 if(clickedSlot is ResultSlot) {
                     ((CraftingStation)deployable).RecipeTakenEvent.Invoke();
+                    //UpdateCraftingSlots();
                     return;
                 }
 
@@ -59,6 +60,12 @@ namespace roguelike.rendering.ui {
                 } else {
                     _resultSlot.ForceStack(ItemStack.EMPTY);
                 }
+            }
+        }
+
+        private void UpdateCraftingSlots() { 
+            foreach(ItemSlot slot in _craftingSlots) {
+                slot.UpdateSlotEvent.Invoke();
             }
         }
     }

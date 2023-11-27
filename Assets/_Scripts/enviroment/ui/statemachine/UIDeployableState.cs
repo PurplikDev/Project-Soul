@@ -1,7 +1,6 @@
 using roguelike.enviroment.world.deployable;
 using roguelike.rendering.ui;
 using roguelike.system.manager;
-using UnityEngine;
 
 namespace roguelike.enviroment.ui.statemachine { 
     public class UIDeployableState: UIBaseState {
@@ -9,13 +8,11 @@ namespace roguelike.enviroment.ui.statemachine {
         private Deployable deployable;
         private DeployableRenderer renderer;
 
-        public UIDeployableState(UIStateMachine uiStateMachine) : base(uiStateMachine) { }
+        public UIDeployableState(UIStateMachine uiStateMachine, Deployable deployable) : base(uiStateMachine) {
+            this.deployable = deployable;
+        }
 
         public override void EnterState() {
-
-            // todo: replace with logic that takes in a deployable that is being currently interacted with
-
-            deployable = GameObject.Find("StorageCrate").GetComponent<Deployable>();
             deployable.StationUIHolder.SetActive(true);
             renderer = deployable.GetRenderer(GameManager.Instance.Player);
         }
@@ -23,6 +20,7 @@ namespace roguelike.enviroment.ui.statemachine {
         public override void ExitState() {
             deployable.StationUIHolder.SetActive(false);
             renderer = null;
+            stateMachine.OnDeployableExit();
         }
 
         public override void UpdateState() { }

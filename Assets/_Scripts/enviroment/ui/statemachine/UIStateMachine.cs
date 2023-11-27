@@ -1,4 +1,5 @@
 using roguelike.core.statemachine;
+using roguelike.enviroment.world.deployable;
 using roguelike.system.manager;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,6 +11,9 @@ namespace roguelike.enviroment.ui.statemachine {
 
         private bool _isInventory = false;
         private bool _isPause = false;
+        private bool _isDeployable = false;
+
+        private UIDeployableState _deployableState;
 
         public GameObject InventoryUIHolder;
         public GameObject PauseUIHolder;
@@ -20,18 +24,16 @@ namespace roguelike.enviroment.ui.statemachine {
             states.Add(UIStates.NONE, new UINoneState(this));
             states.Add(UIStates.INVENTORY, new UIInventoryState(this, InventoryUIHolder));
             states.Add(UIStates.PAUSE, new UIPauseState(this, PauseUIHolder));
-            states.Add(UIStates.DEPLOYABLE, new UIDeployableState(this));
 
             currentState = states[UIStates.NONE];
             // some sort of interaction with objects logic call here
 
             input.UIControls.Inventory.performed += OnInventory;
             input.UIControls.Pause.performed += OnPause;
-            input.UIControls.Test.performed += OnTest;
         }
 
         void OnInventory(InputAction.CallbackContext context) {
-            if (!_isInventory && !_isPause) {
+            if (!_isInventory && !_isPause && !_isDeployable) {
                 TransitionToState(UIStates.INVENTORY);
                 _isInventory = true;
             } else if(_isInventory){
@@ -41,7 +43,7 @@ namespace roguelike.enviroment.ui.statemachine {
         }
 
         void OnPause(InputAction.CallbackContext context) {
-            if(_isPause || _isInventory) {
+            if(_isPause || _isInventory || _isDeployable) {
                 TransitionToState(UIStates.NONE);
                 _isInventory = false;
                 _isPause = false;
@@ -51,14 +53,24 @@ namespace roguelike.enviroment.ui.statemachine {
             }
         }
 
-        void OnTest(InputAction.CallbackContext context) {
-
-            // todo: replace with proper logic for walking up to a station and using it
-
-            TransitionToState(UIStates.DEPLOYABLE);
+        public void OnDeployable(Deployable deployable) {
+            if(!_isInventory && !_isPause && !_isDeployable) {
+                _deployableState = new UIDeployableState(this, deployable);
+                states.Add(UIStates.DEPLOYABLE, _deployableState);
+                TransitionToState(UIStates.DEPLOYABLE);
+                _isDeployable = true;
+            } else if (_isDeployable) {
+                TransitionToState(UIStates.NONE);
+                OnDeployableExit();
+            }
         }
 
-            void OnEnable() {
+        internal void OnDeployableExit() {
+            states.Remove(UIStates.DEPLOYABLE);
+            _isDeployable = false;
+        }
+
+        void OnEnable() {
             input.UIControls.Enable();
         }
 

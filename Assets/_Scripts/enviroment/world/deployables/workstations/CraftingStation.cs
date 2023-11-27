@@ -27,6 +27,12 @@ namespace roguelike.enviroment.world.deployable.workstation {
             RecipeTakenEvent += Craft;
         }
 
+        private void Update() {
+            if (Input.GetKeyDown(KeyCode.F)) {
+                Interact(GameObject.Find("Player").GetComponent<Player>());
+            }
+        }
+
         public override DeployableRenderer GetRenderer(Player interactor) {
             return new CraftingRenderer(interactor.Inventory, this, StationUIHolder.GetComponent<UIDocument>());
         }

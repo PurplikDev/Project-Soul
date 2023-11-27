@@ -12,7 +12,7 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
+  - Objects
   - 
   - 
   - 
@@ -49,4 +49,13 @@ TagManager:
     locked: 0
   - name: PlayerCharacter
     uniqueID: 180855149
+    locked: 0
+  - name: Objects
+    uniqueID: 2275966343
+    locked: 0
+  - name: Walls
+    uniqueID: 840865383
+    locked: 0
+  - name: Ground
+    uniqueID: 3543638645
     locked: 0
