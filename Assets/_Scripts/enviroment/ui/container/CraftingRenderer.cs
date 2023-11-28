@@ -22,18 +22,18 @@ namespace roguelike.rendering.ui {
         protected override void RegisterDeployableSlots() {
             int index = 0;
             foreach(ItemSlot slot in _craftingSlotsRoot.Children().ToList()) {
-                RegisterSlot(slot, deployable.StationInventory[index]);
+                _craftingSlots.Add(RegisterSlot(slot, deployable.StationInventory[index]));
                 index++;
             }
             RegisterSlot(_resultSlot, ((CraftingStation)deployable).ResultStack);
         }
 
-        private void RegisterSlot(ItemSlot slot, ItemStack stack) {
+        private ItemSlot RegisterSlot(ItemSlot slot, ItemStack stack) {
             slot.SetStack(stack);
             slot.Renderer = this;
             slot.SlotIndex = itemSlots.Count;
-            _craftingSlots.Add(slot);
             itemSlots.Add(slot);
+            return slot;
         }
 
         protected override void SyncVisualToInternalSingle(ItemSlot clickedSlot) {
@@ -45,11 +45,10 @@ namespace roguelike.rendering.ui {
 
                 if(clickedSlot is ResultSlot) {
                     ((CraftingStation)deployable).RecipeTakenEvent.Invoke();
-                    //UpdateCraftingSlots();
-                    return;
+                    SyncCraftingSlots();
                 }
 
-                if(!(deployable.StationInventory[workingIndex].IsEmpty() && stack.IsEmpty())) {
+                if(!(clickedSlot is ResultSlot) && !(deployable.StationInventory[workingIndex].IsEmpty() && stack.IsEmpty())) {
                     deployable.StationInventory[workingIndex] = stack;
                 }
 
@@ -63,9 +62,10 @@ namespace roguelike.rendering.ui {
             }
         }
 
-        private void UpdateCraftingSlots() { 
+        private void SyncCraftingSlots() {
             foreach(ItemSlot slot in _craftingSlots) {
-                slot.UpdateSlotEvent.Invoke();
+                int workingIndex = slot.SlotIndex - Inventory.InventorySize;
+                slot.SetStack(deployable.StationInventory[workingIndex]);
             }
         }
     }

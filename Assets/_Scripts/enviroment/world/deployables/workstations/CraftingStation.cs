@@ -41,7 +41,6 @@ namespace roguelike.enviroment.world.deployable.workstation {
             if(IsStationEmpty()) { // no idea why, but empty table has a recipe????
                 return null;
             }
-
             var recipe = RecipeManager.FindRecipe(Recipe.RecipeType.SHAPELESS_CRAFTING, StationInventory.ToArray());
             if(recipe == null) {
                 recipe = RecipeManager.FindRecipe(Recipe.RecipeType.SHAPED_CRAFTING, StationInventory.ToArray());
@@ -52,12 +51,7 @@ namespace roguelike.enviroment.world.deployable.workstation {
         }
 
         protected virtual void Craft() {
-
-            if(LastRecipe == null) {
-                return;
-            }
-
-            var ingredients = LastRecipe.Ingredients;
+            var ingredients = new List<ItemStack>(LastRecipe.Ingredients);
             foreach (ItemStack currentItem in StationInventory) {
                 for (int i = ingredients.Count - 1; i > -1; i--) {
                     if (currentItem.Item == ingredients[i].Item && currentItem.StackSize >= ingredients[i].StackSize) {
