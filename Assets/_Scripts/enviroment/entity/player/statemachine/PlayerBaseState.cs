@@ -20,5 +20,11 @@ namespace roguelike.enviroment.entity.player.statemachine {
                 return PlayerStates.IDLE;
             }
         }
+
+        public override void OnTriggerEnter(Collider collider) { }
+
+        public override void OnTriggerExit(Collider collider) { }
+
+        public override void OnTriggerStay(Collider collider) { }
     }
 }

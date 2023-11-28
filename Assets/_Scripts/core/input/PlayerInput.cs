@@ -184,6 +184,74 @@ namespace roguelike.system.input
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""EnviromentControls"",
+            ""id"": ""a9a72a03-97cc-4838-a640-67766f99537d"",
+            ""actions"": [
+                {
+                    ""name"": ""PrimaryAction"",
+                    ""type"": ""Button"",
+                    ""id"": ""b14b4d30-d240-458e-94ac-ca29a15cf287"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SecondaryAction"",
+                    ""type"": ""Button"",
+                    ""id"": ""46edc469-cc80-43d7-a6ba-ba9b9f5ed2e9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MouseMove"",
+                    ""type"": ""Value"",
+                    ""id"": ""fde467c2-8816-4622-83ba-4f013ec23f84"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""9fd3a07c-cff5-4319-a4b7-8f24f056272d"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""PrimaryAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4d0b8edd-64da-46b7-9b8a-3edc85037ff6"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""SecondaryAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0a4d3b9c-b261-4b74-80e4-398553998f96"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""MouseMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -214,6 +282,11 @@ namespace roguelike.system.input
             m_UIControls_Pause = m_UIControls.FindAction("Pause", throwIfNotFound: true);
             m_UIControls_Inventory = m_UIControls.FindAction("Inventory", throwIfNotFound: true);
             m_UIControls_Test = m_UIControls.FindAction("Test", throwIfNotFound: true);
+            // EnviromentControls
+            m_EnviromentControls = asset.FindActionMap("EnviromentControls", throwIfNotFound: true);
+            m_EnviromentControls_PrimaryAction = m_EnviromentControls.FindAction("PrimaryAction", throwIfNotFound: true);
+            m_EnviromentControls_SecondaryAction = m_EnviromentControls.FindAction("SecondaryAction", throwIfNotFound: true);
+            m_EnviromentControls_MouseMove = m_EnviromentControls.FindAction("MouseMove", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -387,6 +460,68 @@ namespace roguelike.system.input
             }
         }
         public UIControlsActions @UIControls => new UIControlsActions(this);
+
+        // EnviromentControls
+        private readonly InputActionMap m_EnviromentControls;
+        private List<IEnviromentControlsActions> m_EnviromentControlsActionsCallbackInterfaces = new List<IEnviromentControlsActions>();
+        private readonly InputAction m_EnviromentControls_PrimaryAction;
+        private readonly InputAction m_EnviromentControls_SecondaryAction;
+        private readonly InputAction m_EnviromentControls_MouseMove;
+        public struct EnviromentControlsActions
+        {
+            private @PlayerInput m_Wrapper;
+            public EnviromentControlsActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+            public InputAction @PrimaryAction => m_Wrapper.m_EnviromentControls_PrimaryAction;
+            public InputAction @SecondaryAction => m_Wrapper.m_EnviromentControls_SecondaryAction;
+            public InputAction @MouseMove => m_Wrapper.m_EnviromentControls_MouseMove;
+            public InputActionMap Get() { return m_Wrapper.m_EnviromentControls; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(EnviromentControlsActions set) { return set.Get(); }
+            public void AddCallbacks(IEnviromentControlsActions instance)
+            {
+                if (instance == null || m_Wrapper.m_EnviromentControlsActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_EnviromentControlsActionsCallbackInterfaces.Add(instance);
+                @PrimaryAction.started += instance.OnPrimaryAction;
+                @PrimaryAction.performed += instance.OnPrimaryAction;
+                @PrimaryAction.canceled += instance.OnPrimaryAction;
+                @SecondaryAction.started += instance.OnSecondaryAction;
+                @SecondaryAction.performed += instance.OnSecondaryAction;
+                @SecondaryAction.canceled += instance.OnSecondaryAction;
+                @MouseMove.started += instance.OnMouseMove;
+                @MouseMove.performed += instance.OnMouseMove;
+                @MouseMove.canceled += instance.OnMouseMove;
+            }
+
+            private void UnregisterCallbacks(IEnviromentControlsActions instance)
+            {
+                @PrimaryAction.started -= instance.OnPrimaryAction;
+                @PrimaryAction.performed -= instance.OnPrimaryAction;
+                @PrimaryAction.canceled -= instance.OnPrimaryAction;
+                @SecondaryAction.started -= instance.OnSecondaryAction;
+                @SecondaryAction.performed -= instance.OnSecondaryAction;
+                @SecondaryAction.canceled -= instance.OnSecondaryAction;
+                @MouseMove.started -= instance.OnMouseMove;
+                @MouseMove.performed -= instance.OnMouseMove;
+                @MouseMove.canceled -= instance.OnMouseMove;
+            }
+
+            public void RemoveCallbacks(IEnviromentControlsActions instance)
+            {
+                if (m_Wrapper.m_EnviromentControlsActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            public void SetCallbacks(IEnviromentControlsActions instance)
+            {
+                foreach (var item in m_Wrapper.m_EnviromentControlsActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_EnviromentControlsActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        public EnviromentControlsActions @EnviromentControls => new EnviromentControlsActions(this);
         private int m_PCSchemeIndex = -1;
         public InputControlScheme PCScheme
         {
@@ -406,6 +541,12 @@ namespace roguelike.system.input
             void OnPause(InputAction.CallbackContext context);
             void OnInventory(InputAction.CallbackContext context);
             void OnTest(InputAction.CallbackContext context);
+        }
+        public interface IEnviromentControlsActions
+        {
+            void OnPrimaryAction(InputAction.CallbackContext context);
+            void OnSecondaryAction(InputAction.CallbackContext context);
+            void OnMouseMove(InputAction.CallbackContext context);
         }
     }
 }

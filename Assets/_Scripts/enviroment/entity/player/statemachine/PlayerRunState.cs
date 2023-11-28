@@ -13,17 +13,6 @@ namespace roguelike.enviroment.entity.player.statemachine {
             playerStateMachine.CharacterController.SimpleMove(playerStateMachine.GetCurrentSprintSpeed);
         }
 
-        public override void ExitState() {
-        }
-
-        public override void OnTriggerEnter(Collider collider) {
-        }
-
-        public override void OnTriggerExit(Collider collider) {
-        }
-
-        public override void OnTriggerStay(Collider collider) {
-            
-        }
+        public override void ExitState() { }
     }
 }

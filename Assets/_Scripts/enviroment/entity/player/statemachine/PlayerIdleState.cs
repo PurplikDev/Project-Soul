@@ -7,21 +7,9 @@ namespace roguelike.enviroment.entity.player.statemachine {
 
         public PlayerIdleState(PlayerStateMachine stateMachine) : base(stateMachine, PlayerStates.IDLE) { }
 
-        public override void EnterState() {
-        }
+        public override void EnterState() { }
 
-        public override void ExitState() {
-        }
-
-        public override void OnTriggerEnter(Collider collider) {
-        }
-
-        public override void OnTriggerExit(Collider collider) {
-        }
-
-        public override void OnTriggerStay(Collider collider) {
-            
-        }
+        public override void ExitState() { }
 
         public override void UpdateState() {
             if(!playerStateMachine.CharacterController.isGrounded) {

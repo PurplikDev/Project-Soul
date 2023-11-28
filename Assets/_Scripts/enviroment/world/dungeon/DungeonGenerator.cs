@@ -29,7 +29,7 @@ public class DungeonGenerator : MonoBehaviour
 
         InstantiateTiles();
 
-        var starterRoom = new Room(4, 4, TileType.ROOM);
+        var starterRoom = new Room(4, 4, TileType.ROOM, RoomType.STARTER);
         dungeon[4, 4] = starterRoom;
         rooms.Add(starterRoom);
         while (rooms.Count > 0) {
@@ -51,10 +51,12 @@ public class DungeonGenerator : MonoBehaviour
                 }
             }
         }
+
+
     }
 
     private void CheckAndGenerate(int y, int x, Direction direction) {
-        bool doubleRoom = Mathematicus.ChanceIn(50f);
+        bool doubleRoom = Mathematicus.ChanceIn(65f);
         Direction randomDirection = RandomDirection();
         while(randomDirection == direction) { randomDirection = RandomDirection(); }
         try {
@@ -65,15 +67,13 @@ public class DungeonGenerator : MonoBehaviour
             Debug.LogWarning("Coordinates out of range");
         }
     }
-
-        void InstantiateTiles() {
+    void InstantiateTiles() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                dungeon[i, j] = new Room(i, j, TileType.EMPTY);
+                dungeon[i, j] = new Room(i, j, TileType.EMPTY, RoomType.NONE);
             }
         }
     }
-
     private void LogDungeon() {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < dungeon.GetLength(0); i++) {
@@ -102,7 +102,7 @@ public class DungeonGenerator : MonoBehaviour
         for (int i = startY; i < limitY; i++) {
             for(int j = startX; j < limitX; j++) {
                 try {
-                    if (dungeon[y + i, x + j].Type != TileType.EMPTY) {
+                    if (dungeon[y + i, x + j].TileType != TileType.EMPTY) {
                         return false;
                     }
                 } catch(IndexOutOfRangeException) {
@@ -146,18 +146,31 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
-    class Room {
+    struct Room {
         public int y, x;
-        public TileType Type { get; private set; }
+        public TileType TileType { get; private set; }
+        public RoomType RoomType { get; private set; }
 
-        public Room(int y, int x, TileType type) {
+        public Room(int y, int x, TileType type, RoomType roomType = RoomType.NORMAL) {
             this.y = y;
             this.x = x;
-            Type = type;
+            TileType = type;
+            RoomType = roomType;
         }
 
         public override string ToString() {
-            return "[" + Type.ToString()[0] + "]";
+            switch (RoomType) {
+                case RoomType.NONE:
+                    return "|" + TileType.ToString()[0] + "|";
+                case RoomType.NORMAL:
+                    return "[" + TileType.ToString()[0] + "]";
+                case RoomType.FINAL:
+                    return "(" + TileType.ToString()[0] + ")";
+                case RoomType.TREASURE:
+                    return "{" + TileType.ToString()[0] + "}";
+                default:
+                    return "I" + TileType.ToString()[0] + "I";
+            }
         }
     }
 
@@ -165,5 +178,13 @@ public class DungeonGenerator : MonoBehaviour
         EMPTY,
         ROOM,
         CORRIDOR
+    }
+
+    public enum RoomType {
+        NONE,
+        NORMAL,
+        STARTER,
+        FINAL,
+        TREASURE
     }
 }
