@@ -1,4 +1,3 @@
-using roguelike.core.utils;
 using roguelike.core.utils.mathematicus;
 using System;
 using System.Collections.Generic;
@@ -6,23 +5,28 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using static roguelike.core.utils.DirectionUtils;
+using Random = UnityEngine.Random;
 
 public class DungeonGenerator : MonoBehaviour
 {
-
-    private Room[,] dungeon = new Room[9,9];
+    private int dungeonSize = 11;
+    private Room[,] dungeon;
     private List<Room> rooms;
     private List<Room> generatedRooms;
     private int amountOfrooms;
 
     void Start() {
-        do {
-            GenerateDungeon();
-        } while (amountOfrooms < 8);
-        LogDungeon();
+        dungeon = new Room[dungeonSize, dungeonSize];
+        for(int i = 0; i < 50; i++) {
+            do {
+                GenerateDungeon();
+            } while(amountOfrooms < 8);
+            FilloutDungeon();
+            LogDungeon();
+        }
     }
 
-    void GenerateDungeon() {
+    private void GenerateDungeon() {
         rooms = new List<Room>(); // just to make sure that the list is empty
         generatedRooms = new List<Room>(); // just to make sure that the list is empty
         amountOfrooms = 0;
@@ -33,7 +37,6 @@ public class DungeonGenerator : MonoBehaviour
         dungeon[4, 4] = starterRoom;
         rooms.Add(starterRoom);
         while (rooms.Count > 0) {
-
             Room currentRoom = rooms.First();
 
             int curX = currentRoom.x;
@@ -51,8 +54,11 @@ public class DungeonGenerator : MonoBehaviour
                 }
             }
         }
+    }
 
-
+    private void FilloutDungeon() {
+        Room room = generatedRooms[Random.Range(0, generatedRooms.Count())];
+        dungeon[room.y, room.x].RoomType = RoomType.FINAL;
     }
 
     private void CheckAndGenerate(int y, int x, Direction direction) {
@@ -61,22 +67,31 @@ public class DungeonGenerator : MonoBehaviour
         while(randomDirection == direction) { randomDirection = RandomDirection(); }
         try {
             if (CheckAroundRoom(y, x, doubleRoom, randomDirection)) {
-                CreateRoom(y, x, doubleRoom, direction, randomDirection);
+                CreateRoom(y, x, doubleRoom, direction, getOpposite(randomDirection));
             }
-        } catch (IndexOutOfRangeException) {
-            Debug.LogWarning("Coordinates out of range");
-        }
+        } catch (IndexOutOfRangeException) { }
     }
-    void InstantiateTiles() {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
+
+    private void InstantiateTiles() {
+        for (int i = 0; i < dungeonSize; i++) {
+            for (int j = 0; j < dungeonSize; j++) {
                 dungeon[i, j] = new Room(i, j, TileType.EMPTY, RoomType.NONE);
             }
         }
     }
+
     private void LogDungeon() {
         StringBuilder builder = new StringBuilder();
+        builder.Append("   ");
+        for(int i = 0; i < dungeon.GetLength(0); i++) {
+            string space = i < 10 ? " " : "";
+            builder.Append(space + i + " ");
+        }
+        builder.AppendLine("\n   ------------------------------------------------------");
+
         for (int i = 0; i < dungeon.GetLength(0); i++) {
+            string separator = i < 10 ? " |" : "|";
+            builder.Append(i + separator);
             for (int j = 0; j < dungeon.GetLength(1); j++) {
                 builder.Append(dungeon[i, j].ToString());
             }
@@ -98,9 +113,12 @@ public class DungeonGenerator : MonoBehaviour
             limitY = direction == Direction.DOWN ? 3 : 2;
             limitX = direction == Direction.RIGHT ? 3 : 2;
         }
-
+        StringBuilder builder = new StringBuilder();
+        builder.AppendLine("Center of check: y" + y + " | x" + x);
         for (int i = startY; i < limitY; i++) {
             for(int j = startX; j < limitX; j++) {
+                builder.AppendLine("Checking in: y" + (y + i) + " | x" + (x + j));
+
                 try {
                     if (dungeon[y + i, x + j].TileType != TileType.EMPTY) {
                         return false;
@@ -112,6 +130,7 @@ public class DungeonGenerator : MonoBehaviour
                 
             }
         }
+        if(doubleRoom) { Debug.LogWarning(builder); }
         return failsafe > 3 ? false : true;
     }
 
@@ -149,19 +168,21 @@ public class DungeonGenerator : MonoBehaviour
     struct Room {
         public int y, x;
         public TileType TileType { get; private set; }
-        public RoomType RoomType { get; private set; }
+        public RoomType RoomType;
+        public bool isDoubleRoom;
 
         public Room(int y, int x, TileType type, RoomType roomType = RoomType.NORMAL) {
             this.y = y;
             this.x = x;
             TileType = type;
             RoomType = roomType;
+            isDoubleRoom = false;
         }
 
         public override string ToString() {
             switch (RoomType) {
                 case RoomType.NONE:
-                    return "|" + TileType.ToString()[0] + "|";
+                    return " " + TileType.ToString()[0] + " ";
                 case RoomType.NORMAL:
                     return "[" + TileType.ToString()[0] + "]";
                 case RoomType.FINAL:
@@ -169,7 +190,7 @@ public class DungeonGenerator : MonoBehaviour
                 case RoomType.TREASURE:
                     return "{" + TileType.ToString()[0] + "}";
                 default:
-                    return "I" + TileType.ToString()[0] + "I";
+                    return "|" + TileType.ToString()[0] + "|";
             }
         }
     }

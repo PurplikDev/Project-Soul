@@ -28,7 +28,7 @@ namespace roguelike.enviroment.world.deployable.workstation {
         }
 
         private void Update() {
-            if (Input.GetKeyDown(KeyCode.F)) {
+            if (Input.GetKeyDown(KeyCode.F)) { // remove this when proper interaction is added
                 Interact(GameObject.Find("Player").GetComponent<Player>());
             }
         }
