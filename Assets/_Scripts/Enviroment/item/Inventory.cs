@@ -18,6 +18,7 @@ namespace roguelike.core.item {
             FillAllSlots();
         }
 
+        // todo: proper implementation of this method by loading content from a safe file or filling it with air
         private void FillAllSlots() {
             for (int i = 0; i < InventorySize; i++) {
                 if (i % 2 != 0) {

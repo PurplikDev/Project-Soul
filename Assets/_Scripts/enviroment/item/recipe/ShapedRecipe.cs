@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using roguelike.core.utils;
 using UnityEngine;
 
 namespace roguelike.core.item.recipe {
@@ -7,7 +8,7 @@ namespace roguelike.core.item.recipe {
         public ShapedRecipe(List<ItemStack> ingredients, ItemStack result)
             : base(ingredients, result) {
             if(ingredients.Count != 9)
-                { Debug.LogError("Shaped recipe isn't the correct size!"); }
+                { Debug.LogError(GlobalStaticValues.SHAPED_RECIPE_SIZE_ERROR); }
         }
 
         public override bool CheckRecipe(params ItemStack[] inputItems) {

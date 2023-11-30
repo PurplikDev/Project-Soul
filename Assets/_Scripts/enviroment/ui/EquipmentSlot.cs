@@ -12,8 +12,6 @@ public class EquipmentSlot : ItemSlot
         _equipmentTypeIcon = new Image();
         Add(_equipmentTypeIcon);
     } 
-    
-    // todo: add background images for equipment slot to show what equipment type it is
 
     public override bool SetStack(ItemStack stack) {
         if (stack.IsEmpty() || stack.Item is EquipmentItem equipmentItem && equipmentItem.ItemEquipmentType == SlotEquipmentType)

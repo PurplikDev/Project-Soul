@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 public class ResultSlot : ItemSlot
 {
-    public ResultSlot() : base() {} // todo: add background images for equipment slot to show what equipment type it is
+    public ResultSlot() : base() {}
 
     public override bool SetStack(ItemStack stack) {
         if(stack.IsEmpty())

@@ -15,8 +15,6 @@ namespace roguelike.rendering.ui {
 
             RegisterEquipmentSlots();
             RegisterTrinketSlots();
-
-            //UpdateUIEvent += SyncInternalToVisual;
         }
 
         protected override void SyncVisualToInternalSingle(ItemSlot clickedSlot) {

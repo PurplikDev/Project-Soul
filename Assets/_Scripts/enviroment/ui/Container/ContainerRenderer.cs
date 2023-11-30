@@ -131,13 +131,6 @@ namespace roguelike.rendering.ui {
 
         // MISC METHODS
 
-        /// <summary>
-        /// Method that syncs item slot that was clicked with it's internal counterpart.
-        /// </summary>
-        //protected abstract void SyncInternalToVisual(); // Updates Visual inventory to be like internal
-        //protected abstract void SyncVisualToInternal(); // Updates Internal inventory to be like visual
-
-        //protected abstract void SyncInternalToVisualSingle(ItemSlot clickedSlot); // Updates Visual inventory to be like internal
         protected abstract void SyncVisualToInternalSingle(ItemSlot clickedSlot); // Updates Internal inventory to be like visual
     }
 }

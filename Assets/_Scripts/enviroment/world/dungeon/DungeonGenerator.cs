@@ -27,8 +27,8 @@ public class DungeonGenerator : MonoBehaviour
     }
 
     private void GenerateDungeon() {
-        rooms = new List<Room>(); // just to make sure that the list is empty
-        generatedRooms = new List<Room>(); // just to make sure that the list is empty
+        rooms = new List<Room>();
+        generatedRooms = new List<Room>();
         amountOfrooms = 0;
 
         InstantiateTiles();
@@ -80,6 +80,7 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
+    // this method is indended for debuging only!!!
     private void LogDungeon() {
         StringBuilder builder = new StringBuilder();
         builder.Append("   ");

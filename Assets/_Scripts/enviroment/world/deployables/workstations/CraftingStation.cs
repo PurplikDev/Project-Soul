@@ -38,9 +38,6 @@ namespace roguelike.enviroment.world.deployable.workstation {
         }
 
         public virtual Recipe CheckForRecipes() {
-            if(IsStationEmpty()) { // no idea why, but empty table has a recipe????
-                return null;
-            }
             var recipe = RecipeManager.FindRecipe(Recipe.RecipeType.SHAPELESS_CRAFTING, StationInventory.ToArray());
             if(recipe == null) {
                 recipe = RecipeManager.FindRecipe(Recipe.RecipeType.SHAPED_CRAFTING, StationInventory.ToArray());
@@ -60,15 +57,6 @@ namespace roguelike.enviroment.world.deployable.workstation {
                     }
                 }
             }
-        }
-
-        private bool IsStationEmpty() {
-            foreach(ItemStack stack in StationInventory) {
-                if(!stack.IsEmpty()) {
-                    return false;
-                }
-            }
-            return true;
         }
     }
 }
