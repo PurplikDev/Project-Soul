@@ -1,5 +1,4 @@
 using roguelike.core.item;
-using roguelike.enviroment.entity.player.statemachine;
 using roguelike.enviroment.ui.statemachine;
 using roguelike.system.input;
 
@@ -13,16 +12,19 @@ namespace roguelike.enviroment.entity.player {
 
         protected override void Awake() {
             UIStateMachine = GetComponent<UIStateMachine>();
-            PlayerInteractor = new PlayerInteractor();
-            PlayerInput = new PlayerInput();
-            Inventory = new Inventory(this);
 
-            PlayerInput.EnviromentControls.MouseMove.performed += PlayerInteractor.UpdateInteractor;
+            // input needs to be created first!!!!!
+            PlayerInput = new PlayerInput();
+            PlayerInput.Enable();
+
+            Inventory = new Inventory(this);
+            PlayerInteractor = new PlayerInteractor(this);
 
             base.Awake();
         }
 
         protected override void Update() {
+            PlayerInteractor.UpdateInteractor();
         }
     }
 }

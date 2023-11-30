@@ -36,7 +36,7 @@ namespace roguelike.enviroment.ui.statemachine {
             if (!_isInventory && !_isPause && !_isDeployable) {
                 TransitionToState(UIStates.INVENTORY);
                 _isInventory = true;
-            } else if(_isInventory){
+            } else if(!_isPause){
                 TransitionToState(UIStates.NONE);
                 _isInventory = false;
             }

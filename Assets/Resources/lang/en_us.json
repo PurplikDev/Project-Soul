@@ -1,3 +1,9 @@
 {
-      "gold" : "Gold"
+    // ITEMS
+      "gold" : "Gold",
+
+    // UI
+      "ui.inventory" : "Inventory",
+      "ui.crafting_station" : "Crafting Sttation",
+      "ui.storage_crate" : "Storage Crate"
 }
