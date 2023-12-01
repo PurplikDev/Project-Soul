@@ -36,11 +36,6 @@ namespace roguelike.enviroment.entity.player {
             if(_hoveredInteractable != null && Vector3.Distance(_hoveredTransform.position, _player.Position) <= 2.5f) {
                 _hoveredInteractable.Interact(_player);
             }
-
-            string json = JsonConvert.SerializeObject(new RecipeObject(Recipe.RecipeType.SHAPELESS_CRAFTING,
-                new Ingredient(Items.TEST, 4), new Ingredient(Items.TEST2), new Ingredient(Items.TEST4, 2)
-                ), Formatting.Indented);
-            Debug.Log(json);
         }
     }  
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json;
 using roguelike.core.item;
 using roguelike.core.item.recipe;
 using roguelike.system.singleton;
@@ -9,28 +10,50 @@ using static roguelike.core.item.recipe.Recipe;
 namespace roguelike.system.manager {
     public class RecipeManager : PersistentSingleton<RecipeManager> {
 
-        private static Dictionary<RecipeType, Recipe> _recipeDatabase = new Dictionary<RecipeType, Recipe>();
+        private static Dictionary<RecipeType, List<Recipe>> _recipeDatabase = new Dictionary<RecipeType, List<Recipe>>();
+
+        private List<Recipe> _shapelessRecipes = new List<Recipe>();
 
         protected override void Awake() {
             base.Awake();
             RegisterRecipes();
+
+            foreach (KeyValuePair<RecipeType, List<Recipe>> entry in _recipeDatabase) {
+                foreach (Recipe recipe in entry.Value) {
+                    Debug.Log(recipe.Result.Item.Name);
+                    foreach(ItemStack stack in recipe.Ingredients) {
+                        Debug.Log(stack.Item.Name);
+                    }
+                }
+            }
         }
 
         public static Recipe FindRecipe(RecipeType type, ItemStack[] input) {
-            foreach(KeyValuePair<RecipeType, Recipe> entry in _recipeDatabase) {
+            foreach(KeyValuePair<RecipeType, List<Recipe>> entry in _recipeDatabase) {
                 if(entry.Key != type) { continue; }
-                if(entry.Value.CheckRecipe(input)) { return entry.Value; }
+                foreach(Recipe recipe in entry.Value) {
+                    if(recipe.CheckRecipe(input)) { return recipe; }
+                }
             }
             return null;
         }
 
+        // todo: fix registration to not be stupid
 
-        private void RegisterShapeless(List<ItemStack> ingredients, ItemStack result) {
-            _recipeDatabase.Add(RecipeType.SHAPELESS_CRAFTING, new ShapelessRecipe(ingredients, result));
+        /// <summary>
+        /// Method for registering recipes in the code.
+        /// </summary>
+        // private Recipe RegisterShapeless(ItemStack result, params ItemStack[] input) { }
+
+        /// <summary>
+        /// Method for registering recipes from a json file.
+        /// </summary>
+        private void RegisterShapeless(ShapelessRecipeObject recipeObject, List<Recipe> recipeList) {
+            recipeList.Add(recipeObject.GetRecipe());
         }
 
-        private void RegisterShaped(List<ItemStack> ingredients, ItemStack result) {
-            _recipeDatabase.Add(RecipeType.SHAPED_CRAFTING, new ShapedRecipe(ingredients, result));
+        private void RegisterShaped(ItemStack result, params ItemStack[] input) {
+
         }
 
 
@@ -41,20 +64,17 @@ namespace roguelike.system.manager {
 
             // SHAPELESS REGISTRATION
 
-            RegisterShapeless(new List<ItemStack> {
-                new ItemStack(Items.TEST, 4),
-                new ItemStack(Items.TEST4),
-            }, new ItemStack(Items.TEST3));
+            var shapelessRecipes = Resources.LoadAll<TextAsset>("data/recipes/shapeless");
 
+            foreach(var recipe in shapelessRecipes) {
+                RegisterShapeless(JsonConvert.DeserializeObject<ShapelessRecipeObject>(recipe.text.ToString()), _shapelessRecipes);
+            }
+            
+            _recipeDatabase.Add(RecipeType.SHAPELESS_CRAFTING, _shapelessRecipes);
 
 
             // SHAPED REGISTRATION
 
-            RegisterShaped(new List<ItemStack> {
-                new ItemStack(Items.TEST, 4), ItemStack.EMPTY, ItemStack.EMPTY,
-                new ItemStack(Items.TEST3), ItemStack.EMPTY, ItemStack.EMPTY,
-                new ItemStack(Items.TEST4), ItemStack.EMPTY, ItemStack.EMPTY,
-            }, new ItemStack(Items.TEST_EQUIPMENT));
         }
     }
 }

@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using static roguelike.core.item.recipe.Recipe;
 
@@ -24,13 +25,17 @@ namespace roguelike.core.item.recipe {
         public string ItemID { get; private set; }
         public int ItemAmount { get; private set; }
 
-        public Ingredient(ItemStack stack) {
-            ItemID = stack.Item.ID;
-            ItemAmount = stack.StackSize;
+        public Ingredient(ItemStack stack) : this(stack.Item, stack.StackSize) {
         }
 
         public Ingredient(Item item, int itemAmount = 1) {
             ItemID = item.ID;
+            ItemAmount = itemAmount;
+        }
+
+        [JsonConstructor]
+        public Ingredient(string itemID, int itemAmount = 1) {
+            ItemID = itemID;
             ItemAmount = itemAmount;
         }
 
@@ -39,15 +44,15 @@ namespace roguelike.core.item.recipe {
         }
     }
 
-    public class RecipeObject {
-        public RecipeType RecipeType;
+    public abstract class RecipeObject<T> where T : Recipe {
         public Ingredient Result;
         public Ingredient[] Ingredients;
 
-        public RecipeObject(RecipeType recipeType, Ingredient result, params Ingredient[] ingredients) {
+        public RecipeObject(Ingredient result, params Ingredient[] ingredients) {
             Result = result;
             Ingredients = ingredients;
-            RecipeType = recipeType;
         }
+
+        public abstract T GetRecipe();
     }
 }
