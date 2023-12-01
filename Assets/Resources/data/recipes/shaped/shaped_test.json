@@ -1,0 +1,11 @@
+{
+  'Result': {
+    'ItemID': 'test3',
+    'ItemAmount': 4
+  },
+  'Ingredients': [
+    { 'ItemID': 'air', 'ItemAmount': 1 }, { 'ItemID': 'air', 'ItemAmount': 1 }, { 'ItemID': 'air', 'ItemAmount': 1 },
+    { 'ItemID': 'air', 'ItemAmount': 1 }, { 'ItemID': 'air', 'ItemAmount': 1 }, { 'ItemID': 'test', 'ItemAmount': 1 },
+    { 'ItemID': 'air', 'ItemAmount': 1 }, { 'ItemID': 'air', 'ItemAmount': 1 }, { 'ItemID': 'air', 'ItemAmount': 1 }
+  ]
+}

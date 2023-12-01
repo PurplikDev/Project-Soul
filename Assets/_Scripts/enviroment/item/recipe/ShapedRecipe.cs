@@ -25,4 +25,16 @@ namespace roguelike.core.item.recipe {
             return true;
         }
     }
+
+    public class ShapedRecipeObject : RecipeObject<ShapedRecipe> {
+        public ShapedRecipeObject(Ingredient result, params Ingredient[] ingredients) : base(result, ingredients) { }
+
+        public override ShapedRecipe GetRecipe() {
+            List<ItemStack> inputItems = new List<ItemStack>();
+            foreach (Ingredient ingredient in Ingredients) {
+                inputItems.Add(ingredient.GetIngredientStack());
+            }
+            return new ShapedRecipe(inputItems, Result.GetIngredientStack());
+        }
+    }
 }

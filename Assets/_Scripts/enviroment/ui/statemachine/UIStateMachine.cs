@@ -53,6 +53,8 @@ namespace roguelike.enviroment.ui.statemachine {
             }
         }
 
+        // todo: remake this so that you can't close deployables when you are in one 
+
         public void OnDeployable(Deployable deployable) {
             if(!_isInventory && !_isPause && !_isDeployable) {
                 _deployableState = new UIDeployableState(this, deployable);
