@@ -886,6 +886,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be3ce004bb4bbf8418ed4e06e8f7582e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Floor: {fileID: 802719693532913904, guid: 98f2e7de1b21a40a5b85d8582e687129, type: 3}
+  Wall: {fileID: 2564247426491304187, guid: 687d12416170640f48060aea97853d5f, type: 3}
+  Door: {fileID: 3861844027397261973, guid: bbe0b66c5aec825438ac0393d544f2da, type: 3}
 --- !u!1 &1007216554
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace roguelike.core.utils {
     public static class DirectionUtils {
+
+        public static Direction[] Directions = { Direction.UP, Direction.DOWN, Direction.LEFT, Direction.RIGHT };
+
         public static Direction getOpposite(Direction direction) {
             switch(direction) { // i hate this piece of code, too lazy to think of a proper solution
                 case Direction.UP: return Direction.DOWN;

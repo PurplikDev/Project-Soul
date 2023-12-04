@@ -36,6 +36,7 @@ namespace roguelike.enviroment.ui.statemachine {
             if (!_isInventory && !_isPause && !_isDeployable) {
                 TransitionToState(UIStates.INVENTORY);
                 _isInventory = true;
+                _isDeployable = false;
             } else if(!_isPause){
                 TransitionToState(UIStates.NONE);
                 _isInventory = false;
@@ -47,6 +48,7 @@ namespace roguelike.enviroment.ui.statemachine {
                 TransitionToState(UIStates.NONE);
                 _isInventory = false;
                 _isPause = false;
+                _isDeployable = false;
             } else {
                 TransitionToState(UIStates.PAUSE);
                 _isPause = true;
@@ -61,9 +63,6 @@ namespace roguelike.enviroment.ui.statemachine {
                 states.Add(UIStates.DEPLOYABLE, _deployableState);
                 TransitionToState(UIStates.DEPLOYABLE);
                 _isDeployable = true;
-            } else if (_isDeployable) {
-                TransitionToState(UIStates.NONE);
-                OnDeployableExit();
             }
         }
 
