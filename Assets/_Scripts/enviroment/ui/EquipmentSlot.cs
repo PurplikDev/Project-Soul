@@ -1,6 +1,4 @@
-using Mono.Cecil;
 using roguelike.core.item;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 public class EquipmentSlot : ItemSlot

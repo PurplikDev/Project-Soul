@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using roguelike.core.item;
 using UnityEngine.UIElements;
@@ -22,7 +21,7 @@ namespace roguelike.rendering.ui {
         }
 
         protected override void SyncVisualToInternalSingle(ItemSlot clickedSlot) {
-            _inventory.Items[clickedSlot.SlotIndex] = clickedSlot.SlotStack;
+            _inventory.UpdateItemStack(clickedSlot.SlotStack, clickedSlot.SlotIndex);
         }
 
         // SLOT REGISTRATION METHODS

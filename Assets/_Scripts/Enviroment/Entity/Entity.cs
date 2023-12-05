@@ -6,7 +6,7 @@ using UnityEngine;
 using static roguelike.enviroment.entity.StatSystem.Stat;
 
 namespace roguelike.enviroment.entity {
-    public class Entity : Interactable {
+    public class Entity : MonoBehaviour {
         public Stat Health = new Stat(100);
         public Stat Speed = new Stat(5);
         public Stat Defence = new Stat(0);
@@ -35,24 +35,6 @@ namespace roguelike.enviroment.entity {
 
         public void ApplyStatModifier(StatModifier modifier) {
 
-        }
-
-
-
-        public override void Interact(Player player) {
-            
-        }
-
-        public override void OnHoverEnter(Player player) {
-            
-        }
-
-        public override void OnHover(Player player) {
-            
-        }
-
-        public override void OnHoverExit(Player player) {
-            
         }
     }
 }
