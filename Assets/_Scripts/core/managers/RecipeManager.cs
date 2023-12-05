@@ -18,15 +18,6 @@ namespace roguelike.system.manager {
         protected override void Awake() {
             base.Awake();
             RegisterRecipes();
-
-            foreach (KeyValuePair<RecipeType, List<Recipe>> entry in _recipeDatabase) {
-                foreach (Recipe recipe in entry.Value) {
-                    Debug.Log(recipe.Result.Item.Name);
-                    foreach(ItemStack stack in recipe.Ingredients) {
-                        Debug.Log(stack.Item.Name);
-                    }
-                }
-            }
         }
 
         public static Recipe FindRecipe(RecipeType type, ItemStack[] input) {

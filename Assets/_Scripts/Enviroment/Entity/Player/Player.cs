@@ -5,6 +5,8 @@ using roguelike.system.input;
 namespace roguelike.enviroment.entity.player {
     public class Player : Entity {
 
+        public string Name = "joe";
+
         public UIStateMachine UIStateMachine { get; set; }
         public PlayerInteractor PlayerInteractor { get; set; }
         public PlayerInput PlayerInput { get; private set; }

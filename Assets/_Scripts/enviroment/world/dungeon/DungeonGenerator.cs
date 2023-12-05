@@ -20,7 +20,7 @@ namespace roguelike.enviroment.world.dungeon {
 
         void Start() {
             dungeon = new Room[dungeonSize, dungeonSize];
-            do { GenerateDungeon(); } while (amountOfrooms < 8);
+            do { GenerateDungeon(); } while (amountOfrooms < 16);
             FilloutDungeon();
             LogDungeon();
             InstantiateDungeon();
@@ -38,6 +38,7 @@ namespace roguelike.enviroment.world.dungeon {
 
             var starterRoom = new Room(4, 4, TileType.ROOM, RoomType.STARTER);
             dungeon[4, 4] = starterRoom;
+            generatedRooms.Add(starterRoom);
             rooms.Add(starterRoom);
             while (rooms.Count > 0) {
                 Room currentRoom = rooms.First();
@@ -66,17 +67,23 @@ namespace roguelike.enviroment.world.dungeon {
             foreach (Room room in generatedRooms) {
                 foreach (Direction direction in Directions) {
                     var relativeRoom = GetRelativeRoom(room.y, room.x, direction);
-                    if (relativeRoom != null) {
-                        switch (relativeRoom.TileType) {
-                            case TileType.EMPTY: room.wallData.Add(direction, WallType.WALL); continue;
-                            case TileType.ROOM: room.wallData.Add(direction, WallType.NONE); continue;
-                            case TileType.CORRIDOR: room.wallData.Add(direction, WallType.DOOR); continue;
-                        }
-                    } else { room.wallData.Add(direction, WallType.WALL); continue; }
+                    if(relativeRoom == null) {
+                        room.wallData.Add(direction, WallType.WALL);
+                        continue;
+                    }
+
+                    switch(relativeRoom.TileType) {
+                        case TileType.EMPTY: room.wallData.Add(direction, WallType.WALL); continue;
+                        case TileType.ROOM: room.wallData.Add(direction, WallType.NONE); continue;
+                        case TileType.CORRIDOR: room.wallData.Add(direction, WallType.DOOR); continue;
+                    }
                 }
             }
         }
 
+        /// <summary>
+        /// Method for spawning the dungeon into the scene.
+        /// </summary>
         private void InstantiateDungeon() {
             foreach (Room room in generatedRooms) {
                 if (room.TileType == TileType.ROOM) {
@@ -101,6 +108,31 @@ namespace roguelike.enviroment.world.dungeon {
 
 
 
+        // UTIL METHODS
+
+        /// <summary>
+        /// DEBUG! Method for logging the dungeon layout into the console.
+        /// </summary>
+        private void LogDungeon() {
+            StringBuilder builder = new StringBuilder();
+            builder.Append("   ");
+            for(int i = 0; i < dungeon.GetLength(0); i++) {
+                string space = i < 10 ? " " : "";
+                builder.Append(space + i + " ");
+            }
+            builder.AppendLine("\n   ------------------------------------------------------");
+
+            for(int i = 0; i < dungeon.GetLength(0); i++) {
+                string separator = i < 10 ? " |" : "|";
+                builder.Append(i + separator);
+                for(int j = 0; j < dungeon.GetLength(1); j++) {
+                    builder.Append(dungeon[i, j].ToString());
+                }
+                builder.AppendLine();
+            }
+            Debug.Log(builder);
+        }
+
         private void CheckAndGenerate(int y, int x, Direction direction) {
             bool doubleRoom = Mathematicus.ChanceIn(65f);
             Direction randomDirection = RandomDirection();
@@ -118,27 +150,6 @@ namespace roguelike.enviroment.world.dungeon {
                     dungeon[i, j] = new Room(i, j, TileType.EMPTY, RoomType.NONE);
                 }
             }
-        }
-
-        // this method is indended for debuging only!!!
-        private void LogDungeon() {
-            StringBuilder builder = new StringBuilder();
-            builder.Append("   ");
-            for (int i = 0; i < dungeon.GetLength(0); i++) {
-                string space = i < 10 ? " " : "";
-                builder.Append(space + i + " ");
-            }
-            builder.AppendLine("\n   ------------------------------------------------------");
-
-            for (int i = 0; i < dungeon.GetLength(0); i++) {
-                string separator = i < 10 ? " |" : "|";
-                builder.Append(i + separator);
-                for (int j = 0; j < dungeon.GetLength(1); j++) {
-                    builder.Append(dungeon[i, j].ToString());
-                }
-                builder.AppendLine();
-            }
-            Debug.Log(builder);
         }
 
         private bool CheckAroundRoom(int y, int x, bool doubleRoom, Direction direction) {
@@ -214,7 +225,7 @@ namespace roguelike.enviroment.world.dungeon {
                     case Direction.RIGHT: return dungeon[y, x + 1];
                 }
             } catch (IndexOutOfRangeException) { }
-            return dungeon[y, x];
+            return null;
         }
 
         public class Room {

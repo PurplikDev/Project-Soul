@@ -1,7 +1,4 @@
-using Newtonsoft.Json;
-using roguelike.core.item;
-using roguelike.core.item.recipe;
-using roguelike.enviroment.world;
+using roguelike.enviroment.world.interactable;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using PlayerInput = roguelike.system.input.PlayerInput;
@@ -13,7 +10,7 @@ namespace roguelike.enviroment.entity.player {
         private PlayerInput _input;
         private Vector2 _mousePos;
         private Transform _hoveredTransform;
-        private IInteractable _hoveredInteractable;
+        private Interactable _hoveredInteractable;
 
         public PlayerInteractor(Player player) {
             _player = player;
@@ -27,8 +24,19 @@ namespace roguelike.enviroment.entity.player {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(_mousePos);
             if(Physics.Raycast(ray, out hit)) {
-                _hoveredTransform = hit.transform;
-                _hoveredInteractable = _hoveredTransform.GetComponent<IInteractable>();
+                var newTransform = hit.transform;
+
+                if(newTransform != null) {
+                    var newInteractable = newTransform.GetComponent<Interactable>();
+                    if(newTransform != _hoveredTransform) {
+                        _hoveredInteractable?.OnHoverExit(_player);
+                        _hoveredTransform = newTransform;
+                        _hoveredInteractable = newInteractable;
+                        _hoveredInteractable?.OnHoverEnter(_player);
+                    } else {
+                        _hoveredInteractable?.OnHover(_player);
+                    }
+                } 
             }
         }
 

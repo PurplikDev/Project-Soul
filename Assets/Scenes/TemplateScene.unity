@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731704, g: 0.1341472, b: 0.121078566, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -438,7 +438,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: f746f9805ffd5554cb7acfccde4e474c, type: 2}
-  - {fileID: 2100000, guid: e8469b8ce39e0d045a183fbc7d659f7c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -732,6 +731,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ca1b7253568342a49a57be425d3456d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _outlineMaterial: {fileID: 0}
   StationUIHolder: {fileID: 95479895}
 --- !u!65 &499846443
 BoxCollider:
@@ -1458,6 +1458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68d012f475c364a2da0b6c7cc291a9c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _outlineMaterial: {fileID: 2100000, guid: e8469b8ce39e0d045a183fbc7d659f7c, type: 2}
   StationUIHolder: {fileID: 239509056}
 --- !u!4 &1742916644
 Transform:
@@ -1790,7 +1791,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: f746f9805ffd5554cb7acfccde4e474c, type: 2}
-  - {fileID: 2100000, guid: e8469b8ce39e0d045a183fbc7d659f7c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
