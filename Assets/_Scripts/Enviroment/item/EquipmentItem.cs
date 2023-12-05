@@ -1,12 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using roguelike.enviroment.entity.StatSystem;
-using UnityEngine;
 
-namespace roguelike.core.item
-{
-    public class EquipmentItem : Item
-    {
+namespace roguelike.core.item {
+    public class EquipmentItem : Item {
         public List<StatModifier> StatModifiers;
 
         private EquipmentType _itemEquipmentType;
@@ -19,8 +16,7 @@ namespace roguelike.core.item
         }
     }
 
-    public enum EquipmentType
-    {
+    public enum EquipmentType {
         HELMET = 20,
         CHESTPLATE = 21,
         PANTS = 22,

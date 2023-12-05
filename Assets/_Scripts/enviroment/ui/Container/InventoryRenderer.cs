@@ -13,6 +13,10 @@ namespace roguelike.rendering.ui {
             _equipmentRoot = _root.Q<VisualElement>("EquipmentSlotContainer");
             _trinketRoot = _root.Q<VisualElement>("TrinketSlotContainer");
 
+            TranslateHeader(_root.Q<Label>("InventoryHeader"));
+            TranslateHeader(_root.Q<Label>("EquipmentHeader"));
+            TranslateHeader(_root.Q<Label>("TrinketsHeader"));
+
             RegisterEquipmentSlots();
             RegisterTrinketSlots();
         }

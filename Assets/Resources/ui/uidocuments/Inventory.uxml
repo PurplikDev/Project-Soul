@@ -1,10 +1,10 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <Style src="project://database/Assets/_MyInventoryRework/ContainerStyle.uss?fileID=7433441132597879392&amp;guid=8dd38d4c17be74f1baa19b9c760f8269&amp;type=3#ContainerStyle" />
+    <Style src="project://database/Assets/Resources/ui/stylesheets/ContainerStyle.uss?fileID=7433441132597879392&amp;guid=8dd38d4c17be74f1baa19b9c760f8269&amp;type=3#ContainerStyle" />
     <ui:VisualElement name="Container" class="container">
         <ui:VisualElement name="Inventory" class="inventory" style="flex-direction: row; flex-wrap: nowrap; flex-grow: 1; justify-content: center; align-items: stretch;">
             <ui:VisualElement name="CharacterSlots" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; width: 100%; justify-content: flex-start;">
                 <ui:VisualElement name="Equipment" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; width: auto; justify-content: flex-start; height: auto;">
-                    <ui:Label text="Equipment" display-tooltip-when-elided="true" name="Header" class="header" />
+                    <ui:Label text="ui.equipment" display-tooltip-when-elided="true" name="EquipmentHeader" class="header" />
                     <ui:VisualElement name="EquipmentSlotContainer" class="slotsContainer" style="align-items: center; justify-content: center; flex-direction: row; margin-top: 0; margin-left: 0; margin-right: 0; margin-bottom: 0; flex-shrink: 1; flex-wrap: wrap; height: auto;">
                         <EquipmentSlot slot-equipment-type="HELMET" style="background-image: resource(&apos;sprites/ui/helmet_background&apos;);" />
                         <EquipmentSlot slot-equipment-type="CHESTPLATE" style="background-image: resource(&apos;sprites/ui/chestplate_background&apos;);" />
@@ -15,7 +15,7 @@
                     </ui:VisualElement>
                 </ui:VisualElement>
                 <ui:VisualElement name="Trinket" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; width: auto; justify-content: flex-start; height: auto;">
-                    <ui:Label text="Trinkets" display-tooltip-when-elided="true" name="Header" class="header" />
+                    <ui:Label text="ui.trinkets" display-tooltip-when-elided="true" name="TrinketsHeader" class="header" />
                     <ui:VisualElement name="TrinketSlotContainer" class="slotsContainer" style="align-items: center; justify-content: center; flex-direction: row; margin-top: 0; margin-left: 0; margin-right: 0; margin-bottom: 0; flex-shrink: 1; flex-wrap: wrap; height: auto;">
                         <EquipmentSlot slot-equipment-type="TRINKET" />
                         <EquipmentSlot slot-equipment-type="TRINKET" />
@@ -29,7 +29,7 @@
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="Inventory" style="flex-grow: 3; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; width: 140%;">
-                <ui:Label text="Inventory" display-tooltip-when-elided="true" name="Header" class="header" />
+                <ui:Label display-tooltip-when-elided="true" name="InventoryHeader" text="ui.inventory" class="header" />
                 <ui:VisualElement name="InventorySlotContainer" class="slotsContainer inventorySlotContainer" style="align-items: center; justify-content: center; flex-direction: row; flex-shrink: 1; flex-wrap: wrap;">
                     <ItemSlot />
                     <ItemSlot />

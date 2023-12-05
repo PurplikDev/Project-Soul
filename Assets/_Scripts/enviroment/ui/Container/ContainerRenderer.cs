@@ -120,7 +120,6 @@ namespace roguelike.rendering.ui {
             _mouseSlot.SlotStack.SetStackSize(clickedSlot.SlotStack.IncreaseStackSize(_mouseSlot.SlotStack.StackSize));
         }
 
-        // todo: fix logic, it deletes items rn
         protected void SplitSlot(ItemSlot clickedSlot) {
             int split = clickedSlot.SlotStack.StackSize / 2;
             _mouseSlot.SetStack(new ItemStack(clickedSlot.SlotStack.Item, split));
@@ -132,5 +131,9 @@ namespace roguelike.rendering.ui {
         // MISC METHODS
 
         protected abstract void SyncVisualToInternalSingle(ItemSlot clickedSlot); // Updates Internal inventory to be like visual
+
+        protected void TranslateHeader(Label label) {
+            label.text = TranslationManager.getTranslation(label.text);
+        }
     }
 }

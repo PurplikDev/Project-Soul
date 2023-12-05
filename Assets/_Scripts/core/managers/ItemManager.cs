@@ -55,6 +55,9 @@ namespace roguelike.core.item {
             RegisterEquipment("test_equipment", EquipmentType.MAIN_HAND,
                 new StatModifier(0.5f, StatModifier.StatModifierType.FLAT, Stat.StatType.SPEED),
                 new StatModifier(0.5f, StatModifier.StatModifierType.ADDITIONAL, Stat.StatType.HEALTH));
+
+            RegisterEquipment("boots_of_the_traveler", EquipmentType.BOOTS,
+                new StatModifier(1.5f, StatModifier.StatModifierType.ADDITIONAL, Stat.StatType.SPEED));
         }
     }
 }

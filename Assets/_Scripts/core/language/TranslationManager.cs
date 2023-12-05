@@ -7,6 +7,10 @@ public static class TranslationManager {
     public static Language lang = Language.en_us;
     public static Dictionary<string, string> language = new Dictionary<string, string>();
 
+    static TranslationManager() {
+        getTranslationFromFile();
+    }
+
     public static string getTranslation(string key) {
         try {
             return language[key];

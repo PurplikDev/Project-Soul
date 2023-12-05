@@ -12,5 +12,7 @@ namespace roguelike.core.item {
         public static Item TEST4 = ItemManager.GetItemByID("test4");
 
         public static Item TEST_EQUIPMENT = ItemManager.GetItemByID("test_equipment");
+
+        public static Item BOOTS_OF_THE_TRAVELER = ItemManager.GetItemByID("boots_of_the_traveler");
     }
 }

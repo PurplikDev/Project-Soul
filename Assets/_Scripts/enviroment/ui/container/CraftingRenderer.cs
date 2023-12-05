@@ -16,6 +16,9 @@ namespace roguelike.rendering.ui {
             _craftingSlotsRoot = _root.Q<VisualElement>("CraftingSlotContainer");
             _resultSlot = _root.Q<ResultSlot>("ResultSlot");
 
+            TranslateHeader(_root.Q<Label>("InventoryHeader"));
+            TranslateHeader(_root.Q<Label>("CraftingHeader"));
+
             RegisterDeployableSlots();
         }
 

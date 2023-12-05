@@ -1,9 +1,14 @@
 {
-    // ITEMS
-      "gold" : "Gold",
+  // ITEMS
 
-    // UI
+      "gold" : "Gold",
+      "boots_of_the_traveler" : "Boots of the Traveler",
+
+  // UI
+
       "ui.inventory" : "Inventory",
-      "ui.crafting_station" : "Crafting Sttation",
+      "ui.equipment" : "Equipment",
+      "ui.trinkets" : "Trinkets",
+      "ui.crafting_station" : "Crafting Station",
       "ui.storage_crate" : "Storage Crate"
 }

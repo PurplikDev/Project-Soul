@@ -22,7 +22,7 @@ namespace roguelike.enviroment.world.dungeon {
             dungeon = new Room[dungeonSize, dungeonSize];
             do { GenerateDungeon(); } while (amountOfrooms < 16);
             FilloutDungeon();
-            LogDungeon();
+            //LogDungeon();
             InstantiateDungeon();
         }
 
@@ -181,7 +181,7 @@ namespace roguelike.enviroment.world.dungeon {
 
                 }
             }
-            if (doubleRoom) { Debug.LogWarning(builder); }
+            //if (doubleRoom) { Debug.LogWarning(builder); }
             return failsafe > 3 ? false : true;
         }
 
