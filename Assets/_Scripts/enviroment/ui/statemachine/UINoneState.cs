@@ -7,10 +7,12 @@ namespace roguelike.enviroment.ui.statemachine {
 
         public override void EnterState() {
             stateMachine.input.CharacterControls.Enable();
+            stateMachine.input.EnviromentControls.Enable();
         }
 
         public override void ExitState() {
             stateMachine.input.CharacterControls.Disable();
+            stateMachine.input.EnviromentControls.Disable();
         }
 
         public override UIStates GetNextState() {

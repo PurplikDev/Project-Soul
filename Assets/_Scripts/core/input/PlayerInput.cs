@@ -138,15 +138,6 @@ namespace roguelike.system.input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Test"",
-                    ""type"": ""Button"",
-                    ""id"": ""38a712a8-bdcf-4094-b375-fcbdea47bffd"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -169,17 +160,6 @@ namespace roguelike.system.input
                     ""processors"": """",
                     ""groups"": ""PC"",
                     ""action"": ""Inventory"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8c8c8ef9-6fe4-4dd1-996a-b84463af0e3e"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""PC"",
-                    ""action"": ""Test"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -281,7 +261,6 @@ namespace roguelike.system.input
             m_UIControls = asset.FindActionMap("UIControls", throwIfNotFound: true);
             m_UIControls_Pause = m_UIControls.FindAction("Pause", throwIfNotFound: true);
             m_UIControls_Inventory = m_UIControls.FindAction("Inventory", throwIfNotFound: true);
-            m_UIControls_Test = m_UIControls.FindAction("Test", throwIfNotFound: true);
             // EnviromentControls
             m_EnviromentControls = asset.FindActionMap("EnviromentControls", throwIfNotFound: true);
             m_EnviromentControls_PrimaryAction = m_EnviromentControls.FindAction("PrimaryAction", throwIfNotFound: true);
@@ -404,14 +383,12 @@ namespace roguelike.system.input
         private List<IUIControlsActions> m_UIControlsActionsCallbackInterfaces = new List<IUIControlsActions>();
         private readonly InputAction m_UIControls_Pause;
         private readonly InputAction m_UIControls_Inventory;
-        private readonly InputAction m_UIControls_Test;
         public struct UIControlsActions
         {
             private @PlayerInput m_Wrapper;
             public UIControlsActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
             public InputAction @Pause => m_Wrapper.m_UIControls_Pause;
             public InputAction @Inventory => m_Wrapper.m_UIControls_Inventory;
-            public InputAction @Test => m_Wrapper.m_UIControls_Test;
             public InputActionMap Get() { return m_Wrapper.m_UIControls; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -427,9 +404,6 @@ namespace roguelike.system.input
                 @Inventory.started += instance.OnInventory;
                 @Inventory.performed += instance.OnInventory;
                 @Inventory.canceled += instance.OnInventory;
-                @Test.started += instance.OnTest;
-                @Test.performed += instance.OnTest;
-                @Test.canceled += instance.OnTest;
             }
 
             private void UnregisterCallbacks(IUIControlsActions instance)
@@ -440,9 +414,6 @@ namespace roguelike.system.input
                 @Inventory.started -= instance.OnInventory;
                 @Inventory.performed -= instance.OnInventory;
                 @Inventory.canceled -= instance.OnInventory;
-                @Test.started -= instance.OnTest;
-                @Test.performed -= instance.OnTest;
-                @Test.canceled -= instance.OnTest;
             }
 
             public void RemoveCallbacks(IUIControlsActions instance)
@@ -540,7 +511,6 @@ namespace roguelike.system.input
         {
             void OnPause(InputAction.CallbackContext context);
             void OnInventory(InputAction.CallbackContext context);
-            void OnTest(InputAction.CallbackContext context);
         }
         public interface IEnviromentControlsActions
         {

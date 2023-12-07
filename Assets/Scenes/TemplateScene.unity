@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 13261460}
   - component: {fileID: 13261459}
   - component: {fileID: 13261458}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ MeshCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 5
   m_Convex: 0
@@ -753,8 +753,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &722747770
 GameObject:
   m_ObjectHideFlags: 3
@@ -884,12 +884,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 872759933}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be3ce004bb4bbf8418ed4e06e8f7582e, type: 3}
+  m_Script: {fileID: 11500000, guid: 9482ee202e558444ea993644dc66d93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Floor: {fileID: 802719693532913904, guid: 98f2e7de1b21a40a5b85d8582e687129, type: 3}
-  Wall: {fileID: 2564247426491304187, guid: 687d12416170640f48060aea97853d5f, type: 3}
-  Door: {fileID: 3861844027397261973, guid: bbe0b66c5aec825438ac0393d544f2da, type: 3}
 --- !u!1 &1007216554
 GameObject:
   m_ObjectHideFlags: 0
@@ -1497,8 +1494,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &1829708361
 GameObject:
   m_ObjectHideFlags: 0
