@@ -226,8 +226,8 @@ GameObject:
   - component: {fileID: 463748794439470033}
   - component: {fileID: 2266543363147973702}
   - component: {fileID: 3631521290361006392}
-  - component: {fileID: 6975349661015254351}
-  - component: {fileID: 2419982232583033183}
+  - component: {fileID: 2916951928400809492}
+  - component: {fileID: 8997586036569023259}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -290,7 +290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 055e37f6b2aed4500a4907a02d285ae1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6975349661015254351
+--- !u!114 &2916951928400809492
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -302,7 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8184f22ff58c431aa37cc26ce793a3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2419982232583033183
+--- !u!114 &8997586036569023259
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

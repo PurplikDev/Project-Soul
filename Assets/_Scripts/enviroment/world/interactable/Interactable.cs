@@ -2,7 +2,7 @@ using roguelike.enviroment.entity.player;
 using UnityEngine;
 
 namespace roguelike.enviroment.world.interactable {
-    public abstract class Interactable : MonoBehaviour {
+    public interface IHoverable {
         public abstract void Interact(Player player);
 
         public abstract void OnHoverEnter(Player player);
