@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 920759300763957502}
   - component: {fileID: 6431148232386219133}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpriteRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1383337347011810994}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlayerUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   m_Component:
   - component: {fileID: 293380034094437183}
   - component: {fileID: 7953813522972054069}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: InventoryUIHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3150709472398492172}
   - component: {fileID: 1403514897892087158}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PauseUIHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 3631521290361006392}
   - component: {fileID: 2916951928400809492}
   - component: {fileID: 8997586036569023259}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
