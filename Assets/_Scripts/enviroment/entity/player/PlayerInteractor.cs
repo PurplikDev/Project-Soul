@@ -11,6 +11,8 @@ namespace roguelike.enviroment.entity.player {
         private PlayerInput _input;
         private Vector3 _mousePos;
 
+        // todo: re-add logic for IHoverable ( OnHoverEnter, OnHover, OnHoverExit )
+
         public PlayerInteractor(Player player) {
             _player = player;
             _input = player.PlayerInput;
