@@ -1,8 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/Resources/ui/stylesheets/ContainerStyle.uss?fileID=7433441132597879392&amp;guid=8dd38d4c17be74f1baa19b9c760f8269&amp;type=3#ContainerStyle" />
     <ui:VisualElement name="Container" class="container">
-        <ui:VisualElement name="Inventory" class="inventory" style="flex-direction: row; flex-wrap: nowrap; flex-grow: 1; justify-content: center; align-items: stretch;">
-            <ui:VisualElement name="CharacterSlots" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; width: 100%; justify-content: flex-start;">
+        <ui:VisualElement name="Inventory" class="inventory" style="flex-direction: row; flex-wrap: nowrap; flex-grow: 1; justify-content: center; align-items: stretch; max-height: 71%;">
+            <ui:VisualElement name="CharacterSlots" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; width: 30%; justify-content: flex-start; flex-shrink: 0;">
                 <ui:VisualElement name="Equipment" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; width: auto; justify-content: flex-start; height: auto;">
                     <ui:Label text="ui.equipment" display-tooltip-when-elided="true" name="EquipmentHeader" class="header" />
                     <ui:VisualElement name="EquipmentSlotContainer" class="slotsContainer" style="align-items: center; justify-content: center; flex-direction: row; margin-top: 0; margin-left: 0; margin-right: 0; margin-bottom: 0; flex-shrink: 1; flex-wrap: wrap; height: auto;">
@@ -28,9 +28,15 @@
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="Inventory" style="flex-grow: 3; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; width: 140%;">
+            <ui:VisualElement name="Character" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; width: 30%; flex-shrink: 0; height: 100%;">
+                <ui:Label display-tooltip-when-elided="true" name="CharacterHeader" text="ui.character" class="header" />
+                <ui:VisualElement name="CharacterBackground" class="slotsContainer inventorySlotContainer" style="align-items: center; justify-content: center; flex-direction: row; flex-shrink: 1; flex-wrap: wrap; background-image: resource(&apos;sprites/ui/character_background&apos;); height: 100%; margin-left: 25px; margin-right: 25px; margin-top: 10px; margin-bottom: 25px; padding-top: 25px; padding-right: 40px; padding-left: 40px;">
+                    <ui:VisualElement name="Character" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: resource(&apos;sprites/entity/player/player_walk&apos;); width: 100%; height: 100%; justify-content: flex-start; flex-shrink: 0; -unity-background-scale-mode: scale-and-crop; align-self: stretch;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="Inventory" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; width: 30%; flex-shrink: 0; height: 100%;">
                 <ui:Label display-tooltip-when-elided="true" name="InventoryHeader" text="ui.inventory" class="header" />
-                <ui:VisualElement name="InventorySlotContainer" class="slotsContainer inventorySlotContainer" style="align-items: center; justify-content: center; flex-direction: row; flex-shrink: 1; flex-wrap: wrap;">
+                <ui:VisualElement name="InventorySlotContainer" class="slotsContainer inventorySlotContainer" style="align-items: center; justify-content: center; flex-direction: row; flex-shrink: 1; flex-wrap: wrap; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
                     <ItemSlot />
                     <ItemSlot />
                     <ItemSlot />

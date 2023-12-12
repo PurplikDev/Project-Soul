@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using roguelike.enviroment.entity.StatSystem;
+using roguelike.enviroment.entity.statsystem;
 
 namespace roguelike.core.item {
     public class EquipmentItem : Item {

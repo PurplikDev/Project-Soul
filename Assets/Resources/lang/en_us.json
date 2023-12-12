@@ -9,6 +9,8 @@
   // UI
 
       "ui.inventory" : "Inventory",
+      "ui.character" : "Character",
+      "ui.stats" : "Statistics",
       "ui.equipment" : "Equipment",
       "ui.trinkets" : "Trinkets",
       "ui.crafting_station" : "Crafting Station",

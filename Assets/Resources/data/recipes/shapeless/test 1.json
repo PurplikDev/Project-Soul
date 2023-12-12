@@ -1,7 +1,7 @@
 {
   'Result': {
-    'ItemID': 'test3',
-    'ItemAmount': 4
+    'ItemID': 'test_chestplace',
+    'ItemAmount': 1
   },
   'Ingredients': [
     {
@@ -10,7 +10,7 @@
     },
     {
       'ItemID': 'test4',
-      'ItemAmount': 2
+      'ItemAmount': 1
     }
   ]
 }

@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
-using roguelike.enviroment.entity.StatSystem;
+using roguelike.enviroment.entity.statsystem;
 using UnityEngine;
 
 namespace roguelike.core.item {
     public class WeaponItem : EquipmentItem {
 
-        public WeaponItem(string id, params StatModifier[] modifiers) : base(id, EquipmentType.MAIN_HAND, modifiers) {
+        public int WeaponTier { get; private set; }
+
+        public WeaponItem(string id, EquipmentType type, int weaponTier, params StatModifier[] modifiers) : base(id, type, modifiers) {
+            WeaponTier = weaponTier;
         }
     }
 }

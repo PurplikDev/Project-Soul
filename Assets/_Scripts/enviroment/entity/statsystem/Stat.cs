@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace roguelike.enviroment.entity.StatSystem {
+namespace roguelike.enviroment.entity.statsystem {
     [Serializable]
     public class Stat {
         private float _baseValue;

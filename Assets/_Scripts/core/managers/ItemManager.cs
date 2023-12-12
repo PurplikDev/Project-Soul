@@ -1,4 +1,4 @@
-using roguelike.enviroment.entity.StatSystem;
+using roguelike.enviroment.entity.statsystem;
 using roguelike.system.singleton;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +31,10 @@ namespace roguelike.core.item {
             _itemDatabase.Add(id, new EquipmentItem(id, type, modifiers));
         }
 
+        private void RegisterWeapon(string id, EquipmentType type, params StatModifier[] modifiers) {
+            _itemDatabase.Add(id, new WeaponItem(id, type, 1, modifiers));
+        }
+
         public static Sprite GetSpriteByID(string id) {
             var sprite =  ItemIcons.FirstOrDefault(sprite => sprite.name.Equals(id));
             if(sprite == null) { sprite = MissingTexture; }
@@ -57,7 +61,11 @@ namespace roguelike.core.item {
                 new StatModifier(0.5f, StatModifier.StatModifierType.ADDITIONAL, Stat.StatType.HEALTH));
 
             RegisterEquipment("boots_of_the_traveler", EquipmentType.BOOTS,
-                new StatModifier(1.5f, StatModifier.StatModifierType.ADDITIONAL, Stat.StatType.SPEED));
+                new StatModifier(1.5f, StatModifier.StatModifierType.ADDITIONAL, Stat.StatType.SPEED),
+                new StatModifier(0.75f, StatModifier.StatModifierType.FLAT, Stat.StatType.DEFENCE));
+
+            RegisterEquipment("test_chestplace", EquipmentType.CHESTPLATE,
+                new StatModifier(0.75f, StatModifier.StatModifierType.FLAT, Stat.StatType.DEFENCE));
         }
     }
 }

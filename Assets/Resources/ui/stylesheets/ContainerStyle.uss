@@ -20,19 +20,19 @@
 }
 
 .header {
-    color: rgb(255, 255, 255);
+    color: rgb(33, 60, 86);
     font-size: 35px;
     margin-bottom: 10px;
-    border-bottom-width: 5px;
-    border-bottom-color: rgb(255, 255, 255);
     -unity-font-style: bold;
-    -unity-text-outline-width: 2px;
-    -unity-text-outline-color: rgb(0, 0, 0);
+    -unity-text-outline-color: rgb(13, 43, 69);
+    -unity-font: resource('ui/UnityDefaultRuntimeTheme');
+    background-image: resource('sprites/ui/button');
+    padding-left: 15px;
 }
 
 .slotContainer {
-    width: 128px;
-    height: 128px;
+    width: 96px;
+    height: 96px;
     margin: 5px;
     visibility: visible;
     -unity-background-image-tint-color: rgb(255, 255, 255);
@@ -77,4 +77,8 @@
     padding-right: 50px;
     padding-top: 50px;
     padding-bottom: 50px;
+}
+
+.craftingSlot {
+    background-image: resource('sprites/ui/crafting_slot');
 }

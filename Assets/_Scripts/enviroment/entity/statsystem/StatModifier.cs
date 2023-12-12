@@ -1,7 +1,7 @@
 using UnityEngine;
-using static roguelike.enviroment.entity.StatSystem.Stat;
+using static roguelike.enviroment.entity.statsystem.Stat;
 
-namespace roguelike.enviroment.entity.StatSystem {
+namespace roguelike.enviroment.entity.statsystem {
     [SerializeField]
     public class StatModifier {
         public float ModifierValue { get; private set; }

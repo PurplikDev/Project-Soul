@@ -21,7 +21,7 @@ namespace roguelike.enviroment.world.deployable {
 
         private void Start() {
             _deployableRenderer = transform.GetComponentInChildren<MeshRenderer>();
-            _outlineMaterial = Resources.Load<Material>("materials/outline");
+            _outlineMaterial = Resources.Load<Material>("materials/props/outline");
             _materials.Add(_deployableRenderer.material);
         }
 

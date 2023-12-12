@@ -1,9 +1,12 @@
 using roguelike.core.item;
+using roguelike.enviroment.entity.statsystem;
 using roguelike.enviroment.ui.statemachine;
 using roguelike.system.input;
 
 namespace roguelike.enviroment.entity.player {
     public class Player : Entity {
+
+        public Stat Corruption = new Stat(0); // tldr; corruption
 
         public UIStateMachine UIStateMachine { get; set; }
         public PlayerInteractor PlayerInteractor { get; set; }
@@ -11,7 +14,6 @@ namespace roguelike.enviroment.entity.player {
         public Inventory Inventory { get; private set; }
 
         protected override void Awake() {
-            // input needs to be created first!!!!!
             PlayerInput = new PlayerInput();
             PlayerInput.Enable();
 

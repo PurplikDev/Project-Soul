@@ -1,5 +1,5 @@
 using roguelike.enviroment.entity;
-using roguelike.enviroment.entity.StatSystem;
+using roguelike.enviroment.entity.statsystem;
 using System.Collections.Generic;
 
 namespace roguelike.core.item {
@@ -60,8 +60,8 @@ namespace roguelike.core.item {
                     foreach(StatModifier statModifier in item.StatModifiers) {
                         Entity.StatByType[statModifier.StatType].AddModifier(statModifier);
                     }
-                } else if(itemStack.IsEmpty()) {
-                    foreach(StatModifier statModifier in ((EquipmentItem)oldStack.Item).StatModifiers) {
+                } else if(itemStack.IsEmpty() && oldStack.Item is EquipmentItem oldEquipment) {
+                    foreach(StatModifier statModifier in oldEquipment.StatModifiers) {
                         Entity.StatByType[statModifier.StatType].RemoveModifier(statModifier);
                     }
                 }

@@ -1,13 +1,11 @@
 using System.Collections.Generic;
-using roguelike.enviroment.entity.player;
-using roguelike.enviroment.entity.StatSystem;
-using roguelike.enviroment.world.interactable;
+using roguelike.enviroment.entity.statsystem;
 using UnityEngine;
-using static roguelike.enviroment.entity.StatSystem.Stat;
+using static roguelike.enviroment.entity.statsystem.Stat;
 
 namespace roguelike.enviroment.entity {
-    public class Entity : MonoBehaviour, IHoverable {
-        public Stat Health = new Stat(100);
+    public class Entity : MonoBehaviour {
+        public Stat MaxHealth = new Stat(100);
         public Stat Speed = new Stat(5);
         public Stat Defence = new Stat(0);
 
@@ -21,7 +19,7 @@ namespace roguelike.enviroment.entity {
         public Quaternion Rotation { get { return transform.rotation; } }
 
         protected virtual void Awake() {
-            StatByType.Add(StatType.HEALTH, Health);
+            StatByType.Add(StatType.HEALTH, MaxHealth);
             StatByType.Add(StatType.SPEED, Speed);
             StatByType.Add(StatType.DEFENCE, Defence);
             StatByType.Add(StatType.TEMPLAR, Templar);
@@ -37,12 +35,20 @@ namespace roguelike.enviroment.entity {
 
         }
 
-        public void Interact(Player player) { }
 
-        public void OnHoverEnter(Player player) { }
+        public int GetDefenceTier() {
+            return Mathf.FloorToInt(Defence.Value);
+        }
 
-        public void OnHover(Player player) { }
+        public enum DamageSource {
+            COMBAT,            
+            CORRUPTION,
+            ENVIROMENT
+        }
 
-        public void OnHoverExit(Player player) { }
+        public enum DamageType {
+            NORMAL,
+            TRUE
+        }
     }
 }
