@@ -23,7 +23,7 @@ namespace roguelike.core.item {
             for (int i = 0; i < InventorySize; i++) {
                 if (i % 2 != 0) {
                     if(i == 1) {
-                        Items.Add(new ItemStack(ItemManager.GetItemByID("boots_of_the_traveler")));
+                        Items.Add(new ItemStack(ItemManager.GetItemByID("test_light_sword")));
                     } else {
                         Items.Add(ItemStack.EMPTY);
                     }
@@ -66,6 +66,15 @@ namespace roguelike.core.item {
                     }
                 }
             }
+        }
+
+        public enum InventorySlot {
+            HELMET = 20,
+            CHESTPLATE = 21,
+            PANTS = 22,
+            BOOTS = 23,
+            MAIN_HAND = 24,
+            OFF_HAND = 25
         }
     }
 }

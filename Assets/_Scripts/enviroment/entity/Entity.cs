@@ -17,6 +17,7 @@ namespace roguelike.enviroment.entity {
 
         public Vector3 Position { get { return transform.position; } }
         public Quaternion Rotation { get { return transform.rotation; } }
+        public Quaternion LookDirection;
 
         protected virtual void Awake() {
             StatByType.Add(StatType.HEALTH, MaxHealth);
@@ -35,6 +36,13 @@ namespace roguelike.enviroment.entity {
 
         }
 
+        public virtual void Attack() {
+            Debug.Log("Entity attack!");
+        }
+
+        public virtual void Damage(DamageSource source) {
+
+        }
 
         public int GetDefenceTier() {
             return Mathf.FloorToInt(Defence.Value);

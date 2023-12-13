@@ -1,5 +1,6 @@
 using System.Linq;
 using roguelike.core.item;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace roguelike.rendering.ui {
@@ -34,6 +35,8 @@ namespace roguelike.rendering.ui {
                 equipmentSlot.Renderer = this;
                 itemSlots.Add(equipmentSlot);
                 equipmentSlot.UpdateSlotEvent.Invoke();
+
+                Debug.Log(equipmentSlot.SlotIndex + " | " + equipmentSlot.SlotEquipmentType.ToString());
             }
         }
 

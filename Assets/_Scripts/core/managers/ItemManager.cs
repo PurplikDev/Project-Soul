@@ -18,23 +18,7 @@ namespace roguelike.core.item {
             ItemIcons = Resources.LoadAll<Sprite>("sprites/items").ToList();
             RegisterItems();
         }
-
-        private void Register(string id) {
-            _itemDatabase.Add(id, new Item(id));
-        }
-
-        private void Register(string id, int maxStackSize) {
-            _itemDatabase.Add(id, new Item(id, maxStackSize));
-        }
-
-        private void RegisterEquipment(string id, EquipmentType type, params StatModifier[] modifiers) {
-            _itemDatabase.Add(id, new EquipmentItem(id, type, modifiers));
-        }
-
-        private void RegisterWeapon(string id, EquipmentType type, params StatModifier[] modifiers) {
-            _itemDatabase.Add(id, new WeaponItem(id, type, 1, modifiers));
-        }
-
+      
         public static Sprite GetSpriteByID(string id) {
             var sprite =  ItemIcons.FirstOrDefault(sprite => sprite.name.Equals(id));
             if(sprite == null) { sprite = MissingTexture; }
@@ -56,16 +40,39 @@ namespace roguelike.core.item {
             Register("test3");
             Register("test4", 6);
 
-            RegisterEquipment("test_equipment", EquipmentType.MAIN_HAND,
-                new StatModifier(0.5f, StatModifier.StatModifierType.FLAT, Stat.StatType.SPEED),
-                new StatModifier(0.5f, StatModifier.StatModifierType.ADDITIONAL, Stat.StatType.HEALTH));
+            RegisterLightSword("test_light_sword", EquipmentType.MAIN_HAND);
 
             RegisterEquipment("boots_of_the_traveler", EquipmentType.BOOTS,
                 new StatModifier(1.5f, StatModifier.StatModifierType.ADDITIONAL, Stat.StatType.SPEED),
                 new StatModifier(0.75f, StatModifier.StatModifierType.FLAT, Stat.StatType.DEFENCE));
 
+            RegisterEquipment("test_equipment", EquipmentType.HELMET,
+                new StatModifier(0.75f, StatModifier.StatModifierType.FLAT, Stat.StatType.DEFENCE));
+
             RegisterEquipment("test_chestplace", EquipmentType.CHESTPLATE,
                 new StatModifier(0.75f, StatModifier.StatModifierType.FLAT, Stat.StatType.DEFENCE));
+        }
+
+
+
+        // NORMAL ITEM REGISTRATION
+
+        private void Register(string id) {
+            _itemDatabase.Add(id, new Item(id));
+        }
+        private void Register(string id, int maxStackSize) {
+            _itemDatabase.Add(id, new Item(id, maxStackSize));
+        }
+
+
+
+        // EQUIPMENT REGISTRATION
+
+        private void RegisterEquipment(string id, EquipmentType type, params StatModifier[] modifiers) {
+            _itemDatabase.Add(id, new EquipmentItem(id, type, modifiers));
+        }
+        private void RegisterLightSword(string id, EquipmentType type, params StatModifier[] modifiers) {
+            _itemDatabase.Add(id, new LightSword(id, type, 1, modifiers));
         }
     }
 }

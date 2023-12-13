@@ -30,7 +30,7 @@ namespace roguelike.enviroment.entity.player {
         }
 
         public void Attack(InputAction.CallbackContext context) {
-            //_player.Attack();
+            _player.Attack();
         }
         public void Interact(InputAction.CallbackContext context) {
             _hoverable?.Interact(_player);
