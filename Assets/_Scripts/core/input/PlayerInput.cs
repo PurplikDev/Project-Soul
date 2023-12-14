@@ -188,6 +188,15 @@ namespace roguelike.system.input
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""InteractionAction"",
+                    ""type"": ""Button"",
+                    ""id"": ""3dc7feb9-829c-48e7-9be2-a1b0f2d4515d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""MouseMove"",
                     ""type"": ""Value"",
                     ""id"": ""fde467c2-8816-4622-83ba-4f013ec23f84"",
@@ -230,6 +239,17 @@ namespace roguelike.system.input
                     ""action"": ""MouseMove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6d7f0f8c-a262-4025-93e2-ba032ea8e075"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""InteractionAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -265,6 +285,7 @@ namespace roguelike.system.input
             m_EnviromentControls = asset.FindActionMap("EnviromentControls", throwIfNotFound: true);
             m_EnviromentControls_PrimaryAction = m_EnviromentControls.FindAction("PrimaryAction", throwIfNotFound: true);
             m_EnviromentControls_SecondaryAction = m_EnviromentControls.FindAction("SecondaryAction", throwIfNotFound: true);
+            m_EnviromentControls_InteractionAction = m_EnviromentControls.FindAction("InteractionAction", throwIfNotFound: true);
             m_EnviromentControls_MouseMove = m_EnviromentControls.FindAction("MouseMove", throwIfNotFound: true);
         }
 
@@ -437,6 +458,7 @@ namespace roguelike.system.input
         private List<IEnviromentControlsActions> m_EnviromentControlsActionsCallbackInterfaces = new List<IEnviromentControlsActions>();
         private readonly InputAction m_EnviromentControls_PrimaryAction;
         private readonly InputAction m_EnviromentControls_SecondaryAction;
+        private readonly InputAction m_EnviromentControls_InteractionAction;
         private readonly InputAction m_EnviromentControls_MouseMove;
         public struct EnviromentControlsActions
         {
@@ -444,6 +466,7 @@ namespace roguelike.system.input
             public EnviromentControlsActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
             public InputAction @PrimaryAction => m_Wrapper.m_EnviromentControls_PrimaryAction;
             public InputAction @SecondaryAction => m_Wrapper.m_EnviromentControls_SecondaryAction;
+            public InputAction @InteractionAction => m_Wrapper.m_EnviromentControls_InteractionAction;
             public InputAction @MouseMove => m_Wrapper.m_EnviromentControls_MouseMove;
             public InputActionMap Get() { return m_Wrapper.m_EnviromentControls; }
             public void Enable() { Get().Enable(); }
@@ -460,6 +483,9 @@ namespace roguelike.system.input
                 @SecondaryAction.started += instance.OnSecondaryAction;
                 @SecondaryAction.performed += instance.OnSecondaryAction;
                 @SecondaryAction.canceled += instance.OnSecondaryAction;
+                @InteractionAction.started += instance.OnInteractionAction;
+                @InteractionAction.performed += instance.OnInteractionAction;
+                @InteractionAction.canceled += instance.OnInteractionAction;
                 @MouseMove.started += instance.OnMouseMove;
                 @MouseMove.performed += instance.OnMouseMove;
                 @MouseMove.canceled += instance.OnMouseMove;
@@ -473,6 +499,9 @@ namespace roguelike.system.input
                 @SecondaryAction.started -= instance.OnSecondaryAction;
                 @SecondaryAction.performed -= instance.OnSecondaryAction;
                 @SecondaryAction.canceled -= instance.OnSecondaryAction;
+                @InteractionAction.started -= instance.OnInteractionAction;
+                @InteractionAction.performed -= instance.OnInteractionAction;
+                @InteractionAction.canceled -= instance.OnInteractionAction;
                 @MouseMove.started -= instance.OnMouseMove;
                 @MouseMove.performed -= instance.OnMouseMove;
                 @MouseMove.canceled -= instance.OnMouseMove;
@@ -516,6 +545,7 @@ namespace roguelike.system.input
         {
             void OnPrimaryAction(InputAction.CallbackContext context);
             void OnSecondaryAction(InputAction.CallbackContext context);
+            void OnInteractionAction(InputAction.CallbackContext context);
             void OnMouseMove(InputAction.CallbackContext context);
         }
     }

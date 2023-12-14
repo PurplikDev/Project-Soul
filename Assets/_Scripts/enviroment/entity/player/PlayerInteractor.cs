@@ -22,19 +22,26 @@ namespace roguelike.enviroment.entity.player {
             _player = player;
             _input = player.PlayerInput;
 
-            // temp object for testing
+            // access the game object in a different way later
             speeeen = GameObject.Find("speeeen").transform;
 
-            _input.EnviromentControls.PrimaryAction.started += Attack;
-            _input.EnviromentControls.SecondaryAction.started += Interact;
+            _input.EnviromentControls.PrimaryAction.started += ActionPrimary;
+            _input.EnviromentControls.SecondaryAction.started += ActionSecondary;
+            _input.EnviromentControls.InteractionAction.started += Interact;
         }
 
-        public void Attack(InputAction.CallbackContext context) {
-            _player.Attack();
-        }
-        public void Interact(InputAction.CallbackContext context) {
-            _hoverable?.Interact(_player);
-        }
+
+
+        public void ActionPrimary(InputAction.CallbackContext context)
+            { _player.PrimaryAction(); }
+
+        public void ActionSecondary(InputAction.CallbackContext context)
+            { _player.SecondaryAction(); }
+
+        public void Interact(InputAction.CallbackContext context)
+            { _hoverable?.Interact(_player); }
+
+
 
         public void UpdateInteractor() {
             var (hit, pos, hoverable) = GetAimPos();

@@ -164,6 +164,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "InteractionAction",
+                    "type": "Button",
+                    "id": "3dc7feb9-829c-48e7-9be2-a1b0f2d4515d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "MouseMove",
                     "type": "Value",
                     "id": "fde467c2-8816-4622-83ba-4f013ec23f84",
@@ -204,6 +213,17 @@
                     "processors": "",
                     "groups": "PC",
                     "action": "MouseMove",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6d7f0f8c-a262-4025-93e2-ba032ea8e075",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "InteractionAction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

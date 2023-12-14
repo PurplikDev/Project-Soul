@@ -14,11 +14,19 @@ namespace roguelike.enviroment.entity.player {
         public PlayerInput PlayerInput { get; private set; }
         public Inventory Inventory { get; private set; }
 
-        public WeaponItem ItemInMainHand { get {
+        public WeaponItem ItemInMainHand {
+            get {
                 var item = Inventory.Items[(int)InventorySlot.MAIN_HAND].Item;
                 if(item is WeaponItem weapon) { return weapon; }
-                return null; 
-            } }
+                return null; } }
+
+        public WeaponItem ItemInOffHand {
+            get {
+                var item = Inventory.Items[(int)InventorySlot.OFF_HAND].Item;
+                if(item is WeaponItem weapon) { return weapon; }
+                return null; } }
+
+
 
         protected override void Awake() {
             PlayerInput = new PlayerInput();
@@ -35,8 +43,12 @@ namespace roguelike.enviroment.entity.player {
             PlayerInteractor.UpdateInteractor();
         }
 
-        public override void Attack() {
-            ItemInMainHand?.Attack(this);
+        public override void PrimaryAction() {
+            ItemInMainHand?.WeaponAction(this);
+        }
+
+        public override void SecondaryAction() {
+            ItemInOffHand?.WeaponAction(this);
         }
     }
 }

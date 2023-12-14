@@ -28,16 +28,14 @@ namespace roguelike.enviroment.entity {
             StatByType.Add(StatType.THAUMATURGE, Thaumaturge);
         }
 
-        protected virtual void Update() {
+        protected virtual void Update() { }
 
+        public virtual void PrimaryAction() {
+            Debug.Log("Entity primary action!");
         }
 
-        public void ApplyStatModifier(StatModifier modifier) {
-
-        }
-
-        public virtual void Attack() {
-            Debug.Log("Entity attack!");
+        public virtual void SecondaryAction() {
+            Debug.Log("Entity secondary action!");
         }
 
         public virtual void Damage(DamageSource source) {

@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using roguelike.core.item;
+using roguelike.rendering.ui.slot;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace roguelike.rendering.ui {
     public abstract class ContainerRenderer {
-        protected List<ItemSlot> itemSlots = new List<ItemSlot>();
+        internal List<ItemSlot> itemSlots = new List<ItemSlot>();
 
         public Action UpdateUIEvent;
 

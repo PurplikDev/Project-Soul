@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using roguelike.core.item;
 using roguelike.enviroment.world.deployable.workstation;
+using roguelike.rendering.ui.slot;
 using UnityEngine.UIElements;
 
 namespace roguelike.rendering.ui {
