@@ -19,7 +19,7 @@ namespace roguelike.rendering.ui.slot {
                 if(!otherStack.IsEmpty()) {
                     return false;
                 }
-            } if(((WeaponItem)otherStack.Item).IsTwoHanded) {
+            } if(otherStack.Item is WeaponItem weaponItem1 && weaponItem1.IsTwoHanded) {
                 return false;
             }
 

@@ -75,5 +75,9 @@ namespace roguelike.core.item {
         }
 
         public static readonly ItemStack EMPTY = new ItemStack(ItemManager.GetItemByID("air"));
+
+        public override string ToString() {
+            return _stackItem.Name + " | " + _stackSize;
+        }
     }
 }

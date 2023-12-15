@@ -23,11 +23,11 @@ public static class TranslationManager {
 
     // todo: event that calls this method when player changes their language or start the game
     public static void getTranslationFromFile() { 
-        TextAsset textAsset = Resources.Load<TextAsset>("lang/" + lang.ToString());
+        TextAsset textAsset = Resources.Load<TextAsset>("data/lang/" + lang.ToString());
 
         if (textAsset == null) { 
             Debug.LogError("Your lang file is empty! Selecting a default lang file!");
-            textAsset = Resources.Load<TextAsset>("lang/" + Language.en_us.ToString());
+            textAsset = Resources.Load<TextAsset>("data/lang/" + Language.en_us.ToString());
         }
 
         language = JsonConvert.DeserializeObject<Dictionary<string, string>>(textAsset.text.ToString());
