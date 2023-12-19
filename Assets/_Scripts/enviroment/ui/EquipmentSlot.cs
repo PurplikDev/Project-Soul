@@ -18,6 +18,10 @@ namespace roguelike.rendering.ui.slot {
             return false;
         }
 
+        public bool ForceSetStack(ItemStack stack) {
+            return base.SetStack(stack);
+        }
+
         public new class UxmlFactory : UxmlFactory<EquipmentSlot, UxmlTraits> { }
         public new class UxmlTraits : VisualElement.UxmlTraits {
             protected UxmlEnumAttributeDescription<EquipmentType> slotEquipmentType = new UxmlEnumAttributeDescription<EquipmentType> {

@@ -67,14 +67,5 @@ namespace roguelike.core.item {
                 }
             }
         }
-
-        public enum InventorySlot {
-            HELMET = 20,
-            CHESTPLATE = 21,
-            PANTS = 22,
-            BOOTS = 23,
-            MAIN_HAND = 24,
-            OFF_HAND = 25
-        }
     }
 }

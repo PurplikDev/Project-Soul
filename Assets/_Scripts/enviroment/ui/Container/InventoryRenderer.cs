@@ -27,16 +27,14 @@ namespace roguelike.rendering.ui {
             _inventory.UpdateItemStack(clickedSlot.SlotStack, clickedSlot.SlotIndex);
         }
 
+
+
         // SLOT REGISTRATION METHODS
 
         private void RegisterEquipmentSlots() {
-            // todo: fix...
-            // i think it is that it can't put air into the slot... i should have seen that coming tbh
-            // don't have time for now, will fix later
-
             foreach(EquipmentSlot equipmentSlot in _equipmentRoot.Children().ToList()) {
                 equipmentSlot.SlotIndex = (int)equipmentSlot.SlotEquipmentType;
-                equipmentSlot.SetStack(_inventory.Items[equipmentSlot.SlotIndex]);
+                equipmentSlot.ForceSetStack(_inventory.Items[equipmentSlot.SlotIndex]);
                 equipmentSlot.Renderer = this;
                 itemSlots.Add(equipmentSlot);
                 equipmentSlot.UpdateSlotEvent.Invoke();

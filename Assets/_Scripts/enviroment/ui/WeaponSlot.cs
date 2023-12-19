@@ -1,37 +1,36 @@
 using roguelike.core.item;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace roguelike.rendering.ui.slot {
     public class WeaponSlot : EquipmentSlot {
         public override bool SetStack(ItemStack stack) {
 
-            if(stack.IsEmpty()) {
+            if (stack.IsEmpty()) {
                 return base.SetStack(stack);
             }
 
-            if(stack.Item is not WeaponItem weaponItem) {
-                return false;
-            }
+            if (stack.Item is WeaponItem weapon) {
+                ItemStack otherStack = GetOtherStack();
+                if (weapon.IsTwoHanded) {
+                    if (otherStack.IsEmpty()) {
+                        return base.SetStack(stack);
+                    } else {
+                        return false;
+                    }
+                }
 
-            ItemStack otherStack = GetStackFromSlot((int)GetOtherSlot());
-
-            if(weaponItem.IsTwoHanded) {
-                if(!otherStack.IsEmpty()) {
+                if(otherStack.Item is WeaponItem otherWeapon && otherWeapon.IsTwoHanded) {
                     return false;
                 }
-            } if(otherStack.Item is WeaponItem weaponItem1 && weaponItem1.IsTwoHanded) {
-                return false;
             }
-
             return base.SetStack(stack);
         }
-
-        private ItemStack GetStackFromSlot(int slot) {
-            return Renderer.itemSlots[slot].SlotStack;
-        }
-
-        private Inventory.InventorySlot GetOtherSlot() {
-            return SlotEquipmentType == EquipmentType.MAIN_HAND ? Inventory.InventorySlot.MAIN_HAND : Inventory.InventorySlot.OFF_HAND;
+        
+        private ItemStack GetOtherStack() {
+            return Renderer.itemSlots[
+                (int)(SlotEquipmentType == EquipmentType.MAIN_HAND ? EquipmentType.OFF_HAND : EquipmentType.MAIN_HAND)
+                ].SlotStack;
         }
 
         public new class UxmlFactory : UxmlFactory<WeaponSlot, UxmlTraits> { }

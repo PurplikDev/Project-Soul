@@ -16,13 +16,13 @@ namespace roguelike.enviroment.entity.player {
 
         public WeaponItem ItemInMainHand {
             get {
-                var item = Inventory.Items[(int)InventorySlot.MAIN_HAND].Item;
+                var item = Inventory.Items[24].Item;
                 if(item is WeaponItem weapon) { return weapon; }
                 return null; } }
 
         public WeaponItem ItemInOffHand {
             get {
-                var item = Inventory.Items[(int)InventorySlot.OFF_HAND].Item;
+                var item = Inventory.Items[25].Item;
                 if(item is WeaponItem weapon) { return weapon; }
                 return null; } }
 

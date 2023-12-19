@@ -21,7 +21,6 @@ namespace roguelike.system.manager {
         }
 
         public static Recipe FindRecipe(RecipeType type, ItemStack[] input) {
-            /*
             foreach (KeyValuePair<RecipeType, List<Recipe>> entry in _recipeDatabase) {
                 foreach (Recipe recipe in entry.Value) {
                     StringBuilder builder = new StringBuilder();
@@ -32,7 +31,7 @@ namespace roguelike.system.manager {
                     Debug.Log(builder.ToString());
                 }
             }
-            */
+
             foreach(KeyValuePair<RecipeType, List<Recipe>> entry in _recipeDatabase) {
                 if(entry.Key != type) { continue; }
                 foreach(Recipe recipe in entry.Value) {
