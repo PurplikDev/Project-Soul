@@ -1,5 +1,4 @@
 using roguelike.core.item;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace roguelike.rendering.ui.slot {
@@ -10,9 +9,9 @@ namespace roguelike.rendering.ui.slot {
                 return base.SetStack(stack);
             }
 
-            if (stack.Item is WeaponItem weapon) {
+            if (stack.Item is HandheldItem handheldItem) {
                 ItemStack otherStack = GetOtherStack();
-                if (weapon.IsTwoHanded) {
+                if (handheldItem.IsTwoHanded) {
                     if (otherStack.IsEmpty()) {
                         return base.SetStack(stack);
                     } else {
@@ -20,7 +19,7 @@ namespace roguelike.rendering.ui.slot {
                     }
                 }
 
-                if(otherStack.Item is WeaponItem otherWeapon && otherWeapon.IsTwoHanded) {
+                if(otherStack.Item is HandheldItem otherHandheldItem && otherHandheldItem.IsTwoHanded) {
                     return false;
                 }
             }

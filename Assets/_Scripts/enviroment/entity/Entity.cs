@@ -15,9 +15,14 @@ namespace roguelike.enviroment.entity {
 
         public Dictionary<StatType, Stat> StatByType = new Dictionary<StatType, Stat>();
 
+        public List<StatusEffect> ActiveEffects = new List<StatusEffect>();
+
         public Vector3 Position { get { return transform.position; } }
         public Quaternion Rotation { get { return transform.rotation; } }
         public Quaternion LookDirection;
+
+        public bool Immortal { get; protected set; } = false;
+        public float Health { get; protected set; }
 
         protected virtual void Awake() {
             StatByType.Add(StatType.HEALTH, MaxHealth);
@@ -26,6 +31,12 @@ namespace roguelike.enviroment.entity {
             StatByType.Add(StatType.TEMPLAR, Templar);
             StatByType.Add(StatType.ROGUE, Rogue);
             StatByType.Add(StatType.THAUMATURGE, Thaumaturge);
+
+            Health = MaxHealth.Value;
+        }
+
+        protected virtual void Start() {
+            InvokeRepeating(nameof(CheckAndApplyStatusEffects), 1f, 1f);
         }
 
         protected virtual void Update() { }
@@ -38,23 +49,13 @@ namespace roguelike.enviroment.entity {
             Debug.Log("Entity secondary action!");
         }
 
-        public virtual void Damage(DamageSource source) {
-
-        }
-
         public int GetDefenceTier() {
             return Mathf.FloorToInt(Defence.Value);
         }
 
-        public enum DamageSource {
-            COMBAT,            
-            CORRUPTION,
-            ENVIROMENT
-        }
-
-        public enum DamageType {
-            NORMAL,
-            TRUE
+        private void CheckAndApplyStatusEffects() {
+            if(ActiveEffects.Count < 1) { return; }
+            Debug.Log("Effect applied");
         }
     }
 }

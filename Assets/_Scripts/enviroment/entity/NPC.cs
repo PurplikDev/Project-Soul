@@ -4,5 +4,6 @@ using UnityEngine;
 
 namespace roguelike.enviroment.entity.npc {
     public class NPC : Entity {
+
     }
 }

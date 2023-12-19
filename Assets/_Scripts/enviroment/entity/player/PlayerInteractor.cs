@@ -5,26 +5,21 @@ using UnityEngine.InputSystem;
 using PlayerInput = roguelike.system.input.PlayerInput;
 
 namespace roguelike.enviroment.entity.player {
-    public class PlayerInteractor {
+    public class PlayerInteractor : MonoBehaviour {
 
-        private Player _player;
+        [HideInInspector]
+        public Player Player;
         private PlayerInput _input;
         private Vector3 _mousePos;
-
-        public Transform speeeen;
 
         private IHoverable _hoverable;
 
         // todo: fix the aiming sprite, it isn't bright enough and blends in too much
-        // todo part 2: proper aiming gameobject
 
-        public PlayerInteractor(Player player) {
-            _player = player;
-            _input = player.PlayerInput;
+        public void Start() {
+            _input = Player.PlayerInput;
 
             // access the game object in a different way later
-            speeeen = GameObject.Find("speeeen").transform;
-
             _input.EnviromentControls.PrimaryAction.started += ActionPrimary;
             _input.EnviromentControls.SecondaryAction.started += ActionSecondary;
             _input.EnviromentControls.InteractionAction.started += Interact;
@@ -33,23 +28,23 @@ namespace roguelike.enviroment.entity.player {
 
 
         public void ActionPrimary(InputAction.CallbackContext context)
-            { _player.PrimaryAction(); }
+            { Player.PrimaryAction(); }
 
         public void ActionSecondary(InputAction.CallbackContext context)
-            { _player.SecondaryAction(); }
+            { Player.SecondaryAction(); }
 
         public void Interact(InputAction.CallbackContext context)
-            { _hoverable?.Interact(_player); }
+            { _hoverable?.Interact(Player); }
 
 
 
         public void UpdateInteractor() {
             var (hit, pos, hoverable) = GetAimPos();
             if(hit) {
-                var aimPos = pos - _player.Position;
+                var aimPos = pos - Player.Position;
                 aimPos.y = 1;
-                Debug.DrawLine(_player.Position, pos, Color.white);
-                speeeen.rotation = new Quaternion(0, Quaternion.LookRotation(aimPos).y, 0, Quaternion.LookRotation(aimPos).w);
+                transform.rotation = new Quaternion(0, Quaternion.LookRotation(aimPos).y, 0, Quaternion.LookRotation(aimPos).w);
+                Player.LookDirection = transform.rotation;
 
                 if(hoverable != null) {
                     HandleHoverEvents(pos, hoverable);
@@ -81,14 +76,14 @@ namespace roguelike.enviroment.entity.player {
         }
 #nullable enable
         private void HandleHoverEvents(Vector3 hitPos, IHoverable? hoverable) {
-            if(Vector3.Distance(hitPos, _player.Position) < 2.5f) {
+            if(Vector3.Distance(hitPos, Player.Position) < 2.5f) {
                 if(hoverable != null) {
                     if(hoverable == _hoverable) {
-                        _hoverable.OnHover(_player);
+                        _hoverable.OnHover(Player);
                     } else if(hoverable != _hoverable) {
-                        _hoverable?.OnHoverExit(_player);
+                        _hoverable?.OnHoverExit(Player);
                         _hoverable = hoverable;
-                        _hoverable.OnHoverEnter(_player);
+                        _hoverable.OnHoverEnter(Player);
                     }
                 } else { HoverExit(); }
             } else if(_hoverable != null) { HoverExit(); }
@@ -96,7 +91,7 @@ namespace roguelike.enviroment.entity.player {
 #nullable disable
 
         private void HoverExit() {
-            _hoverable?.OnHoverExit(_player);
+            _hoverable?.OnHoverExit(Player);
             _hoverable = null;
         }
     }

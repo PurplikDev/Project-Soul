@@ -38,6 +38,7 @@ namespace roguelike.system.manager {
                     if(recipe.CheckRecipe(input)) { return recipe; }
                 }
             }
+            Debug.Log("didn't find recipe");
             return null;
         }
 

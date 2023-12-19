@@ -7,7 +7,7 @@ namespace roguelike.core.item {
         public LightSword(string id, float damage, int weaponTier, params StatModifier[] modifiers) 
             : base(id, damage, EquipmentType.MAIN_HAND, false, weaponTier, modifiers) {}
 
-        public override void WeaponAction(Entity entityAttacker) {
+        public override void ItemAction(Entity entityAttacker) {
             Debug.Log(entityAttacker.name + " is attacking with " + Name + " for " + Damage + " damage!");
         }
     }

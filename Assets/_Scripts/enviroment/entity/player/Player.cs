@@ -2,7 +2,6 @@ using roguelike.core.item;
 using roguelike.enviroment.entity.statsystem;
 using roguelike.enviroment.ui.statemachine;
 using roguelike.system.input;
-using static roguelike.core.item.Inventory;
 
 namespace roguelike.enviroment.entity.player {
     public class Player : Entity {
@@ -14,16 +13,16 @@ namespace roguelike.enviroment.entity.player {
         public PlayerInput PlayerInput { get; private set; }
         public Inventory Inventory { get; private set; }
 
-        public WeaponItem ItemInMainHand {
+        public HandheldItem ItemInMainHand {
             get {
                 var item = Inventory.Items[24].Item;
-                if(item is WeaponItem weapon) { return weapon; }
+                if(item is HandheldItem handheldItem) { return handheldItem; }
                 return null; } }
 
-        public WeaponItem ItemInOffHand {
+        public HandheldItem ItemInOffHand {
             get {
                 var item = Inventory.Items[25].Item;
-                if(item is WeaponItem weapon) { return weapon; }
+                if(item is HandheldItem handheldItem) { return handheldItem; }
                 return null; } }
 
 
@@ -33,8 +32,10 @@ namespace roguelike.enviroment.entity.player {
             PlayerInput.Enable();
 
             Inventory = new Inventory(this);
-            PlayerInteractor = new PlayerInteractor(this);
+            PlayerInteractor = GetComponentInChildren<PlayerInteractor>();
             UIStateMachine = GetComponent<UIStateMachine>();
+
+            PlayerInteractor.Player = this;
 
             base.Awake();
         }
@@ -44,11 +45,11 @@ namespace roguelike.enviroment.entity.player {
         }
 
         public override void PrimaryAction() {
-            ItemInMainHand?.WeaponAction(this);
+            ItemInMainHand?.ItemAction(this);
         }
 
         public override void SecondaryAction() {
-            ItemInOffHand?.WeaponAction(this);
+            ItemInOffHand?.ItemAction(this);
         }
     }
 }

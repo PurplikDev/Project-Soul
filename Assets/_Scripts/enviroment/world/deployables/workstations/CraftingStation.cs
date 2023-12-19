@@ -5,7 +5,6 @@ using roguelike.core.item.recipe;
 using roguelike.enviroment.entity.player;
 using roguelike.rendering.ui;
 using roguelike.system.manager;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace roguelike.enviroment.world.deployable.workstation {
@@ -32,9 +31,9 @@ namespace roguelike.enviroment.world.deployable.workstation {
         }
 
         public virtual Recipe CheckForRecipes() {
-            var recipe = RecipeManager.FindRecipe(Recipe.RecipeType.SHAPELESS_CRAFTING, StationInventory.ToArray());
+            var recipe = RecipeManager.FindRecipe(Recipe.RecipeType.SHAPED_CRAFTING, StationInventory.ToArray());
             if(recipe == null) {
-                recipe = RecipeManager.FindRecipe(Recipe.RecipeType.SHAPED_CRAFTING, StationInventory.ToArray());
+                recipe = RecipeManager.FindRecipe(Recipe.RecipeType.SHAPELESS_CRAFTING, StationInventory.ToArray());
             }
 
             LastRecipe = recipe;
