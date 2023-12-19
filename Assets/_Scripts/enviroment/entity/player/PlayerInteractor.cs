@@ -44,7 +44,7 @@ namespace roguelike.enviroment.entity.player {
                 var aimPos = pos - Player.Position;
                 aimPos.y = 1;
                 transform.rotation = new Quaternion(0, Quaternion.LookRotation(aimPos).y, 0, Quaternion.LookRotation(aimPos).w);
-                Player.LookDirection = transform.rotation;
+                Player.LookDirection = transform.forward;
 
                 if(hoverable != null) {
                     HandleHoverEvents(pos, hoverable);

@@ -17,14 +17,14 @@
                 <ui:VisualElement name="Trinket" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; width: auto; justify-content: flex-start; height: auto;">
                     <ui:Label text="ui.trinkets" display-tooltip-when-elided="true" name="TrinketsHeader" class="header" />
                     <ui:VisualElement name="TrinketSlotContainer" class="slotsContainer" style="align-items: center; justify-content: center; flex-direction: row; margin-top: 0; margin-left: 0; margin-right: 0; margin-bottom: 0; flex-shrink: 1; flex-wrap: wrap; height: auto;">
-                        <roguelike.rendering.ui.slot.EquipmentSlot slot-equipment-type="TRINKET" />
-                        <roguelike.rendering.ui.slot.EquipmentSlot slot-equipment-type="TRINKET" />
-                        <roguelike.rendering.ui.slot.EquipmentSlot slot-equipment-type="TRINKET" />
-                        <roguelike.rendering.ui.slot.EquipmentSlot slot-equipment-type="TRINKET" />
-                        <roguelike.rendering.ui.slot.EquipmentSlot slot-equipment-type="TRINKET" />
-                        <roguelike.rendering.ui.slot.EquipmentSlot slot-equipment-type="TRINKET" />
-                        <roguelike.rendering.ui.slot.EquipmentSlot slot-equipment-type="TRINKET" />
-                        <roguelike.rendering.ui.slot.EquipmentSlot slot-equipment-type="TRINKET" />
+                        <roguelike.rendering.ui.slot.TrinketSlot />
+                        <roguelike.rendering.ui.slot.TrinketSlot />
+                        <roguelike.rendering.ui.slot.TrinketSlot />
+                        <roguelike.rendering.ui.slot.TrinketSlot />
+                        <roguelike.rendering.ui.slot.TrinketSlot />
+                        <roguelike.rendering.ui.slot.TrinketSlot />
+                        <roguelike.rendering.ui.slot.TrinketSlot />
+                        <roguelike.rendering.ui.slot.TrinketSlot />
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>

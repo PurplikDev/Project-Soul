@@ -3,7 +3,7 @@ using roguelike.enviroment.entity.statsystem;
 using UnityEngine;
 
 namespace roguelike.core.item {
-    public class Shield : HandheldItem { // todo: change this to be equipment, not weapon
+    public class Shield : HandheldItem {
 
         public bool IsUp { get; private set; }
 
@@ -19,9 +19,11 @@ namespace roguelike.core.item {
             IsUp = !IsUp;
             if(IsUp) {
                 entityAttacker.Speed.AddModifier(slowDown);
+                entityAttacker.IsBlocking = true;
                 Debug.Log("shield is up!");
             } else {
                 entityAttacker.Speed.RemoveModifier(slowDown);
+                entityAttacker.IsBlocking = false;
                 Debug.Log("shield is down!");
             }
         }

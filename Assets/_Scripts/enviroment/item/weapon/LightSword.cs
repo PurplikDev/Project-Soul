@@ -1,4 +1,5 @@
 using roguelike.enviroment.entity;
+using roguelike.enviroment.entity.combat;
 using roguelike.enviroment.entity.statsystem;
 using UnityEngine;
 
@@ -8,7 +9,10 @@ namespace roguelike.core.item {
             : base(id, damage, EquipmentType.MAIN_HAND, false, weaponTier, modifiers) {}
 
         public override void ItemAction(Entity entityAttacker) {
-            Debug.Log(entityAttacker.name + " is attacking with " + Name + " for " + Damage + " damage!");
+            if(Physics.Raycast(entityAttacker.Position, entityAttacker.LookDirection, out var hitInfo, 5, LayerMask.GetMask("Entity"))) {
+                var entity = hitInfo.transform.GetComponent<Entity>();
+                entity?.Damage(new DamageSource(Damage, DamageType.COMBAT, WeaponTier, entity, entityAttacker));
+            }
         }
     }
 }

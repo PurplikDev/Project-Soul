@@ -40,6 +40,9 @@ namespace roguelike.core.item {
             Register("test3");
             Register("test4", 6);
 
+            RegisterTrinket("amulet_of_beautiful_eyes",
+                new StatModifier(1.5f, StatModifier.StatModifierType.ADDITIONAL, Stat.StatType.HEALTH));
+
             RegisterLightSword("test_light_sword", 15f, 1);
             RegisterHeavySword("test_heavy_sword", 50f, 2);
             RegisterShield("test_shield", -0.75f, 3);
@@ -73,6 +76,11 @@ namespace roguelike.core.item {
         private void RegisterEquipment(string id, EquipmentType type, params StatModifier[] modifiers) {
             _itemDatabase.Add(id, new EquipmentItem(id, type, modifiers));
         }
+        private void RegisterTrinket(string id, params StatModifier[] modifiers) {
+            _itemDatabase.Add(id, new EquipmentItem(id, EquipmentType.TRINKET, modifiers));
+        }
+
+        // WEAPON AND SHIELD REGISTRATION
         private void RegisterLightSword(string id, float damage, int weaponTier, params StatModifier[] modifiers) {
             _itemDatabase.Add(id, new LightSword(id, damage, weaponTier, modifiers));
         }

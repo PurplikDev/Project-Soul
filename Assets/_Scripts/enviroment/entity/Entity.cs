@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using roguelike.enviroment.entity.combat;
 using roguelike.enviroment.entity.statsystem;
 using UnityEngine;
 using static roguelike.enviroment.entity.statsystem.Stat;
@@ -19,9 +20,10 @@ namespace roguelike.enviroment.entity {
 
         public Vector3 Position { get { return transform.position; } }
         public Quaternion Rotation { get { return transform.rotation; } }
-        public Quaternion LookDirection;
+        public Vector3 LookDirection;
 
         public bool Immortal { get; protected set; } = false;
+        public bool IsBlocking { get; internal set; } = false;
         public float Health { get; protected set; }
 
         protected virtual void Awake() {
@@ -51,6 +53,11 @@ namespace roguelike.enviroment.entity {
 
         public int GetDefenceTier() {
             return Mathf.FloorToInt(Defence.Value);
+        }
+
+        public void Damage(DamageSource source) {
+            // check for blocking and check rotations here :3
+            Health -= (float)source.CalculateDamage();
         }
 
         private void CheckAndApplyStatusEffects() {
