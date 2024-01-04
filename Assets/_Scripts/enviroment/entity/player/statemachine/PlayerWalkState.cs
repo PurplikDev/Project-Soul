@@ -1,5 +1,3 @@
-using roguelike.core.statemachine;
-using UnityEngine;
 using static roguelike.enviroment.entity.player.statemachine.PlayerStateMachine;
 
 namespace roguelike.enviroment.entity.player.statemachine {

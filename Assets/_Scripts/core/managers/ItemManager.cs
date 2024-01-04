@@ -31,6 +31,10 @@ namespace roguelike.core.item {
         }
 
 
+        // i just want to say, i hate this
+        // i have no idea why i made this like this
+        // no idea what i was thinking back then
+        // i want to rewrite it, but that would take too much effort
 
         private void RegisterItems() {
             Register("air");
@@ -43,8 +47,8 @@ namespace roguelike.core.item {
             RegisterTrinket("amulet_of_beautiful_eyes",
                 new StatModifier(1.5f, StatModifier.StatModifierType.ADDITIONAL, Stat.StatType.HEALTH));
 
-            RegisterLightSword("test_light_sword", 15f, 1);
-            RegisterHeavySword("test_heavy_sword", 50f, 2);
+            RegisterLightSword("test_light_sword",15f, 0.25f, 0.5f, 1);
+            RegisterHeavySword("test_heavy_sword", 50f, 0.75f, 1.5f, 2);
             RegisterShield("test_shield", -0.75f, 3);
 
             RegisterEquipment("boots_of_the_traveler", EquipmentType.BOOTS,
@@ -81,11 +85,11 @@ namespace roguelike.core.item {
         }
 
         // WEAPON AND SHIELD REGISTRATION
-        private void RegisterLightSword(string id, float damage, int weaponTier, params StatModifier[] modifiers) {
-            _itemDatabase.Add(id, new LightSword(id, damage, weaponTier, modifiers));
+        private void RegisterLightSword(string id, float damage, float swingSpeed, float attackCooldown, int weaponTier, params StatModifier[] modifiers) {
+            _itemDatabase.Add(id, new LightSword(id, damage, swingSpeed, attackCooldown, weaponTier, modifiers));
         }
-        private void RegisterHeavySword(string id, float damage, int weaponTier, params StatModifier[] modifiers) {
-            _itemDatabase.Add(id, new HeavySword(id, damage, weaponTier, modifiers));
+        private void RegisterHeavySword(string id, float damage, float swingSpeed, float attackCooldown, int weaponTier, params StatModifier[] modifiers) {
+            _itemDatabase.Add(id, new HeavySword(id, damage, swingSpeed, attackCooldown, weaponTier, modifiers));
         }
         private void RegisterShield(string id, float slowDownEffect, int weaponTier, params StatModifier[] modifiers) {
             _itemDatabase.Add(id, new Shield(id, slowDownEffect, weaponTier, modifiers));

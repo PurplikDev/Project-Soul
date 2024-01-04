@@ -32,15 +32,9 @@ namespace roguelike.enviroment.entity.player.statemachine {
             states.Add(PlayerStates.IDLE, new PlayerIdleState(this));
             states.Add(PlayerStates.WALK, new PlayerWalkState(this));
             states.Add(PlayerStates.RUN, new PlayerRunState(this));
+            states.Add(PlayerStates.ATTACK, new PlayerAttackState(this));
 
             currentState = states[PlayerStates.IDLE];
-
-            input.CharacterControls.Movement.started += OnMovementInput;
-            input.CharacterControls.Movement.performed += OnMovementInput;
-            input.CharacterControls.Movement.canceled += OnMovementInput;
-
-            input.CharacterControls.Sprint.started += OnSpritingInput;
-            input.CharacterControls.Sprint.canceled += OnSpritingInput;
         }
 
         void OnMovementInput(InputAction.CallbackContext context) {
@@ -52,18 +46,45 @@ namespace roguelike.enviroment.entity.player.statemachine {
             IsSprinting = context.ReadValueAsButton();
         }
 
+        void OnAttackInput(InputAction.CallbackContext context) {
+            var item = (core.item.WeaponItem)Player.ItemInMainHand;
+            if(item != null) {
+                TransitionToState(PlayerStates.ATTACK);
+                StartCoroutine(((PlayerAttackState)currentState).PlayerAttack(item));
+            }
+        }
+
         void OnEnable() {
             input.CharacterControls.Enable();
+
+            input.CharacterControls.Movement.started += OnMovementInput;
+            input.CharacterControls.Movement.performed += OnMovementInput;
+            input.CharacterControls.Movement.canceled += OnMovementInput;
+
+            input.CharacterControls.Sprint.started += OnSpritingInput;
+            input.CharacterControls.Sprint.canceled += OnSpritingInput;
+
+            input.EnviromentControls.PrimaryAction.started += OnAttackInput;
         }
 
         void OnDisable() {
             input.CharacterControls.Disable();
+
+            input.CharacterControls.Movement.started -= OnMovementInput;
+            input.CharacterControls.Movement.performed -= OnMovementInput;
+            input.CharacterControls.Movement.canceled -= OnMovementInput;
+
+            input.CharacterControls.Sprint.started -= OnSpritingInput;
+            input.CharacterControls.Sprint.canceled -= OnSpritingInput;
+
+            input.EnviromentControls.PrimaryAction.started -= OnAttackInput;
         }
 
         public enum PlayerStates {
             IDLE,
             WALK,
-            RUN
+            RUN,
+            ATTACK
         }
     }
 }
