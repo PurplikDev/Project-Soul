@@ -12,6 +12,7 @@ namespace roguelike.enviroment.entity.player.statemachine {
         Vector2 CurrentMovementInput;
         internal system.input.PlayerInput input { get; private set; }
         internal Player Player { get; private set; }
+        internal Animator Animator { get; private set; }
 
 
         // PUBLIC
@@ -26,6 +27,7 @@ namespace roguelike.enviroment.entity.player.statemachine {
 
         void Awake() {
             Player = GetComponent<Player>();
+            Animator = GetComponent<Animator>();
             input = Player.PlayerInput;
             CharacterController = GetComponent<CharacterController>();
 

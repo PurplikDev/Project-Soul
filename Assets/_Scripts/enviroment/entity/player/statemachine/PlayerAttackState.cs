@@ -11,6 +11,7 @@ namespace roguelike.enviroment.entity.player.statemachine {
 
         public override void EnterState() {
             _isAttacking = true;
+            playerStateMachine.Animator.SetTrigger("AttackTrigger");
         }
 
         public override void UpdateState() { }

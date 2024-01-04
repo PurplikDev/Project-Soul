@@ -1,4 +1,3 @@
-using roguelike.core.statemachine;
 using UnityEngine;
 using static roguelike.enviroment.entity.player.statemachine.PlayerStateMachine;
 
@@ -7,7 +6,9 @@ namespace roguelike.enviroment.entity.player.statemachine {
 
         public PlayerIdleState(PlayerStateMachine stateMachine) : base(stateMachine, PlayerStates.IDLE) { }
 
-        public override void EnterState() { }
+        public override void EnterState() {
+            playerStateMachine.Animator.SetTrigger("IdleTrigger");
+        }
 
         public override void ExitState() { }
 
