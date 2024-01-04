@@ -55,7 +55,7 @@ namespace roguelike.enviroment.entity {
             return Mathf.FloorToInt(Defence.Value);
         }
 
-        public void Damage(DamageSource source) {
+        public virtual void Damage(DamageSource source) {
             // check for blocking and check rotations here :3
             Health -= (float)source.CalculateDamage();
         }

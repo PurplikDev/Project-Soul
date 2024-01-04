@@ -1,4 +1,6 @@
+using roguelike.core.eventsystem;
 using roguelike.enviroment.entity;
+using roguelike.enviroment.entity.player;
 using roguelike.enviroment.entity.statsystem;
 using System.Collections.Generic;
 
@@ -65,6 +67,8 @@ namespace roguelike.core.item {
                         Entity.StatByType[statModifier.StatType].RemoveModifier(statModifier);
                     }
                 }
+
+                Events.PlayerMaxHealthUpdateEvent.Invoke(new PlayerMaxHealthUpdateEvent((Player)Entity));
             }
         }
     }
