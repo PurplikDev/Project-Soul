@@ -25,7 +25,7 @@ namespace roguelike.core.item {
             for (int i = 0; i < InventorySize; i++) {
                 if (i % 2 != 0) {
                     if(i == 1) {
-                        Items.Add(new ItemStack(ItemManager.GetItemByID("test_light_sword")));
+                        Items.Add(new ItemStack(ItemManager.GetItemByID("amulet_of_beautiful_eyes")));
                     } else {
                         Items.Add(ItemStack.EMPTY);
                     }
@@ -68,7 +68,7 @@ namespace roguelike.core.item {
                     }
                 }
 
-                Events.PlayerMaxHealthUpdateEvent.Invoke(new PlayerMaxHealthUpdateEvent((Player)Entity));
+                Events.PlayerHeathUpdateEvent.Invoke(new PlayerHealthUpdateEvent((Player)Entity));
             }
         }
     }

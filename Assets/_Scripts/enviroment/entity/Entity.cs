@@ -6,7 +6,7 @@ using static roguelike.enviroment.entity.statsystem.Stat;
 
 namespace roguelike.enviroment.entity {
     public class Entity : MonoBehaviour {
-        public Stat MaxHealth = new Stat(100);
+        public Stat MaxHealth = new Stat(30);
         public Stat Speed = new Stat(5);
         public Stat Defence = new Stat(0);
 

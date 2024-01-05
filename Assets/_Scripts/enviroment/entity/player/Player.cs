@@ -38,12 +38,12 @@ namespace roguelike.enviroment.entity.player {
             UIStateMachine = GetComponent<UIStateMachine>();
 
             PlayerInteractor.Player = this;
-
-            Events.PlayerMaxHealthUpdateEvent += context => {
-                if(MaxHealth.Value < Health) { Health = MaxHealth.Value; }
-            };
-
             base.Awake();
+        }
+
+        protected override void Start() {
+            Events.PlayerHeathUpdateEvent.Invoke(new PlayerHealthUpdateEvent(this));
+            base.Start();
         }
 
         protected override void Update() { PlayerInteractor.UpdateInteractor(); }

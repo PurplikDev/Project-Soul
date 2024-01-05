@@ -12,7 +12,4 @@ namespace roguelike.core.eventsystem {
 
     public class PlayerHealthUpdateEvent : PlayerEvent
         { public PlayerHealthUpdateEvent(Player player) : base(player) { } }
-
-    public class PlayerMaxHealthUpdateEvent : PlayerEvent
-        { public PlayerMaxHealthUpdateEvent(Player player) : base(player) { } }
 }
