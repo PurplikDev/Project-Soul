@@ -1,4 +1,4 @@
-using roguelike.enviroment.entity.player;
+using roguelike.environment.entity.player;
 
 namespace roguelike.core.eventsystem {
     public abstract class Event { }

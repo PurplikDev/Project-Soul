@@ -1,5 +1,5 @@
 using roguelike.system.singleton;
-using roguelike.enviroment.world.dungeon;
+using roguelike.environment.world.dungeon;
 
 namespace roguelike.system.manager {
     public class DungeonManager : Singleton<DungeonManager> {

@@ -9,7 +9,7 @@ namespace roguelike.core.statemachine {
 
         protected bool isTransitioningState = false;
 
-        protected void Start() {
+        protected virtual void Start() {
             currentState.EnterState();
         }
 

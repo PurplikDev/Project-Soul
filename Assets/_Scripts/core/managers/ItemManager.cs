@@ -1,4 +1,4 @@
-using roguelike.enviroment.entity.statsystem;
+using roguelike.environment.entity.statsystem;
 using roguelike.system.singleton;
 using System.Collections.Generic;
 using System.Linq;

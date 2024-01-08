@@ -1,8 +1,7 @@
-using roguelike.enviroment.entity.player;
+using roguelike.environment.entity.player;
 using roguelike.system.input;
 using roguelike.system.singleton;
 using System;
-using System.Linq;
 using UnityEngine;
 
 namespace roguelike.system.manager {
@@ -27,6 +26,10 @@ namespace roguelike.system.manager {
             
 
             base.Awake();
+        }
+
+        protected virtual void Start() {
+            
         }
 
         private void SpawnPlayer() {

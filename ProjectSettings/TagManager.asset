@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Entity
   layers:
   - Default
   - TransparentFX
@@ -47,15 +48,15 @@ TagManager:
   - name: EquipmentArmor
     uniqueID: 866315675
     locked: 0
-  - name: PlayerCharacter
+  - name: Ground
+    uniqueID: 3543638645
+    locked: 0
+  - name: Entities
     uniqueID: 180855149
     locked: 0
-  - name: Objects
-    uniqueID: 2275966343
+  - name: UI
+    uniqueID: 1736564027
     locked: 0
   - name: Walls
     uniqueID: 840865383
-    locked: 0
-  - name: Ground
-    uniqueID: 3543638645
     locked: 0
