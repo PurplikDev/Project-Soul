@@ -12,5 +12,16 @@ namespace roguelike.environment.entity.statemachine {
         }
 
         public override void ExitState() { }
+
+
+
+        public override EntityStates GetNextState() {
+            if(stateMachine.NeedToSeePlayer && stateMachine.canSeePlayer ||
+                !stateMachine.NeedToSeePlayer && stateMachine.isPlayerInRange) {
+                return EntityStates.CHASE;
+            } else {
+                return EntityStates.IDLE;
+            }
+        }
     }
 }

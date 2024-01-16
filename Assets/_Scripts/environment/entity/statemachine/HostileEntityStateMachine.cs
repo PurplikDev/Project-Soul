@@ -10,6 +10,7 @@ namespace roguelike.environment.entity.statemachine {
         internal CharacterController entityController { get; private set; }
         internal bool isPlayerInRange;
         internal bool canSeePlayer;
+        internal bool isTargetting;
         internal Player targetCache;
         internal Vector3 targetPosition;
         internal Vector3 targetDirection;
@@ -17,9 +18,13 @@ namespace roguelike.environment.entity.statemachine {
         internal Vector3 originalEntityPosition;
 
         [Header("Behavior Options")]
+        /// <summary> Does the Entity not lose the player agro? </summary>
         public bool DoesPermaAgro;
+        /// <summary> Does the Entity go to a position it saw the player last at? </summary>
         public bool DoesFollowToCorner;
+        /// <summary> Does the Entity try to look for the player when it loses it's agro? </summary>
         public bool LooksForPlayer;
+        /// <summary> Does the Entity need to have a line of sight in order to follow the player? </summary>
         public bool NeedToSeePlayer;
         [Space]
         [Header("Behavior Properties")]
@@ -45,17 +50,30 @@ namespace roguelike.environment.entity.statemachine {
 
         protected override void Start() {
             base.Start();
-            InvokeRepeating(nameof(CheckFieldOfVision), 0f, 0.25f);
+            InvokeRepeating(nameof(CheckForTarget), 0f, 0.25f);
         }
 
-        private void CheckFieldOfVision() {
+        private void CheckForTarget() {
             if(DoesPermaAgro && targetCache != null && !targetCache.IsDead) { return; } // no need to recheck if it's perma agro and the entity is already mad
+
+            CheckRange();
+
+            if(!NeedToSeePlayer) {
+
+            }
+
+            if(NeedToSeePlayer && isPlayerInRange) {
+                CheckFieldOfVision();
+            }
+        }
+
+        private (Player target, Vector3 targetPosition) CheckRange() {
 
             Collider[] colliders = Physics.OverlapSphere(hostileEntity.Position, Range, LayerMask.GetMask("Player"), QueryTriggerInteraction.Ignore);
 
             if(colliders.Length == 0) {
                 isPlayerInRange = false;
-                return;
+                return (null, new Vector3());
             }
 
             foreach(var collider in colliders) {
@@ -64,32 +82,19 @@ namespace roguelike.environment.entity.statemachine {
 
                 targetPosition = player.Position;
                 targetDirection = (hostileEntity.Position - player.Position).normalized;
-
                 isPlayerInRange = true;
+                break;
+            }
+        }
 
-                var targetAngle = Vector3.Angle(hostileEntity.LookDirection, targetDirection);
 
-                if (targetAngle < Angle) {
-                    if (Physics.Raycast(hostileEntity.Position, targetDirection * -1, out var hitInfo, Range)) {
-                        if(hitInfo.transform.GetComponent<Player>() != null) {
-                            canSeePlayer = true;
-                        } else {
-                            canSeePlayer = false;
-                        }
-                    } else {
-                        canSeePlayer = false;
-                    }
-                } else {
-                    canSeePlayer = false;
-                }
+        private void CheckFieldOfVision() {
+            var targetAngle = Vector3.Angle(hostileEntity.LookDirection, targetDirection);
 
-                
-
-                if(NeedToSeePlayer && canSeePlayer || !NeedToSeePlayer && isPlayerInRange) {
-                    targetCache = player;
-                    lastSeenLocation = targetPosition;
-                    hostileEntity.LookDirection = targetDirection;
-                }
+            if (targetAngle < Angle && Physics.Raycast(hostileEntity.Position, targetDirection * -1, out var hitInfo, Range) && hitInfo.transform.GetComponent<Player>() != null) {
+                canSeePlayer = true;
+            } else {
+                canSeePlayer = false;
             }
         }
     }
