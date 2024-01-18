@@ -1,18 +1,41 @@
-using roguelike.environment.entity.player.statemachine;
 using UnityEngine;
 
 namespace roguelike.environment.entity.statemachine {
     public class HostileEntityChaseState : HostileEntityBaseState {
         public HostileEntityChaseState(HostileEntityStateMachine stateMachine) : base(stateMachine, EntityStates.CHASE) { }
 
+        private float _forgetTicker;
+
         public override void EnterState() {
-            Debug.Log("chase state entered");
+            _forgetTicker = 0;
         }
 
         public override void UpdateState() {
-            stateMachine.entityController.SimpleMove(stateMachine.GetCurrentMovementSpeed);
+            Vector3 targetPos;
+
+            if(!stateMachine.hasLineOfSight) {
+                targetPos = stateMachine.lastSeenLocation;
+                _forgetTicker += 1f * Time.deltaTime;
+            } else {
+                targetPos = stateMachine.targetPosition;
+                _forgetTicker = 0;
+            }
+            stateMachine.entityController.SimpleMove(stateMachine.GetCurrentMovementSpeed(targetPos));
         }
 
         public override void ExitState() { }
+
+        public override EntityStates GetNextState() {
+            if(stateMachine.ForgetTimer < _forgetTicker && !stateMachine.DoesPermaAgro) {
+                if(stateMachine.LooksForPlayer) {
+                    return EntityStates.SEARCH;
+                } else {
+                    stateMachine.isTargetting = false;
+                    return EntityStates.IDLE;
+                }
+            }
+
+            return EntityStates.CHASE;
+        }
     }
 }

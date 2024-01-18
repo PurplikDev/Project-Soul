@@ -11,11 +11,12 @@ namespace roguelike.environment.entity.statemachine {
         internal bool isPlayerInRange;
         internal bool canSeePlayer;
         internal bool isTargetting;
-        internal Player targetCache;
-        internal Vector3 targetPosition;
-        internal Vector3 targetDirection;
-        internal Vector3 lastSeenLocation;
-        internal Vector3 originalEntityPosition;
+        internal bool hasLineOfSight;
+        internal Player targetCache { get; private set; }
+        internal Vector3 targetPosition { get; private set; }
+        internal Vector3 targetDirection { get; private set; }
+        internal Vector3 lastSeenLocation { get; private set; }
+        internal Vector3 originalEntityPosition { get; private set; }
 
         [Header("Behavior Options")]
         /// <summary> Does the Entity not lose the player agro? </summary>
@@ -31,9 +32,7 @@ namespace roguelike.environment.entity.statemachine {
         public float Range;
         [Range(0, 360)]
         public float Angle;
-        public float ForgetTimer;
-
-        public Vector3 GetCurrentMovementSpeed { get { return new Vector3(targetDirection.x, 0, targetDirection.z) * hostileEntity.Speed.Value * -1; } }
+        public int ForgetTimer;
 
         public void Awake() {
             hostileEntity = GetComponent<HostileEntity>();
@@ -42,7 +41,7 @@ namespace roguelike.environment.entity.statemachine {
 
             states.Add(EntityStates.IDLE, new HostileEntityIdleState(this));
             states.Add(EntityStates.CHASE, new HostileEntityChaseState(this));
-            //states.Add(EntityStates.SEARCH, new PlayerRunState(this));
+            states.Add(EntityStates.SEARCH, new HostileEntitySearchState(this));
             //states.Add(EntityStates.ATTACK, new PlayerAttackState(this));
 
             currentState = states[EntityStates.IDLE];
@@ -50,52 +49,94 @@ namespace roguelike.environment.entity.statemachine {
 
         protected override void Start() {
             base.Start();
+            // why invoke repeating? no idea, just didn't want the check to happen every tick/frame
             InvokeRepeating(nameof(CheckForTarget), 0f, 0.25f);
         }
 
         private void CheckForTarget() {
-            if(DoesPermaAgro && targetCache != null && !targetCache.IsDead) { return; } // no need to recheck if it's perma agro and the entity is already mad
+            // no need to recheck if it's perma agro and the entity is already mad
+            if(DoesPermaAgro && targetCache != null && !targetCache.IsDead) { return; }
 
-            CheckRange();
+            var target = CheckRange();
+            if(target == null) { return; }
+            SetTarget(target);
 
-            if(!NeedToSeePlayer) {
+            // the difference between these two is that FOV is used to check if the player is infront
+            // of the creature, while line of sight prevents the entity from tracking players
+            // that are behind a wall without being seen first
+            hasLineOfSight = CheckLineOfSight();
+            canSeePlayer = CheckFieldOfVision();
 
+            if(hasLineOfSight) {
+                lastSeenLocation = target.Position;
             }
 
-            if(NeedToSeePlayer && isPlayerInRange) {
-                CheckFieldOfVision();
+            if(canSeePlayer || (!NeedToSeePlayer && isPlayerInRange)) {
+                isTargetting = true;
+            }
+
+            if(isTargetting) {
+                SetLookRotation(lastSeenLocation);
             }
         }
 
-        private (Player target, Vector3 targetPosition) CheckRange() {
+        private Player CheckRange() {
 
             Collider[] colliders = Physics.OverlapSphere(hostileEntity.Position, Range, LayerMask.GetMask("Player"), QueryTriggerInteraction.Ignore);
 
             if(colliders.Length == 0) {
                 isPlayerInRange = false;
-                return (null, new Vector3());
+                return null;
             }
 
             foreach(var collider in colliders) {
                 var player = collider.GetComponent<Player>();
                 if(player == null) continue;
-
-                targetPosition = player.Position;
-                targetDirection = (hostileEntity.Position - player.Position).normalized;
-                isPlayerInRange = true;
-                break;
+                return player;
             }
+
+            return null;
         }
 
 
-        private void CheckFieldOfVision() {
+        private bool CheckFieldOfVision() {
             var targetAngle = Vector3.Angle(hostileEntity.LookDirection, targetDirection);
-
-            if (targetAngle < Angle && Physics.Raycast(hostileEntity.Position, targetDirection * -1, out var hitInfo, Range) && hitInfo.transform.GetComponent<Player>() != null) {
-                canSeePlayer = true;
+            if(targetAngle < Angle / 2 && Physics.Raycast(hostileEntity.Position, targetDirection, out var hitInfo, Range) && hitInfo.transform.GetComponent<Player>() != null) {
+                return true;
             } else {
-                canSeePlayer = false;
+                return false;
             }
+        }
+
+        private bool CheckLineOfSight() {
+            if(Physics.Raycast(hostileEntity.Position, targetDirection, out var hitInfo, Range)) {
+                return hitInfo.transform.GetComponent<Player>() != null;
+            }
+
+            return false;
+        }
+
+        private void SetTarget(Player target) {
+            targetCache = target;
+            targetPosition = target.Position;
+            targetDirection = GetDirection(target.Position);
+        }
+
+        internal Vector3 GetDirection(Vector3 targetPosition) {
+            // to this day i still have no idea why it needs to be multiplied by -1
+            return (hostileEntity.Position - targetPosition).normalized * -1;
+        }
+
+        /// <param name="targetPosition">Position to target at.</param>
+        /// <returns>Vector directed at provided position with entity's speed stat applied.</returns>
+        public Vector3 GetCurrentMovementSpeed(Vector3 targetPosition) {
+            Vector3 direction = GetDirection(targetPosition);
+            return new Vector3(direction.x, 0, direction.z) * hostileEntity.Speed.Value;
+        }
+
+        internal void SetLookRotation(Vector3 targetPosition) {
+            Vector3 direction = GetDirection(targetPosition);
+            hostileEntity.LookDirection = new Vector3(direction.x, 0, direction.z);
         }
     }
 

@@ -16,8 +16,7 @@ namespace roguelike.environment.entity.statemachine {
 
 
         public override EntityStates GetNextState() {
-            if(stateMachine.NeedToSeePlayer && stateMachine.canSeePlayer ||
-                !stateMachine.NeedToSeePlayer && stateMachine.isPlayerInRange) {
+            if(stateMachine.isTargetting) {
                 return EntityStates.CHASE;
             } else {
                 return EntityStates.IDLE;
