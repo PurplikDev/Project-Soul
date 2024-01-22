@@ -30,7 +30,7 @@ namespace roguelike.environment.entity.statemachine {
                 if(stateMachine.LooksForPlayer) {
                     return EntityStates.SEARCH;
                 } else {
-                    stateMachine.isTargetting = false;
+                    stateMachine.LoseAgro();
                     return EntityStates.IDLE;
                 }
             }

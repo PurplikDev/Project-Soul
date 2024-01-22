@@ -32,7 +32,12 @@ namespace roguelike.environment.entity.statemachine {
         public float Range;
         [Range(0, 360)]
         public float Angle;
+        [Space]
         public int ForgetTimer;
+        [Space]
+        public int MinimumSearchingIteractions;
+        [Range(0, 100)]
+        public float AdditionalSearchChance;
 
         public void Awake() {
             hostileEntity = GetComponent<HostileEntity>();
@@ -67,8 +72,10 @@ namespace roguelike.environment.entity.statemachine {
             hasLineOfSight = CheckLineOfSight();
             canSeePlayer = CheckFieldOfVision();
 
-            if(hasLineOfSight) {
+            if((NeedToSeePlayer && hasLineOfSight) || (!NeedToSeePlayer && hasLineOfSight)) {
                 lastSeenLocation = target.Position;
+            } else {
+                return;
             }
 
             if(canSeePlayer || (!NeedToSeePlayer && isPlayerInRange)) {
@@ -137,6 +144,14 @@ namespace roguelike.environment.entity.statemachine {
         internal void SetLookRotation(Vector3 targetPosition) {
             Vector3 direction = GetDirection(targetPosition);
             hostileEntity.LookDirection = new Vector3(direction.x, 0, direction.z);
+        }
+
+        public void LoseAgro() {
+            targetCache = null;
+            isPlayerInRange = false;
+            canSeePlayer = false;
+            isTargetting = false;
+            hasLineOfSight = false;
         }
     }
 

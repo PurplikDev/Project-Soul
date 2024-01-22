@@ -4,8 +4,12 @@ namespace roguelike.environment.entity.statemachine {
     public class HostileEntitySearchState : HostileEntityBaseState {
         public HostileEntitySearchState(HostileEntityStateMachine stateMachine) : base(stateMachine, EntityStates.SEARCH) { }
 
+        int searchingLoops;
+        bool isDoneSearching;
+
         public override void EnterState() {
-            Debug.Log("entered search");
+            
+            searchingLoops = 0;
         }
 
         public override void UpdateState() {
@@ -13,11 +17,23 @@ namespace roguelike.environment.entity.statemachine {
         }
 
         public override void ExitState() {
-            Debug.Log("exited search");
+            stateMachine.LoseAgro();
         }
 
         public override EntityStates GetNextState() {
-            return EntityStates.IDLE;
+            if(isDoneSearching) {
+                return EntityStates.IDLE;
+            }
+            return EntityStates.SEARCH;
+        }
+
+
+        private void ResetSearch() {
+            if(searchingLoops < stateMachine.MinimumSearchingIteractions || stateMachine.AdditionalSearchChance < Random.Range(0, 100) {
+                searchingLoops++;
+            } else {
+                isDoneSearching = true;
+            }
         }
     }
 }
