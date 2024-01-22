@@ -7,29 +7,37 @@ namespace roguelike.environment.entity.statemachine {
         int searchingLoops;
         bool isDoneSearching;
         float searchTimer;
+        Vector3 searchPos;
 
         public override void EnterState() {
             searchingLoops = 0;
             searchTimer = 0;
             isDoneSearching = false;
+            searchPos = stateMachine.hostileEntity.Position;
         }
 
         public override void UpdateState() {
             searchTimer += Time.deltaTime;
 
-            var randomPos = new Vector3(0, 1, 0);
+            if(searchTimer > 1.5f) {
+                searchPos = stateMachine.hostileEntity.Position;
+            }
 
-            if (searchTimer > 2) {
+            if(searchTimer > 2.5f) {
                 searchingLoops++;
                 searchTimer = 0;
-                randomPos.x += 2.5f;
+
+                // idea: shoot a raycast here to check in the direction, if there is a wall near try to reroll?
+
+                searchPos = stateMachine.GetRandomPosition();
+                stateMachine.SetLookRotation(searchPos);
 
                 if (searchingLoops >= stateMachine.MinimumSearchingIteractions && stateMachine.AdditionalSearchChance > Random.Range(0, 100)) {
                     isDoneSearching = true;
                 }
             }
 
-            stateMachine.entityController.SimpleMove(stateMachine.GetCurrentMovementSpeed(randomPos));
+            stateMachine.entityController.SimpleMove(stateMachine.GetCurrentMovementSpeed(searchPos));
 
             if(stateMachine.isTargetting) {
                 isDoneSearching = true;

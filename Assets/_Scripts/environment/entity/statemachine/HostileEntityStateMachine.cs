@@ -146,6 +146,13 @@ namespace roguelike.environment.entity.statemachine {
             hostileEntity.LookDirection = new Vector3(direction.x, 0, direction.z);
         }
 
+        internal Vector3 GetRandomPosition() {
+            return new Vector3(
+                Random.Range(hostileEntity.Position.x - 5, hostileEntity.Position.x + 5),
+                hostileEntity.Position.y,
+                Random.Range(hostileEntity.Position.z - 5, hostileEntity.Position.z + 5));
+        }
+
         public void LoseAgro() {
             targetCache = null;
             isPlayerInRange = false;
