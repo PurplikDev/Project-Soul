@@ -3146,6 +3146,16 @@ PrefabInstance:
       propertyPath: LooksForPlayer
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4468917740967889186, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: AdditionalSearchChance
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4468917740967889186, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: MinimumSearchingIteractions
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7368721368942156920, guid: dc1fe72712bc4cf4a9710c1124307252,
         type: 3}
       propertyPath: m_Name

@@ -23,14 +23,15 @@ namespace roguelike.environment.entity.statemachine {
             stateMachine.entityController.SimpleMove(stateMachine.GetCurrentMovementSpeed(targetPos));
         }
 
-        public override void ExitState() { }
+        public override void ExitState() {
+            stateMachine.LoseAgro();
+        }
 
         public override EntityStates GetNextState() {
             if(stateMachine.ForgetTimer < _forgetTicker && !stateMachine.DoesPermaAgro) {
                 if(stateMachine.LooksForPlayer) {
                     return EntityStates.SEARCH;
                 } else {
-                    stateMachine.LoseAgro();
                     return EntityStates.IDLE;
                 }
             }
