@@ -7,7 +7,7 @@ namespace roguelike.environment.entity.player.statemachine {
         public PlayerIdleState(PlayerStateMachine stateMachine) : base(stateMachine, PlayerStates.IDLE) { }
 
         public override void EnterState() {
-            playerStateMachine.Animator.SetTrigger("IdleTrigger");
+            playerStateMachine.animator.SetTrigger("IdleTrigger");
         }
 
         public override void ExitState() { }

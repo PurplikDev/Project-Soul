@@ -17,6 +17,13 @@ namespace roguelike.environment.entity.combat {
         }
 
         public float CalculateDamage() {
+            float angle = Vector3.Angle(Target.LookDirection, Attacker.LookDirection);
+
+            if(angle >= 165 && angle <= 195 && Target.IsBlocking || Target.Immortal) {
+                Debug.Log("blocked");
+                return 0;
+            }
+
             if(Type != DamageType.COMBAT) {
                 return Mathf.RoundToInt(Damage);
             }

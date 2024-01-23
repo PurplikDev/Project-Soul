@@ -20,11 +20,9 @@ namespace roguelike.core.item {
             if(IsUp) {
                 entityAttacker.Speed.AddModifier(slowDown);
                 entityAttacker.IsBlocking = true;
-                Debug.Log("shield is up!");
             } else {
                 entityAttacker.Speed.RemoveModifier(slowDown);
                 entityAttacker.IsBlocking = false;
-                Debug.Log("shield is down!");
             }
         }
     }

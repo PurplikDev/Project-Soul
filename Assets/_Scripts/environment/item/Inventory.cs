@@ -25,7 +25,9 @@ namespace roguelike.core.item {
             for (int i = 0; i < InventorySize; i++) {
                 if (i % 2 != 0) {
                     if(i == 1) {
-                        Items.Add(new ItemStack(ItemManager.GetItemByID("amulet_of_beautiful_eyes")));
+                        Items.Add(new ItemStack(ItemManager.GetItemByID("test_shield")));
+                    } else if(i == 3){
+                        Items.Add(new ItemStack(ItemManager.GetItemByID("test_light_sword")));
                     } else {
                         Items.Add(ItemStack.EMPTY);
                     }

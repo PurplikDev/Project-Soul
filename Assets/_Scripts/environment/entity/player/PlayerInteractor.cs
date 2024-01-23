@@ -23,11 +23,11 @@ namespace roguelike.environment.entity.player {
             _input.EnviromentControls.PrimaryAction.started += ActionPrimary;
             _input.EnviromentControls.SecondaryAction.started += ActionSecondary;
             _input.EnviromentControls.InteractionAction.started += Interact;
-
-            InvokeRepeating(nameof(UpdateInteractor), 0f, 0.25f);
         }
 
-
+        private void Update() {
+            UpdateInteractor();
+        }
 
         public void ActionPrimary(InputAction.CallbackContext context)
             { Player.PrimaryAction(); }

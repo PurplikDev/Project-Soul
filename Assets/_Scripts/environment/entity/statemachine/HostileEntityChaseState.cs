@@ -28,14 +28,15 @@ namespace roguelike.environment.entity.statemachine {
         }
 
         public override EntityStates GetNextState() {
-            if(stateMachine.ForgetTimer < _forgetTicker && !stateMachine.DoesPermaAgro) {
+            if(stateMachine.ForgetTimer < _forgetTicker) {
                 if(stateMachine.LooksForPlayer) {
                     return EntityStates.SEARCH;
                 } else {
-                    return EntityStates.IDLE;
+                    if(!stateMachine.DoesPermaAgro) {
+                        return EntityStates.IDLE;
+                    }
                 }
             }
-
             return EntityStates.CHASE;
         }
     }

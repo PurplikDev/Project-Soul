@@ -6,7 +6,7 @@ namespace roguelike.environment.entity.player.statemachine {
         public PlayerWalkState(PlayerStateMachine stateMachine) : base(stateMachine, PlayerStates.WALK) { }
 
         public override void EnterState() {
-            playerStateMachine.Animator.SetTrigger("WalkTrigger");
+            playerStateMachine.animator.SetTrigger("WalkTrigger");
         }
 
         public override void UpdateState() {

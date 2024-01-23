@@ -9,6 +9,7 @@ namespace roguelike.environment.entity.statsystem {
 
         protected List<StatModifier> statModifiers;
 
+        public float BaseValue;
         public float Value {
             get {
                  cachedValue = _isDirty ? ApplyModifiers() : cachedValue;
@@ -16,10 +17,9 @@ namespace roguelike.environment.entity.statsystem {
                  return cachedValue;
             }
         }
-        public float BaseValue;
-        // no idea why i would need this, but still, just in case
 
-        public Stat(int baseValue) {
+        public Stat(float baseValue) {
+            BaseValue = baseValue;
             statModifiers = new List<StatModifier>();
         }
 

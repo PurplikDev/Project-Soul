@@ -12,6 +12,8 @@ namespace roguelike.environment.entity.statemachine {
         internal bool canSeePlayer;
         internal bool isTargetting;
         internal bool hasLineOfSight;
+        internal bool isAttacking;
+        internal float distanceToTarget;
         internal Player targetCache { get; private set; }
         internal Vector3 targetPosition { get; private set; }
         internal Vector3 targetDirection { get; private set; }
@@ -47,15 +49,18 @@ namespace roguelike.environment.entity.statemachine {
             states.Add(EntityStates.IDLE, new HostileEntityIdleState(this));
             states.Add(EntityStates.CHASE, new HostileEntityChaseState(this));
             states.Add(EntityStates.SEARCH, new HostileEntitySearchState(this));
-            //states.Add(EntityStates.ATTACK, new PlayerAttackState(this));
+            states.Add(EntityStates.ATTACK, new HostileEntityAttackState(this));
+            states.Add(EntityStates.DEAD, new HostileEntityDeadState(this));
 
             currentState = states[EntityStates.IDLE];
+
+            hostileEntity.DeathEvent += Death;
         }
 
-        protected override void Start() {
-            base.Start();
-            // why invoke repeating? no idea, just didn't want the check to happen every tick/frame
-            InvokeRepeating(nameof(CheckForTarget), 0f, 0.25f);
+        protected override void Update() {
+            if(hostileEntity.IsDead) { return; }
+            CheckForTarget();
+            base.Update();
         }
 
         private void CheckForTarget() {
@@ -82,8 +87,12 @@ namespace roguelike.environment.entity.statemachine {
                 isTargetting = true;
             }
 
-            if(isTargetting) {
-                SetLookRotation(lastSeenLocation);
+            if(!isTargetting) { return; }
+
+            SetLookRotation(lastSeenLocation);
+
+            if((distanceToTarget - 1) < hostileEntity.AttackRange.Value) {
+                Attack();
             }
         }
 
@@ -119,7 +128,6 @@ namespace roguelike.environment.entity.statemachine {
             if(Physics.Raycast(hostileEntity.Position, targetDirection, out var hitInfo, Range)) {
                 return hitInfo.transform.GetComponent<Player>() != null;
             }
-
             return false;
         }
 
@@ -127,6 +135,7 @@ namespace roguelike.environment.entity.statemachine {
             targetCache = target;
             targetPosition = target.Position;
             targetDirection = GetDirection(target.Position);
+            distanceToTarget = Vector3.Distance(hostileEntity.Position, target.Position);
         }
 
         internal Vector3 GetDirection(Vector3 targetPosition) {
@@ -153,12 +162,27 @@ namespace roguelike.environment.entity.statemachine {
                 Random.Range(hostileEntity.Position.z - 5, hostileEntity.Position.z + 5));
         }
 
+
+
+        internal void Attack() {
+            if(isAttacking) { return; }
+            TransitionToState(EntityStates.ATTACK);
+            StartCoroutine(((HostileEntityAttackState)currentState).EntityAttack());
+        }
+
+
+
         public void LoseAgro() {
             targetCache = null;
             isPlayerInRange = false;
             canSeePlayer = false;
             isTargetting = false;
             hasLineOfSight = false;
+            distanceToTarget = 9999;
+        }
+
+        private void Death() {
+            TransitionToState(EntityStates.DEAD);
         }
     }
 
@@ -166,6 +190,7 @@ namespace roguelike.environment.entity.statemachine {
         IDLE,
         CHASE,
         SEARCH,
-        ATTACK
+        ATTACK,
+        DEAD
     }
 }

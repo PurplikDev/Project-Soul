@@ -12,8 +12,8 @@ namespace roguelike.environment.entity.player.statemachine {
         bool facingRight = false;
 
         internal system.input.PlayerInput input { get; private set; }
-        internal Player Player { get; private set; }
-        internal Animator Animator { get; private set; }
+        internal Player player { get; private set; }
+        internal Animator animator { get; private set; }
 
 
         // PUBLIC
@@ -21,15 +21,15 @@ namespace roguelike.environment.entity.player.statemachine {
         public bool IsMoving { get; private set; }
         public bool IsSprinting { get; private set; }
         public CharacterController CharacterController { get; private set; }
-        public Vector3 GetCurrentMovementSpeed { get { return new Vector3(CurrentMovementInput.x, 0, CurrentMovementInput.y) * Player.Speed.Value; } }
+        public Vector3 GetCurrentMovementSpeed { get { return new Vector3(CurrentMovementInput.x, 0, CurrentMovementInput.y) * player.Speed.Value; } }
         public Vector3 GetCurrentSprintSpeed { get { return GetCurrentMovementSpeed * 1.45f; } }
 
 
 
         void Awake() {
-            Player = GetComponent<Player>();
-            Animator = GetComponent<Animator>();
-            input = Player.PlayerInput;
+            player = GetComponent<Player>();
+            animator = GetComponent<Animator>();
+            input = player.PlayerInput;
             CharacterController = GetComponent<CharacterController>();
 
             states.Add(PlayerStates.IDLE, new PlayerIdleState(this));
@@ -44,8 +44,8 @@ namespace roguelike.environment.entity.player.statemachine {
             var direction = GetCurrentMovementSpeed.x > 0 && !(GetCurrentMovementSpeed.x < 0);
             if (direction != facingRight) {
                 facingRight = direction;
-                Animator.SetBool("FacingRight", direction);
-                Animator.SetTrigger("WalkTrigger");
+                animator.SetBool("FacingRight", direction);
+                animator.SetTrigger("WalkTrigger");
             }
 
             base.Update();
@@ -61,7 +61,7 @@ namespace roguelike.environment.entity.player.statemachine {
         }
 
         void OnAttackInput(InputAction.CallbackContext context) {
-            var item = (core.item.WeaponItem)Player.ItemInMainHand;
+            var item = (core.item.WeaponItem)player.ItemInMainHand;
             if(item != null) {
                 TransitionToState(PlayerStates.ATTACK);
                 StartCoroutine(((PlayerAttackState)currentState).PlayerAttack(item));

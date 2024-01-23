@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using roguelike.environment.entity.combat;
 using roguelike.environment.entity.statsystem;
@@ -22,7 +23,10 @@ namespace roguelike.environment.entity {
         public Quaternion Rotation { get { return Quaternion.LookRotation(LookDirection); } }
         public virtual Vector3 LookDirection { get; internal set; } = Vector3.forward;
 
+        public Action DeathEvent;
+
         public bool Immortal = false;
+        public bool Invisible = false;
         public bool IsBlocking { get; internal set; } = false;
         public bool IsDead { get; internal set; } = false;
         public float Health { get; protected set; }
@@ -55,8 +59,10 @@ namespace roguelike.environment.entity {
         }
 
         public virtual void Damage(DamageSource source) {
-            // check for blocking and check rotations here :3
             Health -= (float)source.CalculateDamage();
+            if(Health <= 0) {
+                DeathEvent.Invoke();
+            }
         }
 
         private void CheckAndApplyStatusEffects() {

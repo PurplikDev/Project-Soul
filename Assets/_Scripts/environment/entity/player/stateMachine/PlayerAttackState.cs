@@ -1,7 +1,6 @@
 using System.Collections;
 using roguelike.core.item;
 using UnityEngine;
-using static roguelike.environment.entity.player.statemachine.PlayerStateMachine;
 
 namespace roguelike.environment.entity.player.statemachine {
     public class PlayerAttackState : PlayerBaseState {
@@ -11,7 +10,7 @@ namespace roguelike.environment.entity.player.statemachine {
 
         public override void EnterState() {
             _isAttacking = true;
-            playerStateMachine.Animator.SetTrigger("AttackTrigger");
+            playerStateMachine.animator.SetTrigger("AttackTrigger");
         }
 
         public override void UpdateState() { }
