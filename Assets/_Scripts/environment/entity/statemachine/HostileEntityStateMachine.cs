@@ -21,6 +21,8 @@ namespace roguelike.environment.entity.statemachine {
         internal Vector3 originalEntityPosition { get; private set; }
 
         [Header("Behavior Options")]
+        /// <summary> Does the Entity switch from the idle state at all? </summary>
+        public bool DoesHaveBrain;
         /// <summary> Does the Entity not lose the player agro? </summary>
         public bool DoesPermaAgro;
         /// <summary> Does the Entity go to a position it saw the player last at? </summary>
@@ -67,7 +69,7 @@ namespace roguelike.environment.entity.statemachine {
 
         private void CheckForTarget() {
             // no need to recheck if it's perma agro and the entity is already mad
-            if(DoesPermaAgro && targetCache != null && !targetCache.IsDead) { return; }
+            if(DoesPermaAgro && targetCache != null && !targetCache.IsDead || !DoesHaveBrain) { return; }
 
             var target = CheckRange();
             if(target == null) { return; }

@@ -4367,6 +4367,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4468917740967889186, guid: dc1fe72712bc4cf4a9710c1124307252,
         type: 3}
+      propertyPath: DoesHaveBrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4468917740967889186, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
       propertyPath: DoesFollowToCorner
       value: 1
       objectReference: {fileID: 0}
