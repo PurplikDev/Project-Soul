@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace roguelike.environment.entity.statemachine {
     public class HostileEntityDeadState : HostileEntityBaseState {
         public HostileEntityDeadState(HostileEntityStateMachine stateMachine) : base(stateMachine, EntityStates.SEARCH) { }
@@ -5,6 +7,8 @@ namespace roguelike.environment.entity.statemachine {
         public override void EnterState() {
             stateMachine.hostileEntity.IsDead = true;
             stateMachine.animator.SetBool("Death", true);
+            stateMachine.entityController.enabled = false;
+            stateMachine.hostileEntity.EntityAim.gameObject.SetActive(false);
         }
 
         public override void UpdateState() {

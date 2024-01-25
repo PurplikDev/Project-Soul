@@ -69,5 +69,10 @@ namespace roguelike.environment.entity {
             if(ActiveEffects.Count < 1) { return; }
             Debug.Log("Effect applied");
         }
+
+        // need to make this function run only in editor
+        private void DeathRename() {
+            gameObject.name += " (Dead)";
+        }
     }
 }

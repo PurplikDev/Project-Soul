@@ -1,3 +1,5 @@
+using roguelike.core.item;
+using roguelike.environment.entity.player;
 using UnityEngine;
 
 namespace roguelike.environment.entity.combat {
@@ -17,11 +19,17 @@ namespace roguelike.environment.entity.combat {
         }
 
         public float CalculateDamage() {
+            if(Target.Immortal) { return 0; }
+
             float angle = Vector3.Angle(Target.LookDirection, Attacker.LookDirection);
 
-            if(angle >= 165 && angle <= 195 && Target.IsBlocking || Target.Immortal) {
-                Debug.Log("blocked");
-                return 0;
+            if(angle >= 165 && angle <= 195 && Target.IsBlocking) {
+                var player = (Player)Target;
+                var shield = (Shield)player?.ItemInOffHand;
+                if(shield.WeaponTier >= DamageTier) {
+                    shield.Blocked(player);
+                    return 0;
+                }
             }
 
             if(Type != DamageType.COMBAT) {

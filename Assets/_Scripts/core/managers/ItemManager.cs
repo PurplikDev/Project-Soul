@@ -49,7 +49,7 @@ namespace roguelike.core.item {
 
             RegisterLightSword("test_light_sword",15f, 0.25f, 0.5f, 1);
             RegisterHeavySword("test_heavy_sword", 50f, 0.75f, 1.5f, 2);
-            RegisterShield("test_shield", -0.75f, 3);
+            RegisterShield("test_shield", -0.75f, 1, 3);
 
             RegisterEquipment("boots_of_the_traveler", EquipmentType.BOOTS,
                 new StatModifier(1.5f, StatModifier.StatModifierType.ADDITIONAL, Stat.StatType.SPEED),
@@ -91,8 +91,8 @@ namespace roguelike.core.item {
         private void RegisterHeavySword(string id, float damage, float swingSpeed, float attackCooldown, int weaponTier, params StatModifier[] modifiers) {
             _itemDatabase.Add(id, new HeavySword(id, damage, swingSpeed, attackCooldown, weaponTier, modifiers));
         }
-        private void RegisterShield(string id, float slowDownEffect, int weaponTier, params StatModifier[] modifiers) {
-            _itemDatabase.Add(id, new Shield(id, slowDownEffect, weaponTier, modifiers));
+        private void RegisterShield(string id, float slowDownEffect, int weaponTier, int maxAmountOfBlocks,params StatModifier[] modifiers) {
+            _itemDatabase.Add(id, new Shield(id, slowDownEffect, weaponTier, maxAmountOfBlocks, modifiers));
         }
     }
 }

@@ -1,6 +1,3 @@
-using UnityEngine;
-using static roguelike.environment.entity.player.statemachine.PlayerStateMachine;
-
 namespace roguelike.environment.entity.player.statemachine {
     public class PlayerWalkState : PlayerBaseState {
         public PlayerWalkState(PlayerStateMachine stateMachine) : base(stateMachine, PlayerStates.WALK) { }
@@ -12,7 +9,5 @@ namespace roguelike.environment.entity.player.statemachine {
         public override void UpdateState() {
             playerStateMachine.CharacterController.SimpleMove(playerStateMachine.GetCurrentMovementSpeed);
         }
-
-        public override void ExitState() { }
     }
 }

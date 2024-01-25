@@ -19,6 +19,7 @@ namespace roguelike.environment.entity {
         }
 
         protected void Update() {
+            if(IsDead) { return; }
             EntityAim.rotation = Rotation;
         }
 

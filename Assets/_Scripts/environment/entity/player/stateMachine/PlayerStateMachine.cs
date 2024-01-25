@@ -9,8 +9,8 @@ namespace roguelike.environment.entity.player.statemachine {
         // PRIVATE/DEFAULT/PROTECTED/INTERNAL
 
         Vector2 CurrentMovementInput;
-        bool facingRight = false;
 
+        internal bool facingRight = false;
         internal system.input.PlayerInput input { get; private set; }
         internal Player player { get; private set; }
         internal Animator animator { get; private set; }
@@ -75,8 +75,8 @@ namespace roguelike.environment.entity.player.statemachine {
             input.CharacterControls.Movement.performed += OnMovementInput;
             input.CharacterControls.Movement.canceled += OnMovementInput;
 
-            input.CharacterControls.Sprint.started += OnSpritingInput;
-            input.CharacterControls.Sprint.canceled += OnSpritingInput;
+            //input.CharacterControls.Sprint.started += OnSpritingInput;
+            //input.CharacterControls.Sprint.canceled += OnSpritingInput;
 
             input.EnviromentControls.PrimaryAction.started += OnAttackInput;
         }
@@ -88,8 +88,8 @@ namespace roguelike.environment.entity.player.statemachine {
             input.CharacterControls.Movement.performed -= OnMovementInput;
             input.CharacterControls.Movement.canceled -= OnMovementInput;
 
-            input.CharacterControls.Sprint.started -= OnSpritingInput;
-            input.CharacterControls.Sprint.canceled -= OnSpritingInput;
+            //input.CharacterControls.Sprint.started -= OnSpritingInput;
+            //input.CharacterControls.Sprint.canceled -= OnSpritingInput;
 
             input.EnviromentControls.PrimaryAction.started -= OnAttackInput;
         }

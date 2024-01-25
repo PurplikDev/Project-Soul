@@ -1,6 +1,5 @@
 using roguelike.core.statemachine;
 using UnityEngine;
-using static roguelike.environment.entity.player.statemachine.PlayerStateMachine;
 
 namespace roguelike.environment.entity.player.statemachine {
     public abstract class PlayerBaseState : BaseState<PlayerStates> {        
@@ -9,6 +8,11 @@ namespace roguelike.environment.entity.player.statemachine {
 
         public PlayerBaseState(PlayerStateMachine stateMachine, PlayerStates state) : base(state) { 
             playerStateMachine = stateMachine;
+        }
+
+        public override void ExitState() {
+            playerStateMachine.facingRight = false;
+            playerStateMachine.animator.ResetTrigger("WalkTrigger");
         }
 
         public override PlayerStates GetNextState() {

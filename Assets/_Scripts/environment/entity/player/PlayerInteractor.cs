@@ -30,7 +30,7 @@ namespace roguelike.environment.entity.player {
         }
 
         public void ActionPrimary(InputAction.CallbackContext context)
-            { Player.PrimaryAction(); }
+            { Debug.LogWarning("Hook this up to the state machine so that it's better ya know"); }
 
         public void ActionSecondary(InputAction.CallbackContext context)
             { Player.SecondaryAction(); }

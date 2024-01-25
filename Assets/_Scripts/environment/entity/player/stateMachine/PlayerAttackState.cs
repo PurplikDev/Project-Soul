@@ -21,12 +21,12 @@ namespace roguelike.environment.entity.player.statemachine {
             if(_isAttacking) {
                 return PlayerStates.ATTACK;
             }
-            return base.GetNextState();
+            return PlayerStates.IDLE;
         }
 
         public IEnumerator PlayerAttack(WeaponItem item) {
             yield return new WaitForSeconds(item.SwingSpeed);
-            // do attack
+            playerStateMachine.player.PrimaryAction();
             yield return new WaitForSeconds(item.AttackCooldown);
             _isAttacking = false;
         }
