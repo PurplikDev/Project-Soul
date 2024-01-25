@@ -17,6 +17,7 @@ namespace roguelike.environment.ui.statemachine {
 
         public GameObject InventoryUIHolder;
         public GameObject PauseUIHolder;
+        public GameObject DialogUIHolder;
 
         void Awake() {
             input = GameManager.Instance.Input;
