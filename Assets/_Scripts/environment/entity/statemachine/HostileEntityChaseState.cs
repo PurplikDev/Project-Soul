@@ -28,7 +28,8 @@ namespace roguelike.environment.entity.statemachine {
         }
 
         public override EntityStates GetNextState() {
-            if(stateMachine.ForgetTimer < _forgetTicker) {
+            if(stateMachine.ForgetTimer < _forgetTicker && !stateMachine.DoesFollowToCorner ||
+               Vector3.Distance(stateMachine.hostileEntity.Position, stateMachine.lastSeenLocation) < 0.5f) {
                 if(stateMachine.LooksForPlayer) {
                     return EntityStates.SEARCH;
                 } else {

@@ -341,6 +341,13 @@ MonoBehaviour:
   Thaumaturge:
     BaseValue: 0
   Immortal: 0
+  Invisible: 0
+  AttackSpeed:
+    BaseValue: 1.5
+  AttackCooldown:
+    BaseValue: 0.5
+  AttackRange:
+    BaseValue: 0.5
   EntityAim: {fileID: 2029155580072626083}
 --- !u!114 &4468917740967889186
 MonoBehaviour:
@@ -356,8 +363,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DoesPermaAgro: 0
   DoesFollowToCorner: 0
-  LooksForPlayer: 0
+  LooksForPlayer: 1
   NeedToSeePlayer: 1
-  Range: 5
+  Range: 15
   Angle: 60
-  ForgetTimer: 0
+  ForgetTimer: 2
+  MinimumSearchingIteractions: 5
+  AdditionalSearchChance: 50

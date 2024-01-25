@@ -324,6 +324,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4468917740967889186, guid: dc1fe72712bc4cf4a9710c1124307252,
         type: 3}
+      propertyPath: DoesFollowToCorner
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4468917740967889186, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
       propertyPath: AdditionalSearchChance
       value: 50
       objectReference: {fileID: 0}
@@ -340,7 +345,7 @@ PrefabInstance:
     - target: {fileID: 7368721368942156920, guid: dc1fe72712bc4cf4a9710c1124307252,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9159898711395760817, guid: dc1fe72712bc4cf4a9710c1124307252,
         type: 3}
@@ -427,6 +432,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4468917740967889186, guid: dc1fe72712bc4cf4a9710c1124307252,
         type: 3}
+      propertyPath: DoesFollowToCorner
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4468917740967889186, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
       propertyPath: AdditionalSearchChance
       value: 50
       objectReference: {fileID: 0}
@@ -443,7 +453,7 @@ PrefabInstance:
     - target: {fileID: 7368721368942156920, guid: dc1fe72712bc4cf4a9710c1124307252,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9159898711395760817, guid: dc1fe72712bc4cf4a9710c1124307252,
         type: 3}
@@ -1237,6 +1247,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4468917740967889186, guid: dc1fe72712bc4cf4a9710c1124307252,
         type: 3}
+      propertyPath: DoesFollowToCorner
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4468917740967889186, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
       propertyPath: AdditionalSearchChance
       value: 50
       objectReference: {fileID: 0}
@@ -1253,7 +1268,7 @@ PrefabInstance:
     - target: {fileID: 7368721368942156920, guid: dc1fe72712bc4cf4a9710c1124307252,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9159898711395760817, guid: dc1fe72712bc4cf4a9710c1124307252,
         type: 3}
@@ -4352,43 +4367,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4468917740967889186, guid: dc1fe72712bc4cf4a9710c1124307252,
         type: 3}
-      propertyPath: Range
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4468917740967889186, guid: dc1fe72712bc4cf4a9710c1124307252,
-        type: 3}
-      propertyPath: ForgetTimer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4468917740967889186, guid: dc1fe72712bc4cf4a9710c1124307252,
-        type: 3}
-      propertyPath: LooksForPlayer
+      propertyPath: DoesFollowToCorner
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4468917740967889186, guid: dc1fe72712bc4cf4a9710c1124307252,
-        type: 3}
-      propertyPath: AdditionalSearchChance
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 4468917740967889186, guid: dc1fe72712bc4cf4a9710c1124307252,
-        type: 3}
-      propertyPath: MinimumSearchingIteractions
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7368721368942156920, guid: dc1fe72712bc4cf4a9710c1124307252,
         type: 3}
       propertyPath: m_Name
       value: Entity
-      objectReference: {fileID: 0}
-    - target: {fileID: 7368721368942156920, guid: dc1fe72712bc4cf4a9710c1124307252,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9159898711395760817, guid: dc1fe72712bc4cf4a9710c1124307252,
-        type: 3}
-      propertyPath: AttackRange.BaseValue
-      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

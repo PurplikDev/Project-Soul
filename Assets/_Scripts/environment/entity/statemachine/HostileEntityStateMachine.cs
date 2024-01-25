@@ -46,6 +46,8 @@ namespace roguelike.environment.entity.statemachine {
             animator = GetComponent<Animator>();
             entityController = GetComponent<CharacterController>();
 
+            SetLookRotation(GetRandomPosition());
+
             states.Add(EntityStates.IDLE, new HostileEntityIdleState(this));
             states.Add(EntityStates.CHASE, new HostileEntityChaseState(this));
             states.Add(EntityStates.SEARCH, new HostileEntitySearchState(this));
