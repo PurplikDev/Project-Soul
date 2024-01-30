@@ -15,7 +15,7 @@ namespace roguelike.core.item {
         public Shield(string id, float slowdownEffect, int weaponTier, int maxAmountOfBlocks, params StatModifier[] modifiers)
             : base(id, EquipmentType.OFF_HAND, false, modifiers) {
             IsUp = false;
-            slowDown = new StatModifier(slowdownEffect, StatModifier.StatModifierType.ADDITIONAL, Stat.StatType.SPEED);
+            slowDown = new StatModifier(slowdownEffect, StatModifierType.ADDITIONAL, StatType.SPEED);
             WeaponTier = weaponTier;
             maxBlockAmount = maxAmountOfBlocks;
         }

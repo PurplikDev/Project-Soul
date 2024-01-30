@@ -42,11 +42,11 @@ namespace roguelike.environment.entity.statsystem {
 
                 switch (modifier.ModifierType) {
 
-                    case StatModifier.StatModifierType.FLAT: 
+                    case StatModifierType.FLAT: 
                         returnValue += modifier.ModifierValue;
                         break;
 
-                    case StatModifier.StatModifierType.ADDITIONAL:
+                    case StatModifierType.ADDITIONAL:
                         returnValue *= 1 + modifier.ModifierValue;
                         break;
                 }
@@ -63,14 +63,15 @@ namespace roguelike.environment.entity.statsystem {
             }
             return 0;
         }
+    }
 
-        public enum StatType {
-            HEALTH,
-            SPEED,
-            DEFENCE,
-            TEMPLAR,
-            ROGUE,
-            THAUMATURGE
-        }
+
+    public enum StatType {
+        HEALTH,
+        SPEED,
+        DEFENCE,
+        TEMPLAR,
+        ROGUE,
+        THAUMATURGE
     }
 }

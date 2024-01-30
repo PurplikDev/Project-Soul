@@ -45,21 +45,21 @@ namespace roguelike.core.item {
             Register("test4", 6);
 
             RegisterTrinket("amulet_of_beautiful_eyes",
-                new StatModifier(1.5f, StatModifier.StatModifierType.ADDITIONAL, Stat.StatType.HEALTH));
+                new StatModifier(1.5f, StatModifierType.ADDITIONAL, StatType.HEALTH));
 
             RegisterLightSword("test_light_sword",15f, 0.25f, 0.5f, 1);
             RegisterHeavySword("test_heavy_sword", 50f, 0.75f, 1.5f, 2);
             RegisterShield("test_shield", -0.75f, 1, 3);
 
             RegisterEquipment("boots_of_the_traveler", EquipmentType.BOOTS,
-                new StatModifier(1.5f, StatModifier.StatModifierType.ADDITIONAL, Stat.StatType.SPEED),
-                new StatModifier(0.75f, StatModifier.StatModifierType.FLAT, Stat.StatType.DEFENCE));
+                new StatModifier(1.5f, StatModifierType.ADDITIONAL, StatType.SPEED),
+                new StatModifier(0.75f, StatModifierType.FLAT, StatType.DEFENCE));
 
             RegisterEquipment("test_equipment", EquipmentType.HELMET,
-                new StatModifier(0.75f, StatModifier.StatModifierType.FLAT, Stat.StatType.DEFENCE));
+                new StatModifier(0.75f, StatModifierType.FLAT, StatType.DEFENCE));
 
             RegisterEquipment("test_chestplace", EquipmentType.CHESTPLATE,
-                new StatModifier(0.75f, StatModifier.StatModifierType.FLAT, Stat.StatType.DEFENCE));
+                new StatModifier(0.75f, StatModifierType.FLAT, StatType.DEFENCE));
         }
 
 

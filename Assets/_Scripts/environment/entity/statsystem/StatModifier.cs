@@ -13,10 +13,10 @@ namespace roguelike.environment.entity.statsystem {
             ModifierType = modifierType;
             StatType = statType;
         }
+    }
 
-        public enum StatModifierType {
-            FLAT = 0,
-            ADDITIONAL = 1
-        }
+    public enum StatModifierType {
+        FLAT = 0,
+        ADDITIONAL = 1
     }
 }
