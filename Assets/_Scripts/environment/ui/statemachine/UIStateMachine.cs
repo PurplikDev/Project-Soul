@@ -1,4 +1,6 @@
 using roguelike.core.statemachine;
+using roguelike.core.utils.dialogutils;
+using roguelike.environment.ui.dialog;
 using roguelike.environment.world.deployable;
 using roguelike.system.manager;
 using UnityEngine;
