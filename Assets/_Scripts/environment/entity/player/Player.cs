@@ -4,16 +4,25 @@ using roguelike.environment.entity.combat;
 using roguelike.environment.entity.statsystem;
 using roguelike.environment.ui.statemachine;
 using roguelike.system.input;
+using UnityEngine;
 
 namespace roguelike.environment.entity.player {
     public class Player : Entity {
-
+        [Space]
+        [Header("Player Stats")]
         public Stat Corruption = new Stat(0); // tldr; corruption
 
         public UIStateMachine UIStateMachine { get; set; }
         public PlayerInteractor PlayerInteractor { get; set; }
         public PlayerInput PlayerInput { get; private set; }
         public Inventory Inventory { get; private set; }
+
+        [Space]
+        [Header("Player UI Elements")]
+        public GameObject InventoryScreen;
+        public GameObject PauseScreen;
+        public GameObject DialogScreen;
+
 
         public HandheldItem ItemInMainHand {
             get {
