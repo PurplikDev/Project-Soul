@@ -1,9 +1,6 @@
 using roguelike.core.statemachine;
-using roguelike.core.utils.dialogutils;
-using roguelike.environment.ui.dialog;
 using roguelike.environment.world.deployable;
 using roguelike.system.manager;
-using UnityEngine;
 using UnityEngine.InputSystem;
 using static roguelike.environment.ui.statemachine.UIStateMachine;
 
@@ -17,16 +14,14 @@ namespace roguelike.environment.ui.statemachine {
 
         private UIDeployableState _deployableState;
 
-        public GameObject InventoryUIHolder;
-        public GameObject PauseUIHolder;
-        public GameObject DialogUIHolder;
-
         void Awake() {
             input = GameManager.Instance.Input;
 
+            var player = GameManager.Instance.Player;
+
             states.Add(UIStates.NONE, new UINoneState(this));
-            states.Add(UIStates.INVENTORY, new UIInventoryState(this, InventoryUIHolder));
-            states.Add(UIStates.PAUSE, new UIPauseState(this, PauseUIHolder));
+            states.Add(UIStates.INVENTORY, new UIInventoryState(this, player.InventoryScreen));
+            states.Add(UIStates.PAUSE, new UIPauseState(this, player.PauseScreen));
 
             currentState = states[UIStates.NONE];
             // some sort of interaction with objects logic call here

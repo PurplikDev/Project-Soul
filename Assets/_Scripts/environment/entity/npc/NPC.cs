@@ -5,6 +5,8 @@ using UnityEngine;
 namespace roguelike.environment.entity.npc {
     public class NPC : Entity, IHoverable {
 
+        [Space]
+        [Header("NPC Properties")]
         public string InteractMessage;
 
         public GameObject InteractionScreenHolder;
