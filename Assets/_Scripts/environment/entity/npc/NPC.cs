@@ -17,13 +17,9 @@ namespace roguelike.environment.entity.npc {
 
         public void OnHover(Player player) {}
 
-        public void OnHoverEnter(Player player) {
-            Debug.Log("NPC hovered");
-        }
+        public void OnHoverEnter(Player player) {}
 
-        public void OnHoverExit(Player player) {
-            Debug.Log("NPC not hovered");
-        }
+        public void OnHoverExit(Player player) {}
 
         protected override void Awake() {
             // logic here

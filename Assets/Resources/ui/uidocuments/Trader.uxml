@@ -5,7 +5,28 @@
             <ui:VisualElement name="TraderInventory" class="inventory" style="flex-direction: row; flex-wrap: nowrap; flex-grow: 0; justify-content: center; align-items: center; height: 100%; width: 35%; margin-right: 25px; flex-shrink: 0; max-height: 100%;">
                 <ui:VisualElement name="TraderInventory" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; width: 55%; flex-shrink: 0; justify-content: center; align-self: flex-start; -unity-background-scale-mode: stretch-to-fill;">
                     <ui:Label text="ui.trader_inventory" display-tooltip-when-elided="true" name="TraderInventoryHeader" class="header" />
-                    <ui:VisualElement name="TraderInventorySlotContainer" class="slotsContainer inventorySlotContainer" style="align-items: center; justify-content: center; flex-direction: row; margin-top: 0; margin-left: 0; margin-right: 0; margin-bottom: 0; flex-shrink: 1; flex-wrap: wrap; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px;" />
+                    <ui:VisualElement name="TraderInventorySlotContainer" class="slotsContainer inventorySlotContainer" style="align-items: center; justify-content: center; flex-direction: row; margin-top: 0; margin-left: 0; margin-right: 0; margin-bottom: 0; flex-shrink: 1; flex-wrap: wrap; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px;">
+                        <roguelike.rendering.ui.slot.OfferSlot />
+                        <roguelike.rendering.ui.slot.OfferSlot />
+                        <roguelike.rendering.ui.slot.OfferSlot />
+                        <roguelike.rendering.ui.slot.OfferSlot />
+                        <roguelike.rendering.ui.slot.OfferSlot />
+                        <roguelike.rendering.ui.slot.OfferSlot />
+                        <roguelike.rendering.ui.slot.OfferSlot />
+                        <roguelike.rendering.ui.slot.OfferSlot />
+                        <roguelike.rendering.ui.slot.OfferSlot />
+                        <roguelike.rendering.ui.slot.OfferSlot />
+                        <roguelike.rendering.ui.slot.OfferSlot />
+                        <roguelike.rendering.ui.slot.OfferSlot />
+                        <roguelike.rendering.ui.slot.OfferSlot />
+                        <roguelike.rendering.ui.slot.OfferSlot />
+                        <roguelike.rendering.ui.slot.OfferSlot />
+                        <roguelike.rendering.ui.slot.OfferSlot />
+                        <roguelike.rendering.ui.slot.OfferSlot />
+                        <roguelike.rendering.ui.slot.OfferSlot />
+                        <roguelike.rendering.ui.slot.OfferSlot />
+                        <roguelike.rendering.ui.slot.OfferSlot />
+                    </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="PlayerInventory" class="inventory" style="flex-direction: row; flex-wrap: nowrap; flex-grow: 0; justify-content: center; align-items: stretch; height: 100%; width: 35%; margin-left: 25px; flex-shrink: 0; max-height: 100%;">
@@ -38,15 +59,33 @@
         </ui:VisualElement>
         <ui:VisualElement name="Offers" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: 100%; height: 25%; justify-content: center; flex-direction: row; margin-top: 2.5%;">
             <ui:VisualElement name="TraderOffer" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); background-image: resource(&apos;sprites/ui/container_background&apos;); width: 35%; height: auto; margin-right: 25px;">
-                <ui:VisualElement name="TraderOfferSLots" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); height: 55%; margin-top: 5%; margin-right: 5%; margin-left: 5%;" />
-                <ui:VisualElement name="TraderValue" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); height: 35%; margin-bottom: 5%; margin-left: 5%; margin-right: 5%;" />
+                <ui:VisualElement name="TraderOfferSLots" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); height: 55%; margin-top: 5%; margin-right: 5%; margin-left: 5%; flex-direction: row; justify-content: center; align-items: flex-end;">
+                    <roguelike.rendering.ui.slot.OfferSlot />
+                    <roguelike.rendering.ui.slot.OfferSlot />
+                    <roguelike.rendering.ui.slot.OfferSlot />
+                    <roguelike.rendering.ui.slot.OfferSlot />
+                    <roguelike.rendering.ui.slot.OfferSlot />
+                </ui:VisualElement>
+                <ui:VisualElement name="TraderValue" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); height: 35%; margin-bottom: 5%; margin-left: 5%; margin-right: 5%; flex-direction: row; justify-content: center; align-items: center; width: 90%;">
+                    <ui:Label tabindex="-1" text="ui.trader_value" display-tooltip-when-elided="true" name="TraderValueHeader" style="align-self: flex-end; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; height: 100%; width: 60%; -unity-text-align: middle-left; font-size: 35px; color: rgb(38, 62, 86); -unity-font-style: bold; padding-left: 25px; padding-right: 1px;" />
+                    <ui:Label tabindex="-1" text="0" display-tooltip-when-elided="true" name="TraderValueDisplay" style="align-self: flex-end; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; height: 100%; width: 40%; -unity-text-align: middle-right; font-size: 35px; color: rgb(38, 62, 86); -unity-font-style: bold; padding-right: 25px;" />
+                </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="DealButtonHolder" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); justify-content: center; align-items: center;">
                 <ui:Button text="ui.deal" display-tooltip-when-elided="true" name="DealButton" style="position: relative; top: auto; left: auto; width: 100%; height: 35%; background-image: resource(&apos;sprites/ui/button&apos;); color: rgb(38, 62, 86); font-size: 35px; -unity-font-style: bold; white-space: normal; justify-content: center; align-items: center; align-self: center; background-color: rgba(0, 0, 0, 0);" />
             </ui:VisualElement>
-            <ui:VisualElement name="PlayerOffer" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); background-image: resource(&apos;sprites/ui/container_background&apos;); width: 35%; height: auto; margin-left: 25px;">
-                <ui:VisualElement name="PlayerOfferSLots" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); height: 55%; margin-top: 5%; margin-right: 5%; margin-left: 5%;" />
-                <ui:VisualElement name="PlayerValue" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); height: 35%; margin-bottom: 5%; margin-left: 5%; margin-right: 5%;" />
+            <ui:VisualElement name="PlayerOffer" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); background-image: resource(&apos;sprites/ui/container_background&apos;); width: 35%; height: auto; margin-left: 25px; justify-content: center; align-items: center; align-self: auto;">
+                <ui:VisualElement name="PlayerOfferSLots" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); height: 55%; margin-top: 5%; margin-right: 5%; margin-left: 5%; flex-direction: row; justify-content: center; align-items: flex-end;">
+                    <roguelike.rendering.ui.slot.ItemSlot />
+                    <roguelike.rendering.ui.slot.ItemSlot />
+                    <roguelike.rendering.ui.slot.ItemSlot />
+                    <roguelike.rendering.ui.slot.ItemSlot />
+                    <roguelike.rendering.ui.slot.ItemSlot />
+                </ui:VisualElement>
+                <ui:VisualElement name="PlayerValue" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); height: 35%; margin-bottom: 5%; margin-left: 5%; margin-right: 5%; flex-direction: row; justify-content: center; align-items: center; width: 90%;">
+                    <ui:Label tabindex="-1" text="ui.player_value" display-tooltip-when-elided="true" name="PlayerValueHeader" style="align-self: flex-end; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; height: 100%; width: 60%; -unity-text-align: middle-left; font-size: 35px; color: rgb(38, 62, 86); -unity-font-style: bold; padding-left: 25px; padding-right: 1px;" />
+                    <ui:Label tabindex="-1" text="0" display-tooltip-when-elided="true" name="PlayerValueDisplay" style="align-self: flex-end; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; height: 100%; width: 40%; -unity-text-align: middle-right; font-size: 35px; color: rgb(38, 62, 86); -unity-font-style: bold; padding-right: 25px;" />
+                </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
         <roguelike.rendering.ui.slot.ItemSlot name="MouseSlot" style="display: flex; position: absolute; visibility: hidden;" />
