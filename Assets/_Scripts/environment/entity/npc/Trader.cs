@@ -1,9 +1,7 @@
 using roguelike.core.item;
 using roguelike.environment.entity.player;
 using roguelike.rendering.ui;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace roguelike.environment.entity.npc
@@ -17,6 +15,11 @@ namespace roguelike.environment.entity.npc
         public TradeRenderer GetRenderer(Player interactor)
         {
             return new TradeRenderer(interactor.Inventory, this, InteractionScreenHolder.GetComponent<UIDocument>());
+        }
+
+        public override void Interact(Player player)
+        {
+            player.UIStateMachine.OnTrader(this);
         }
     }
 }   

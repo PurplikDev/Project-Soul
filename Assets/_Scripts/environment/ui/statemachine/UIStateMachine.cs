@@ -1,6 +1,8 @@
 using roguelike.core.statemachine;
+using roguelike.environment.entity.npc;
 using roguelike.environment.world.deployable;
 using roguelike.system.manager;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using static roguelike.environment.ui.statemachine.UIStateMachine;
 
@@ -11,6 +13,7 @@ namespace roguelike.environment.ui.statemachine {
         private bool _isInventory = false;
         private bool _isPause = false;
         private bool _isDeployable = false;
+        private bool _isTrader = false;
 
         private UIDeployableState _deployableState;
 
@@ -69,6 +72,10 @@ namespace roguelike.environment.ui.statemachine {
             _isDeployable = false;
         }
 
+        public void OnTrader(Trader trader) {
+            Debug.Log(trader.InteractMessage);
+        }
+
         void OnEnable() {
             input.UIControls.Enable();
         }
@@ -85,7 +92,8 @@ namespace roguelike.environment.ui.statemachine {
             NONE,
             INVENTORY,
             PAUSE,
-            DEPLOYABLE
+            DEPLOYABLE,
+            TRADER
         }
     }
 }

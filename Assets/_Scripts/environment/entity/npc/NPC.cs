@@ -11,7 +11,7 @@ namespace roguelike.environment.entity.npc {
 
         public GameObject InteractionScreenHolder;
 
-        public void Interact(Player player) {
+        public virtual void Interact(Player player) {
             Debug.Log(InteractMessage);
         }
 

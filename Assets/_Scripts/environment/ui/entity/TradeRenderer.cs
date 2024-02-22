@@ -1,8 +1,6 @@
 using roguelike.core.item;
 using roguelike.environment.entity.npc;
 using roguelike.rendering.ui.slot;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
