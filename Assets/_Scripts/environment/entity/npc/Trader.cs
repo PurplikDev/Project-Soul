@@ -17,8 +17,7 @@ namespace roguelike.environment.entity.npc
             return new TradeRenderer(interactor.Inventory, this, InteractionScreenHolder.GetComponent<UIDocument>());
         }
 
-        public override void Interact(Player player)
-        {
+        public override void Interact(Player player) {
             player.UIStateMachine.OnTrader(this);
         }
     }

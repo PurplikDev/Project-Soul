@@ -4,6 +4,7 @@ namespace roguelike.core.item {
     public class Item {
         private string _id;
         private int _maxStackSize;
+        private int _itemValue = 1;
 
         public Item(string id, int maxStackSize) {
             _id = id;
@@ -18,6 +19,7 @@ namespace roguelike.core.item {
         public string Name { get { return TranslationManager.getTranslation(_id); } }
         public Sprite Icon { get { return ItemManager.GetSpriteByID(ID); } }
         public int MaxStackSize { get { return _maxStackSize; } }
+        public int ItemValue { get { return _itemValue; } }
     }
 
     public class ItemStack {

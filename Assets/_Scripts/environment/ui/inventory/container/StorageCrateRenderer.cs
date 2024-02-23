@@ -13,10 +13,10 @@ namespace roguelike.rendering.ui {
 
         public StorageCrateRenderer(Inventory interactorInventory, StorageCrate deployable, UIDocument inventoryUI) : base(interactorInventory, deployable, inventoryUI) {
 
-            _storageSlotsRoot = _root.Q<VisualElement>("StorageSlotContainer");
+            _storageSlotsRoot = root.Q<VisualElement>("StorageSlotContainer");
 
-            TranslateHeader(_root.Q<Label>("InventoryHeader"));
-            TranslateHeader(_root.Q<Label>("StorageHeader"));            
+            TranslateHeader(root.Q<Label>("InventoryHeader"));
+            TranslateHeader(root.Q<Label>("StorageHeader"));            
 
             RegisterDeployableSlots();
         }
@@ -39,7 +39,7 @@ namespace roguelike.rendering.ui {
 
         protected override void SyncVisualToInternalSingle(ItemSlot clickedSlot) {
             if(clickedSlot.SlotIndex < Inventory.InventorySize) {
-                _inventory.Items[clickedSlot.SlotIndex] = clickedSlot.SlotStack;
+                inventory.Items[clickedSlot.SlotIndex] = clickedSlot.SlotStack;
             } else {
                 ItemStack stack = clickedSlot.SlotStack;
                 int workingIndex = clickedSlot.SlotIndex - Inventory.InventorySize;

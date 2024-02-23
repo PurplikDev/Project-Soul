@@ -10,12 +10,10 @@ namespace roguelike.environment.ui.statemachine {
     public class UIStateMachine : StateManager<UIStates> {
         internal system.input.PlayerInput input { get; private set; }
 
-        private bool _isInventory = false;
-        private bool _isPause = false;
-        private bool _isDeployable = false;
-        private bool _isTrader = false;
+        private bool _isInUI = false;
 
         private UIDeployableState _deployableState;
+        private UITraderState _traderState;
 
         void Awake() {
             input = GameManager.Instance.Input;
@@ -34,46 +32,55 @@ namespace roguelike.environment.ui.statemachine {
         }
 
         void OnInventory(InputAction.CallbackContext context) {
-            if (!_isInventory && !_isPause && !_isDeployable) {
+            if (!_isInUI) {
                 TransitionToState(UIStates.INVENTORY);
-                _isInventory = true;
-                _isDeployable = false;
-            } else if(!_isPause){
+                _isInUI = true;
+            } else {
                 TransitionToState(UIStates.NONE);
-                _isInventory = false;
+                _isInUI = false;
             }
         }
 
         void OnPause(InputAction.CallbackContext context) {
-            if(_isPause || _isInventory || _isDeployable) {
-                TransitionToState(UIStates.NONE);
-                _isInventory = false;
-                _isPause = false;
-                _isDeployable = false;
-            } else {
+            if(!_isInUI) {
                 TransitionToState(UIStates.PAUSE);
-                _isPause = true;
+                _isInUI = true;
+            } else {
+                TransitionToState(UIStates.NONE);
+                _isInUI = false;
             }
         }
 
         // todo: remake this so that you can't close deployables when you are in one 
 
         public void OnDeployable(Deployable deployable) {
-            if(!_isInventory && !_isPause && !_isDeployable) {
+            if(!_isInUI) {
                 _deployableState = new UIDeployableState(this, deployable);
                 states.Add(UIStates.DEPLOYABLE, _deployableState);
                 TransitionToState(UIStates.DEPLOYABLE);
-                _isDeployable = true;
+                _isInUI = true;
             }
         }
 
         internal void OnDeployableExit() {
             states.Remove(UIStates.DEPLOYABLE);
-            _isDeployable = false;
+            _isInUI = false;
         }
 
         public void OnTrader(Trader trader) {
             Debug.Log(trader.InteractMessage);
+            if(!_isInUI) {
+                _traderState = new UITraderState(this, trader);
+                states.Add(UIStates.TRADER, _traderState);
+                TransitionToState(UIStates.TRADER);
+                _isInUI = true;
+            }
+        }
+
+        internal void OnTraderExit()
+        {
+            states.Remove(UIStates.TRADER);
+            _isInUI = false;
         }
 
         void OnEnable() {

@@ -59,7 +59,7 @@
         </ui:VisualElement>
         <ui:VisualElement name="Offers" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: 100%; height: 25%; justify-content: center; flex-direction: row; margin-top: 2.5%;">
             <ui:VisualElement name="TraderOffer" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); background-image: resource(&apos;sprites/ui/container_background&apos;); width: 35%; height: auto; margin-right: 25px;">
-                <ui:VisualElement name="TraderOfferSLots" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); height: 55%; margin-top: 5%; margin-right: 5%; margin-left: 5%; flex-direction: row; justify-content: center; align-items: flex-end;">
+                <ui:VisualElement name="TraderOfferSlots" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); height: 55%; margin-top: 5%; margin-right: 5%; margin-left: 5%; flex-direction: row; justify-content: center; align-items: flex-end;">
                     <roguelike.rendering.ui.slot.OfferSlot />
                     <roguelike.rendering.ui.slot.OfferSlot />
                     <roguelike.rendering.ui.slot.OfferSlot />
@@ -75,7 +75,7 @@
                 <ui:Button text="ui.deal" display-tooltip-when-elided="true" name="DealButton" style="position: relative; top: auto; left: auto; width: 100%; height: 35%; background-image: resource(&apos;sprites/ui/button&apos;); color: rgb(38, 62, 86); font-size: 35px; -unity-font-style: bold; white-space: normal; justify-content: center; align-items: center; align-self: center; background-color: rgba(0, 0, 0, 0);" />
             </ui:VisualElement>
             <ui:VisualElement name="PlayerOffer" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); background-image: resource(&apos;sprites/ui/container_background&apos;); width: 35%; height: auto; margin-left: 25px; justify-content: center; align-items: center; align-self: auto;">
-                <ui:VisualElement name="PlayerOfferSLots" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); height: 55%; margin-top: 5%; margin-right: 5%; margin-left: 5%; flex-direction: row; justify-content: center; align-items: flex-end;">
+                <ui:VisualElement name="PlayerOfferSlots" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); height: 55%; margin-top: 5%; margin-right: 5%; margin-left: 5%; flex-direction: row; justify-content: center; align-items: flex-end;">
                     <roguelike.rendering.ui.slot.ItemSlot />
                     <roguelike.rendering.ui.slot.ItemSlot />
                     <roguelike.rendering.ui.slot.ItemSlot />

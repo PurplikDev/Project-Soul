@@ -9,22 +9,22 @@ namespace roguelike.rendering.ui {
         protected VisualElement _equipmentRoot, _trinketRoot;
 
         public InventoryRenderer(Inventory entityInventory, UIDocument inventoryUI) : base(entityInventory, inventoryUI) {
-            _root = inventoryUI.rootVisualElement;
+            root = inventoryUI.rootVisualElement;
             
-            _equipmentRoot = _root.Q<VisualElement>("EquipmentSlotContainer");
-            _trinketRoot = _root.Q<VisualElement>("TrinketSlotContainer");
+            _equipmentRoot = root.Q<VisualElement>("EquipmentSlotContainer");
+            _trinketRoot = root.Q<VisualElement>("TrinketSlotContainer");
 
-            TranslateHeader(_root.Q<Label>("InventoryHeader"));
-            TranslateHeader(_root.Q<Label>("CharacterHeader"));
-            TranslateHeader(_root.Q<Label>("EquipmentHeader"));
-            TranslateHeader(_root.Q<Label>("TrinketsHeader"));
+            TranslateHeader(root.Q<Label>("InventoryHeader"));
+            TranslateHeader(root.Q<Label>("CharacterHeader"));
+            TranslateHeader(root.Q<Label>("EquipmentHeader"));
+            TranslateHeader(root.Q<Label>("TrinketsHeader"));
 
             RegisterEquipmentSlots();
             RegisterTrinketSlots();
         }
 
         protected override void SyncVisualToInternalSingle(ItemSlot clickedSlot) {
-            _inventory.UpdateItemStack(clickedSlot.SlotStack, clickedSlot.SlotIndex);
+            inventory.UpdateItemStack(clickedSlot.SlotStack, clickedSlot.SlotIndex);
         }
 
 
@@ -34,7 +34,7 @@ namespace roguelike.rendering.ui {
         private void RegisterEquipmentSlots() {
             foreach(EquipmentSlot equipmentSlot in _equipmentRoot.Children().ToList()) {
                 equipmentSlot.SlotIndex = (int)equipmentSlot.SlotEquipmentType;
-                equipmentSlot.ForceSetStack(_inventory.Items[equipmentSlot.SlotIndex]);
+                equipmentSlot.ForceSetStack(inventory.Items[equipmentSlot.SlotIndex]);
                 equipmentSlot.Renderer = this;
                 itemSlots.Add(equipmentSlot);
                 equipmentSlot.UpdateSlotEvent.Invoke();
@@ -45,7 +45,7 @@ namespace roguelike.rendering.ui {
             int index = 0;
             foreach (EquipmentSlot equipmentSlot in _trinketRoot.Children().ToList()) {
                 equipmentSlot.SlotIndex = (int)equipmentSlot.SlotEquipmentType + index;
-                equipmentSlot.SetStack(_inventory.Items[equipmentSlot.SlotIndex]);
+                equipmentSlot.SetStack(inventory.Items[equipmentSlot.SlotIndex]);
                 equipmentSlot.Renderer = this;
                 itemSlots.Add(equipmentSlot);
                 equipmentSlot.UpdateSlotEvent.Invoke();
