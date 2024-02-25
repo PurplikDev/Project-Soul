@@ -37,12 +37,12 @@ namespace roguelike.core.item {
         // i want to rewrite it, but that would take too much effort
 
         private void RegisterItems() {
-            Register("air");
-            Register("coins", 32);
-            Register("test", 32);
-            Register("test2");
-            Register("test3");
-            Register("test4", 6);
+            Register("air", 0);
+            Register("coins", 32, 1);
+            Register("test", 32, 2);
+            Register("test2", 16);
+            Register("test3", 32);
+            Register("test4", 6, 5);
 
             RegisterTrinket("amulet_of_beautiful_eyes",
                 new StatModifier(1.5f, StatModifierType.ADDITIONAL, StatType.HEALTH));
@@ -66,11 +66,11 @@ namespace roguelike.core.item {
 
         // NORMAL ITEM REGISTRATION
 
-        private void Register(string id) {
-            _itemDatabase.Add(id, new Item(id));
+        private void Register(string id, int itemValue) {
+            _itemDatabase.Add(id, new Item(id, itemValue));
         }
-        private void Register(string id, int maxStackSize) {
-            _itemDatabase.Add(id, new Item(id, maxStackSize));
+        private void Register(string id, int maxStackSize, int itemValue) {
+            _itemDatabase.Add(id, new Item(id, maxStackSize, itemValue));
         }
 
 

@@ -36,7 +36,7 @@ namespace roguelike.rendering.ui {
             RegisterItemSlots();
         }
 
-        protected void RegisterItemSlots() {
+        protected virtual void RegisterItemSlots() {
             foreach(ItemSlot itemSlot in inventoryRoot.Children().ToList()) {
                 itemSlot.SlotIndex = itemSlots.Count;
                 itemSlot.SetStack(inventory.Items[itemSlot.SlotIndex]);

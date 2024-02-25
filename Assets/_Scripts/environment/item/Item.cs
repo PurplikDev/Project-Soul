@@ -4,14 +4,15 @@ namespace roguelike.core.item {
     public class Item {
         private string _id;
         private int _maxStackSize;
-        private int _itemValue = 1;
+        private int _itemValue;
 
-        public Item(string id, int maxStackSize) {
+        public Item(string id, int maxStackSize, int itemValue = 0) {
             _id = id;
             _maxStackSize = maxStackSize;
+            _itemValue = itemValue;
         }
 
-        public Item(string id) : this(id, 1) {
+        public Item(string id, int itemValue = 0) : this(id, 1, itemValue) {
             // hi. :3
         }
 

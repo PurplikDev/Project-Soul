@@ -1,23 +1,24 @@
 {
   // ITEMS
 
-      "gold" : "Gold",
-      "boots_of_the_traveler" : "Boots of the Traveler",
+        "air": "Air",
 
+        "gold" : "Gold",
+        "boots_of_the_traveler" : "Boots of the Traveler",
 
 
   // UI
 
-      "ui.inventory" : "Inventory",
-      "ui.character" : "Character",
-      "ui.stats" : "Statistics",
-      "ui.equipment" : "Equipment",
-      "ui.trinkets" : "Trinkets",
-      "ui.crafting_station" : "Crafting Station",
-      "ui.storage_crate" : "Storage Crate",
+        "ui.inventory" : "Inventory",
+        "ui.character" : "Character",
+        "ui.stats" : "Statistics",
+        "ui.equipment" : "Equipment",
+        "ui.trinkets" : "Trinkets",
+        "ui.crafting_station" : "Crafting Station",
+        "ui.storage_crate" : "Storage Crate",
 
-      "ui.trader_inventory" : "Trader's Inventory",
-      "ui.trader_value" : "Trader Offer Value:",
-      "ui.player_value" : "Player Offer Value:",
-      "ui.deal" : "Deal"
+        "ui.trader_inventory" : "Trader's Inventory",
+        "ui.trader_value" : "Trader Offer Value:",
+        "ui.player_value" : "Player Offer Value:",
+        "ui.deal" : "Deal"
 }
