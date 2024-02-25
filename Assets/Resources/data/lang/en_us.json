@@ -17,5 +17,7 @@
       "ui.storage_crate" : "Storage Crate",
 
       "ui.trader_inventory" : "Trader's Inventory",
+      "ui.trader_value" : "Trader Offer Value:",
+      "ui.player_value" : "Player Offer Value:",
       "ui.deal" : "Deal"
 }

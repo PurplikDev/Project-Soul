@@ -10,9 +10,9 @@ namespace roguelike.rendering.ui
 {
     public class TradeRenderer : ContainerRenderer
     {
-        internal List<OfferSlot> traderInventorySlots = new List<OfferSlot>();
-        internal List<OfferSlot> traderOffer = new List<OfferSlot>();
-        internal List<OfferSlot> playerOffer = new List<OfferSlot>();
+        internal List<ItemSlot> traderInventorySlots = new List<ItemSlot>();
+        internal List<ItemSlot> traderOffer = new List<ItemSlot>();
+        internal List<ItemSlot> playerOffer = new List<ItemSlot>();
 
         protected VisualElement traderInventoryRoot, traderOfferRoot, playerOfferRoot;
 
@@ -26,7 +26,10 @@ namespace roguelike.rendering.ui
             playerOfferRoot = root.Q<VisualElement>("PlayerOfferSlots");
 
             TranslateHeader(root.Q<Label>("TraderInventoryHeader"));
-            TranslateHeader(root.Q<Label>("DealButton"));
+            TranslateHeader(root.Q<Label>("InventoryHeader"));
+            TranslateHeader(root.Q<Label>("TraderValueHeader"));
+            TranslateHeader(root.Q<Label>("PlayerValueHeader"));
+            TranslateHeader(root.Q<Label>("DealButtonHeader"));
 
             RegisterTraderInventory();
         }
@@ -35,9 +38,9 @@ namespace roguelike.rendering.ui
         // todo: offer slot registration, offer value calculation, offer creation
 
         protected void RegisterTraderInventory() {
-            foreach (OfferSlot offerSlot in traderInventoryRoot.Children().ToList()) {
+            foreach (ItemSlot offerSlot in traderInventoryRoot.Children().ToList()) {
                 offerSlot.SlotIndex = itemSlots.Count;
-                offerSlot.ForceStack(ItemStack.EMPTY);
+                offerSlot.SetStack(ItemStack.EMPTY);
                 offerSlot.Renderer = this;
                 itemSlots.Add(offerSlot);
                 traderInventorySlots.Add(offerSlot);
@@ -49,10 +52,7 @@ namespace roguelike.rendering.ui
 
 
         public override void ClickSlot(Vector2 position, ItemSlot originalSlot, bool isPrimary) {
-            if(originalSlot is OfferSlot) {
-                Debug.Log("busuaugygfuiguif");
-            }
-            base.ClickSlot(position, originalSlot, isPrimary);
+            Debug.Log("busuaugygfuiguif");
         }
 
         protected override void SyncVisualToInternalSingle(ItemSlot clickedSlot)
