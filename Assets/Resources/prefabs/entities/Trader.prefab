@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 4660208105647432965, guid: 89a46b7549fa3a348bf4dec83ecfc5cb,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.03
+      value: -1.97
       objectReference: {fileID: 0}
     - target: {fileID: 4660208105647432965, guid: 89a46b7549fa3a348bf4dec83ecfc5cb,
         type: 3}
@@ -71,6 +71,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 9135510976890487680, guid: 89a46b7549fa3a348bf4dec83ecfc5cb,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1510485592089838928}
+    - targetCorrespondingSourceObject: {fileID: 9135510976890487680, guid: 89a46b7549fa3a348bf4dec83ecfc5cb,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 76787348375562427}
   m_SourcePrefab: {fileID: 100100000, guid: 89a46b7549fa3a348bf4dec83ecfc5cb, type: 3}
 --- !u!1 &6559621151282058988 stripped
@@ -79,6 +83,27 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2724588139068986732}
   m_PrefabAsset: {fileID: 0}
+--- !u!135 &1510485592089838928
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6559621151282058988}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 7.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &76787348375562427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,7 +130,7 @@ MonoBehaviour:
     BaseValue: 0
   Immortal: 1
   Invisible: 0
-  InteractMessage: Good for trade!
+  InteractMessage: Goods for trade!
   InteractionScreenHolder: {fileID: 6724485487805798084}
 --- !u!1 &6724485487805798084 stripped
 GameObject:

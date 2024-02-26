@@ -1,10 +1,9 @@
 using roguelike.core.statemachine;
-using roguelike.environment.entity.player;
+using roguelike.environment.entity.npc.statemachine;
 using UnityEngine;
 
-namespace roguelike.environment.entity.npc {
-    public class NPCStateMachine : StateManager<EntityStates> {
-
+namespace roguelike.environment.entity.npc.statemachine {
+    public class NPCStateMachine : StateManager<NPCState> {
         internal NPC npc { get; private set; }
         internal Animator animator { get; private set; }
         internal CharacterController entityController { get; private set; }
@@ -26,9 +25,9 @@ namespace roguelike.environment.entity.npc {
 
             SetLookRotation(GetRandomPosition());
 
-            // states.Add(EntityStates.IDLE, new HostileEntityIdleState(this));
+            states.Add(NPCState.IDLE, new NPCIdleState(this));
 
-            currentState = states[EntityStates.IDLE];
+            currentState = states[NPCState.IDLE];
         }
 
         protected override void Update() {
@@ -60,7 +59,7 @@ namespace roguelike.environment.entity.npc {
         }
     }
 
-    public enum EntityStates {
+    public enum NPCState {
         IDLE,
         WANDER,
         GO_TO_POSITION
