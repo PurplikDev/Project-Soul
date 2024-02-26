@@ -2,7 +2,9 @@ using roguelike.core.eventsystem;
 using roguelike.environment.entity;
 using roguelike.environment.entity.player;
 using roguelike.environment.entity.statsystem;
+using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace roguelike.core.item {
     public class Inventory {
@@ -14,6 +16,8 @@ namespace roguelike.core.item {
         public List<ItemStack> Items = new List<ItemStack>(34);
 
         public Entity Entity;
+
+        public GameObject ArmorHolder;
 
         public Inventory(Entity entity) {
             Entity = entity;

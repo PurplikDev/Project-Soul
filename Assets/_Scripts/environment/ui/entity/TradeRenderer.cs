@@ -1,6 +1,7 @@
 using roguelike.core.item;
 using roguelike.environment.entity.npc;
 using roguelike.rendering.ui.slot;
+using roguelike.system.manager;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -33,6 +34,8 @@ namespace roguelike.rendering.ui
             playerValue = root.Q<Label>("PlayerValueDisplay");
             traderValue = root.Q<Label>("TraderValueDisplay");
 
+            root.Q<Button>("DealButton").clicked += Deal;
+
             TranslateHeader(root.Q<Label>("TraderInventoryHeader"));
             TranslateHeader(root.Q<Label>("InventoryHeader"));
             TranslateHeader(root.Q<Label>("TraderValueHeader"));
@@ -50,13 +53,15 @@ namespace roguelike.rendering.ui
         // todo: offer slot registration, offer value calculation, offer creation
 
         protected void RegisterTraderInventory() {
+            int slotIndex = 0;
             foreach (ItemSlot offerSlot in traderInventoryRoot.Children().ToList()) {
                 offerSlot.SlotIndex = itemSlots.Count;
-                offerSlot.SetStack(ItemStack.EMPTY);
+                offerSlot.SetStack(trader.Stock[slotIndex]);
                 offerSlot.Renderer = this;
                 itemSlots.Add(offerSlot);
                 traderInventorySlots.Add(offerSlot);
                 offerSlot.UpdateSlotEvent.Invoke();
+                slotIndex++;
             }
         }
 
@@ -87,80 +92,133 @@ namespace roguelike.rendering.ui
         // Slot Interaction Methods
 
         public override void ClickSlot(Vector2 position, ItemSlot originalSlot, bool isPrimary) {
-            Debug.Log(originalSlot.SlotStack.Item.Name);
+            if(originalSlot.SlotStack.IsEmpty()) { return; }
+
             if(playerInventorySlots.Contains(originalSlot)) {
-                if(!originalSlot.SlotStack.IsEmpty() && PlayerOfferSpace()) {
-                    AddPlayerOffer(originalSlot.SlotStack);
-                    originalSlot.SetStack(ItemStack.EMPTY);
-                    UpdatePlayerValue();
+                if (SpaceInOffer(playerOffer, originalSlot.SlotStack)) {
+                    SwapItemsInSlots(originalSlot, playerOffer, isPrimary);
                 }
             } else if (traderInventorySlots.Contains(originalSlot)) {
-                if (!originalSlot.SlotStack.IsEmpty() && TraderOfferSpace()) {
-                    AddTraderOffer(originalSlot.SlotStack);
-                    originalSlot.SetStack(ItemStack.EMPTY);
-                    UpdateTraderValue();
+                if (SpaceInOffer(traderOffer, originalSlot.SlotStack)) {
+                    SwapItemsInSlots(originalSlot, traderOffer, isPrimary);
                 }
             } else if (playerOffer.Contains(originalSlot)) {
-                Debug.Log("player offer");
+                SwapItemsInSlots(originalSlot, playerInventorySlots, isPrimary);
             } else if (traderOffer.Contains(originalSlot)) {
-                Debug.Log("trader offer");
+                SwapItemsInSlots(originalSlot, traderInventorySlots, isPrimary);
+            }
+
+            UpdateValues();
+        }
+
+        private void Deal() {
+            // todo: add checks if the player and the trader have enough space
+            // for the items that are meants to be exchanged
+
+            // todo: options to haggle with the trader, increasing or decreasing the treshold of the trade
+
+            if (playerValueAmount >= traderValueAmount) {
+                foreach(ItemSlot slot in traderOffer) {
+                    if(!slot.SlotStack.IsEmpty()) {
+                        foreach(ItemSlot playerSlot in playerInventorySlots) {
+                            if(playerSlot.SlotStack.IsEmpty()) {
+                                playerSlot.SetStack(slot.SlotStack);
+                                slot.SetStack(ItemStack.EMPTY);
+                            }
+                        }
+                        slot.SetStack(ItemStack.EMPTY);
+                    }
+                }
+
+                foreach (ItemSlot slot in playerOffer) {
+                    if (!slot.SlotStack.IsEmpty()) {
+                        foreach (ItemSlot traderSlot in traderInventorySlots) {
+                            if (traderSlot.SlotStack.IsEmpty()) {
+                                traderSlot.SetStack(slot.SlotStack);
+                                slot.SetStack(ItemStack.EMPTY);
+                            }
+                        }
+                        slot.SetStack(ItemStack.EMPTY);
+                    }
+                }
+                SyncVIsualToInternalAll();                
+            }    
+        }
+
+        protected override void SyncVisualToInternalSingle(ItemSlot clickedSlot) {
+            if (playerInventorySlots.Contains(clickedSlot)) {
+                GameManager.Instance.Player.Inventory.Items[clickedSlot.SlotIndex] = clickedSlot.SlotStack;
+            } else if (traderInventorySlots.Contains(clickedSlot)) {
+                trader.Stock[clickedSlot.SlotIndex - 20] = clickedSlot.SlotStack;
             }
         }
 
-        protected override void SyncVisualToInternalSingle(ItemSlot clickedSlot)
-        {
-            Debug.LogWarning("this is missing!!!");
+        protected void SyncVIsualToInternalAll() {
+            foreach(ItemSlot slot in playerInventorySlots) {
+                SyncVisualToInternalSingle(slot);
+            }
+            foreach (ItemSlot slot in traderInventorySlots) {
+                SyncVisualToInternalSingle(slot);
+            }
         }
 
 
 
         // Utility Methods
 
-        private bool TraderOfferSpace() {
-            foreach(ItemSlot slot in traderOffer) {
-                if(slot.SlotStack.IsEmpty()) {
+        private bool SpaceInOffer(List<ItemSlot> slotsToCheck, ItemStack stack) {
+            foreach (ItemSlot slot in slotsToCheck) {
+                if (slot.SlotStack.IsEmpty() || 
+                    slot.SlotStack.Item == stack.Item && 
+                    slot.SlotStack.StackSize < slot.SlotStack.Item.MaxStackSize) {
                     return true;
                 }
             }
             return false;
         }
 
-        private bool PlayerOfferSpace() {
-            foreach (ItemSlot slot in playerOffer) {
-                if (slot.SlotStack.IsEmpty()) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private void AddPlayerOffer(ItemStack stack) {
-            foreach (ItemSlot slot in playerOffer) {
-                if (slot.SlotStack.IsEmpty()) {
-                    slot.SetStack(stack);
+        private void SwapItemsInSlots(ItemSlot clickedSlot, List<ItemSlot> listToCheck, bool isPrimary) {
+            foreach (ItemSlot slot in listToCheck) {
+                if(slot.SlotStack.Item == clickedSlot.SlotStack.Item && slot.SlotStack.StackSize < clickedSlot.SlotStack.Item.MaxStackSize) {
+                    if(isPrimary) {
+                        FillSlot(slot, clickedSlot);
+                    } else {
+                        slot.SlotStack.IncreaseStackSize(1);
+                        clickedSlot.SlotStack.DecreaseStackSize(1);
+                    }
+                    slot.UpdateSlotEvent.Invoke();
+                    clickedSlot.UpdateSlotEvent.Invoke();
                     return;
                 }
             }
-        }
 
-        private void AddTraderOffer(ItemStack stack) {
-            foreach (ItemSlot slot in traderOffer) {
+            foreach (ItemSlot slot in listToCheck) {
                 if (slot.SlotStack.IsEmpty()) {
-                    slot.SetStack(stack);
-                    return;
+                    if(isPrimary) {
+                        slot.SetStack(clickedSlot.SlotStack);
+                        clickedSlot.SetStack(ItemStack.EMPTY);
+                        return;
+                    } else {
+                        slot.SetStack(new ItemStack(clickedSlot.SlotStack.Item));
+                        clickedSlot.SlotStack.DecreaseStackSize(1);
+                        clickedSlot.UpdateSlotEvent.Invoke();
+                        return;
+                    }
+                    
                 }
             }
+
+            
+            return;
         }
 
-        private void UpdatePlayerValue() {
+        private void UpdateValues() {
             playerValueAmount = 0;
-            foreach(ItemSlot slot in playerOffer) { playerValueAmount += slot.SlotStack.Item.ItemValue; }
+            foreach(ItemSlot slot in playerOffer) { playerValueAmount += slot.SlotStack.Item.ItemValue * slot.SlotStack.StackSize; }
             playerValue.text = playerValueAmount.ToString();
-        }
 
-        private void UpdateTraderValue() {
             traderValueAmount = 0;
-            foreach (ItemSlot slot in traderOffer) { traderValueAmount += slot.SlotStack.Item.ItemValue; }
+            foreach (ItemSlot slot in traderOffer) { traderValueAmount += slot.SlotStack.Item.ItemValue * slot.SlotStack.StackSize; }
             traderValue.text = traderValueAmount.ToString();
         }
     }

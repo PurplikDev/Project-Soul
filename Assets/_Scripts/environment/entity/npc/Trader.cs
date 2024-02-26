@@ -10,7 +10,12 @@ namespace roguelike.environment.entity.npc
     {
         public int Gold { get; private set; }
 
-        public List<ItemStack> Stock {  get; private set; }
+        public List<ItemStack> Stock {  get; private set; } = new List<ItemStack>();
+
+        protected override void Awake() {
+            base.Awake();
+            FillInventory();
+        }
 
         public TradeRenderer GetRenderer(Player interactor)
         {
@@ -19,6 +24,12 @@ namespace roguelike.environment.entity.npc
 
         public override void Interact(Player player) {
             player.UIStateMachine.OnTrader(this);
+        }
+
+        protected void FillInventory() {
+            for(int slotsFilled = 0; slotsFilled < 20; slotsFilled++) {
+                Stock.Add(new ItemStack(Items.TEST3));
+            }
         }
     }
 }   

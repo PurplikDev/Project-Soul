@@ -68,9 +68,7 @@ namespace roguelike.rendering.ui {
 
             if (clickedSlot.SlotStack.Item == mouseSlot.SlotStack.Item &&
                 clickedSlot.SlotStack.Item.MaxStackSize != 1 && isPrimary) {
-                FillSlot(clickedSlot);
-
-                // todo: add logic for splitting stacks :3
+                FillSlot(clickedSlot, mouseSlot);
             } else if (clickedSlot.SlotStack.StackSize > 1 && mouseSlot.SlotStack.IsEmpty() && !isPrimary) {
                 SplitSlot(clickedSlot);
             } else {
@@ -116,8 +114,8 @@ namespace roguelike.rendering.ui {
         /// <summary>
         /// Method that fills a clicked stack and subtracks from the mouse slot.
         /// </summary>
-        protected void FillSlot(ItemSlot clickedSlot) {
-            mouseSlot.SlotStack.SetStackSize(clickedSlot.SlotStack.IncreaseStackSize(mouseSlot.SlotStack.StackSize));
+        protected void FillSlot(ItemSlot clickedSlot, ItemSlot otherSlot) {
+            otherSlot.SlotStack.SetStackSize(clickedSlot.SlotStack.IncreaseStackSize(otherSlot.SlotStack.StackSize));
         }
 
         protected void SplitSlot(ItemSlot clickedSlot) {

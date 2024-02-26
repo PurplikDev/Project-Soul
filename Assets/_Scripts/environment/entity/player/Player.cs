@@ -21,7 +21,6 @@ namespace roguelike.environment.entity.player {
         [Header("Player UI Elements")]
         public GameObject InventoryScreen;
         public GameObject PauseScreen;
-        public GameObject DialogScreen;
 
 
         public HandheldItem ItemInMainHand {

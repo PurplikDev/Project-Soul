@@ -3,7 +3,7 @@
     <ui:VisualElement name="Container" class="container">
         <ui:VisualElement name="Inventory" class="inventory" style="flex-direction: row; flex-wrap: nowrap; flex-grow: 1; justify-content: center; align-items: stretch; max-height: 71%;">
             <ui:VisualElement name="CharacterSlots" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; width: 30%; justify-content: flex-start; flex-shrink: 0;">
-                <ui:VisualElement name="Equipment" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; width: auto; justify-content: flex-start; height: auto;">
+                <ui:VisualElement name="Equipment" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; width: 105%; justify-content: flex-start; height: auto;">
                     <ui:Label text="ui.equipment" display-tooltip-when-elided="true" name="EquipmentHeader" class="header" />
                     <ui:VisualElement name="EquipmentSlotContainer" class="slotsContainer" style="align-items: center; justify-content: center; flex-direction: row; margin-top: 0; margin-left: 0; margin-right: 0; margin-bottom: 0; flex-shrink: 1; flex-wrap: wrap; height: auto;">
                         <roguelike.rendering.ui.slot.EquipmentSlot slot-equipment-type="HELMET" style="background-image: resource(&apos;sprites/ui/helmet_background&apos;);" />
@@ -14,7 +14,7 @@
                         <roguelike.rendering.ui.slot.WeaponSlot slot-equipment-type="OFF_HAND" />
                     </ui:VisualElement>
                 </ui:VisualElement>
-                <ui:VisualElement name="Trinket" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; width: auto; justify-content: flex-start; height: auto;">
+                <ui:VisualElement name="Trinket" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; width: 105%; justify-content: flex-start; height: auto;">
                     <ui:Label text="ui.trinkets" display-tooltip-when-elided="true" name="TrinketsHeader" class="header" />
                     <ui:VisualElement name="TrinketSlotContainer" class="slotsContainer" style="align-items: center; justify-content: center; flex-direction: row; margin-top: 0; margin-left: 0; margin-right: 0; margin-bottom: 0; flex-shrink: 1; flex-wrap: wrap; height: auto;">
                         <roguelike.rendering.ui.slot.TrinketSlot />
@@ -34,7 +34,7 @@
                     <ui:VisualElement name="Character" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: resource(&apos;sprites/entity/player/player_walk&apos;); width: 100%; height: 100%; justify-content: flex-start; flex-shrink: 0; -unity-background-scale-mode: scale-and-crop; align-self: stretch;" />
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="Inventory" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; width: 30%; flex-shrink: 0; height: 100%;">
+            <ui:VisualElement name="Inventory" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; width: 40%; flex-shrink: 0; height: 100%;">
                 <ui:Label display-tooltip-when-elided="true" name="InventoryHeader" text="ui.inventory" class="header" />
                 <ui:VisualElement name="InventorySlotContainer" class="slotsContainer inventorySlotContainer" style="align-items: center; justify-content: center; flex-direction: row; flex-shrink: 1; flex-wrap: wrap; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
                     <roguelike.rendering.ui.slot.ItemSlot />
