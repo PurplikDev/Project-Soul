@@ -8,8 +8,8 @@ namespace roguelike.core.item {
         public float SwingSpeed { get; private set; }
         public float AttackCooldown { get; private set; }
 
-        public WeaponItem(string id, float damage, float swingSpeed, float attackCooldown, EquipmentType type, bool isTwoHanded, int weaponTier, params StatModifier[] modifiers)
-            : base(id, type, isTwoHanded, modifiers) {
+        public WeaponItem(string id, int value, float damage, float swingSpeed, float attackCooldown, EquipmentType type, bool isTwoHanded, int weaponTier, params StatModifier[] modifiers)
+            : base(id, value, type, isTwoHanded, modifiers) {
             Damage = damage;
             WeaponTier = weaponTier;
             SwingSpeed = swingSpeed;

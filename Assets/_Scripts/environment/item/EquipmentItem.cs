@@ -12,7 +12,7 @@ namespace roguelike.core.item {
 
         public EquipmentType ItemEquipmentType { get { return _itemEquipmentType; } }
 
-        public EquipmentItem(string id, EquipmentType type, params StatModifier[] modifiers) : base(id) {
+        public EquipmentItem(string id, int value, EquipmentType type, params StatModifier[] modifiers) : base(id, value) {
             _itemEquipmentType = type;
             StatModifiers = modifiers.ToList();
         }

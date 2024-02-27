@@ -1,11 +1,15 @@
 {
-  // ITEMS
+  // ITEM NAMES
 
         "air": "Air",
 
         "gold" : "Gold",
         "boots_of_the_traveler" : "Boots of the Traveler",
 
+  // ITEM DESCRIPTIONS
+	
+        "test4.description" : "cum",
+        "boots_of_the_traveler.description" : "Boots that were once worn by an ancient Thaumaturge, but now they belong to nobody..."
 
   // UI
 

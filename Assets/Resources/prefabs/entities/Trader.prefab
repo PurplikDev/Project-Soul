@@ -76,6 +76,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 76787348375562427}
+    - targetCorrespondingSourceObject: {fileID: 9135510976890487680, guid: 89a46b7549fa3a348bf4dec83ecfc5cb,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8770551255436761135}
   m_SourcePrefab: {fileID: 100100000, guid: 89a46b7549fa3a348bf4dec83ecfc5cb, type: 3}
 --- !u!1 &6559621151282058988 stripped
 GameObject:
@@ -132,6 +136,20 @@ MonoBehaviour:
   Invisible: 0
   InteractMessage: Goods for trade!
   InteractionScreenHolder: {fileID: 6724485487805798084}
+  possibleOffer: {fileID: 11400000, guid: f29a5922a80cb7a4aacd1b44ad19f9da, type: 2}
+--- !u!114 &8770551255436761135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6559621151282058988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5722267a5f205b439fc50ee6d2c9866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DoesGoToPosition: 1
 --- !u!1 &6724485487805798084 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8691249736287257512, guid: 89a46b7549fa3a348bf4dec83ecfc5cb,

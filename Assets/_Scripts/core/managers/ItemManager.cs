@@ -44,21 +44,21 @@ namespace roguelike.core.item {
             Register("test3", 32);
             Register("test4", 6, 5);
 
-            RegisterTrinket("amulet_of_beautiful_eyes",
+            RegisterTrinket("amulet_of_beautiful_eyes", 526,
                 new StatModifier(1.5f, StatModifierType.ADDITIONAL, StatType.HEALTH));
 
-            RegisterLightSword("test_light_sword",15f, 0.25f, 0.5f, 1);
-            RegisterHeavySword("test_heavy_sword", 50f, 0.75f, 1.5f, 2);
-            RegisterShield("test_shield", -0.75f, 1, 3);
+            RegisterLightSword("test_light_sword", 64, 15f, 0.25f, 0.5f, 1);
+            RegisterHeavySword("test_heavy_sword", 128, 50f, 0.75f, 1.5f, 2);
+            RegisterShield("test_shield", 64, -0.75f, 1, 3);
 
-            RegisterEquipment("boots_of_the_traveler", EquipmentType.BOOTS,
+            RegisterEquipment("boots_of_the_traveler", 256, EquipmentType.BOOTS,
                 new StatModifier(1.5f, StatModifierType.ADDITIONAL, StatType.SPEED),
                 new StatModifier(0.75f, StatModifierType.FLAT, StatType.DEFENCE));
 
-            RegisterEquipment("test_equipment", EquipmentType.HELMET,
+            RegisterEquipment("test_equipment", 16, EquipmentType.HELMET,
                 new StatModifier(0.75f, StatModifierType.FLAT, StatType.DEFENCE));
 
-            RegisterEquipment("test_chestplace", EquipmentType.CHESTPLATE,
+            RegisterEquipment("test_chestplace", 32, EquipmentType.CHESTPLATE,
                 new StatModifier(0.75f, StatModifierType.FLAT, StatType.DEFENCE));
         }
 
@@ -77,22 +77,22 @@ namespace roguelike.core.item {
 
         // EQUIPMENT REGISTRATION
 
-        private void RegisterEquipment(string id, EquipmentType type, params StatModifier[] modifiers) {
-            _itemDatabase.Add(id, new EquipmentItem(id, type, modifiers));
+        private void RegisterEquipment(string id, int value, EquipmentType type, params StatModifier[] modifiers) {
+            _itemDatabase.Add(id, new EquipmentItem(id, value, type, modifiers));
         }
-        private void RegisterTrinket(string id, params StatModifier[] modifiers) {
-            _itemDatabase.Add(id, new EquipmentItem(id, EquipmentType.TRINKET, modifiers));
+        private void RegisterTrinket(string id, int value, params StatModifier[] modifiers) {
+            _itemDatabase.Add(id, new EquipmentItem(id, value, EquipmentType.TRINKET, modifiers));
         }
 
         // WEAPON AND SHIELD REGISTRATION
-        private void RegisterLightSword(string id, float damage, float swingSpeed, float attackCooldown, int weaponTier, params StatModifier[] modifiers) {
-            _itemDatabase.Add(id, new LightSword(id, damage, swingSpeed, attackCooldown, weaponTier, modifiers));
+        private void RegisterLightSword(string id, int value, float damage, float swingSpeed, float attackCooldown, int weaponTier, params StatModifier[] modifiers) {
+            _itemDatabase.Add(id, new LightSword(id, value, damage, swingSpeed, attackCooldown, weaponTier, modifiers));
         }
-        private void RegisterHeavySword(string id, float damage, float swingSpeed, float attackCooldown, int weaponTier, params StatModifier[] modifiers) {
-            _itemDatabase.Add(id, new HeavySword(id, damage, swingSpeed, attackCooldown, weaponTier, modifiers));
+        private void RegisterHeavySword(string id, int value, float damage, float swingSpeed, float attackCooldown, int weaponTier, params StatModifier[] modifiers) {
+            _itemDatabase.Add(id, new HeavySword(id, value, damage, swingSpeed, attackCooldown, weaponTier, modifiers));
         }
-        private void RegisterShield(string id, float slowDownEffect, int weaponTier, int maxAmountOfBlocks,params StatModifier[] modifiers) {
-            _itemDatabase.Add(id, new Shield(id, slowDownEffect, weaponTier, maxAmountOfBlocks, modifiers));
+        private void RegisterShield(string id, int value, float slowDownEffect, int weaponTier, int maxAmountOfBlocks, params StatModifier[] modifiers) {
+            _itemDatabase.Add(id, new Shield(id, value, slowDownEffect, weaponTier, maxAmountOfBlocks, modifiers));
         }
     }
 }

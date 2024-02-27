@@ -1,4 +1,6 @@
 using roguelike.core.item;
+using roguelike.core.item.loottable;
+using roguelike.core.utils.mathematicus;
 using roguelike.environment.entity.player;
 using roguelike.rendering.ui;
 using System.Collections.Generic;
@@ -9,7 +11,7 @@ namespace roguelike.environment.entity.npc
     public class Trader : NPC
     {
         public int Gold { get; private set; }
-
+        public LootTable possibleOffer;
         public List<ItemStack> Stock {  get; private set; } = new List<ItemStack>();
 
         protected override void Awake() {
@@ -23,12 +25,18 @@ namespace roguelike.environment.entity.npc
         }
 
         public override void Interact(Player player) {
+            Stock.Clear();
+            FillInventory();
             player.UIStateMachine.OnTrader(this);
         }
 
         protected void FillInventory() {
             for(int slotsFilled = 0; slotsFilled < 20; slotsFilled++) {
-                Stock.Add(new ItemStack(Items.TEST3));
+                if(Mathematicus.ChanceIn(65f)) {
+                    Stock.Add(ItemStack.EMPTY);
+                } else {
+                    Stock.Add(possibleOffer.GetRandomLoot());
+                }
             }
         }
     }
