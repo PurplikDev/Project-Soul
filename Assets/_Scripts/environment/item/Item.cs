@@ -4,20 +4,24 @@ namespace roguelike.core.item {
     public class Item {
         private string _id;
         private int _maxStackSize;
+        private int _itemValue;
 
-        public Item(string id, int maxStackSize) {
+        public Item(string id, int maxStackSize, int itemValue) {
             _id = id;
             _maxStackSize = maxStackSize;
+            _itemValue = itemValue;
         }
 
-        public Item(string id) : this(id, 1) {
+        public Item(string id, int itemValue) : this(id, 1, itemValue) {
             // hi. :3
         }
 
         public string ID { get { return _id; } }
         public string Name { get { return TranslationManager.getTranslation(_id); } }
+        public string Description { get { return TranslationManager.getTranslation(_id + ".description"); } }
         public Sprite Icon { get { return ItemManager.GetSpriteByID(ID); } }
         public int MaxStackSize { get { return _maxStackSize; } }
+        public int ItemValue { get { return _itemValue; } }
     }
 
     public class ItemStack {

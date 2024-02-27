@@ -1,4 +1,5 @@
 using roguelike.core.statemachine;
+using roguelike.environment.entity.npc;
 using roguelike.environment.world.deployable;
 using roguelike.system.manager;
 using UnityEngine;
@@ -9,22 +10,19 @@ namespace roguelike.environment.ui.statemachine {
     public class UIStateMachine : StateManager<UIStates> {
         internal system.input.PlayerInput input { get; private set; }
 
-        private bool _isInventory = false;
-        private bool _isPause = false;
-        private bool _isDeployable = false;
+        private bool _isInUI = false;
 
         private UIDeployableState _deployableState;
-
-        public GameObject InventoryUIHolder;
-        public GameObject PauseUIHolder;
-        public GameObject DialogUIHolder;
+        private UITraderState _traderState;
 
         void Awake() {
             input = GameManager.Instance.Input;
 
+            var player = GameManager.Instance.Player;
+
             states.Add(UIStates.NONE, new UINoneState(this));
-            states.Add(UIStates.INVENTORY, new UIInventoryState(this, InventoryUIHolder));
-            states.Add(UIStates.PAUSE, new UIPauseState(this, PauseUIHolder));
+            states.Add(UIStates.INVENTORY, new UIInventoryState(this, player.InventoryScreen));
+            states.Add(UIStates.PAUSE, new UIPauseState(this, player.PauseScreen));
 
             currentState = states[UIStates.NONE];
             // some sort of interaction with objects logic call here
@@ -34,42 +32,56 @@ namespace roguelike.environment.ui.statemachine {
         }
 
         void OnInventory(InputAction.CallbackContext context) {
-            if (!_isInventory && !_isPause && !_isDeployable) {
+            if (!_isInUI) {
                 TransitionToState(UIStates.INVENTORY);
-                _isInventory = true;
-                _isDeployable = false;
-            } else if(!_isPause){
+                _isInUI = true;
+            } else {
                 TransitionToState(UIStates.NONE);
-                _isInventory = false;
+                _isInUI = false;
             }
         }
 
         void OnPause(InputAction.CallbackContext context) {
-            if(_isPause || _isInventory || _isDeployable) {
-                TransitionToState(UIStates.NONE);
-                _isInventory = false;
-                _isPause = false;
-                _isDeployable = false;
-            } else {
+            if(!_isInUI) {
                 TransitionToState(UIStates.PAUSE);
-                _isPause = true;
+                _isInUI = true;
+            } else {
+                TransitionToState(UIStates.NONE);
+                _isInUI = false;
             }
         }
 
         // todo: remake this so that you can't close deployables when you are in one 
 
         public void OnDeployable(Deployable deployable) {
-            if(!_isInventory && !_isPause && !_isDeployable) {
+            if(!_isInUI) {
                 _deployableState = new UIDeployableState(this, deployable);
                 states.Add(UIStates.DEPLOYABLE, _deployableState);
                 TransitionToState(UIStates.DEPLOYABLE);
-                _isDeployable = true;
+                _isInUI = true;
             }
         }
 
         internal void OnDeployableExit() {
             states.Remove(UIStates.DEPLOYABLE);
-            _isDeployable = false;
+            _isInUI = false;
+        }
+
+        public void OnTrader(Trader trader) {
+            // todo: replace this with an in-world speech bubble
+            Debug.Log(trader.InteractMessage);
+            if(!_isInUI) {
+                _traderState = new UITraderState(this, trader);
+                states.Add(UIStates.TRADER, _traderState);
+                TransitionToState(UIStates.TRADER);
+                _isInUI = true;
+            }
+        }
+
+        internal void OnTraderExit()
+        {
+            states.Remove(UIStates.TRADER);
+            _isInUI = false;
         }
 
         void OnEnable() {
@@ -88,7 +100,8 @@ namespace roguelike.environment.ui.statemachine {
             NONE,
             INVENTORY,
             PAUSE,
-            DEPLOYABLE
+            DEPLOYABLE,
+            TRADER
         }
     }
 }

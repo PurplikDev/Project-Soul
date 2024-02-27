@@ -6,25 +6,37 @@ using UnityEngine.UIElements;
 
 namespace roguelike.rendering.ui {
     public class InventoryRenderer : ContainerRenderer {
-        protected VisualElement _equipmentRoot, _trinketRoot;
+        protected VisualElement equipmentRoot, trinketRoot, itemTooltip;
+
+        protected Label tooltipName, tooltipDescription;
 
         public InventoryRenderer(Inventory entityInventory, UIDocument inventoryUI) : base(entityInventory, inventoryUI) {
-            _root = inventoryUI.rootVisualElement;
+            root = inventoryUI.rootVisualElement;
             
-            _equipmentRoot = _root.Q<VisualElement>("EquipmentSlotContainer");
-            _trinketRoot = _root.Q<VisualElement>("TrinketSlotContainer");
+            equipmentRoot = root.Q<VisualElement>("EquipmentSlotContainer");
+            trinketRoot = root.Q<VisualElement>("TrinketSlotContainer");
 
-            TranslateHeader(_root.Q<Label>("InventoryHeader"));
-            TranslateHeader(_root.Q<Label>("CharacterHeader"));
-            TranslateHeader(_root.Q<Label>("EquipmentHeader"));
-            TranslateHeader(_root.Q<Label>("TrinketsHeader"));
+            itemTooltip = root.Q<VisualElement>("ItemTooltip");
+
+            tooltipName = itemTooltip.Q<Label>("ItemTooltipName");
+            tooltipDescription = itemTooltip.Q<Label>("ItemTooltipDescription");
+
+            TranslateHeader(root.Q<Label>("InventoryHeader"));
+            TranslateHeader(root.Q<Label>("CharacterHeader"));
+            TranslateHeader(root.Q<Label>("EquipmentHeader"));
+            TranslateHeader(root.Q<Label>("TrinketsHeader"));
 
             RegisterEquipmentSlots();
             RegisterTrinketSlots();
+
+            foreach(ItemSlot slot in itemSlots) {
+                slot.RegisterCallback<PointerOverEvent>(ShowTooltip);
+                slot.RegisterCallback<PointerOutEvent>(HideTooltip);
+            }
         }
 
         protected override void SyncVisualToInternalSingle(ItemSlot clickedSlot) {
-            _inventory.UpdateItemStack(clickedSlot.SlotStack, clickedSlot.SlotIndex);
+            inventory.UpdateItemStack(clickedSlot.SlotStack, clickedSlot.SlotIndex);
         }
 
 
@@ -32,9 +44,9 @@ namespace roguelike.rendering.ui {
         // SLOT REGISTRATION METHODS
 
         private void RegisterEquipmentSlots() {
-            foreach(EquipmentSlot equipmentSlot in _equipmentRoot.Children().ToList()) {
+            foreach(EquipmentSlot equipmentSlot in equipmentRoot.Children().ToList()) {
                 equipmentSlot.SlotIndex = (int)equipmentSlot.SlotEquipmentType;
-                equipmentSlot.ForceSetStack(_inventory.Items[equipmentSlot.SlotIndex]);
+                equipmentSlot.ForceSetStack(inventory.Items[equipmentSlot.SlotIndex]);
                 equipmentSlot.Renderer = this;
                 itemSlots.Add(equipmentSlot);
                 equipmentSlot.UpdateSlotEvent.Invoke();
@@ -43,14 +55,29 @@ namespace roguelike.rendering.ui {
 
         private void RegisterTrinketSlots() {
             int index = 0;
-            foreach (EquipmentSlot equipmentSlot in _trinketRoot.Children().ToList()) {
+            foreach (EquipmentSlot equipmentSlot in trinketRoot.Children().ToList()) {
                 equipmentSlot.SlotIndex = (int)equipmentSlot.SlotEquipmentType + index;
-                equipmentSlot.SetStack(_inventory.Items[equipmentSlot.SlotIndex]);
+                equipmentSlot.SetStack(inventory.Items[equipmentSlot.SlotIndex]);
                 equipmentSlot.Renderer = this;
                 itemSlots.Add(equipmentSlot);
                 equipmentSlot.UpdateSlotEvent.Invoke();
                 index++; // yes i know a for loop this exact thing, but using that would make this a bit more stupider
             }
+        }
+
+
+
+        private void ShowTooltip(PointerOverEvent evt) {
+            if(evt.currentTarget is ItemSlot slot && !slot.SlotStack.IsEmpty()) {
+                tooltipName.text = slot.SlotStack.Item.Name;
+                tooltipDescription.text = slot.SlotStack.Item.Description;
+
+                itemTooltip.style.visibility = Visibility.Visible;
+            }
+        }
+
+        private void HideTooltip(PointerOutEvent evt) {
+            itemTooltip.style.visibility = Visibility.Hidden;
         }
     }
 }

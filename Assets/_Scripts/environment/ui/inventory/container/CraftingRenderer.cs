@@ -14,11 +14,11 @@ namespace roguelike.rendering.ui {
         private List<ItemSlot> _craftingSlots = new List<ItemSlot>();
 
         public CraftingRenderer(Inventory interactorInventory, CraftingStation deployable, UIDocument inventoryUI) : base(interactorInventory, deployable, inventoryUI) {
-            _craftingSlotsRoot = _root.Q<VisualElement>("CraftingSlotContainer");
-            _resultSlot = _root.Q<ResultSlot>("ResultSlot");
+            _craftingSlotsRoot = root.Q<VisualElement>("CraftingSlotContainer");
+            _resultSlot = root.Q<ResultSlot>("ResultSlot");
 
-            TranslateHeader(_root.Q<Label>("InventoryHeader"));
-            TranslateHeader(_root.Q<Label>("CraftingHeader"));
+            TranslateHeader(root.Q<Label>("InventoryHeader"));
+            TranslateHeader(root.Q<Label>("CraftingHeader"));
 
             RegisterDeployableSlots();
         }
@@ -42,7 +42,7 @@ namespace roguelike.rendering.ui {
 
         protected override void SyncVisualToInternalSingle(ItemSlot clickedSlot) {
             if(clickedSlot.SlotIndex < Inventory.InventorySize) {
-                _inventory.Items[clickedSlot.SlotIndex] = clickedSlot.SlotStack;
+                inventory.Items[clickedSlot.SlotIndex] = clickedSlot.SlotStack;
             } else {
                 ItemStack stack = clickedSlot.SlotStack;
                 int workingIndex = clickedSlot.SlotIndex - Inventory.InventorySize;

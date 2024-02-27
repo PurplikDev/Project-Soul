@@ -29,8 +29,8 @@ namespace roguelike.environment.entity.player {
             UpdateInteractor();
         }
 
-        public void ActionPrimary(InputAction.CallbackContext context)
-            { Debug.LogWarning("Hook this up to the state machine so that it's better ya know"); }
+        public void ActionPrimary(InputAction.CallbackContext context) { }
+            // { Debug.LogWarning("Hook this up to the state machine so that it's better ya know"); }
 
         public void ActionSecondary(InputAction.CallbackContext context)
             { Player.SecondaryAction(); }

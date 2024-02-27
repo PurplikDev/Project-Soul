@@ -12,6 +12,8 @@ namespace roguelike.system.manager {
         public Action StartGame;
         public Action GlobalPauseEvent;
 
+        public int Day { get; private set; }
+
         public Player Player { get { return GameObject.Find("Player").GetComponent<Player>(); } }
         public PlayerInput Input { get { return Player.PlayerInput; } }
 
@@ -23,7 +25,8 @@ namespace roguelike.system.manager {
 
             // if the game is in singleplayer it will actually pause stuff in game
             // but when ur in multiplayer the game won't pause (for example entities will still move and stuff)
-            
+
+            Day = 1;
 
             base.Awake();
         }

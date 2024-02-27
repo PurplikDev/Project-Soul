@@ -1,6 +1,5 @@
 using roguelike.environment.entity;
 using roguelike.environment.entity.statsystem;
-using UnityEngine;
 
 namespace roguelike.core.item {
     public class Shield : HandheldItem {
@@ -12,8 +11,8 @@ namespace roguelike.core.item {
         public int WeaponTier { get; private set; }
         public int PerformedBlocksAmount { get; private set; }
 
-        public Shield(string id, float slowdownEffect, int weaponTier, int maxAmountOfBlocks, params StatModifier[] modifiers)
-            : base(id, EquipmentType.OFF_HAND, false, modifiers) {
+        public Shield(string id, int value, float slowdownEffect, int weaponTier, int maxAmountOfBlocks, params StatModifier[] modifiers)
+            : base(id, value, EquipmentType.OFF_HAND, false, modifiers) {
             IsUp = false;
             slowDown = new StatModifier(slowdownEffect, StatModifierType.ADDITIONAL, StatType.SPEED);
             WeaponTier = weaponTier;

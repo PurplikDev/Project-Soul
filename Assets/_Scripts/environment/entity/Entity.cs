@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using roguelike.environment.entity.combat;
 using roguelike.environment.entity.statsystem;
 using UnityEngine;
-using static roguelike.environment.entity.statsystem.Stat;
 
 namespace roguelike.environment.entity {
     public abstract class Entity : MonoBehaviour {

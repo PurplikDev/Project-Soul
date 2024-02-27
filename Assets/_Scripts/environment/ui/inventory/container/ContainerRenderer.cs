@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using roguelike.core.item;
@@ -13,34 +12,34 @@ namespace roguelike.rendering.ui {
 
         public Action UpdateUIEvent;
 
-        protected VisualElement _root, _inventoryRoot;
-        protected ItemSlot _mouseSlot;
-        protected Inventory _inventory;
+        protected VisualElement root, inventoryRoot;
+        protected ItemSlot mouseSlot;
+        protected Inventory inventory;
 
         public ContainerRenderer(Inventory entityInventory, UIDocument inventoryUI) {
-            _inventory = entityInventory;
+            inventory = entityInventory;
 
-            _root = inventoryUI.rootVisualElement;
+            root = inventoryUI.rootVisualElement;
 
-            _inventoryRoot = _root.Q<VisualElement>("InventorySlotContainer");
+            inventoryRoot = root.Q<VisualElement>("InventorySlotContainer");
 
             StyleColor imageTint = new StyleColor();
             imageTint.value = new Color(255, 255, 255, 0);
 
-            _mouseSlot = _root.Q<ItemSlot>("MouseSlot");
-            _mouseSlot.SetStack(ItemStack.EMPTY);
-            _mouseSlot.Renderer = this;
-            _mouseSlot.style.unityBackgroundImageTintColor = imageTint;
+            mouseSlot = root.Q<ItemSlot>("MouseSlot");
+            mouseSlot.SetStack(ItemStack.EMPTY);
+            mouseSlot.Renderer = this;
+            mouseSlot.style.unityBackgroundImageTintColor = imageTint;
 
-            _root.RegisterCallback<PointerMoveEvent>(OnPointerMove);
+            root.RegisterCallback<PointerMoveEvent>(OnPointerMove);
 
             RegisterItemSlots();
         }
 
-        protected void RegisterItemSlots() {
-            foreach(ItemSlot itemSlot in _inventoryRoot.Children().ToList()) {
+        protected virtual void RegisterItemSlots() {
+            foreach(ItemSlot itemSlot in inventoryRoot.Children().ToList()) {
                 itemSlot.SlotIndex = itemSlots.Count;
-                itemSlot.SetStack(_inventory.Items[itemSlot.SlotIndex]);
+                itemSlot.SetStack(inventory.Items[itemSlot.SlotIndex]);
                 itemSlot.Renderer = this;
                 itemSlots.Add(itemSlot);
                 itemSlot.UpdateSlotEvent.Invoke();
@@ -51,28 +50,26 @@ namespace roguelike.rendering.ui {
 
         public virtual void ClickSlot(Vector2 position, ItemSlot originalSlot, bool isPrimary) {
 
-            if (_mouseSlot.SlotStack.IsEmpty() && originalSlot.SlotStack.IsEmpty()) {
+            if (mouseSlot.SlotStack.IsEmpty() && originalSlot.SlotStack.IsEmpty()) {
                 return;
             }
 
-            _mouseSlot.style.top = position.y - _mouseSlot.layout.height / 2;
-            _mouseSlot.style.left = position.x - _mouseSlot.layout.width / 2;
+            mouseSlot.style.top = position.y - mouseSlot.layout.height / 2;
+            mouseSlot.style.left = position.x - mouseSlot.layout.width / 2;
 
             ItemSlot clickedSlot;
-            IEnumerable<ItemSlot> slots = itemSlots.Where(x => x.worldBound.Overlaps(_mouseSlot.worldBound));
+            IEnumerable<ItemSlot> slots = itemSlots.Where(x => x.worldBound.Overlaps(mouseSlot.worldBound));
 
             if (slots.Count() > 0) {
-                clickedSlot = slots.OrderBy(x => Vector2.Distance(x.worldBound.position, _mouseSlot.worldBound.position)).First();
+                clickedSlot = slots.OrderBy(x => Vector2.Distance(x.worldBound.position, mouseSlot.worldBound.position)).First();
             } else {
                 clickedSlot = originalSlot;
             }
 
-            if (clickedSlot.SlotStack.Item == _mouseSlot.SlotStack.Item &&
+            if (clickedSlot.SlotStack.Item == mouseSlot.SlotStack.Item &&
                 clickedSlot.SlotStack.Item.MaxStackSize != 1 && isPrimary) {
-                FillSlot(clickedSlot);
-
-                // todo: add logic for splitting stacks :3
-            } else if (clickedSlot.SlotStack.StackSize > 1 && _mouseSlot.SlotStack.IsEmpty() && !isPrimary) {
+                FillSlot(clickedSlot, mouseSlot);
+            } else if (clickedSlot.SlotStack.StackSize > 1 && mouseSlot.SlotStack.IsEmpty() && !isPrimary) {
                 SplitSlot(clickedSlot);
             } else {
                 SwapSlots(clickedSlot);
@@ -83,22 +80,22 @@ namespace roguelike.rendering.ui {
 
             SyncVisualToInternalSingle(clickedSlot);
 
-            if(_mouseSlot.SlotStack.IsEmpty()) {
-                _mouseSlot.style.visibility = Visibility.Hidden;
-                _mouseSlot.style.top = 0;
-                _mouseSlot.style.left = 0;
+            if(mouseSlot.SlotStack.IsEmpty()) {
+                mouseSlot.style.visibility = Visibility.Hidden;
+                mouseSlot.style.top = 0;
+                mouseSlot.style.left = 0;
             } else {
-                _mouseSlot.style.visibility = Visibility.Visible;
-                _mouseSlot.UpdateSlotEvent.Invoke();
+                mouseSlot.style.visibility = Visibility.Visible;
+                mouseSlot.UpdateSlotEvent.Invoke();
             }
         }
 
         protected void OnPointerMove(PointerMoveEvent evt) {
-            if(_mouseSlot.style.visibility == Visibility.Hidden) {
+            if(mouseSlot.style.visibility == Visibility.Hidden) {
                 return;
             }
-            _mouseSlot.style.top = evt.position.y - _mouseSlot.layout.height / 2;
-            _mouseSlot.style.left = evt.position.x - _mouseSlot.layout.width / 2;
+            mouseSlot.style.top = evt.position.y - mouseSlot.layout.height / 2;
+            mouseSlot.style.left = evt.position.x - mouseSlot.layout.width / 2;
         }
 
 
@@ -109,21 +106,21 @@ namespace roguelike.rendering.ui {
         /// </summary>
         protected void SwapSlots(ItemSlot clickedSlot) {
             ItemStack tempStack = clickedSlot.SlotStack;
-            if(clickedSlot.SetStack(_mouseSlot.SlotStack)) {
-                _mouseSlot.SetStack(tempStack);
+            if(clickedSlot.SetStack(mouseSlot.SlotStack)) {
+                mouseSlot.SetStack(tempStack);
             }
         }
 
         /// <summary>
         /// Method that fills a clicked stack and subtracks from the mouse slot.
         /// </summary>
-        protected void FillSlot(ItemSlot clickedSlot) {
-            _mouseSlot.SlotStack.SetStackSize(clickedSlot.SlotStack.IncreaseStackSize(_mouseSlot.SlotStack.StackSize));
+        protected void FillSlot(ItemSlot clickedSlot, ItemSlot otherSlot) {
+            otherSlot.SlotStack.SetStackSize(clickedSlot.SlotStack.IncreaseStackSize(otherSlot.SlotStack.StackSize));
         }
 
         protected void SplitSlot(ItemSlot clickedSlot) {
             int split = clickedSlot.SlotStack.StackSize / 2;
-            _mouseSlot.SetStack(new ItemStack(clickedSlot.SlotStack.Item, split));
+            mouseSlot.SetStack(new ItemStack(clickedSlot.SlotStack.Item, split));
             clickedSlot.SlotStack.DecreaseStackSize(split);
         }
 

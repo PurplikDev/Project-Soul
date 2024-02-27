@@ -1,18 +1,28 @@
 {
-  // ITEMS
+  // ITEM NAMES
 
-      "gold" : "Gold",
-      "boots_of_the_traveler" : "Boots of the Traveler",
+        "air": "Air",
 
+        "gold" : "Gold",
+        "boots_of_the_traveler" : "Boots of the Traveler",
 
+  // ITEM DESCRIPTIONS
+	
+        "test4.description" : "cum",
+        "boots_of_the_traveler.description" : "Boots that were once worn by an ancient Thaumaturge, but now they belong to nobody..."
 
   // UI
 
-      "ui.inventory" : "Inventory",
-      "ui.character" : "Character",
-      "ui.stats" : "Statistics",
-      "ui.equipment" : "Equipment",
-      "ui.trinkets" : "Trinkets",
-      "ui.crafting_station" : "Crafting Station",
-      "ui.storage_crate" : "Storage Crate"
+        "ui.inventory" : "Inventory",
+        "ui.character" : "Character",
+        "ui.stats" : "Statistics",
+        "ui.equipment" : "Equipment",
+        "ui.trinkets" : "Trinkets",
+        "ui.crafting_station" : "Crafting Station",
+        "ui.storage_crate" : "Storage Crate",
+
+        "ui.trader_inventory" : "Trader's Inventory",
+        "ui.trader_value" : "Trader Offer Value:",
+        "ui.player_value" : "Player Offer Value:",
+        "ui.deal" : "Deal"
 }
