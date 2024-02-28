@@ -62,4 +62,22 @@ namespace roguelike.environment.entity.player {
             Events.PlayerHeathUpdateEvent.Invoke(new PlayerHealthUpdateEvent(this));
         }
     }
+
+    [System.Serializable]
+    public class PlayerData {
+        public float Health;
+        public Stat MaxHealth, Speed, Defence, Templar, Rogue, Thaumaturge, Corruption;
+        public InventoryData PlayerInventory;
+        public PlayerData(Player player) {
+            Health = player.Health;
+            MaxHealth = player.MaxHealth;
+            Speed = player.Speed;
+            Defence = player.Defence;
+            Templar = player.Templar;
+            Rogue = player.Rogue;
+            Thaumaturge = player.Thaumaturge;
+            Corruption = player.Corruption;
+            PlayerInventory = new InventoryData(player.Inventory);
+        }
+    }
 }

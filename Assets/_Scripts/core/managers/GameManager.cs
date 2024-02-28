@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+using roguelike.core.utils.gamedata;
 using roguelike.environment.entity.player;
 using roguelike.system.input;
 using roguelike.system.singleton;
@@ -12,31 +14,21 @@ namespace roguelike.system.manager {
         public Action StartGame;
         public Action GlobalPauseEvent;
 
-        public int Day { get; private set; }
+        protected GameData gameData {  get; private set; }
 
         public Player Player { get { return GameObject.Find("Player").GetComponent<Player>(); } }
         public PlayerInput Input { get { return Player.PlayerInput; } }
-
         protected override void Awake()
         {
-
-            StartGame += SpawnPlayer;
-            StartGame.Invoke();
-
-            // if the game is in singleplayer it will actually pause stuff in game
-            // but when ur in multiplayer the game won't pause (for example entities will still move and stuff)
-
-            Day = 1;
-
             base.Awake();
         }
 
         protected virtual void Start() {
-            
-        }
+            gameData = new GameData("Purplik", 0, Player);
 
-        private void SpawnPlayer() {
-            
+            string output = JsonConvert.SerializeObject(gameData);
+
+            Debug.Log(output);
         }
 
         private void HandlePause()

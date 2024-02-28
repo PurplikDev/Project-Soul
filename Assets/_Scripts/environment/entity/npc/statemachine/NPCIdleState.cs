@@ -17,11 +17,7 @@ namespace roguelike.environment.entity.npc.statemachine {
         }
 
         public override void UpdateState() {
-            if(isPlayerClose) {
-                Debug.Log("is close");
-            } else {
-                Debug.Log("is not close");
-            }
+            
         }
     }
 }

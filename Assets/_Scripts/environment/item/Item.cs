@@ -84,4 +84,20 @@ namespace roguelike.core.item {
             return _stackItem.Name + " | " + _stackSize;
         }
     }
+
+    [System.Serializable]
+    public class ItemStackData {
+        public string ItemID;
+        public int ItemStackSize;
+
+        public ItemStackData(ItemStack stack) {
+            ItemID = stack.Item.ID;
+            ItemStackSize = stack.StackSize;
+        }
+
+        public ItemStackData(string itemID, int stackSize) {
+            ItemID = itemID;
+            ItemStackSize = stackSize;
+        }
+    }
 }
