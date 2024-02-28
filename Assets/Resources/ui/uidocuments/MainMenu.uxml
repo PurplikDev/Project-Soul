@@ -10,8 +10,9 @@
     </ui:VisualElement>
     <ui:VisualElement name="SaveMenuHolder" style="flex-grow: 1; width: 64%; height: 100%; position: absolute; right: 0;">
         <ui:VisualElement name="SaveMenu" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: resource(&apos;sprites/ui/container_background&apos;); margin-left: 20%; margin-right: 20%; margin-top: 10%; margin-bottom: 10%; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%;">
-            <ui:Label tabindex="-1" text="ui.saves" display-tooltip-when-elided="true" name="SavesHeader" style="color: rgb(38, 62, 86); font-size: 47px; -unity-font-style: bold; margin-left: 15px;" />
-            <ui:ListView focusable="true" name="ListView" />
+            <ui:Label tabindex="-1" text="ui.saves" display-tooltip-when-elided="true" name="SavesHeader" style="color: rgb(38, 62, 86); font-size: 47px; -unity-font-style: bold; height: 10%; margin-top: 0; margin-bottom: 0; margin-left: 10px;" />
+            <ui:ListView focusable="true" name="SaveList" fixed-item-height="40" style="height: 80%;" />
+            <ui:Button text="ui.new_save" display-tooltip-when-elided="true" name="NewSaveButton" class="button" style="height: 10%; justify-content: center; -unity-text-align: middle-center; margin-left: 16px; margin-right: 16px; margin-top: 8px; margin-bottom: 8px;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
