@@ -39,6 +39,8 @@ namespace roguelike.rendering.ui.mainmenu {
             _quitButton.clicked += OnQuitButton;
             _newSaveButton.clicked += OnNewSaveButton;
 
+            Directory.CreateDirectory(Path.GetDirectoryName(GlobalStaticValues.SAVE_PATH));
+
             foreach (var save in Directory.GetFiles(GlobalStaticValues.SAVE_PATH)) {
                 var newSaveElement = _saveFileElement.Instantiate();
                 var newSaveElementController = new SaveElementController();

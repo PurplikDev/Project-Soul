@@ -28,8 +28,6 @@ namespace roguelike.system.manager {
 
             string output = JsonConvert.SerializeObject(gameData);
 
-            Debug.Log(output);
-
             Directory.CreateDirectory(Path.GetDirectoryName(GlobalStaticValues.SAVE_PATH + "/debug.json"));
 
             using (FileStream fileStream = new FileStream(GlobalStaticValues.SAVE_PATH + "/debug.json", FileMode.Create)) {
@@ -45,10 +43,9 @@ namespace roguelike.system.manager {
 
         public void LoadGame(GameData gameData) {
 
-            SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
+            SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
 
             var playerObject = Resources.Load<GameObject>("prefabs/entities/player");
-
             Player = playerObject.GetComponent<Player>();
 
             Player.MaxHealth = gameData.PlayerData.MaxHealth;
@@ -59,9 +56,7 @@ namespace roguelike.system.manager {
             Player.Thaumaturge = gameData.PlayerData.Thaumaturge;
             Player.Corruption = gameData.PlayerData.Corruption;
 
-            Instantiate(playerObject);
-
-            SceneManager.UnloadSceneAsync(0);
+            // instantiate the player when the scene is loaded logic here
         }
     }
 }
