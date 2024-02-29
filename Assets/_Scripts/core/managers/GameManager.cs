@@ -35,7 +35,7 @@ namespace roguelike.system.manager {
 
             Debug.Log(output);
 
-            Directory.CreateDirectory(Path.GetDirectoryName(GlobalStaticValues.SAVE_PATH));
+            Directory.CreateDirectory(Path.GetDirectoryName(GlobalStaticValues.SAVE_PATH + "/save.json"));
 
             using (FileStream fileStream = new FileStream(GlobalStaticValues.SAVE_PATH + "/save.json", FileMode.Create)) {
                 byte[] info = new UTF8Encoding(true).GetBytes(output);

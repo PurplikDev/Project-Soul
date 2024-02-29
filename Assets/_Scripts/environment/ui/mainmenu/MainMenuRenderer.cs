@@ -8,7 +8,7 @@ namespace roguelike.rendering.ui.mainmenu {
         protected UIDocument document;
 
         private VisualElement _root, _menuRoot, _saveMenuRoot;
-        private ListView _saveFileList;
+        private ScrollView _saveFileList;
 
         private VisualTreeAsset _saveFileElement;
 
@@ -18,26 +18,24 @@ namespace roguelike.rendering.ui.mainmenu {
 
             _root = document.rootVisualElement;
 
+            TranslateHeader(_root.Q<Label>("SavesHeader"));
+            TranslateHeader(_root.Q<Label>("NewSaveButtonHeader"));
+
             _menuRoot = _root.Q<VisualElement>("MainMenuHolder");
             _saveMenuRoot = _root.Q<VisualElement>("SaveMenuHolder");
-            _saveFileList = _saveMenuRoot.Q<ListView>("SaveList");
+            _saveFileList = _saveMenuRoot.Q<ScrollView>("SaveList");
 
             foreach(var save in Directory.GetFiles(GlobalStaticValues.SAVE_PATH)) {
-                _saveFileList.makeItem = () => {
-                    var newListEntry = _saveFileElement.Instantiate();
-
-                    var newSaveElementController = new SaveElementController();
-
-                    newListEntry.userData = newSaveElementController;
-                    newSaveElementController.SetupElement(newListEntry);
-
-                    return newListEntry;
-                };
-
-                _saveFileList.bindItem = (item, index) => {
-                    // (item.userData as SaveElementController).FillData();
-                };
+                var newSaveElement = _saveFileElement.Instantiate();
+                var newSaveElementController = new SaveElementController();
+                newSaveElement.userData = newSaveElementController;
+                newSaveElementController.SetupElement(newSaveElement);
+                _saveFileList.Add(newSaveElement);
             }
+        }
+
+        protected void TranslateHeader(Label label) {
+            label.text = TranslationManager.getTranslation(label.text);
         }
     }
 }
