@@ -69,6 +69,9 @@ namespace roguelike.rendering.ui.mainmenu {
             Debug.LogWarning("Create new save!");
         }
 
+        public void OnSaveClicked(PointerDownEvent evt) {
+            
+        }
         protected void TranslateHeader(Label label) {
             label.text = TranslationManager.getTranslation(label.text);
         }

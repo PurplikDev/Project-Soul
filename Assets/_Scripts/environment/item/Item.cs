@@ -34,9 +34,9 @@ namespace roguelike.core.item {
             _stackSize = amount > _stackItem.MaxStackSize ? _stackItem.MaxStackSize : amount;
         }
 
-        public ItemStack(Item item) : this(item, 1) {
-            // hi again :3
-        }
+        public ItemStack(Item item) : this(item, 1) {}
+
+        public ItemStack(ItemStackData data) : this(ItemManager.GetItemByID(data.ItemID), data.ItemStackSize) {}
 
         public int IncreaseStackSize(int amount) {
             int combined = _stackSize + amount;

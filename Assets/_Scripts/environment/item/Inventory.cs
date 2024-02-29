@@ -31,8 +31,10 @@ namespace roguelike.core.item {
             for (int i = 0; i < TrinketSize; i++) { Items.Add(ItemStack.EMPTY); }
         }
 
-        public void LoadItemsFromSave(GameData data) {
-            // data.PlayerData.PlayerInventory
+        public void LoadItemsFromSave(InventoryData data) {
+            for(int i = 0; i < data.Items.Count; i++) {
+                Items[i] = new ItemStack(data.Items[i]);
+            }
         }
 
         public void UpdateItemStack(ItemStack itemStack, int index) {

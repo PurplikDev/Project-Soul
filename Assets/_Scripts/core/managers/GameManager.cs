@@ -8,6 +8,7 @@ using System;
 using System.IO;
 using System.Text;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace roguelike.system.manager {
     public class GameManager : Singleton<GameManager> {
@@ -43,6 +44,9 @@ namespace roguelike.system.manager {
         }
 
         public void LoadGame(GameData gameData) {
+
+            SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
+
             var playerObject = Resources.Load<GameObject>("prefabs/entities/player");
 
             Player = playerObject.GetComponent<Player>();
@@ -54,6 +58,10 @@ namespace roguelike.system.manager {
             Player.Rogue = gameData.PlayerData.Rogue;
             Player.Thaumaturge = gameData.PlayerData.Thaumaturge;
             Player.Corruption = gameData.PlayerData.Corruption;
+
+            Instantiate(playerObject);
+
+            SceneManager.UnloadSceneAsync(0);
         }
     }
 }
