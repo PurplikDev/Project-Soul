@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace roguelike.core.item {
@@ -95,6 +96,7 @@ namespace roguelike.core.item {
             ItemStackSize = stack.StackSize;
         }
 
+        [JsonConstructor]
         public ItemStackData(string itemID, int stackSize) {
             ItemID = itemID;
             ItemStackSize = stackSize;

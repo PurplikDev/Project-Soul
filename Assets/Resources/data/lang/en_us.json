@@ -13,6 +13,13 @@
 
   // UI
 
+        "ui.play" : "Play",
+        "ui.settings" : "Settings",
+        "ui.quit" : "Quit",
+
+        "ui.saves" : "Saves",
+        "ui.new_save" : "New Saves",
+
         "ui.inventory" : "Inventory",
         "ui.character" : "Character",
         "ui.stats" : "Statistics",

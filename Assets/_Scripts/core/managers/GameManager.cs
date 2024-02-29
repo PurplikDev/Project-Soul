@@ -6,56 +6,54 @@ using roguelike.system.input;
 using roguelike.system.singleton;
 using System;
 using System.IO;
-using System.IO.Pipes;
 using System.Text;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 namespace roguelike.system.manager {
     public class GameManager : Singleton<GameManager> {
-        private static bool _isSingleplayer = true; // THIS VALUE IS  NOT AFFECTED RN, I JUST HAVE IT HERE FOR THE FUTURE:TM:
-        public static bool IsSinglePlayer { get { return _isSingleplayer; } }
 
         public Action StartGame;
         public Action GlobalPauseEvent;
 
         protected GameData gameData {  get; private set; }
 
-        public Player Player { get { return GameObject.Find("Player").GetComponent<Player>(); } }
+        public Player Player { get; private set; }
         public PlayerInput Input { get { return Player.PlayerInput; } }
-        protected override void Awake()
-        {
-            base.Awake();
-        }
 
-        protected virtual void Start() {
+
+
+        private void GenerateDebugSave() {
             gameData = new GameData("Purplik", 0, Player);
 
             string output = JsonConvert.SerializeObject(gameData);
 
             Debug.Log(output);
 
-            Directory.CreateDirectory(Path.GetDirectoryName(GlobalStaticValues.SAVE_PATH + "/save.json"));
+            Directory.CreateDirectory(Path.GetDirectoryName(GlobalStaticValues.SAVE_PATH + "/debug.json"));
 
-            using (FileStream fileStream = new FileStream(GlobalStaticValues.SAVE_PATH + "/save.json", FileMode.Create)) {
+            using (FileStream fileStream = new FileStream(GlobalStaticValues.SAVE_PATH + "/debug.json", FileMode.Create)) {
                 byte[] info = new UTF8Encoding(true).GetBytes(output);
                 fileStream.Write(info, 0, info.Length);
             }
         }
 
-        private void HandlePause()
-        {
-            if (IsSinglePlayer)
-            {
-                GlobalPauseEvent.Invoke();
-            }
+
+        public void CreateNewGame() {
+
         }
 
-        public enum GameState {
-            LOADING,
-            MAINMENU,
-            TOWN,
-            DUNGEON
+        public void LoadGame(GameData gameData) {
+            var playerObject = Resources.Load<GameObject>("prefabs/entities/player");
+
+            Player = playerObject.GetComponent<Player>();
+
+            Player.MaxHealth = gameData.PlayerData.MaxHealth;
+            Player.Speed = gameData.PlayerData.Speed;
+            Player.Defence = gameData.PlayerData.Defence;
+            Player.Templar = gameData.PlayerData.Templar;
+            Player.Rogue = gameData.PlayerData.Rogue;
+            Player.Thaumaturge = gameData.PlayerData.Thaumaturge;
+            Player.Corruption = gameData.PlayerData.Corruption;
         }
     }
 }

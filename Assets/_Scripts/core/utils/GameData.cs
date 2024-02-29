@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using roguelike.environment.entity.player;
 
 namespace roguelike.core.utils.gamedata {
@@ -11,6 +12,13 @@ namespace roguelike.core.utils.gamedata {
             Name = name;
             Day = day;
             PlayerData = new PlayerData(player);
+        }
+
+        [JsonConstructor]
+        public GameData(string name, int day, PlayerData playerData) {
+            Name = name;
+            Day = day;
+            PlayerData = playerData;
         }
     }
 }

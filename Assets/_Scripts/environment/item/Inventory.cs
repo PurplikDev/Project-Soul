@@ -1,9 +1,12 @@
+using Newtonsoft.Json;
 using roguelike.core.eventsystem;
 using roguelike.core.utils.gamedata;
 using roguelike.environment.entity;
 using roguelike.environment.entity.player;
 using roguelike.environment.entity.statsystem;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 namespace roguelike.core.item {
     public class Inventory {
@@ -60,6 +63,11 @@ namespace roguelike.core.item {
             foreach(ItemStack stack in  inventory.Items) {
                 Items.Add(new ItemStackData(stack));
             }
+        }
+
+        [JsonConstructor]
+        public InventoryData(params ItemStackData[] items) {
+            Items = items.ToList();
         }
     }
 }

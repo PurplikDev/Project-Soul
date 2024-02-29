@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using roguelike.core.eventsystem;
 using roguelike.core.item;
 using roguelike.environment.entity.combat;
@@ -61,6 +62,10 @@ namespace roguelike.environment.entity.player {
             base.Damage(source);
             Events.PlayerHeathUpdateEvent.Invoke(new PlayerHealthUpdateEvent(this));
         }
+
+        public void SetHealth(float amount) {
+            Health = amount;
+        }
     }
 
     [System.Serializable]
@@ -68,6 +73,7 @@ namespace roguelike.environment.entity.player {
         public float Health;
         public Stat MaxHealth, Speed, Defence, Templar, Rogue, Thaumaturge, Corruption;
         public InventoryData PlayerInventory;
+
         public PlayerData(Player player) {
             Health = player.Health;
             MaxHealth = player.MaxHealth;
@@ -78,6 +84,19 @@ namespace roguelike.environment.entity.player {
             Thaumaturge = player.Thaumaturge;
             Corruption = player.Corruption;
             PlayerInventory = new InventoryData(player.Inventory);
+        }
+
+        [JsonConstructor]
+        public PlayerData(float health, Stat maxHealth, Stat speed, Stat defence, Stat templar, Stat rogue, Stat thaumaturge, Stat corruptuon, InventoryData inventory) {
+            Health = health;
+            MaxHealth = maxHealth;
+            Speed = speed;
+            Defence = defence;
+            Templar = templar;
+            Rogue = rogue;
+            Thaumaturge = thaumaturge;
+            Corruption = corruptuon;
+            PlayerInventory = inventory;
         }
     }
 }
