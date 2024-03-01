@@ -14,7 +14,7 @@ namespace roguelike.environment.ui.statemachine {
 
         public override void EnterState() {
             deployable.StationUIHolder.SetActive(true);
-            renderer = deployable.GetRenderer(GameManager.Instance.Player);
+            renderer = deployable.GetRenderer(GameManager.Player);
         }
 
         public override void ExitState() {

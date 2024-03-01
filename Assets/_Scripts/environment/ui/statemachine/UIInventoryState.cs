@@ -15,7 +15,7 @@ namespace roguelike.environment.ui.statemachine {
 
         public override void EnterState() {
             _inventoryUIHolder.SetActive(true);
-            _inventoryRenderer = new InventoryRenderer(GameManager.Instance.Player.Inventory, _inventoryUIHolder.GetComponent<UIDocument>());
+            _inventoryRenderer = new InventoryRenderer(GameManager.Player.Inventory, _inventoryUIHolder.GetComponent<UIDocument>());
         }
 
         public override void ExitState() {

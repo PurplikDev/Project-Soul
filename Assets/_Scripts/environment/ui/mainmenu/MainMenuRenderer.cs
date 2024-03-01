@@ -1,4 +1,5 @@
 using roguelike.core.utils;
+using roguelike.system.manager;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -68,12 +69,10 @@ namespace roguelike.rendering.ui.mainmenu {
         }
 
         public void OnNewSaveButton() {
-            Debug.LogWarning("Create new save!");
-        }
 
-        public void OnSaveClicked(PointerDownEvent evt) {
             
         }
+
         protected void TranslateHeader(Label label) {
             label.text = TranslationManager.getTranslation(label.text);
         }

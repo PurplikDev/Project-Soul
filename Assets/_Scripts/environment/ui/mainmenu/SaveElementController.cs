@@ -23,7 +23,8 @@ namespace roguelike.rendering.ui.mainmenu {
         }
 
         public void OnClicked(PointerDownEvent evt) {
-            GameManager.Instance.LoadGame(gameData);
+            GameManager.Instance.LoadSave(gameData);
+            GameManager.Instance.LoadGame(1, GameState.TOWN);
         }
     }
 }

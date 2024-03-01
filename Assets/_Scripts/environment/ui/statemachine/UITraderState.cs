@@ -15,7 +15,7 @@ namespace roguelike.environment.ui.statemachine {
 
         public override void EnterState() {
             trader.InteractionScreenHolder.SetActive(true);
-            renderer = trader.GetRenderer(GameManager.Instance.Player);
+            renderer = trader.GetRenderer(GameManager.Player);
         }
 
         public override void ExitState() {

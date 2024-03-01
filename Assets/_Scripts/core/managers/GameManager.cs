@@ -7,21 +7,39 @@ using roguelike.system.singleton;
 using System;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace roguelike.system.manager {
     public class GameManager : Singleton<GameManager> {
 
+        public static GameState CurrentGameState;
+
         public Action StartGame;
         public Action GlobalPauseEvent;
 
-        protected GameData gameData {  get; private set; }
+        protected static GameData gameData { get; private set; }
 
-        public Player Player { get; private set; }
-        public PlayerInput Input { get { return Player.PlayerInput; } }
+        public static Player Player { get; private set; }
+        public static GameObject PlayerObject { get; private set; }
+        public static PlayerInput Input { get { return Player.PlayerInput; } }
 
+        public virtual void Start() {
+            if (CurrentGameState != GameState.MAINMENU) {
+                if (gameData == null) {
+                    Debug.Log("Creating New Game!");
+                    // CreateNewGame();
+                } else {
+                    Debug.Log("Loading Game!");
+                    // LoadGame(gameData);
+                    Instantiate(PlayerObject, new Vector3(0, 1, 0), PlayerObject.transform.rotation);
+                }
+            }
 
+            Debug.Log("whu!!!");
+            Debug.Log(CurrentGameState.ToString());
+        }
 
         private void GenerateDebugSave() {
             gameData = new GameData("Purplik", 0, Player);
@@ -37,16 +55,15 @@ namespace roguelike.system.manager {
         }
 
 
-        public void CreateNewGame() {
+        public void CreateNewSave() {
 
         }
 
-        public void LoadGame(GameData gameData) {
+        public void LoadSave(GameData gameData) {
+            GameManager.gameData = gameData;
 
-            SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
-
-            var playerObject = Resources.Load<GameObject>("prefabs/entities/player");
-            Player = playerObject.GetComponent<Player>();
+            PlayerObject = Resources.Load<GameObject>("prefabs/entities/player");
+            Player = PlayerObject.GetComponent<Player>();
 
             Player.MaxHealth = gameData.PlayerData.MaxHealth;
             Player.Speed = gameData.PlayerData.Speed;
@@ -55,8 +72,27 @@ namespace roguelike.system.manager {
             Player.Rogue = gameData.PlayerData.Rogue;
             Player.Thaumaturge = gameData.PlayerData.Thaumaturge;
             Player.Corruption = gameData.PlayerData.Corruption;
-
-            // instantiate the player when the scene is loaded logic here
         }
+
+        public async void LoadGame(int sceneIndex, GameState gameState) {
+            var scene = SceneManager.LoadSceneAsync(sceneIndex);
+            CurrentGameState = gameState;
+            scene.allowSceneActivation = false;
+
+            // todo: activate loading screen ui
+
+            do {
+                await Task.Delay(1000);
+                Debug.Log(scene.progress);
+            } while (scene.progress < 0.9f);
+
+            scene.allowSceneActivation = true;
+        }
+    }
+
+    public enum GameState {
+        MAINMENU,
+        TOWN,
+        DUNGEON
     }
 }

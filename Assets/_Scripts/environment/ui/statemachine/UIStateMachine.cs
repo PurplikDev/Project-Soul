@@ -15,10 +15,10 @@ namespace roguelike.environment.ui.statemachine {
         private UIDeployableState _deployableState;
         private UITraderState _traderState;
 
-        void Awake() {
-            input = GameManager.Instance.Input;
+        protected override void Start() {
+            input = GameManager.Input;
 
-            var player = GameManager.Instance.Player;
+            var player = GameManager.Player;
 
             states.Add(UIStates.NONE, new UINoneState(this));
             states.Add(UIStates.INVENTORY, new UIInventoryState(this, player.InventoryScreen));
@@ -29,6 +29,8 @@ namespace roguelike.environment.ui.statemachine {
 
             input.UIControls.Inventory.performed += OnInventory;
             input.UIControls.Pause.performed += OnPause;
+
+            base.Start();
         }
 
         void OnInventory(InputAction.CallbackContext context) {
@@ -82,14 +84,6 @@ namespace roguelike.environment.ui.statemachine {
         {
             states.Remove(UIStates.TRADER);
             _isInUI = false;
-        }
-
-        void OnEnable() {
-            input.UIControls.Enable();
-        }
-
-        void OnDisable() {
-            input.UIControls.Disable();
         }
 
         protected override void Update() { 

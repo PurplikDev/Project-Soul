@@ -9,13 +9,21 @@ using UnityEngine;
 
 namespace roguelike.environment.entity.player {
     public class Player : Entity {
+        private PlayerInput _playerInput;
         [Space]
         [Header("Player Stats")]
         public Stat Corruption = new Stat(0); // tldr; corruption
 
         public UIStateMachine UIStateMachine { get; set; }
         public PlayerInteractor PlayerInteractor { get; set; }
-        public PlayerInput PlayerInput { get; private set; }
+        public PlayerInput PlayerInput { get {
+                if(_playerInput == null) {
+                    _playerInput = new PlayerInput();
+                }
+                return _playerInput;
+            }
+        }
+
         public Inventory Inventory { get; private set; }
 
         [Space]
@@ -39,7 +47,6 @@ namespace roguelike.environment.entity.player {
 
 
         protected override void Awake() {
-            PlayerInput = new PlayerInput();
             PlayerInput.Enable();
 
             Inventory = new Inventory(this);
