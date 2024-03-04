@@ -27,6 +27,8 @@ namespace roguelike.system.manager {
         public static PlayerInput Input { get { return Player.PlayerInput; } }
 
         public virtual void Start() {
+            Debug.Log(JsonConvert.SerializeObject(GameData.EMPTY));
+
             if (CurrentGameState != GameState.MAINMENU) {
                 if (gameData == null) {
                     Debug.LogError("No GameData present!");
@@ -51,6 +53,8 @@ namespace roguelike.system.manager {
         }
 
         public static void SaveGame() {
+            if(gameData == null) { return; }
+
             gameData = new GameData(gameData.Name, gameData.Day, Player);
 
             string output = JsonConvert.SerializeObject(gameData);
@@ -74,6 +78,8 @@ namespace roguelike.system.manager {
 
             PlayerObject = Resources.Load<GameObject>("prefabs/entities/player");
             Player = PlayerObject.GetComponent<Player>();
+
+            Player.SetHealth(gameData.PlayerData.Health);
 
             Player.MaxHealth = gameData.PlayerData.MaxHealth;
             Player.Speed = gameData.PlayerData.Speed;

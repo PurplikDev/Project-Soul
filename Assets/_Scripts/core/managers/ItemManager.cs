@@ -49,6 +49,8 @@ namespace roguelike.core.item {
             Register("test3", 32);
             Register("test4", 6, 5);
 
+            RegisterTrophy("test_trophy", 64);
+
             RegisterTrinket("amulet_of_beautiful_eyes", 526,
                 new StatModifier(1.5f, StatModifierType.ADDITIONAL, StatType.HEALTH));
 
@@ -78,6 +80,11 @@ namespace roguelike.core.item {
             _itemDatabase.Add(id, new Item(id, maxStackSize, itemValue));
         }
 
+
+
+        private void RegisterTrophy(string id, int itemValue) {
+            _itemDatabase.Add(id, new Trophy(id, itemValue));
+        }
 
 
         // EQUIPMENT REGISTRATION
