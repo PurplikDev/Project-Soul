@@ -9,13 +9,5 @@ namespace roguelike.environment.entity.statemachine {
         public HostileEntityBaseState(HostileEntityStateMachine stateMachine, EntityStates key) : base(key) {
             this.stateMachine = stateMachine;
         }
-
-        public override void OnTriggerEnter(Collider collider) { }
-
-        public override void OnTriggerStay(Collider collider) { }
-
-        public override void OnTriggerExit(Collider collider) { }
-
-        
     }
 }

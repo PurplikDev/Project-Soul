@@ -1,4 +1,5 @@
 using roguelike.core.utils;
+using roguelike.core.utils.gamedata;
 using roguelike.system.manager;
 using System.IO;
 using UnityEngine;
@@ -8,9 +9,10 @@ namespace roguelike.rendering.ui.mainmenu {
     public class MainMenuRenderer : MonoBehaviour {
         protected UIDocument document;
 
-        private VisualElement _root, _menuRoot, _saveMenuRoot;
+        private VisualElement _root, _menuRoot, _saveMenuRoot, _saveSelectionRoot, _saveCreationRoot;
         private ScrollView _saveFileList;
-        private Button _playButton, _settingsButton, _quitButton, _newSaveButton;
+        private Button _playButton, _settingsButton, _quitButton, _newSaveButton, _newSaveCreateButton, _newSaveCancelButton;
+        private TextField _characterName;
 
         private VisualTreeAsset _saveFileElement;
 
@@ -22,23 +24,35 @@ namespace roguelike.rendering.ui.mainmenu {
 
             _menuRoot = _root.Q<VisualElement>("MainMenuHolder");
             _saveMenuRoot = _root.Q<VisualElement>("SaveMenuHolder");
+            _saveSelectionRoot = _saveMenuRoot.Q<VisualElement>("SaveSelectionHolder");
+            _saveCreationRoot = _saveMenuRoot.Q<VisualElement>("SaveCreationHolder");
+
             _saveFileList = _saveMenuRoot.Q<ScrollView>("SaveList");
+            _characterName = _saveCreationRoot.Q<TextField>("SaveCreationCharacterNameField");
 
             _playButton = _menuRoot.Q<Button>("PlayButton");
             _settingsButton = _menuRoot.Q<Button>("SettingsButton");
             _quitButton = _menuRoot.Q<Button>("QuitButton");
             _newSaveButton = _saveMenuRoot.Q<Button>("NewSaveButton");
+            _newSaveCreateButton = _saveMenuRoot.Q<Button>("CreateSaveButton");
+            _newSaveCancelButton = _saveCreationRoot.Q<Button>("CreateSaveCancelButton");
 
             TranslateHeader(_playButton.Q<Label>());
             TranslateHeader(_settingsButton.Q<Label>());
             TranslateHeader(_quitButton.Q<Label>());
             TranslateHeader(_root.Q<Label>("SavesHeader"));
             TranslateHeader(_newSaveButton.Q<Label>());
+            TranslateHeader(_saveCreationRoot.Q<Label>("CreateSaveButtonHeader"));
+            TranslateHeader(_saveCreationRoot.Q<Label>("SaveCreationCharacterNameHeader"));
+            TranslateHeader(_saveCreationRoot.Q<Label>("CreateSaveCancelButtonHeader"));
 
             _playButton.clicked += OnPlayButton;
             _settingsButton.clicked += OnSettingsButton;
             _quitButton.clicked += OnQuitButton;
             _newSaveButton.clicked += OnNewSaveButton;
+            _newSaveCreateButton.clicked += OnNewSaveCreateButton;
+            _newSaveCancelButton.clicked += OnCancelButton;
+
 
             Directory.CreateDirectory(Path.GetDirectoryName(GlobalStaticValues.SAVE_PATH));
 
@@ -53,10 +67,12 @@ namespace roguelike.rendering.ui.mainmenu {
         }
 
         public void OnPlayButton() {
-            if(_saveMenuRoot.style.visibility != Visibility.Visible) {
-                _saveMenuRoot.style.visibility = Visibility.Visible;
+            if(_saveSelectionRoot.style.visibility != Visibility.Visible) {
+                _saveSelectionRoot.style.visibility = Visibility.Visible;
+                _saveCreationRoot.style.visibility = Visibility.Hidden;
             } else {
-                _saveMenuRoot.style.visibility = Visibility.Hidden;
+                _saveSelectionRoot.style.visibility = Visibility.Hidden;
+                _saveCreationRoot.style.visibility = Visibility.Hidden;
             }
         }
 
@@ -69,8 +85,21 @@ namespace roguelike.rendering.ui.mainmenu {
         }
 
         public void OnNewSaveButton() {
+            if (_saveCreationRoot.style.visibility != Visibility.Visible) {
+                _saveSelectionRoot.style.visibility = Visibility.Hidden;
+                _saveCreationRoot.style.visibility = Visibility.Visible;
+            }
+        }
 
-            
+        public void OnNewSaveCreateButton() {
+            var newGameData = GameManager.CreateNewSave(_characterName.value);
+            GameManager.Instance.LoadSave(newGameData);
+            GameManager.Instance.LoadGame(1, GameState.TOWN);
+        }
+
+        public void OnCancelButton() {
+            _saveSelectionRoot.style.visibility = Visibility.Visible;
+            _saveCreationRoot.style.visibility = Visibility.Hidden;
         }
 
         protected void TranslateHeader(Label label) {

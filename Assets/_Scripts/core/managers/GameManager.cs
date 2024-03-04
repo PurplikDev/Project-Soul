@@ -1,4 +1,6 @@
+using Cinemachine;
 using Newtonsoft.Json;
+using roguelike.core.item;
 using roguelike.core.utils;
 using roguelike.core.utils.gamedata;
 using roguelike.environment.entity.player;
@@ -20,7 +22,6 @@ namespace roguelike.system.manager {
         public Action GlobalPauseEvent;
 
         protected static GameData gameData { get; private set; }
-
         public static Player Player { get; private set; }
         public static GameObject PlayerObject { get; private set; }
         public static PlayerInput Input { get { return Player.PlayerInput; } }
@@ -28,17 +29,12 @@ namespace roguelike.system.manager {
         public virtual void Start() {
             if (CurrentGameState != GameState.MAINMENU) {
                 if (gameData == null) {
-                    Debug.Log("Creating New Game!");
-                    // CreateNewGame();
-                } else {
-                    Debug.Log("Loading Game!");
-                    // LoadGame(gameData);
-                    Instantiate(PlayerObject, new Vector3(0, 1, 0), PlayerObject.transform.rotation);
+                    Debug.LogError("No GameData present!");
+                    return;
                 }
+                GameObject player = Instantiate(PlayerObject, new Vector3(0, 1, 0), PlayerObject.transform.rotation);
+                GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>().Follow = player.transform;
             }
-
-            Debug.Log("whu!!!");
-            Debug.Log(CurrentGameState.ToString());
         }
 
         private void GenerateDebugSave() {
@@ -55,8 +51,10 @@ namespace roguelike.system.manager {
         }
 
 
-        public void CreateNewSave() {
-
+        public static GameData CreateNewSave(string characterName) {
+            GameData data = GameData.EMPTY;
+            data.Name = characterName;
+            return data;
         }
 
         public void LoadSave(GameData gameData) {
@@ -72,6 +70,8 @@ namespace roguelike.system.manager {
             Player.Rogue = gameData.PlayerData.Rogue;
             Player.Thaumaturge = gameData.PlayerData.Thaumaturge;
             Player.Corruption = gameData.PlayerData.Corruption;
+
+            Player.Inventory = new Inventory(Player, gameData.PlayerData.PlayerInventory);
         }
 
         public async void LoadGame(int sceneIndex, GameState gameState) {

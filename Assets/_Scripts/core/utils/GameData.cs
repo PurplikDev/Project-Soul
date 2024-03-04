@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using roguelike.environment.entity.player;
+using roguelike.environment.entity.statsystem;
 
 namespace roguelike.core.utils.gamedata {
     [System.Serializable]
@@ -19,6 +20,12 @@ namespace roguelike.core.utils.gamedata {
             Name = name;
             Day = day;
             PlayerData = playerData;
+        }
+
+        public static GameData EMPTY {
+            get {
+                return new GameData("", 0, new PlayerData(30, new Stat(30), new Stat(2.5f), new Stat(0), new Stat(0), new Stat(0), new Stat(0), new Stat(0), new item.InventoryData()));
+            }
         }
     }
 }

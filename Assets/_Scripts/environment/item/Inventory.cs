@@ -24,6 +24,11 @@ namespace roguelike.core.item {
             FillAllSlots();
         }
 
+        public Inventory(Entity entity, InventoryData data) {
+            Entity = entity;
+            LoadItemsFromSave(data);
+        }
+
         // todo: proper implementation of this method by loading content from a safe file or filling it with air
         private void FillAllSlots() {
             for (int i = 0; i < InventorySize; i++) { Items.Add(ItemStack.EMPTY); }
@@ -33,7 +38,7 @@ namespace roguelike.core.item {
 
         public void LoadItemsFromSave(InventoryData data) {
             for(int i = 0; i < data.Items.Count; i++) {
-                Items[i] = new ItemStack(data.Items[i]);
+                Items.Add(new ItemStack(data.Items[i]));
             }
         }
 
@@ -70,6 +75,15 @@ namespace roguelike.core.item {
         [JsonConstructor]
         public InventoryData(params ItemStackData[] items) {
             Items = items.ToList();
+        }
+
+        /// <summary>
+        /// This constructor creates and empty inventory!
+        /// </summary>
+        public InventoryData() {
+            for (int i = 0; i < Inventory.InventorySize; i++) { Items.Add(ItemStackData.EMPTY); }
+            for (int i = 0; i < Inventory.EquipmentSize; i++) { Items.Add(ItemStackData.EMPTY); }
+            for (int i = 0; i < Inventory.TrinketSize; i++) { Items.Add(ItemStackData.EMPTY); }
         }
     }
 }

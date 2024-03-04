@@ -85,3 +85,10 @@
     padding-top: 0;
     padding-bottom: 0;
 }
+
+.header {
+    color: rgb(38, 62, 86);
+    font-size: 40px;
+    -unity-text-align: middle-center;
+    -unity-font-style: bold;
+}

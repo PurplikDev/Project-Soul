@@ -24,7 +24,7 @@ namespace roguelike.environment.entity.player {
             }
         }
 
-        public Inventory Inventory { get; private set; }
+        public Inventory Inventory { get; set; }
 
         [Space]
         [Header("Player UI Elements")]

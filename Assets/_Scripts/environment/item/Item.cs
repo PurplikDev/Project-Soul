@@ -101,5 +101,11 @@ namespace roguelike.core.item {
             ItemID = itemID;
             ItemStackSize = stackSize;
         }
+
+        public static ItemStackData EMPTY {
+            get {
+                return new ItemStackData(ItemStack.EMPTY);
+            }
+        }
     }
 }
