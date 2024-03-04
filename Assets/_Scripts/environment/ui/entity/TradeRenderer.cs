@@ -147,7 +147,7 @@ namespace roguelike.rendering.ui
 
         protected override void SyncVisualToInternalSingle(ItemSlot clickedSlot) {
             if (playerInventorySlots.Contains(clickedSlot)) {
-                GameManager.Instance.Player.Inventory.Items[clickedSlot.SlotIndex] = clickedSlot.SlotStack;
+                GameManager.Player.Inventory.Items[clickedSlot.SlotIndex] = clickedSlot.SlotStack;
             } else if (traderInventorySlots.Contains(clickedSlot)) {
                 trader.Stock[clickedSlot.SlotIndex - 20] = clickedSlot.SlotStack;
             }

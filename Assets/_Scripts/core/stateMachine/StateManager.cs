@@ -29,15 +29,5 @@ namespace roguelike.core.statemachine {
             currentState.EnterState();
             isTransitioningState = false;
         }
-
-        void OnTriggerEnter(Collider collider) {
-            currentState.OnTriggerEnter(collider);
-        }
-        void OnTriggerStay(Collider collider) {
-            currentState.OnTriggerStay(collider);
-        }
-        void OnTriggerExit(Collider collider) {
-            currentState.OnTriggerExit(collider);
-        }
     }
 }

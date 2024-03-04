@@ -1,9 +1,11 @@
+using Newtonsoft.Json;
 using roguelike.core.eventsystem;
+using roguelike.core.utils.gamedata;
 using roguelike.environment.entity;
 using roguelike.environment.entity.player;
 using roguelike.environment.entity.statsystem;
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace roguelike.core.item {
@@ -17,43 +19,26 @@ namespace roguelike.core.item {
 
         public Entity Entity;
 
-        public GameObject ArmorHolder;
-
         public Inventory(Entity entity) {
             Entity = entity;
             FillAllSlots();
         }
 
+        public Inventory(Entity entity, InventoryData data) {
+            Entity = entity;
+            LoadItemsFromSave(data);
+        }
+
         // todo: proper implementation of this method by loading content from a safe file or filling it with air
         private void FillAllSlots() {
-            for (int i = 0; i < InventorySize; i++) {
-                if (i % 2 != 0) {
-                    if(i == 1) {
-                        Items.Add(new ItemStack(ItemManager.GetItemByID("test_shield")));
-                    } else if(i == 3){
-                        Items.Add(new ItemStack(ItemManager.GetItemByID("test_light_sword")));
-                    } else {
-                        Items.Add(ItemStack.EMPTY);
-                    }
-                } else {
-                    if (i % 4 == 0) {
-                        Items.Add(new ItemStack(ItemManager.GetItemByID("test2"), i));
-                    } else {
-                        if (i % 3 == 0) {
-                            Items.Add(new ItemStack(ItemManager.GetItemByID("test"), i));
-                        } else {
-                            Items.Add(new ItemStack(ItemManager.GetItemByID("test4"), i));
-                        }
-                    }
-                }
-            }
+            for (int i = 0; i < InventorySize; i++) { Items.Add(ItemStack.EMPTY); }
+            for (int i = 0; i < EquipmentSize; i++) { Items.Add(ItemStack.EMPTY); }
+            for (int i = 0; i < TrinketSize; i++) { Items.Add(ItemStack.EMPTY); }
+        }
 
-            for (int i = 0; i < EquipmentSize; i++) {
-                Items.Add(ItemStack.EMPTY);
-            }
-
-            for (int i = 0; i < TrinketSize; i++) {
-                Items.Add(ItemStack.EMPTY);
+        public void LoadItemsFromSave(InventoryData data) {
+            for(int i = 0; i < data.Items.Count; i++) {
+                Items.Add(new ItemStack(data.Items[i]));
             }
         }
 
@@ -76,6 +61,29 @@ namespace roguelike.core.item {
 
                 Events.PlayerHeathUpdateEvent.Invoke(new PlayerHealthUpdateEvent((Player)Entity));
             }
+        }
+    }
+
+    public class InventoryData {
+        public List<ItemStackData> Items = new List<ItemStackData>();
+        public InventoryData(Inventory inventory) {
+            foreach(ItemStack stack in  inventory.Items) {
+                Items.Add(new ItemStackData(stack));
+            }
+        }
+
+        [JsonConstructor]
+        public InventoryData(params ItemStackData[] items) {
+            Items = items.ToList();
+        }
+
+        /// <summary>
+        /// This constructor creates and empty inventory!
+        /// </summary>
+        public InventoryData() {
+            for (int i = 0; i < Inventory.InventorySize; i++) { Items.Add(ItemStackData.EMPTY); }
+            for (int i = 0; i < Inventory.EquipmentSize; i++) { Items.Add(ItemStackData.EMPTY); }
+            for (int i = 0; i < Inventory.TrinketSize; i++) { Items.Add(ItemStackData.EMPTY); }
         }
     }
 }

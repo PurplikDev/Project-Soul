@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731704, g: 0.1341472, b: 0.121078566, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1923,6 +1923,8 @@ MonoBehaviour:
     BaseValue: 0
   Immortal: 0
   Invisible: 0
+  InteractMessage: 
+  InteractionScreenHolder: {fileID: 0}
 --- !u!1 &1955977558
 GameObject:
   m_ObjectHideFlags: 0
@@ -2328,6 +2330,74 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8acd872d91f9f34499d7b8197bd980a6, type: 3}
+--- !u!1001 &6952812242523442278
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6032663523381362827, guid: 1dafcb860db770c44b4d9b253c8d19e5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032663523381362827, guid: 1dafcb860db770c44b4d9b253c8d19e5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032663523381362827, guid: 1dafcb860db770c44b4d9b253c8d19e5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032663523381362827, guid: 1dafcb860db770c44b4d9b253c8d19e5,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032663523381362827, guid: 1dafcb860db770c44b4d9b253c8d19e5,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032663523381362827, guid: 1dafcb860db770c44b4d9b253c8d19e5,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032663523381362827, guid: 1dafcb860db770c44b4d9b253c8d19e5,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032663523381362827, guid: 1dafcb860db770c44b4d9b253c8d19e5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032663523381362827, guid: 1dafcb860db770c44b4d9b253c8d19e5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032663523381362827, guid: 1dafcb860db770c44b4d9b253c8d19e5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566077580892012262, guid: 1dafcb860db770c44b4d9b253c8d19e5,
+        type: 3}
+      propertyPath: m_Name
+      value: Altar of the Blaze
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1dafcb860db770c44b4d9b253c8d19e5, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2350,3 +2420,4 @@ SceneRoots:
   - {fileID: 1683365779}
   - {fileID: 1829708363}
   - {fileID: 1602118427}
+  - {fileID: 6952812242523442278}

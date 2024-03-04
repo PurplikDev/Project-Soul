@@ -1,5 +1,5 @@
+using System;
 using System.Collections.Generic;
-using System.Text;
 using Newtonsoft.Json;
 using roguelike.core.item;
 using roguelike.core.item.recipe;
@@ -60,16 +60,17 @@ namespace roguelike.system.manager {
 
 
         private void RegisterRecipes() {
+            try {
+                var shapelessRecipes = Resources.LoadAll<TextAsset>("data/recipes/shapeless");
+                foreach (var recipe in shapelessRecipes) { RegisterShapeless(JsonConvert.DeserializeObject<ShapelessRecipeObject>(recipe.text.ToString()), _shapelessRecipes); }
+                _recipeDatabase.Add(RecipeType.SHAPELESS_CRAFTING, _shapelessRecipes);
 
-            // todo: replace place holder testing recipes with proper recipes :3
-
-            var shapelessRecipes = Resources.LoadAll<TextAsset>("data/recipes/shapeless");
-            foreach (var recipe in shapelessRecipes) { RegisterShapeless(JsonConvert.DeserializeObject<ShapelessRecipeObject>(recipe.text.ToString()), _shapelessRecipes); }
-            _recipeDatabase.Add(RecipeType.SHAPELESS_CRAFTING, _shapelessRecipes);
-
-            var shapedRecipes = Resources.LoadAll<TextAsset>("data/recipes/shaped");
-            foreach (var recipe in shapedRecipes) { RegisterShaped(JsonConvert.DeserializeObject<ShapedRecipeObject>(recipe.text.ToString()), _shapedRecipes); }
-            _recipeDatabase.Add(RecipeType.SHAPED_CRAFTING, _shapedRecipes);
+                var shapedRecipes = Resources.LoadAll<TextAsset>("data/recipes/shaped");
+                foreach (var recipe in shapedRecipes) { RegisterShaped(JsonConvert.DeserializeObject<ShapedRecipeObject>(recipe.text.ToString()), _shapedRecipes); }
+                _recipeDatabase.Add(RecipeType.SHAPED_CRAFTING, _shapedRecipes);
+            } catch(ArgumentException) {
+                Debug.LogWarning("Recipes already present!");
+            }
         }
     }
 }

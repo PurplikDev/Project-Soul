@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using roguelike.core.eventsystem;
 using roguelike.core.item;
 using roguelike.environment.entity.combat;
@@ -8,14 +9,22 @@ using UnityEngine;
 
 namespace roguelike.environment.entity.player {
     public class Player : Entity {
+        private PlayerInput _playerInput;
         [Space]
         [Header("Player Stats")]
         public Stat Corruption = new Stat(0); // tldr; corruption
 
         public UIStateMachine UIStateMachine { get; set; }
         public PlayerInteractor PlayerInteractor { get; set; }
-        public PlayerInput PlayerInput { get; private set; }
-        public Inventory Inventory { get; private set; }
+        public PlayerInput PlayerInput { get {
+                if(_playerInput == null) {
+                    _playerInput = new PlayerInput();
+                }
+                return _playerInput;
+            }
+        }
+
+        public Inventory Inventory { get; set; }
 
         [Space]
         [Header("Player UI Elements")]
@@ -38,7 +47,6 @@ namespace roguelike.environment.entity.player {
 
 
         protected override void Awake() {
-            PlayerInput = new PlayerInput();
             PlayerInput.Enable();
 
             Inventory = new Inventory(this);
@@ -60,6 +68,42 @@ namespace roguelike.environment.entity.player {
         public override void Damage(DamageSource source) {
             base.Damage(source);
             Events.PlayerHeathUpdateEvent.Invoke(new PlayerHealthUpdateEvent(this));
+        }
+
+        public void SetHealth(float amount) {
+            Health = amount;
+        }
+    }
+
+    [System.Serializable]
+    public class PlayerData {
+        public float Health;
+        public Stat MaxHealth, Speed, Defence, Templar, Rogue, Thaumaturge, Corruption;
+        public InventoryData PlayerInventory;
+
+        public PlayerData(Player player) {
+            Health = player.Health;
+            MaxHealth = player.MaxHealth;
+            Speed = player.Speed;
+            Defence = player.Defence;
+            Templar = player.Templar;
+            Rogue = player.Rogue;
+            Thaumaturge = player.Thaumaturge;
+            Corruption = player.Corruption;
+            PlayerInventory = new InventoryData(player.Inventory);
+        }
+
+        [JsonConstructor]
+        public PlayerData(float health, Stat maxHealth, Stat speed, Stat defence, Stat templar, Stat rogue, Stat thaumaturge, Stat corruptuon, InventoryData inventory) {
+            Health = health;
+            MaxHealth = maxHealth;
+            Speed = speed;
+            Defence = defence;
+            Templar = templar;
+            Rogue = rogue;
+            Thaumaturge = thaumaturge;
+            Corruption = corruptuon;
+            PlayerInventory = inventory;
         }
     }
 }

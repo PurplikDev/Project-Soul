@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace roguelike.core.item {
@@ -33,9 +34,9 @@ namespace roguelike.core.item {
             _stackSize = amount > _stackItem.MaxStackSize ? _stackItem.MaxStackSize : amount;
         }
 
-        public ItemStack(Item item) : this(item, 1) {
-            // hi again :3
-        }
+        public ItemStack(Item item) : this(item, 1) {}
+
+        public ItemStack(ItemStackData data) : this(ItemManager.GetItemByID(data.ItemID), data.ItemStackSize) {}
 
         public int IncreaseStackSize(int amount) {
             int combined = _stackSize + amount;
@@ -82,6 +83,29 @@ namespace roguelike.core.item {
 
         public override string ToString() {
             return _stackItem.Name + " | " + _stackSize;
+        }
+    }
+
+    [System.Serializable]
+    public class ItemStackData {
+        public string ItemID;
+        public int ItemStackSize;
+
+        public ItemStackData(ItemStack stack) {
+            ItemID = stack.Item.ID;
+            ItemStackSize = stack.StackSize;
+        }
+
+        [JsonConstructor]
+        public ItemStackData(string itemID, int stackSize) {
+            ItemID = itemID;
+            ItemStackSize = stackSize;
+        }
+
+        public static ItemStackData EMPTY {
+            get {
+                return new ItemStackData(ItemStack.EMPTY);
+            }
         }
     }
 }

@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Resources/ui/stylesheets/GenericUI.uss?fileID=7433441132597879392&amp;guid=ed10c5c2a46b611438e83ec12f00ff40&amp;type=3#GenericUI" />
+    <ui:VisualElement name="SaveElementHolder" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; background-image: resource(&apos;sprites/ui/crafting_slot&apos;); padding-left: 2.5%; padding-right: 2.5%; padding-top: 2.5%; padding-bottom: 2.5%; align-items: center; justify-content: center; margin-top: 5px; margin-bottom: 5px;">
+        <ui:Label tabindex="-1" text="SaveName" display-tooltip-when-elided="true" name="SaveNameHeader" style="font-size: 45px; -unity-font-style: bold; width: 50%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; height: 100%; -unity-text-align: middle-left; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
+        <ui:Label tabindex="-1" text="Day 17" display-tooltip-when-elided="true" name="SaveDayHeader" style="-unity-text-align: middle-right; width: 50%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; font-size: 35px; -unity-font-style: bold; height: 100%; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
+    </ui:VisualElement>
+</ui:UXML>

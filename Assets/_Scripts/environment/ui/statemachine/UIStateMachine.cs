@@ -1,5 +1,6 @@
 using roguelike.core.statemachine;
 using roguelike.environment.entity.npc;
+using roguelike.environment.entity.player;
 using roguelike.environment.world.deployable;
 using roguelike.system.manager;
 using UnityEngine;
@@ -15,10 +16,8 @@ namespace roguelike.environment.ui.statemachine {
         private UIDeployableState _deployableState;
         private UITraderState _traderState;
 
-        void Awake() {
-            input = GameManager.Instance.Input;
-
-            var player = GameManager.Instance.Player;
+        protected override void Start() {
+            var player = GetComponent<Player>();
 
             states.Add(UIStates.NONE, new UINoneState(this));
             states.Add(UIStates.INVENTORY, new UIInventoryState(this, player.InventoryScreen));
@@ -27,8 +26,12 @@ namespace roguelike.environment.ui.statemachine {
             currentState = states[UIStates.NONE];
             // some sort of interaction with objects logic call here
 
+            input = player.PlayerInput;
+
             input.UIControls.Inventory.performed += OnInventory;
             input.UIControls.Pause.performed += OnPause;
+
+            base.Start();
         }
 
         void OnInventory(InputAction.CallbackContext context) {
@@ -82,14 +85,6 @@ namespace roguelike.environment.ui.statemachine {
         {
             states.Remove(UIStates.TRADER);
             _isInUI = false;
-        }
-
-        void OnEnable() {
-            input.UIControls.Enable();
-        }
-
-        void OnDisable() {
-            input.UIControls.Disable();
         }
 
         protected override void Update() { 

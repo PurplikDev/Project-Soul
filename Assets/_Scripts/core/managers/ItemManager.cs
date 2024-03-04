@@ -1,5 +1,6 @@
 using roguelike.environment.entity.statsystem;
 using roguelike.system.singleton;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -14,9 +15,13 @@ namespace roguelike.core.item {
 
         protected override void Awake() {
             base.Awake();
-            MissingTexture = Resources.Load<Sprite>("sprites/missing_texture");
-            ItemIcons = Resources.LoadAll<Sprite>("sprites/items").ToList();
-            RegisterItems();
+            try { // todo: find a better way to do this
+                RegisterItems();
+                MissingTexture = Resources.Load<Sprite>("sprites/missing_texture");
+                ItemIcons = Resources.LoadAll<Sprite>("sprites/items").ToList();
+            } catch(ArgumentException) {
+                Debug.LogWarning("Items already present");
+            }
         }
       
         public static Sprite GetSpriteByID(string id) {
