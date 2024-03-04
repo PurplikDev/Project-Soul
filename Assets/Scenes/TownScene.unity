@@ -249,6 +249,74 @@ Transform:
   - {fileID: 602351640}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &335707608
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6032663523381362827, guid: 1dafcb860db770c44b4d9b253c8d19e5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032663523381362827, guid: 1dafcb860db770c44b4d9b253c8d19e5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032663523381362827, guid: 1dafcb860db770c44b4d9b253c8d19e5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032663523381362827, guid: 1dafcb860db770c44b4d9b253c8d19e5,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.38268343
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032663523381362827, guid: 1dafcb860db770c44b4d9b253c8d19e5,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032663523381362827, guid: 1dafcb860db770c44b4d9b253c8d19e5,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.92387956
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032663523381362827, guid: 1dafcb860db770c44b4d9b253c8d19e5,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032663523381362827, guid: 1dafcb860db770c44b4d9b253c8d19e5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032663523381362827, guid: 1dafcb860db770c44b4d9b253c8d19e5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 135
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032663523381362827, guid: 1dafcb860db770c44b4d9b253c8d19e5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566077580892012262, guid: 1dafcb860db770c44b4d9b253c8d19e5,
+        type: 3}
+      propertyPath: m_Name
+      value: Altar of the Blaze
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1dafcb860db770c44b4d9b253c8d19e5, type: 3}
 --- !u!1001 &521247672
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2539,3 +2607,4 @@ SceneRoots:
   - {fileID: 150006582}
   - {fileID: 1190528325}
   - {fileID: 521247672}
+  - {fileID: 335707608}

@@ -50,6 +50,18 @@ namespace roguelike.system.manager {
             }
         }
 
+        public static void SaveGame() {
+            gameData = new GameData(gameData.Name, gameData.Day, Player);
+
+            string output = JsonConvert.SerializeObject(gameData);
+
+            Directory.CreateDirectory(Path.GetDirectoryName(GlobalStaticValues.SAVE_PATH + $"/{gameData.Name}.json"));
+
+            using (FileStream fileStream = new FileStream(GlobalStaticValues.SAVE_PATH + $"/{gameData.Name}.json", FileMode.Create)) {
+                byte[] info = new UTF8Encoding(true).GetBytes(output);
+                fileStream.Write(info, 0, info.Length);
+            }
+        }
 
         public static GameData CreateNewSave(string characterName) {
             GameData data = GameData.EMPTY;
