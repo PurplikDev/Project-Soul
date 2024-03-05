@@ -95,14 +95,15 @@ namespace roguelike.system.manager {
             CurrentGameState = gameState;
             scene.allowSceneActivation = false;
 
-            // todo: activate loading screen ui
+            LoadingManager.BeginLoading();
 
             do {
                 await Task.Delay(1000);
-                Debug.Log(scene.progress);
+                LoadingManager.UpdateProgress(scene.progress);
             } while (scene.progress < 0.9f);
 
             scene.allowSceneActivation = true;
+            LoadingManager.FinishLoading();
         }
 
         public void GoToMainMenu() {
