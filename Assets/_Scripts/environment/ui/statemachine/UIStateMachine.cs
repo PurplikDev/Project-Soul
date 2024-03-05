@@ -82,8 +82,7 @@ namespace roguelike.environment.ui.statemachine {
             }
         }
 
-        internal void OnTraderExit()
-        {
+        internal void OnTraderExit() {
             states.Remove(UIStates.TRADER);
             _isInUI = false;
         }
