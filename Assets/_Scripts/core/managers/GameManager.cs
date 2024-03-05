@@ -27,8 +27,6 @@ namespace roguelike.system.manager {
         public static PlayerInput Input { get { return Player.PlayerInput; } }
 
         public virtual void Start() {
-            Debug.Log(JsonConvert.SerializeObject(GameData.EMPTY));
-
             if (CurrentGameState != GameState.MAINMENU) {
                 if (gameData == null) {
                     Debug.LogError("No GameData present!");

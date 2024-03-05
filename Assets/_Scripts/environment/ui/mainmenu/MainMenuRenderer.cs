@@ -1,6 +1,7 @@
 using roguelike.core.utils;
 using roguelike.core.utils.gamedata;
 using roguelike.system.manager;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -56,12 +57,26 @@ namespace roguelike.rendering.ui.mainmenu {
 
             Directory.CreateDirectory(Path.GetDirectoryName(GlobalStaticValues.SAVE_PATH));
 
-            foreach (var save in Directory.GetFiles(GlobalStaticValues.SAVE_PATH)) {
+            var files = Directory.GetFiles(GlobalStaticValues.SAVE_PATH);
+            List<GameData> data = new List<GameData>();
+
+            foreach(string save in files) {
+                data.Add(SaveFileUtils.GetDataFromFile(save));
+            }
+
+            data.Sort(delegate(GameData dataX, GameData dataY) {
+                if (dataX == null && dataY == null) return 0;
+                else if (dataX == null) return -1;
+                else if (dataY == null) return 1;
+                else return dataX.CompareTo(dataY);
+            });
+
+            foreach (GameData save in data) {
                 var newSaveElement = _saveFileElement.Instantiate();
                 var newSaveElementController = new SaveElementController();
                 newSaveElement.userData = newSaveElementController;
                 newSaveElementController.SetupElement(newSaveElement);
-                newSaveElementController.FillData(SaveFileUtils.GetDataFromFile(save));
+                newSaveElementController.FillData(save);
                 _saveFileList.Add(newSaveElement);
             }
         }

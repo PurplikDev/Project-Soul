@@ -5,7 +5,7 @@ using System;
 
 namespace roguelike.core.utils.gamedata {
     [System.Serializable]
-    public class GameData {
+    public class GameData : IComparable<GameData> {
         public string Name;
         public int Day;
         public PlayerData PlayerData;
@@ -30,6 +30,11 @@ namespace roguelike.core.utils.gamedata {
             get {
                 return new GameData("", 0, new PlayerData(30, new Stat(30), new Stat(2.5f), new Stat(0), new Stat(0), new Stat(0), new Stat(0), new Stat(0), new item.InventoryData()), DateTime.Now);
             }
+        }
+
+        public int CompareTo(GameData other) {
+            if (SaveTime > other.SaveTime) return -1;
+            else return 1;
         }
     }
 }
