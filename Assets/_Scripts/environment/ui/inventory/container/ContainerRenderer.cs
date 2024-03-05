@@ -129,9 +129,5 @@ namespace roguelike.rendering.ui {
         // MISC METHODS
 
         protected abstract void SyncVisualToInternalSingle(ItemSlot clickedSlot); // Updates Internal inventory to be like visual
-
-        protected void TranslateHeader(Label label) {
-            label.text = TranslationManager.getTranslation(label.text);
-        }
     }
 }

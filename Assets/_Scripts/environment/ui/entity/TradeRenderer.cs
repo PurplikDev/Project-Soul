@@ -36,11 +36,11 @@ namespace roguelike.rendering.ui
 
             root.Q<Button>("DealButton").clicked += Deal;
 
-            TranslateHeader(root.Q<Label>("TraderInventoryHeader"));
-            TranslateHeader(root.Q<Label>("InventoryHeader"));
-            TranslateHeader(root.Q<Label>("TraderValueHeader"));
-            TranslateHeader(root.Q<Label>("PlayerValueHeader"));
-            TranslateHeader(root.Q<Label>("DealButtonHeader"));
+            TranslationManager.TranslateHeader(root.Q<Label>("TraderInventoryHeader"));
+            TranslationManager.TranslateHeader(root.Q<Label>("InventoryHeader"));
+            TranslationManager.TranslateHeader(root.Q<Label>("TraderValueHeader"));
+            TranslationManager.TranslateHeader(root.Q<Label>("PlayerValueHeader"));
+            TranslationManager.TranslateHeader(root.Q<Label>("DealButtonHeader"));
 
             playerInventorySlots = itemSlots.ToList();
 

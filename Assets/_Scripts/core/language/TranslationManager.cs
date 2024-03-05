@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public static class TranslationManager {
 
@@ -31,6 +32,10 @@ public static class TranslationManager {
         }
 
         language = JsonConvert.DeserializeObject<Dictionary<string, string>>(textAsset.text.ToString());
+    }
+
+    public static void TranslateHeader(Label label) {
+        label.text = getTranslation(label.text);
     }
 
     public enum Language {

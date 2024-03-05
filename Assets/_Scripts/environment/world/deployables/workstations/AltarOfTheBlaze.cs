@@ -14,5 +14,10 @@ namespace roguelike.environment.world.deployable.workstation {
         public override DeployableRenderer GetRenderer(Player interactor) {
             return new AltarOfTheBlazeRenderer(interactor.Inventory, this, StationUIHolder.GetComponent<UIDocument>());
         }
+
+        public void SaveGame() {
+            GameManager.SaveGame();
+            ActivationParticles.Play();
+        }
     }
 }

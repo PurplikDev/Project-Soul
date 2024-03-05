@@ -104,6 +104,10 @@ namespace roguelike.system.manager {
 
             scene.allowSceneActivation = true;
         }
+
+        public void GoToMainMenu() {
+            LoadGame(0, GameState.MAINMENU);
+        }
     }
 
     public enum GameState {

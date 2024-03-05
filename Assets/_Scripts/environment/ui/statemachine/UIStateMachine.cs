@@ -2,7 +2,6 @@ using roguelike.core.statemachine;
 using roguelike.environment.entity.npc;
 using roguelike.environment.entity.player;
 using roguelike.environment.world.deployable;
-using roguelike.system.manager;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static roguelike.environment.ui.statemachine.UIStateMachine;
@@ -19,6 +18,8 @@ namespace roguelike.environment.ui.statemachine {
         protected override void Start() {
             var player = GetComponent<Player>();
 
+            Debug.Log("fddfdfs");
+            
             states.Add(UIStates.NONE, new UINoneState(this));
             states.Add(UIStates.INVENTORY, new UIInventoryState(this, player.InventoryScreen));
             states.Add(UIStates.PAUSE, new UIPauseState(this, player.PauseScreen));
@@ -87,8 +88,18 @@ namespace roguelike.environment.ui.statemachine {
             _isInUI = false;
         }
 
+        public void ForceNone() {
+            TransitionToState(UIStates.NONE);
+            _isInUI = false;
+        }
+
         protected override void Update() { 
             currentState.UpdateState();
+        }
+
+        private void OnDestroy() {
+            input.UIControls.Inventory.performed -= OnInventory;
+            input.UIControls.Pause.performed -= OnPause;
         }
 
         public enum UIStates {

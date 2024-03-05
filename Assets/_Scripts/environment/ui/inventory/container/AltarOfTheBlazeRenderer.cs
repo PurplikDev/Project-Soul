@@ -22,13 +22,13 @@ namespace roguelike.rendering {
             _sacrificeButton = root.Q<Button>("SacrificeButton");
             _scorchButton = root.Q<Button>("ScorchButton");
 
-            TranslateHeader(root.Q<Label>("AltarHeader"));
-            TranslateHeader(_sacrificeButton.Q<Label>("SacrificeButtonHeader"));
-            TranslateHeader(_scorchButton.Q<Label>("ScorchButtonHeader"));
+            TranslationManager.TranslateHeader(root.Q<Label>("AltarHeader"));
+            TranslationManager.TranslateHeader(_sacrificeButton.Q<Label>("SacrificeButtonHeader"));
+            TranslationManager.TranslateHeader(_scorchButton.Q<Label>("ScorchButtonHeader"));
 
             RegisterDeployableSlots();
 
-            _scorchButton.clicked += GameManager.SaveGame;
+            _scorchButton.clicked += _altar.SaveGame;
         }
 
         public override void ClickSlot(Vector2 position, ItemSlot originalSlot, bool isPrimary) {

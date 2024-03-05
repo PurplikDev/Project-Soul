@@ -21,10 +21,10 @@ namespace roguelike.rendering.ui {
             tooltipName = itemTooltip.Q<Label>("ItemTooltipName");
             tooltipDescription = itemTooltip.Q<Label>("ItemTooltipDescription");
 
-            TranslateHeader(root.Q<Label>("InventoryHeader"));
-            TranslateHeader(root.Q<Label>("CharacterHeader"));
-            TranslateHeader(root.Q<Label>("EquipmentHeader"));
-            TranslateHeader(root.Q<Label>("TrinketsHeader"));
+            TranslationManager.TranslateHeader(root.Q<Label>("InventoryHeader"));
+            TranslationManager.TranslateHeader(root.Q<Label>("CharacterHeader"));
+            TranslationManager.TranslateHeader(root.Q<Label>("EquipmentHeader"));
+            TranslationManager.TranslateHeader(root.Q<Label>("TrinketsHeader"));
 
             RegisterEquipmentSlots();
             RegisterTrinketSlots();

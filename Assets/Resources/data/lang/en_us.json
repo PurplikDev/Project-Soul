@@ -24,6 +24,8 @@
         "ui.create" : "Create",
         "ui.cancel" : "Cancel",
         "ui.day" : "Day",
+
+        "ui.resume" : "Resume",
         
         "ui.inventory" : "Inventory",
         "ui.character" : "Character",
@@ -36,5 +38,9 @@
         "ui.trader_inventory" : "Trader's Inventory",
         "ui.trader_value" : "Trader Offer Value:",
         "ui.player_value" : "Player Offer Value:",
-        "ui.deal" : "Deal"
+        "ui.deal" : "Deal",
+
+        "ui.altar_of_the_blaze" : "Altar of the Blaze",
+        "ui.sacrifice" : "Sacrifice",
+        "ui.scorch" : "Scorch"
 }

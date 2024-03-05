@@ -15,8 +15,8 @@ namespace roguelike.rendering.ui {
 
             _storageSlotsRoot = root.Q<VisualElement>("StorageSlotContainer");
 
-            TranslateHeader(root.Q<Label>("InventoryHeader"));
-            TranslateHeader(root.Q<Label>("StorageHeader"));            
+            TranslationManager.TranslateHeader(root.Q<Label>("InventoryHeader"));
+            TranslationManager.TranslateHeader(root.Q<Label>("StorageHeader"));            
 
             RegisterDeployableSlots();
         }
