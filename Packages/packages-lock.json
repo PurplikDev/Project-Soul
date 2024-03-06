@@ -189,6 +189,13 @@
         "com.unity.modules.imgui": "1.0.0"
       }
     },
+    "nl.jeffreylanters.tweens": {
+      "version": "git+https://github.com/jeffreylanters/unity-tweens",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "c33ccb9c3821b798a6a1f0d91ad939694018167a"
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,

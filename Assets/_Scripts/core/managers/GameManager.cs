@@ -90,24 +90,8 @@ namespace roguelike.system.manager {
             Player.Inventory = new Inventory(Player, gameData.PlayerData.PlayerInventory);
         }
 
-        public async void LoadGame(int sceneIndex, GameState gameState) {
-            var scene = SceneManager.LoadSceneAsync(sceneIndex);
-            CurrentGameState = gameState;
-            scene.allowSceneActivation = false;
-
-            LoadingManager.BeginLoading();
-
-            do {
-                await Task.Delay(1000);
-                LoadingManager.UpdateProgress(scene.progress);
-            } while (scene.progress < 0.9f);
-
-            scene.allowSceneActivation = true;
-            LoadingManager.FinishLoading();
-        }
-
         public void GoToMainMenu() {
-            LoadGame(0, GameState.MAINMENU);
+            LoadingManager.Instance.LoadScene(0, GameState.MAINMENU);
         }
     }
 

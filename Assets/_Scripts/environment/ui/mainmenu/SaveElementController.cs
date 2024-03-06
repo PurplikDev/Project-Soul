@@ -25,7 +25,7 @@ namespace roguelike.rendering.ui.mainmenu {
 
         public void OnClicked(PointerDownEvent evt) {
             GameManager.Instance.LoadSave(gameData);
-            GameManager.Instance.LoadGame(1, GameState.TOWN);
+            LoadingManager.Instance.LoadScene(1, GameState.TOWN);
         }
     }
 }
