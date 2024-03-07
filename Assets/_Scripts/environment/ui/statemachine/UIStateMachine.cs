@@ -17,8 +17,6 @@ namespace roguelike.environment.ui.statemachine {
 
         protected override void Start() {
             var player = GetComponent<Player>();
-
-            Debug.Log("fddfdfs");
             
             states.Add(UIStates.NONE, new UINoneState(this));
             states.Add(UIStates.INVENTORY, new UIInventoryState(this, player.InventoryScreen));

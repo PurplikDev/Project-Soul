@@ -8,6 +8,9 @@ using UnityEngine.UIElements;
 namespace roguelike.system.manager {
     public class LoadingManager : PersistentSingleton<LoadingManager> {
         private static VisualElement _root, _loadingHolder, _loadingProgressBar;
+        private static Label _tips;
+
+        public string[] _loadingScreenTips;
 
         protected override void Awake() {
             base.Awake();
@@ -15,6 +18,7 @@ namespace roguelike.system.manager {
             _root = GetComponent<UIDocument>().rootVisualElement;
             _loadingHolder = _root.Q<VisualElement>("LoadingScreenHolder");
             _loadingProgressBar = _root.Q<VisualElement>("ProgressBar");
+            _tips = _root.Q<Label>("LoadingScreenTips");
 
             _loadingHolder.style.opacity = 0f;
             _loadingHolder.style.visibility = Visibility.Hidden;
@@ -26,6 +30,7 @@ namespace roguelike.system.manager {
 
         internal async void AsyncLoadGame(int sceneIndex, GameState gameState) {
             var scene = SceneManager.LoadSceneAsync(sceneIndex);
+            scene.completed += GameManager.SpawnPlayer;
             GameManager.CurrentGameState = gameState;
             scene.allowSceneActivation = false;
 
@@ -42,6 +47,11 @@ namespace roguelike.system.manager {
         }
 
         internal void BeginLoading(int sceneIndex, GameState gameState) {
+
+            int random = Random.Range(0, _loadingScreenTips.Length);
+
+            _tips.text = $"Tip #{random + 1}: {_loadingScreenTips[random]}";
+
             _loadingHolder.style.opacity = 0f;
             _loadingProgressBar.style.width = 0f;
             _loadingHolder.style.visibility = Visibility.Visible;
@@ -56,14 +66,16 @@ namespace roguelike.system.manager {
                 }
             };
 
-            gameObject.AddTween(tween);
+            Instance.gameObject.AddTween(tween);
         }
 
         public void UpdateProgress(float progress) {
             _loadingProgressBar.style.width = new StyleLength(new Length(progress * 100, LengthUnit.Percent));
         }
 
-        public void FinishLoading() {
+        public async void FinishLoading() {
+            await Task.Delay(1000);
+
             var tween = new FloatTween {
                 from = 1f,
                 to = 0f,

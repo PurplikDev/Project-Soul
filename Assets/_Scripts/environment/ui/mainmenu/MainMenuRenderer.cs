@@ -109,7 +109,7 @@ namespace roguelike.rendering.ui.mainmenu {
         public void OnNewSaveCreateButton() {
             var newGameData = GameManager.CreateNewSave(_characterName.value);
             GameManager.Instance.LoadSave(newGameData);
-            LoadingManager.Instance.LoadScene(1, GameState.TOWN);
+            LoadingManager.Instance.LoadScene(2, GameState.TOWN);
         }
 
         public void OnCancelButton() {

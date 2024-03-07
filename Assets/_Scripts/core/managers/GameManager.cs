@@ -9,12 +9,10 @@ using roguelike.system.singleton;
 using System;
 using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace roguelike.system.manager {
-    public class GameManager : Singleton<GameManager> {
+    public class GameManager : PersistentSingleton<GameManager> {
 
         public static GameState CurrentGameState;
 
@@ -27,14 +25,11 @@ namespace roguelike.system.manager {
         public static PlayerInput Input { get { return Player.PlayerInput; } }
 
         public virtual void Start() {
-            if (CurrentGameState != GameState.MAINMENU) {
-                if (gameData == null) {
-                    Debug.LogError("No GameData present!");
-                    return;
-                }
-                GameObject player = Instantiate(PlayerObject, new Vector3(0, 1, 0), PlayerObject.transform.rotation);
-                GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>().Follow = player.transform;
-            }
+            Invoke(nameof(LoadGame), 0.05f);
+        }
+
+        public void LoadGame() {
+            LoadingManager.Instance.LoadScene(1, GameState.MAINMENU);
         }
 
         private void GenerateDebugSave() {
@@ -91,7 +86,19 @@ namespace roguelike.system.manager {
         }
 
         public void GoToMainMenu() {
-            LoadingManager.Instance.LoadScene(0, GameState.MAINMENU);
+            LoadingManager.Instance.LoadScene(1, GameState.MAINMENU);
+        }
+
+        internal static void SpawnPlayer(AsyncOperation _) {
+            if (CurrentGameState != GameState.MAINMENU) {
+                if (gameData == null) {
+                    Debug.LogError("No GameData present!");
+                    return;
+                }
+                GameObject player = Instantiate(PlayerObject, new Vector3(0, 1, 0), PlayerObject.transform.rotation);
+                player.transform.SetParent(null);
+                GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>().Follow = player.transform;
+            }
         }
     }
 
