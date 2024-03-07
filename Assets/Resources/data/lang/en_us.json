@@ -25,6 +25,7 @@
         "ui.cancel" : "Cancel",
         "ui.day" : "Day",
 
+        "ui.pause" : "Paused",
         "ui.resume" : "Resume",
         
         "ui.inventory" : "Inventory",

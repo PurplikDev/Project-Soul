@@ -97,7 +97,7 @@
 }
 
 .header {
-    color: rgb(255, 255, 255);
+    color: rgb(13, 43, 69);
     font-size: 40px;
     -unity-text-align: middle-center;
     -unity-font-style: bold;
