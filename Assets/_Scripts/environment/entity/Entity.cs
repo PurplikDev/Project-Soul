@@ -6,12 +6,12 @@ using UnityEngine;
 
 namespace roguelike.environment.entity {
     public abstract class Entity : MonoBehaviour {
-        [Header("Entity Stats")]
+        [Header("Entity Stats", order = 0)]
         public Stat MaxHealth = new Stat(30);
         public Stat Speed = new Stat(5);
         public Stat Defence = new Stat(0);
         [Space]
-        [Header("Class Stats")]
+        [Header("Class Stats", order = 1)]
         public Stat Templar = new Stat(0);
         public Stat Rogue = new Stat(0);
         public Stat Thaumaturge = new Stat(0);
@@ -25,8 +25,8 @@ namespace roguelike.environment.entity {
         public virtual Vector3 LookDirection { get; internal set; } = Vector3.forward;
 
         public Action DeathEvent;
-        [Space]
-        [Header("Entity Properties")]
+        [Space(order = 2)]
+        [Header("Entity Properties", order = 3)]
         public bool Immortal = false;
         public bool Invisible = false;
         public bool IsBlocking { get; internal set; } = false;

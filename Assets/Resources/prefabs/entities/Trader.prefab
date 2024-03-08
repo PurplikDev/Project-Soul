@@ -63,9 +63,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Trader
       objectReference: {fileID: 0}
+    - target: {fileID: 9135510976890487680, guid: 89a46b7549fa3a348bf4dec83ecfc5cb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2440987660473845415, guid: 89a46b7549fa3a348bf4dec83ecfc5cb, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 580878532760639184, guid: 89a46b7549fa3a348bf4dec83ecfc5cb, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 9135510976890487680, guid: 89a46b7549fa3a348bf4dec83ecfc5cb,

@@ -38,7 +38,9 @@ namespace roguelike.environment.entity.combat {
 
             var defenceTier = Target.GetDefenceTier();
 
-            return Mathf.RoundToInt(Damage * (DamageTier / defenceTier));
+            // todo: fix!!!!!!!!!!!!!!!!!!
+
+            return Damage;
         }
     }
 

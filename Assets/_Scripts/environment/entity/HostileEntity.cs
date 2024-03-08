@@ -6,11 +6,11 @@ using UnityEngine;
 namespace roguelike.environment.entity {
     public class HostileEntity : Entity {
         protected float entityWidth;
-        [Space]
+        [Space(order = 4)]
         public Stat AttackSpeed = new Stat(1.5f);
         public Stat AttackCooldown = new Stat(0.5f);
         public Stat AttackRange = new Stat(0.5f);
-        [Space]
+        [Space(order = 2)]
         public Transform EntityAim;
 
         protected override void Awake() {
