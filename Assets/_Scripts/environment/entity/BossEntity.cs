@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 namespace roguelike.environment.entity {
     public class BossEntity : HostileEntity {
         private UIDocument _bossHealthBar;
-        private VisualElement _root, _healthBar, _healthBarFill;
+        private VisualElement _root, _healthBar, _healthBarFill, _healthBarWhiteFill;
         private Label _healthText, _bossName, _bossDescription;
 
         [Header("Boss Information", order = -1)]
@@ -22,10 +22,14 @@ namespace roguelike.environment.entity {
 
             _healthBar = _root.Q<VisualElement>("BossHealthBar");
             _healthBarFill = _root.Q<VisualElement>("BossHealthBarFill");
+            _healthBarWhiteFill = _root.Q<VisualElement>("BossHealthBarWhiteFill");
 
             _healthText = _root.Q<Label>("BossHealthText");
             _bossName = _root.Q<Label>("BossName");
             _bossDescription = _root.Q<Label>("BossDescription");
+
+            _healthBarFill.style.width = new StyleLength(new Length(100, LengthUnit.Percent));
+            _healthBarWhiteFill.style.width = new StyleLength(new Length(100, LengthUnit.Percent));
 
             _healthText.text = $"{Health}/{MaxHealth.Value}";
             _bossName.text = BossName;
@@ -39,15 +43,15 @@ namespace roguelike.environment.entity {
         }
 
         public override void Damage(DamageSource source) {
+            Debug.Log(_healthBarFill.style.width);
             base.Damage(source);
             _healthText.text = $"{Health}/{MaxHealth.Value}";
-            _healthBarFill.style.width = new StyleLength(new Length((Health / MaxHealth.Value) * 100, LengthUnit.Percent));
+            _healthBarFill.style.width = new StyleLength(new Length(Health / MaxHealth.Value * 100, LengthUnit.Percent));
+            BarDamageEffect();
         }
 
         public void DebugHurt() {
-            DamageSource source = new DamageSource(25, DamageType.COMBAT, 2, this, this);
-            Debug.Log($"Damaging for: {source.CalculateDamage()}");
-            Damage(source);
+            Damage(new DamageSource(25, DamageType.COMBAT, 4, this, this));
         }
 
         // making another renderer class would have been a bit more clean, but i think in this case it's better to do it this way
@@ -80,6 +84,20 @@ namespace roguelike.environment.entity {
                     _bossDescription.style.opacity = value;
                 }
             };
+            gameObject.AddTween(tween);
+        }
+
+        private void BarDamageEffect() {
+            var tween = new FloatTween {
+                duration = 0.75f,
+                from = _healthBarWhiteFill.style.width.value.value,
+                to = _healthBarFill.style.width.value.value,
+                easeType = EaseType.ExpoInOut,
+                onUpdate = (_, value) => {
+                    _healthBarWhiteFill.style.width = new StyleLength(new Length(value, LengthUnit.Percent));
+                }
+            };
+
             gameObject.AddTween(tween);
         }
 
