@@ -3,6 +3,7 @@ using roguelike.core.utils.gamedata;
 using roguelike.system.manager;
 using System.Collections.Generic;
 using System.IO;
+using Tweens;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -38,14 +39,14 @@ namespace roguelike.rendering.ui.mainmenu {
             _newSaveCreateButton = _saveMenuRoot.Q<Button>("CreateSaveButton");
             _newSaveCancelButton = _saveCreationRoot.Q<Button>("CreateSaveCancelButton");
 
-            TranslateHeader(_playButton.Q<Label>());
-            TranslateHeader(_settingsButton.Q<Label>());
-            TranslateHeader(_quitButton.Q<Label>());
-            TranslateHeader(_root.Q<Label>("SavesHeader"));
-            TranslateHeader(_newSaveButton.Q<Label>());
-            TranslateHeader(_saveCreationRoot.Q<Label>("CreateSaveButtonHeader"));
-            TranslateHeader(_saveCreationRoot.Q<Label>("SaveCreationCharacterNameHeader"));
-            TranslateHeader(_saveCreationRoot.Q<Label>("CreateSaveCancelButtonHeader"));
+            TranslationManager.TranslateHeader(_playButton.Q<Label>());
+            TranslationManager.TranslateHeader(_settingsButton.Q<Label>());
+            TranslationManager.TranslateHeader(_quitButton.Q<Label>());
+            TranslationManager.TranslateHeader(_root.Q<Label>("SavesHeader"));
+            TranslationManager.TranslateHeader(_newSaveButton.Q<Label>());
+            TranslationManager.TranslateHeader(_saveCreationRoot.Q<Label>("CreateSaveButtonHeader"));
+            TranslationManager.TranslateHeader(_saveCreationRoot.Q<Label>("SaveCreationCharacterNameHeader"));
+            TranslationManager.TranslateHeader(_saveCreationRoot.Q<Label>("CreateSaveCancelButtonHeader"));
 
             _playButton.clicked += OnPlayButton;
             _settingsButton.clicked += OnSettingsButton;
@@ -83,11 +84,11 @@ namespace roguelike.rendering.ui.mainmenu {
 
         public void OnPlayButton() {
             if(_saveSelectionRoot.style.visibility != Visibility.Visible) {
-                _saveSelectionRoot.style.visibility = Visibility.Visible;
-                _saveCreationRoot.style.visibility = Visibility.Hidden;
+                TweenElementOpacity(_saveSelectionRoot, 1);
+                TweenElementOpacity(_saveCreationRoot, 0);
             } else {
-                _saveSelectionRoot.style.visibility = Visibility.Hidden;
-                _saveCreationRoot.style.visibility = Visibility.Hidden;
+                TweenElementOpacity(_saveSelectionRoot, 0);
+                TweenElementOpacity(_saveCreationRoot, 0);
             }
         }
 
@@ -101,8 +102,8 @@ namespace roguelike.rendering.ui.mainmenu {
 
         public void OnNewSaveButton() {
             if (_saveCreationRoot.style.visibility != Visibility.Visible) {
-                _saveSelectionRoot.style.visibility = Visibility.Hidden;
-                _saveCreationRoot.style.visibility = Visibility.Visible;
+                TweenElementOpacity(_saveSelectionRoot, 0);
+                TweenElementOpacity(_saveCreationRoot, 1);
             }
         }
 
@@ -113,12 +114,30 @@ namespace roguelike.rendering.ui.mainmenu {
         }
 
         public void OnCancelButton() {
-            _saveSelectionRoot.style.visibility = Visibility.Visible;
-            _saveCreationRoot.style.visibility = Visibility.Hidden;
+            TweenElementOpacity(_saveSelectionRoot, 1);
+            TweenElementOpacity(_saveCreationRoot, 0);
         }
 
-        protected void TranslateHeader(Label label) {
-            label.text = TranslationManager.getTranslation(label.text);
+        private void TweenElementOpacity(VisualElement element, float opacity) {
+            var tween = new FloatTween {
+                duration = 0.5f,
+                from = element.style.opacity.value,
+                to = opacity,
+                easeType = EaseType.ExpoInOut,
+                onStart = (_) => {
+                    element.style.visibility = Visibility.Visible;
+                },
+                onUpdate = (_, value) => {
+                    element.style.opacity = value;
+                },
+                onFinally = (_) => {
+                    if(opacity == 0) {
+                        element.style.visibility = Visibility.Hidden;
+                    }
+                }
+            };
+
+            gameObject.AddTween(tween);
         }
     }
 }
