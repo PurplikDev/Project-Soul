@@ -1,0 +1,43 @@
+.heart {
+    background-image: resource('sprites/ui/hud/heart10');
+    width: 96px;
+    height: 96px;
+    align-self: auto;
+    flex-grow: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.displayRoot {
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    top: 0;
+    left: 0;
+    padding-left: 2.5%;
+    padding-top: 2.5%;
+}
+
+.heart Label {
+    width: 50%;
+    height: 50%;
+    align-self: auto;
+    color: rgb(13, 43, 69);
+    -unity-text-outline-color: rgb(255, 212, 163);
+    -unity-text-outline-width: 2px;
+    font-size: 40px;
+    -unity-text-align: middle-center;
+    -unity-font-style: bold;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}

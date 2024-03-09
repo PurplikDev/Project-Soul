@@ -1,8 +1,8 @@
 using Newtonsoft.Json;
-using roguelike.core.eventsystem;
 using roguelike.core.item;
 using roguelike.environment.entity.combat;
 using roguelike.environment.entity.statsystem;
+using roguelike.environment.ui.hud;
 using roguelike.environment.ui.statemachine;
 using roguelike.system.input;
 using UnityEngine;
@@ -54,21 +54,20 @@ namespace roguelike.environment.entity.player {
             UIStateMachine = GetComponent<UIStateMachine>();
 
             PlayerInteractor.Player = this;
+
+            GetComponentInChildren<HealthBarRenderer>().SetTarget(this);
+
             base.Awake();
+
+            InvokeRepeating(nameof(DebugHurt), 5f, 2.5f);
         }
 
-        protected override void Start() {
-            Events.PlayerHeathUpdateEvent.Invoke(new PlayerHealthUpdateEvent(this));
-            base.Start();
+        public void DebugHurt() {
+            Damage(new DamageSource(2.5f, DamageType.COMBAT, 1, this, this));
         }
 
         public override void PrimaryAction() { ItemInMainHand?.ItemAction(this); }
         public override void SecondaryAction() { ItemInOffHand?.ItemAction(this); }
-
-        public override void Damage(DamageSource source) {
-            base.Damage(source);
-            Events.PlayerHeathUpdateEvent.Invoke(new PlayerHealthUpdateEvent(this));
-        }
 
         public void SetHealth(float amount) {
             Health = amount;

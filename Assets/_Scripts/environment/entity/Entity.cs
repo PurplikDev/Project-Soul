@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using roguelike.environment.entity.combat;
 using roguelike.environment.entity.statsystem;
+using roguelike.environment.ui.hud;
 using UnityEngine;
 
 namespace roguelike.environment.entity {
@@ -10,11 +11,16 @@ namespace roguelike.environment.entity {
         public Stat MaxHealth = new Stat(30);
         public Stat Speed = new Stat(5);
         public Stat Defence = new Stat(0);
-        [Space]
+        [Space(order = 1)]
         [Header("Class Stats", order = 1)]
         public Stat Templar = new Stat(0);
         public Stat Rogue = new Stat(0);
         public Stat Thaumaturge = new Stat(0);
+        [Space(order = 2)]
+        [Header("Entity Properties", order = 3)]
+        public bool Immortal = false;
+        public bool Invisible = false;
+
 
         public Dictionary<StatType, Stat> StatByType = new Dictionary<StatType, Stat>();
 
@@ -25,10 +31,9 @@ namespace roguelike.environment.entity {
         public virtual Vector3 LookDirection { get; internal set; } = Vector3.forward;
 
         public Action DeathEvent;
-        [Space(order = 2)]
-        [Header("Entity Properties", order = 3)]
-        public bool Immortal = false;
-        public bool Invisible = false;
+        public Action HealthUpdate;
+        public Action MaxHealthUpdate;
+
         public bool IsBlocking { get; internal set; } = false;
         public bool IsDead { get; internal set; } = false;
         public float Health { get; protected set; }
@@ -41,7 +46,7 @@ namespace roguelike.environment.entity {
             StatByType.Add(StatType.ROGUE, Rogue);
             StatByType.Add(StatType.THAUMATURGE, Thaumaturge);
 
-            Health = MaxHealth.Value;
+            DeathEvent += DeathRename;
         }
 
         protected virtual void Start() {
@@ -65,6 +70,7 @@ namespace roguelike.environment.entity {
             if(Health <= 0) {
                 DeathEvent.Invoke();
             }
+            HealthUpdate.Invoke();
         }
 
         private void CheckAndApplyStatusEffects() {
