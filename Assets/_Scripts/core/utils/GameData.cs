@@ -4,7 +4,7 @@ using roguelike.environment.entity.statsystem;
 using System;
 
 namespace roguelike.core.utils.gamedata {
-    [System.Serializable]
+    [Serializable]
     public class GameData : IComparable<GameData> {
         public string Name;
         public int Day;

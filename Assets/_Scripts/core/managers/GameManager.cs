@@ -24,6 +24,10 @@ namespace roguelike.system.manager {
         public static GameObject PlayerObject { get; private set; }
         public static PlayerInput Input { get { return Player.PlayerInput; } }
 
+        public static GameSettings GameSettings { get; private set; }
+
+        private static GameObject _playerPrefab { get { return Resources.Load<GameObject>("prefabs/entities/player"); } }
+
         public virtual void Start() {
             Invoke(nameof(LoadGame), 0.05f);
         }
@@ -50,6 +54,8 @@ namespace roguelike.system.manager {
 
             gameData = new GameData(gameData.Name, gameData.Day, Player);
 
+            Debug.Log(Player.Health);
+
             string output = JsonConvert.SerializeObject(gameData);
 
             Directory.CreateDirectory(Path.GetDirectoryName(GlobalStaticValues.SAVE_PATH + $"/{gameData.Name}.json"));
@@ -68,21 +74,22 @@ namespace roguelike.system.manager {
 
         public void LoadSave(GameData gameData) {
             GameManager.gameData = gameData;
+        }
 
-            PlayerObject = Resources.Load<GameObject>("prefabs/entities/player");
-            Player = PlayerObject.GetComponent<Player>();
+        private static void LoadDataToPlayer(Player player) {
+            player.SetHealth(gameData.PlayerData.Health);
 
-            Player.SetHealth(gameData.PlayerData.Health);
+            player.MaxHealth = gameData.PlayerData.MaxHealth;
+            player.Speed = gameData.PlayerData.Speed;
+            player.Defence = gameData.PlayerData.Defence;
+            player.Templar = gameData.PlayerData.Templar;
+            player.Rogue = gameData.PlayerData.Rogue;
+            player.Thaumaturge = gameData.PlayerData.Thaumaturge;
+            player.Corruption = gameData.PlayerData.Corruption;
 
-            Player.MaxHealth = gameData.PlayerData.MaxHealth;
-            Player.Speed = gameData.PlayerData.Speed;
-            Player.Defence = gameData.PlayerData.Defence;
-            Player.Templar = gameData.PlayerData.Templar;
-            Player.Rogue = gameData.PlayerData.Rogue;
-            Player.Thaumaturge = gameData.PlayerData.Thaumaturge;
-            Player.Corruption = gameData.PlayerData.Corruption;
+            player.Inventory = new Inventory(Player, gameData.PlayerData.PlayerInventory);
 
-            Player.Inventory = new Inventory(Player, gameData.PlayerData.PlayerInventory);
+            Player = player;
         }
 
         public void GoToMainMenu() {
@@ -95,9 +102,10 @@ namespace roguelike.system.manager {
                     Debug.LogError("No GameData present!");
                     return;
                 }
-                GameObject player = Instantiate(PlayerObject, new Vector3(0, 1, 0), PlayerObject.transform.rotation);
-                player.transform.SetParent(null);
-                GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>().Follow = player.transform;
+                PlayerObject = Instantiate(_playerPrefab, new Vector3(0, 1, 0), _playerPrefab.transform.rotation);
+                PlayerObject.transform.SetParent(null);
+                LoadDataToPlayer(PlayerObject.GetComponent<Player>());
+                GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>().Follow = PlayerObject.transform;
             }
         }
     }

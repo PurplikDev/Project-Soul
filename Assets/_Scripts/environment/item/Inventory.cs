@@ -58,8 +58,7 @@ namespace roguelike.core.item {
                         Entity.StatByType[statModifier.StatType].RemoveModifier(statModifier);
                     }
                 }
-
-                Events.PlayerHeathUpdateEvent.Invoke(new PlayerHealthUpdateEvent((Player)Entity));
+                Entity.MaxHealthUpdate.Invoke();
             }
         }
     }
