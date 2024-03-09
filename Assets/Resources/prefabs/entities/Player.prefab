@@ -515,7 +515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c57bc4bc831e34cdab208d2c2ffb0ecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealthBarStyle: 1
+  HealthBarStyle: 0
   HealthDisplayText: 1
   ShouldReveal: 0
 --- !u!114 &3802705390560278136

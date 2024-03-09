@@ -62,7 +62,7 @@ namespace roguelike.environment.ui.hud {
         private void Start() {
             UpdateHealthDisplay();
 
-            if(ShouldReveal) {
+            if (ShouldReveal) {
                 switch (HealthBarStyle) {
                     case HealthBarStyle.CLASSIC:
                         // RevealHearts(); NOT IMPLEMENTED YET
@@ -206,6 +206,8 @@ namespace roguelike.environment.ui.hud {
             if(value < 10 && value > 0 && showText) {
                 _heartText.text = value.ToString();
                 _heartText.style.visibility = Visibility.Visible;
+            } else {
+                _heartText.style.visibility = Visibility.Hidden;
             }
         }
 

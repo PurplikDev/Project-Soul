@@ -58,12 +58,6 @@ namespace roguelike.environment.entity.player {
             GetComponentInChildren<HealthBarRenderer>().SetTarget(this);
 
             base.Awake();
-
-            InvokeRepeating(nameof(DebugHurt), 5f, 2.5f);
-        }
-
-        public void DebugHurt() {
-            Damage(new DamageSource(2.5f, DamageType.COMBAT, 1, this, this));
         }
 
         public override void PrimaryAction() { ItemInMainHand?.ItemAction(this); }
