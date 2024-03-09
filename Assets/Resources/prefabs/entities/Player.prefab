@@ -516,7 +516,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HealthBarStyle: 1
-  HealthDisplayText: 0
+  HealthDisplayText: 1
   ShouldReveal: 0
 --- !u!114 &3802705390560278136
 MonoBehaviour:

@@ -1,5 +1,70 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5816466611265667182
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5061031842560215391}
+  - component: {fileID: 5193246374071510627}
+  - component: {fileID: 7312701088518236244}
+  m_Layer: 8
+  m_Name: HealthDisplay
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5061031842560215391
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5816466611265667182}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6811281171197306542}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5193246374071510627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5816466611265667182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c57bc4bc831e34cdab208d2c2ffb0ecc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthBarStyle: 1
+  HealthDisplayText: 1
+  ShouldReveal: 1
+--- !u!114 &7312701088518236244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5816466611265667182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: b444bfdf113184baab5c506106244038, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: d3cbf148e5d8a674cbd66c2ddcf1e500,
+    type: 3}
+  m_SortingOrder: 0
 --- !u!1001 &7307566525462072030
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10,13 +75,28 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4318733422776708208, guid: dc1fe72712bc4cf4a9710c1124307252,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4318733422776708208, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4318733422776708208, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4318733422776708208, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -3.35
       objectReference: {fileID: 0}
     - target: {fileID: 4318733422776708208, guid: dc1fe72712bc4cf4a9710c1124307252,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4318733422776708208, guid: dc1fe72712bc4cf4a9710c1124307252,
         type: 3}
@@ -58,6 +138,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4318733422776708208, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7368721368942156920, guid: dc1fe72712bc4cf4a9710c1124307252,
         type: 3}
       propertyPath: m_Name
@@ -66,16 +151,16 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 9159898711395760817, guid: dc1fe72712bc4cf4a9710c1124307252, type: 3}
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4318733422776708208, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5061031842560215391}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7368721368942156920, guid: dc1fe72712bc4cf4a9710c1124307252,
         type: 3}
       insertIndex: 3
       addedObject: {fileID: 7798326749682616454}
-    - targetCorrespondingSourceObject: {fileID: 7368721368942156920, guid: dc1fe72712bc4cf4a9710c1124307252,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4444698624650323959}
   m_SourcePrefab: {fileID: 100100000, guid: dc1fe72712bc4cf4a9710c1124307252, type: 3}
 --- !u!1 &228350984010815142 stripped
 GameObject:
@@ -118,23 +203,12 @@ MonoBehaviour:
   EntityAim: {fileID: 8737180323261500797}
   BossName: Braaaah
   BossDescription: The bruhing
---- !u!114 &4444698624650323959
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 228350984010815142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PanelSettings: {fileID: 11400000, guid: b444bfdf113184baab5c506106244038, type: 2}
-  m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: d3cbf148e5d8a674cbd66c2ddcf1e500,
+--- !u!4 &6811281171197306542 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4318733422776708208, guid: dc1fe72712bc4cf4a9710c1124307252,
     type: 3}
-  m_SortingOrder: 0
+  m_PrefabInstance: {fileID: 7307566525462072030}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8737180323261500797 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2029155580072626083, guid: dc1fe72712bc4cf4a9710c1124307252,

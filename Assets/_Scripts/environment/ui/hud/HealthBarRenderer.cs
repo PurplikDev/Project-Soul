@@ -51,10 +51,28 @@ namespace roguelike.environment.ui.hud {
             _barHealthDisplay = _barDisplayHolder.Q<Label>("HealthBarText");
 
             GameSettings.GameSettingsChanged += DisplaySettingsUpdated;
+
+            if (ShouldReveal) {
+                _heartDisplayHolder.style.opacity = 0;
+                _barHealthDisplay.style.opacity = 0;
+                _barDisplayHolder.style.width = 0;
+            }
         }
 
         private void Start() {
             UpdateHealthDisplay();
+
+            if(ShouldReveal) {
+                switch (HealthBarStyle) {
+                    case HealthBarStyle.CLASSIC:
+                        // RevealHearts(); NOT IMPLEMENTED YET
+                        break;
+                    case HealthBarStyle.BAR:
+                        RevealBar();
+                        break;
+                    default: Debug.LogError("No valid HealthBarStyle!"); break;
+                }
+            }
         }
 
         private void DisplaySettingsUpdated(GameSettings settings) {
@@ -122,6 +140,7 @@ namespace roguelike.environment.ui.hud {
             }
             
             _barFill.style.width = new StyleLength(new Length(Target.Health / Target.MaxHealth.Value * 100, LengthUnit.Percent));
+
             BarDamageEffect();
         }
 
@@ -129,10 +148,10 @@ namespace roguelike.environment.ui.hud {
             var tween = new FloatTween {
                 duration = 2,
                 from = 0,
-                to = 80,
+                to = 100,
                 easeType = EaseType.ExpoInOut,
                 onUpdate = (_, value) => {
-                    _barFill.style.width = new StyleLength(new Length(value, LengthUnit.Percent));
+                    _barDisplayHolder.style.width = new StyleLength(new Length(value, LengthUnit.Percent));
                 },
                 onFinally = (_) => {
                     RevealText();
@@ -165,18 +184,6 @@ namespace roguelike.environment.ui.hud {
                 }
             };
 
-            gameObject.AddTween(tween);
-        }
-
-        private void HideHealthBar() {
-            var tween = new FloatTween {
-                duration = 0.25f,
-                from = 1,
-                to = 0,
-                onUpdate = (_, value) => {
-                    _barDisplayHolder.style.opacity = value;
-                }
-            };
             gameObject.AddTween(tween);
         }
     }

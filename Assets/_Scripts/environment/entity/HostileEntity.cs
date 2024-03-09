@@ -16,6 +16,7 @@ namespace roguelike.environment.entity {
         protected override void Awake() {
             entityWidth = GetComponent<CharacterController>().radius;
             base.Awake();
+            Health = MaxHealth.Value;
         }
 
         protected void Update() {
