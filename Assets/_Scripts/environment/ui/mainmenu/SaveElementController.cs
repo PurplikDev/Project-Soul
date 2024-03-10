@@ -9,11 +9,14 @@ namespace roguelike.rendering.ui.mainmenu {
 
         GameData gameData;
 
-        public void SetupElement(VisualElement root) {
+        MainMenuRenderer mainMenuRenderer;
+
+        public void SetupElement(VisualElement root, MainMenuRenderer renderer) {
             saveName = root.Q<Label>("SaveNameHeader");
             dayCount = root.Q<Label>("SaveDayHeader");
             dateDisplay = root.Q<Label>("SaveDateHeader");
             root.RegisterCallback<PointerDownEvent>(OnClicked);
+            mainMenuRenderer = renderer;
         }
 
         public void FillData(GameData gameData) {
@@ -24,6 +27,7 @@ namespace roguelike.rendering.ui.mainmenu {
         }
 
         public void OnClicked(PointerDownEvent evt) {
+            mainMenuRenderer.StopMusic();
             GameManager.Instance.LoadSave(gameData);
             LoadingManager.Instance.LoadScene(2, GameState.TOWN);
         }

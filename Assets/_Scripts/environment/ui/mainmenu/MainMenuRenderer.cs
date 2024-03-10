@@ -18,6 +18,8 @@ namespace roguelike.rendering.ui.mainmenu {
 
         private VisualTreeAsset _saveFileElement;
 
+        public AudioSource MainMenuMusicSource;
+
         private void Awake() {
             document = GetComponent<UIDocument>();
             _saveFileElement = Resources.Load<VisualTreeAsset>("ui/uidocuments/templates/SaveElement");
@@ -76,7 +78,7 @@ namespace roguelike.rendering.ui.mainmenu {
                 var newSaveElement = _saveFileElement.Instantiate();
                 var newSaveElementController = new SaveElementController();
                 newSaveElement.userData = newSaveElementController;
-                newSaveElementController.SetupElement(newSaveElement);
+                newSaveElementController.SetupElement(newSaveElement, this);
                 newSaveElementController.FillData(save);
                 _saveFileList.Add(newSaveElement);
             }
@@ -108,6 +110,9 @@ namespace roguelike.rendering.ui.mainmenu {
         }
 
         public void OnNewSaveCreateButton() {
+
+            StopMusic();
+
             var newGameData = GameManager.CreateNewSave(_characterName.value);
             GameManager.Instance.LoadSave(newGameData);
             LoadingManager.Instance.LoadScene(2, GameState.TOWN);
@@ -134,6 +139,19 @@ namespace roguelike.rendering.ui.mainmenu {
                     if(opacity == 0) {
                         element.style.visibility = Visibility.Hidden;
                     }
+                }
+            };
+
+            gameObject.AddTween(tween);
+        }
+
+        public void StopMusic() {
+            var tween = new FloatTween {
+                duration = 1,
+                from = MainMenuMusicSource.volume,
+                to = 0,
+                onUpdate = (_, value) => {
+                    MainMenuMusicSource.volume = value;
                 }
             };
 
