@@ -534,7 +534,7 @@ MonoBehaviour:
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 645aa7f618c5d4183ac654a14b797b72,
     type: 3}
-  m_SortingOrder: -1
+  m_SortingOrder: -10
 --- !u!1 &4791135019721556551
 GameObject:
   m_ObjectHideFlags: 0

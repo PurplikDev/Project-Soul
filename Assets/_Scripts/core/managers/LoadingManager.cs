@@ -47,15 +47,15 @@ namespace roguelike.system.manager {
 
             switch (gameState) {
                 case GameState.MAINMENU:
-                    DiscordManager.Instance.ChangeActivity("Picking a save...", "In Main Menu");
+                    DiscordManager.Instance?.ChangeActivity("Picking a save...", "In Main Menu");
                     break;
 
                 case GameState.TOWN:
-                    DiscordManager.Instance.ChangeActivity("Gearing up...", "Pargenyl - Town");
+                    DiscordManager.Instance?.ChangeActivity("Gearing up...", "Pargenyl - Town");
                     break;
 
                 case GameState.DUNGEON:
-                    DiscordManager.Instance.ChangeActivity("Floor X", "Surviving the Dungeon");
+                    DiscordManager.Instance?.ChangeActivity("Floor X", "Surviving the Dungeon");
                     break;
             }
 

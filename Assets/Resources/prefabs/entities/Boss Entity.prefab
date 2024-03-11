@@ -64,7 +64,7 @@ MonoBehaviour:
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: d3cbf148e5d8a674cbd66c2ddcf1e500,
     type: 3}
-  m_SortingOrder: 0
+  m_SortingOrder: -10
 --- !u!1001 &7307566525462072030
 PrefabInstance:
   m_ObjectHideFlags: 0

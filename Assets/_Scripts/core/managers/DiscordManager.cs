@@ -1,5 +1,4 @@
 using roguelike.system.singleton;
-using UnityEngine;
 
 namespace roguelike.system.manager {
     public class DiscordManager : PersistentSingleton<DiscordManager> {
@@ -18,7 +17,7 @@ namespace roguelike.system.manager {
         }
 
         public void ChangeActivity(string state, string details) {
-            var activityManager = discord.GetActivityManager();
+            var activityManager = discord?.GetActivityManager();
             var activity = new Discord.Activity {
                 State = state,
                 Details = details,
@@ -29,7 +28,7 @@ namespace roguelike.system.manager {
 
         };
 
-            activityManager.UpdateActivity(activity, (res) => {});
+            activityManager?.UpdateActivity(activity, (res) => {});
         }
 
         private void Update() {
