@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5647346773911023893}
-  m_Layer: 0
+  - component: {fileID: 6834512046786121138}
+  m_Layer: 10
   m_Name: dungeon_floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,6 +33,28 @@ Transform:
   - {fileID: 2649811819243230706}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &6834512046786121138
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4484303232703111918}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2432090755550338912, guid: 1f913ed8eed055f4989d58da7f9c8daa, type: 3}
 --- !u!1001 &2543615362535174681
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -94,6 +117,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: dungeon_floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1f913ed8eed055f4989d58da7f9c8daa,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 1f913ed8eed055f4989d58da7f9c8daa,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
