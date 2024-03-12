@@ -31,6 +31,8 @@ namespace roguelike.environment.entity.statemachine {
         public bool LooksForPlayer;
         /// <summary> Does the Entity need to have a line of sight in order to follow the player? </summary>
         public bool NeedToSeePlayer;
+        /// <summary> Does the Entity wander around instead of standing still while idle? </summary>
+        public bool DoesWander;
         [Space]
         [Header("Behavior Properties")]
         public float Range;

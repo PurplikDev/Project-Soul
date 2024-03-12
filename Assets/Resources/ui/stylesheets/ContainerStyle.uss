@@ -82,3 +82,10 @@
 .craftingSlot {
     background-image: resource('sprites/ui/crafting_slot');
 }
+
+.dungeonOffer {
+}
+
+.dungeonOffer:hover {
+    -unity-background-image-tint-color: rgb(188, 188, 188);
+}

@@ -54,8 +54,6 @@ namespace roguelike.system.manager {
 
             gameData = new GameData(gameData.Name, gameData.Day, Player);
 
-            Debug.Log(Player.Health);
-
             string output = JsonConvert.SerializeObject(gameData);
 
             Directory.CreateDirectory(Path.GetDirectoryName(GlobalStaticValues.SAVE_PATH + $"/{gameData.Name}.json"));

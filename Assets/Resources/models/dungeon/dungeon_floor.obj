@@ -2,10 +2,10 @@
 mtllib dungeon_floor.mtl
 
 o floor
-v 2.875 0 3
-v 2.875 0 -3
-v -3.125 0 -3
-v -3.125 0 3
+v 3 0 3
+v 3 0 -3
+v -3 0 -3
+v -3 0 3
 vt 0.75 0.625
 vt 0.75 1
 vt 0.375 1

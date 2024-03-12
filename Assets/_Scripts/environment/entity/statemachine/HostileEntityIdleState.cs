@@ -14,8 +14,10 @@ namespace roguelike.environment.entity.statemachine {
         public override void ExitState() { }
 
         public override EntityStates GetNextState() {
-            if(stateMachine.isTargetting) {
+            if (stateMachine.isTargetting) {
                 return EntityStates.CHASE;
+            } else if (stateMachine.DoesWander) {
+                return EntityStates.SEARCH;
             } else {
                 return EntityStates.IDLE;
             }
