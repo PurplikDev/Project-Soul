@@ -22,6 +22,7 @@ namespace roguelike.environment.ui.statemachine {
             // _root.Q<Button>("SettingsButton").clicked += SettingsClicked;
             _root.Q<Button>("QuitButton").clicked += ExitToMenu;
 
+            TranslationManager.TranslateHeader(_root.Q<Label>("PauseHeader"));
             TranslationManager.TranslateHeader(_root.Q<Label>("ResumeButtonHeader"));
             TranslationManager.TranslateHeader(_root.Q<Label>("SettingsButtonHeader"));
             TranslationManager.TranslateHeader(_root.Q<Label>("QuitButtonHeader"));

@@ -14,6 +14,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 68f0ab05314890c488b201b9aabd8497,
         type: 3}
+    - target: {fileID: 723451890515026800, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 269ca06fae753bb4f9da5f29ceb86df3, type: 2}
     - target: {fileID: 2029155580072626083, guid: dc1fe72712bc4cf4a9710c1124307252,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -78,6 +83,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4468917740967889186, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: DoesWander
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4468917740967889186, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: DoesHaveBrain
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6355783003351811161, guid: dc1fe72712bc4cf4a9710c1124307252,
         type: 3}
