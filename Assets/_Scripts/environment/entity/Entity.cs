@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using roguelike.environment.entity.combat;
 using roguelike.environment.entity.statsystem;
-using roguelike.environment.ui.hud;
 using UnityEngine;
 
 namespace roguelike.environment.entity {

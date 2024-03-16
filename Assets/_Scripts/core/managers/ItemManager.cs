@@ -44,28 +44,49 @@ namespace roguelike.core.item {
         private void RegisterItems() {
             Register("air", 0);
             Register("coins", 32, 1);
-            Register("test", 32, 2);
-            Register("test2", 16);
-            Register("test3", 32);
-            Register("test4", 6, 5);
 
-            RegisterTrophy("test_trophy", 64);
+            // Light Weapon Registry
+
+            RegisterLightSword("crooked_blade", 32, 12, 0.5f, 0.75f, 1, 
+                new StatModifier(1.125f, StatModifierType.FLAT, StatType.SPEED),
+                new StatModifier(2f, StatModifierType.FLAT, StatType.TEMPLAR),
+                new StatModifier(1.5f, StatModifierType.FLAT, StatType.ROGUE));
+
+
+
+            // Trinket Registry
 
             RegisterTrinket("amulet_of_beautiful_eyes", 526,
                 new StatModifier(1.5f, StatModifierType.ADDITIONAL, StatType.HEALTH));
 
-            RegisterLightSword("test_light_sword", 64, 15f, 0.25f, 0.5f, 1);
-            RegisterHeavySword("test_heavy_sword", 128, 50f, 0.75f, 1.5f, 2);
-            RegisterShield("test_shield", 64, -0.75f, 1, 3);
 
-            RegisterEquipment("boots_of_the_traveler", 256, EquipmentType.BOOTS,
+
+            // Armor Registry
+
+            // Helmets
+
+            RegisterEquipment("hood_of_the_traveler", 64, EquipmentType.HELMET,
+                new StatModifier(1.25f, StatModifierType.ADDITIONAL, StatType.SPEED),
+                new StatModifier(0.75f, StatModifierType.FLAT, StatType.DEFENCE));
+
+            // Chestplates
+
+            RegisterEquipment("tunic_of_the_traveler", 128, EquipmentType.CHESTPLATE,
+                new StatModifier(1.25f, StatModifierType.FLAT, StatType.HEALTH),
                 new StatModifier(1.5f, StatModifierType.ADDITIONAL, StatType.SPEED),
                 new StatModifier(0.75f, StatModifierType.FLAT, StatType.DEFENCE));
 
-            RegisterEquipment("test_equipment", 16, EquipmentType.HELMET,
+            // Leggings
+
+            RegisterEquipment("leggings_of_the_traveler", 96, EquipmentType.PANTS,
+                new StatModifier(1.25f, StatModifierType.FLAT, StatType.HEALTH),
+                new StatModifier(1.5f, StatModifierType.ADDITIONAL, StatType.SPEED),
                 new StatModifier(0.75f, StatModifierType.FLAT, StatType.DEFENCE));
 
-            RegisterEquipment("test_chestplace", 32, EquipmentType.CHESTPLATE,
+            // Boots
+
+            RegisterEquipment("boots_of_the_traveler", 256, EquipmentType.BOOTS,
+                new StatModifier(1.75f, StatModifierType.ADDITIONAL, StatType.SPEED),
                 new StatModifier(0.75f, StatModifierType.FLAT, StatType.DEFENCE));
         }
 

@@ -84,10 +84,9 @@ namespace roguelike.system.manager {
             player.Rogue = gameData.PlayerData.Rogue;
             player.Thaumaturge = gameData.PlayerData.Thaumaturge;
             player.Corruption = gameData.PlayerData.Corruption;
-
-            player.Inventory = new Inventory(Player, gameData.PlayerData.PlayerInventory);
-
             Player = player;
+
+            Player.Inventory = new Inventory(Player, gameData.PlayerData.PlayerInventory);
         }
 
         public void GoToMainMenu() {
@@ -103,6 +102,7 @@ namespace roguelike.system.manager {
                 PlayerObject = Instantiate(_playerPrefab, new Vector3(0, 1, 0), _playerPrefab.transform.rotation);
                 PlayerObject.transform.SetParent(null);
                 LoadDataToPlayer(PlayerObject.GetComponent<Player>());
+                Player.Inventory.Entity = Player;
                 GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>().Follow = PlayerObject.transform;
             }
         }

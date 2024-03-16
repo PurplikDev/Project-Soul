@@ -1,11 +1,11 @@
 {
   'Result': {
-    'ItemID': 'test_shield',
+    'ItemID': 'air',
     'ItemAmount': 1
   },
   'Ingredients': [
-    { 'ItemID': 'air', 'ItemAmount': 1 }, { 'ItemID': 'test2', 'ItemAmount': 1 }, { 'ItemID': 'air', 'ItemAmount': 1 },
-    { 'ItemID': 'air', 'ItemAmount': 1 }, { 'ItemID': 'test', 'ItemAmount': 1 }, { 'ItemID': 'air', 'ItemAmount': 1 },
-    { 'ItemID': 'air', 'ItemAmount': 1 }, { 'ItemID': 'test2', 'ItemAmount': 1 }, { 'ItemID': 'air', 'ItemAmount': 1 }
+    { 'ItemID': 'air', 'ItemAmount': 1 }, { 'ItemID': 'air', 'ItemAmount': 1 }, { 'ItemID': 'air', 'ItemAmount': 1 },
+    { 'ItemID': 'air', 'ItemAmount': 1 }, { 'ItemID': 'air', 'ItemAmount': 1 }, { 'ItemID': 'air', 'ItemAmount': 1 },
+    { 'ItemID': 'air', 'ItemAmount': 1 }, { 'ItemID': 'air', 'ItemAmount': 1 }, { 'ItemID': 'air', 'ItemAmount': 1 }
   ]
 }

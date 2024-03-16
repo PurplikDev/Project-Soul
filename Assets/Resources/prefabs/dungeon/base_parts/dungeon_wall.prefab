@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8582400891600574609}
   - component: {fileID: 3663179546300381479}
-  m_Layer: 0
+  - component: {fileID: 2240045503815506822}
+  m_Layer: 10
   m_Name: dungeon_wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,6 +55,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 7, y: 15, z: 1}
   m_Center: {x: 0, y: 2.5, z: 0}
+--- !u!114 &2240045503815506822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5575541723800717340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 492587a8574223b44a41f0f4a6fedc9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3019301944490000740
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -116,6 +129,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: dungeon_wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 51fcbc890fe8a1d47af1803d70c09558,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 51fcbc890fe8a1d47af1803d70c09558,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

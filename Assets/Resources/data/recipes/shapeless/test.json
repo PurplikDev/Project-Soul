@@ -1,16 +1,12 @@
 {
   'Result': {
-    'ItemID': 'test',
-    'ItemAmount': 4
+    'ItemID': 'air',
+    'ItemAmount': 1
   },
   'Ingredients': [
     {
-      'ItemID': 'test2',
+      'ItemID': 'air',
       'ItemAmount': 1
-    },
-    {
-      'ItemID': 'test4',
-      'ItemAmount': 2
     }
   ]
 }

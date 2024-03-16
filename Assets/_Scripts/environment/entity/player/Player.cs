@@ -60,6 +60,15 @@ namespace roguelike.environment.entity.player {
             base.Awake();
         }
 
+        protected override void Start() {
+            base.Start();
+            Inventory.Entity = this;
+        }
+
+        private void Update() {
+            Debug.Log(Speed.Value);
+        }
+
         public override void PrimaryAction() { ItemInMainHand?.ItemAction(this); }
         public override void SecondaryAction() { ItemInOffHand?.ItemAction(this); }
 
