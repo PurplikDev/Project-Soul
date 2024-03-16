@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="MissionOffer" class="dungeonOffer" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: 321px; height: 444px; background-image: resource(&apos;sprites/ui/parchment&apos;); -unity-background-scale-mode: scale-and-crop; padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%; justify-content: space-around;">
+        <ui:Label tabindex="-1" text="Hard Offer :3" display-tooltip-when-elided="true" name="MissionHeader" style="-unity-text-align: middle-center; height: 10%; color: rgb(33, 60, 86); font-size: 30px; -unity-font-style: bold; width: 100%; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+        <ui:VisualElement name="MissionIcon" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); height: 65%; -unity-background-scale-mode: scale-to-fit; background-image: resource(&apos;sprites/items/test&apos;);" />
+        <ui:Label tabindex="-1" text="Deez nuts" display-tooltip-when-elided="true" name="DifficultyHeader" style="color: rgb(141, 105, 122); font-size: 25px; -unity-text-align: upper-center; white-space: normal; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 2.5%; padding-right: 2.5%; padding-top: 2.5%; padding-bottom: 2.5%; width: 100%; height: auto; -unity-font-style: bold;" />
+    </ui:VisualElement>
+</ui:UXML>

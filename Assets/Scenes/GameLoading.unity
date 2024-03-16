@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -170,7 +170,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &570543505
 Transform:
   m_ObjectHideFlags: 0
@@ -247,8 +247,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _loadingScreenTips:
   - Try keeping your health above 0, while damaging your enemies.
-  - :3
-  - Fuck catEat!!!! Phycat ftw!!!!!!!!!!!!!!
+  - Monsters will never spawn outside of room.
+  - When trading try to keep your value as close to the trader's value as possible.
+    They don't mind the extra coin from you.
 --- !u!4 &626539375
 Transform:
   m_ObjectHideFlags: 0
@@ -401,6 +402,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &841516196
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 841516198}
+  - component: {fileID: 841516197}
+  m_Layer: 0
+  m_Name: Dungeon Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &841516197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841516196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9482ee202e558444ea993644dc66d93d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Difficulty: 0
+--- !u!4 &841516198
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841516196}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.8348722, y: 3.7543764, z: 1.6985081}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &921942925
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,7 +458,7 @@ GameObject:
   - component: {fileID: 921942927}
   - component: {fileID: 921942926}
   m_Layer: 0
-  m_Name: RecipeManager
+  m_Name: Recipe Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -632,5 +678,6 @@ SceneRoots:
   - {fileID: 1407103450}
   - {fileID: 626539375}
   - {fileID: 570543505}
+  - {fileID: 841516198}
   - {fileID: 46476572}
   - {fileID: 749476362}

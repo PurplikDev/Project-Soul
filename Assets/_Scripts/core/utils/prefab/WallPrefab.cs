@@ -14,7 +14,7 @@ namespace roguelike.core.utils.prefab {
             _renderer = GetComponentInChildren<Renderer>();
             _defaultPosition = _renderer.transform.position;
         }
-
+        
         private void Update() {
             if (!_renderer.isVisible) { return; }
 
@@ -28,7 +28,7 @@ namespace roguelike.core.utils.prefab {
                     QueryTriggerInteraction.Ignore)) {
 
                 if (hit.transform == transform) {
-                    if (!_isHiding) {
+                    if (!_isHiding && hit.point.y > 5) {
                         _isHiding = true;
                         Hide(_defaultPosition.y - 10);
                     }

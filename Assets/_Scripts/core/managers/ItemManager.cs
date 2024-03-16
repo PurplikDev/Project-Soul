@@ -42,8 +42,14 @@ namespace roguelike.core.item {
         // i want to rewrite it, but that would take too much effort
 
         private void RegisterItems() {
+            
+            // Generic Item/Registry
+
             Register("air", 0);
-            Register("coins", 32, 1);
+            Register("coins", 1280, 1);
+            Register("magic_silk", 32);
+
+
 
             // Light Weapon Registry
 
@@ -67,27 +73,55 @@ namespace roguelike.core.item {
 
             RegisterEquipment("hood_of_the_traveler", 64, EquipmentType.HELMET,
                 new StatModifier(1.25f, StatModifierType.ADDITIONAL, StatType.SPEED),
-                new StatModifier(0.75f, StatModifierType.FLAT, StatType.DEFENCE));
+                new StatModifier(0.75f, StatModifierType.FLAT, StatType.DEFENCE),
+                new StatModifier(1f, StatModifierType.FLAT, StatType.ROGUE),
+                new StatModifier(1.75f, StatModifierType.FLAT, StatType.THAUMATURGE));
+
+            RegisterEquipment("paladin_helmet", 64, EquipmentType.HELMET,
+                new StatModifier(0.75f, StatModifierType.ADDITIONAL, StatType.SPEED),
+                new StatModifier(1.25f, StatModifierType.FLAT, StatType.DEFENCE),
+                new StatModifier(1f, StatModifierType.FLAT, StatType.TEMPLAR),
+                new StatModifier(1.75f, StatModifierType.FLAT, StatType.THAUMATURGE));
 
             // Chestplates
 
             RegisterEquipment("tunic_of_the_traveler", 128, EquipmentType.CHESTPLATE,
                 new StatModifier(1.25f, StatModifierType.FLAT, StatType.HEALTH),
                 new StatModifier(1.5f, StatModifierType.ADDITIONAL, StatType.SPEED),
-                new StatModifier(0.75f, StatModifierType.FLAT, StatType.DEFENCE));
+                new StatModifier(0.75f, StatModifierType.FLAT, StatType.DEFENCE),
+                new StatModifier(1f, StatModifierType.FLAT, StatType.ROGUE),
+                new StatModifier(1.75f, StatModifierType.FLAT, StatType.THAUMATURGE));
 
             // Leggings
 
             RegisterEquipment("leggings_of_the_traveler", 96, EquipmentType.PANTS,
                 new StatModifier(1.25f, StatModifierType.FLAT, StatType.HEALTH),
                 new StatModifier(1.5f, StatModifierType.ADDITIONAL, StatType.SPEED),
-                new StatModifier(0.75f, StatModifierType.FLAT, StatType.DEFENCE));
+                new StatModifier(0.75f, StatModifierType.FLAT, StatType.DEFENCE),
+                new StatModifier(1f, StatModifierType.FLAT, StatType.ROGUE),
+                new StatModifier(1.75f, StatModifierType.FLAT, StatType.THAUMATURGE));
 
             // Boots
 
             RegisterEquipment("boots_of_the_traveler", 256, EquipmentType.BOOTS,
                 new StatModifier(1.75f, StatModifierType.ADDITIONAL, StatType.SPEED),
-                new StatModifier(0.75f, StatModifierType.FLAT, StatType.DEFENCE));
+                new StatModifier(0.75f, StatModifierType.FLAT, StatType.DEFENCE),
+                new StatModifier(1f, StatModifierType.FLAT, StatType.ROGUE),
+                new StatModifier(1.75f, StatModifierType.FLAT, StatType.THAUMATURGE));
+
+
+
+            // Debug/Admin/Easter Egg Items
+
+            Register("missing_item", int.MaxValue);
+            RegisterLightSword("missing_light_sword", int.MaxValue, int.MaxValue, 0f, 0f, int.MaxValue, new StatModifier(10f, StatModifierType.FLAT, StatType.HEALTH), new StatModifier(10f, StatModifierType.FLAT, StatType.DEFENCE), new StatModifier(10f, StatModifierType.FLAT, StatType.SPEED), new StatModifier(10f, StatModifierType.FLAT, StatType.TEMPLAR), new StatModifier(10f, StatModifierType.FLAT, StatType.ROGUE), new StatModifier(10f, StatModifierType.FLAT, StatType.THAUMATURGE));
+            RegisterHeavySword("missing_heavy_sword", int.MaxValue, int.MaxValue, 0f, 0f, int.MaxValue, new StatModifier(10f, StatModifierType.FLAT, StatType.HEALTH), new StatModifier(10f, StatModifierType.FLAT, StatType.DEFENCE), new StatModifier(10f, StatModifierType.FLAT, StatType.SPEED), new StatModifier(10f, StatModifierType.FLAT, StatType.TEMPLAR), new StatModifier(10f, StatModifierType.FLAT, StatType.ROGUE), new StatModifier(10f, StatModifierType.FLAT, StatType.THAUMATURGE));
+            RegisterShield("missing_shield", int.MaxValue, 0f, int.MaxValue, int.MaxValue, new StatModifier(10f, StatModifierType.FLAT, StatType.HEALTH), new StatModifier(10f, StatModifierType.FLAT, StatType.DEFENCE), new StatModifier(10f, StatModifierType.FLAT, StatType.SPEED), new StatModifier(10f, StatModifierType.FLAT, StatType.TEMPLAR), new StatModifier(10f, StatModifierType.FLAT, StatType.ROGUE), new StatModifier(10f, StatModifierType.FLAT, StatType.THAUMATURGE));
+            RegisterEquipment("missing_cap", int.MaxValue, EquipmentType.HELMET, new StatModifier(10f, StatModifierType.FLAT, StatType.HEALTH), new StatModifier(10f, StatModifierType.FLAT, StatType.DEFENCE), new StatModifier(10f, StatModifierType.FLAT, StatType.SPEED), new StatModifier(10f, StatModifierType.FLAT, StatType.TEMPLAR), new StatModifier(10f, StatModifierType.FLAT, StatType.ROGUE), new StatModifier(10f, StatModifierType.FLAT, StatType.THAUMATURGE));
+            RegisterEquipment("missing_tshirt", int.MaxValue, EquipmentType.CHESTPLATE, new StatModifier(10f, StatModifierType.FLAT, StatType.HEALTH), new StatModifier(10f, StatModifierType.FLAT, StatType.DEFENCE), new StatModifier(10f, StatModifierType.FLAT, StatType.SPEED), new StatModifier(10f, StatModifierType.FLAT, StatType.TEMPLAR), new StatModifier(10f, StatModifierType.FLAT, StatType.ROGUE), new StatModifier(10f, StatModifierType.FLAT, StatType.THAUMATURGE));
+            RegisterEquipment("missing_shorts", int.MaxValue, EquipmentType.PANTS, new StatModifier(10f, StatModifierType.FLAT, StatType.HEALTH), new StatModifier(10f, StatModifierType.FLAT, StatType.DEFENCE), new StatModifier(10f, StatModifierType.FLAT, StatType.SPEED), new StatModifier(10f, StatModifierType.FLAT, StatType.TEMPLAR), new StatModifier(10f, StatModifierType.FLAT, StatType.ROGUE), new StatModifier(10f, StatModifierType.FLAT, StatType.THAUMATURGE));
+            RegisterEquipment("missing_crocs", int.MaxValue, EquipmentType.BOOTS, new StatModifier(10f, StatModifierType.FLAT, StatType.HEALTH), new StatModifier(10f, StatModifierType.FLAT, StatType.DEFENCE), new StatModifier(10f, StatModifierType.FLAT, StatType.SPEED), new StatModifier(10f, StatModifierType.FLAT, StatType.TEMPLAR), new StatModifier(10f, StatModifierType.FLAT, StatType.ROGUE), new StatModifier(10f, StatModifierType.FLAT, StatType.THAUMATURGE));
+            RegisterTrinket("missing_trinket", int.MaxValue, new StatModifier(10f, StatModifierType.FLAT, StatType.HEALTH), new StatModifier(10f, StatModifierType.FLAT, StatType.DEFENCE), new StatModifier(10f, StatModifierType.FLAT, StatType.SPEED), new StatModifier(10f, StatModifierType.FLAT, StatType.TEMPLAR), new StatModifier(10f, StatModifierType.FLAT, StatType.ROGUE), new StatModifier(10f, StatModifierType.FLAT, StatType.THAUMATURGE));
         }
 
 

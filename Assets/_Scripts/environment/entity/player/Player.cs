@@ -5,6 +5,7 @@ using roguelike.environment.entity.statsystem;
 using roguelike.environment.ui.hud;
 using roguelike.environment.ui.statemachine;
 using roguelike.system.input;
+using roguelike.system.manager;
 using UnityEngine;
 
 namespace roguelike.environment.entity.player {
@@ -48,25 +49,28 @@ namespace roguelike.environment.entity.player {
 
         protected override void Awake() {
             PlayerInput.Enable();
-
-            Inventory = new Inventory(this);
             PlayerInteractor = GetComponentInChildren<PlayerInteractor>();
             UIStateMachine = GetComponent<UIStateMachine>();
-
             PlayerInteractor.Player = this;
-
             GetComponentInChildren<HealthBarRenderer>().SetTarget(this);
 
+
+
+            // LOADING DATA FROM SAVE
+
+            Inventory = new Inventory(this, GameManager.CurrentGameData.PlayerData.PlayerInventory);
+
+            SetHealth(GameManager.CurrentGameData.PlayerData.Health);
+
+            MaxHealth = GameManager.CurrentGameData.PlayerData.MaxHealth;
+            Speed = GameManager.CurrentGameData.PlayerData.Speed;
+            Defence = GameManager.CurrentGameData.PlayerData.Defence;
+            Templar = GameManager.CurrentGameData.PlayerData.Templar;
+            Rogue = GameManager.CurrentGameData.PlayerData.Rogue;
+            Thaumaturge = GameManager.CurrentGameData.PlayerData.Thaumaturge;
+            Corruption = GameManager.CurrentGameData.PlayerData.Corruption;
+
             base.Awake();
-        }
-
-        protected override void Start() {
-            base.Start();
-            Inventory.Entity = this;
-        }
-
-        private void Update() {
-            Debug.Log(Speed.Value);
         }
 
         public override void PrimaryAction() { ItemInMainHand?.ItemAction(this); }

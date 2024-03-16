@@ -19,7 +19,7 @@ namespace roguelike.system.manager {
         public Action StartGame;
         public Action GlobalPauseEvent;
 
-        protected static GameData gameData { get; private set; }
+        public static GameData CurrentGameData { get; private set; }
         public static Player Player { get; private set; }
         public static GameObject PlayerObject { get; private set; }
         public static PlayerInput Input { get { return Player.PlayerInput; } }
@@ -37,9 +37,9 @@ namespace roguelike.system.manager {
         }
 
         private void GenerateDebugSave() {
-            gameData = new GameData("Purplik", 0, Player);
+            CurrentGameData = new GameData("Purplik", 0, Player);
 
-            string output = JsonConvert.SerializeObject(gameData);
+            string output = JsonConvert.SerializeObject(CurrentGameData);
 
             Directory.CreateDirectory(Path.GetDirectoryName(GlobalStaticValues.SAVE_PATH + "/debug.json"));
 
@@ -50,15 +50,15 @@ namespace roguelike.system.manager {
         }
 
         public static void SaveGame() {
-            if(gameData == null) { return; }
+            if(CurrentGameData == null) { return; }
 
-            gameData = new GameData(gameData.Name, gameData.Day, Player);
+            CurrentGameData = new GameData(CurrentGameData.Name, CurrentGameData.Day, Player);
 
-            string output = JsonConvert.SerializeObject(gameData);
+            string output = JsonConvert.SerializeObject(CurrentGameData);
 
-            Directory.CreateDirectory(Path.GetDirectoryName(GlobalStaticValues.SAVE_PATH + $"/{gameData.Name}.json"));
+            Directory.CreateDirectory(Path.GetDirectoryName(GlobalStaticValues.SAVE_PATH + $"/{CurrentGameData.Name}.json"));
 
-            using (FileStream fileStream = new FileStream(GlobalStaticValues.SAVE_PATH + $"/{gameData.Name}.json", FileMode.Create)) {
+            using (FileStream fileStream = new FileStream(GlobalStaticValues.SAVE_PATH + $"/{CurrentGameData.Name}.json", FileMode.Create)) {
                 byte[] info = new UTF8Encoding(true).GetBytes(output);
                 fileStream.Write(info, 0, info.Length);
             }
@@ -71,22 +71,7 @@ namespace roguelike.system.manager {
         }
 
         public void LoadSave(GameData gameData) {
-            GameManager.gameData = gameData;
-        }
-
-        private static void LoadDataToPlayer(Player player) {
-            player.SetHealth(gameData.PlayerData.Health);
-
-            player.MaxHealth = gameData.PlayerData.MaxHealth;
-            player.Speed = gameData.PlayerData.Speed;
-            player.Defence = gameData.PlayerData.Defence;
-            player.Templar = gameData.PlayerData.Templar;
-            player.Rogue = gameData.PlayerData.Rogue;
-            player.Thaumaturge = gameData.PlayerData.Thaumaturge;
-            player.Corruption = gameData.PlayerData.Corruption;
-            Player = player;
-
-            Player.Inventory = new Inventory(Player, gameData.PlayerData.PlayerInventory);
+            CurrentGameData = gameData;
         }
 
         public void GoToMainMenu() {
@@ -95,16 +80,19 @@ namespace roguelike.system.manager {
 
         internal static void SpawnPlayer(AsyncOperation _) {
             if (CurrentGameState != GameState.MAINMENU) {
-                if (gameData == null) {
+                if (CurrentGameData == null) {
                     Debug.LogError("No GameData present!");
                     return;
                 }
                 PlayerObject = Instantiate(_playerPrefab, new Vector3(0, 1, 0), _playerPrefab.transform.rotation);
                 PlayerObject.transform.SetParent(null);
-                LoadDataToPlayer(PlayerObject.GetComponent<Player>());
-                Player.Inventory.Entity = Player;
+                Player = PlayerObject.GetComponent<Player>();
                 GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>().Follow = PlayerObject.transform;
             }
+        }
+
+        public static void UpdateGameData() {
+            CurrentGameData = new GameData(CurrentGameData.Name, CurrentGameData.Day, Player);
         }
     }
 

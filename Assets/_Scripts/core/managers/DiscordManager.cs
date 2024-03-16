@@ -1,3 +1,4 @@
+using Discord;
 using roguelike.system.singleton;
 
 namespace roguelike.system.manager {
@@ -6,14 +7,18 @@ namespace roguelike.system.manager {
         Discord.Discord discord;
 
         protected override void Awake() {
-            discord = new Discord.Discord(1216476050599575723, (ulong)Discord.CreateFlags.NoRequireDiscord);
-            ChangeActivity("", "Loading the game...");
+            try {
+                discord = new Discord.Discord(1216476050599575723, (ulong)Discord.CreateFlags.NoRequireDiscord);
+                ChangeActivity("", "Loading the game...");
+            } catch (ResultException) {
+                gameObject.SetActive(false);
+            }
 
             base.Awake();
         }
 
         private void OnDisable() {
-            discord.Dispose();
+            discord?.Dispose();
         }
 
         public void ChangeActivity(string state, string details) {
@@ -32,7 +37,7 @@ namespace roguelike.system.manager {
         }
 
         private void Update() {
-            discord.RunCallbacks();
+            discord?.RunCallbacks();
         }
     }
 }

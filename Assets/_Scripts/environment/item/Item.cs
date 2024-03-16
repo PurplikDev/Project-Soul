@@ -18,8 +18,8 @@ namespace roguelike.core.item {
         }
 
         public string ID { get { return _id; } }
-        public string Name { get { return TranslationManager.getTranslation(_id); } }
-        public string Description { get { return TranslationManager.getTranslation(_id + ".description"); } }
+        public string Name { get { return TranslationManager.GetTranslation(_id); } }
+        public string Description { get { return TranslationManager.GetTranslation(_id + ".description"); } }
         public Sprite Icon { get { return ItemManager.GetSpriteByID(ID); } }
         public int MaxStackSize { get { return _maxStackSize; } }
         public int ItemValue { get { return _itemValue; } }

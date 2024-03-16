@@ -1,18 +1,20 @@
 using Newtonsoft.Json;
+using roguelike.core.utils;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public static class TranslationManager {
+public class TranslationManager {
 
     public static Language lang = Language.en_us;
     public static Dictionary<string, string> language = new Dictionary<string, string>();
 
     static TranslationManager() {
-        getTranslationFromFile();
+        GetTranslationFromFile();
+        GameSettings.GameSettingsChanged += UpdatePickedLanguage;
     }
 
-    public static string getTranslation(string key) {
+    public static string GetTranslation(string key) {
         try {
             return language[key];
         } catch (KeyNotFoundException) {
@@ -23,7 +25,7 @@ public static class TranslationManager {
     }
 
     // todo: event that calls this method when player changes their language or start the game
-    public static void getTranslationFromFile() { 
+    public static void GetTranslationFromFile() { 
         TextAsset textAsset = Resources.Load<TextAsset>("data/lang/" + lang.ToString());
 
         if (textAsset == null) { 
@@ -35,7 +37,12 @@ public static class TranslationManager {
     }
 
     public static void TranslateHeader(Label label) {
-        label.text = getTranslation(label.text);
+        label.text = GetTranslation(label.text);
+    }
+
+    public static void UpdatePickedLanguage(GameSettings settings) {
+        lang = settings.TranslationLanguage;
+        GetTranslationFromFile();
     }
 
     public enum Language {

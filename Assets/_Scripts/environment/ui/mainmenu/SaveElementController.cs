@@ -21,7 +21,7 @@ namespace roguelike.rendering.ui.mainmenu {
 
         public void FillData(GameData gameData) {
             saveName.text = gameData.Name;
-            dayCount.text = TranslationManager.getTranslation("ui.day") + " " + gameData.Day.ToString();
+            dayCount.text = TranslationManager.GetTranslation("ui.day") + " " + gameData.Day.ToString();
             dateDisplay.text = gameData.SaveTime.ToString();
             this.gameData = gameData;
         }
