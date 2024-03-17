@@ -770,6 +770,7 @@ GameObject:
   - component: {fileID: 3631521290361006392}
   - component: {fileID: 2916951928400809492}
   - component: {fileID: 6574857355360050139}
+  - component: {fileID: 4389360908593931080}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -878,7 +879,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 055e37f6b2aed4500a4907a02d285ae1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EntityName: 
+  EntityName: Player
   MaxHealth:
     BaseValue: 30
   Speed:
@@ -921,6 +922,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faf5ab88decdd9149927d86c71d9bf69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!81 &4389360908593931080
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8111650899813401520}
+  m_Enabled: 1
 --- !u!1 &8603608754554356972
 GameObject:
   m_ObjectHideFlags: 0

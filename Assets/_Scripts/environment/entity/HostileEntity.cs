@@ -25,6 +25,7 @@ namespace roguelike.environment.entity {
         }
 
         internal virtual void Attack() {
+            AttackEvent.Invoke();
             // spawn a sphere in front of the entity
             var colliders = Physics.OverlapSphere(Position, AttackRange.Value + 3, LayerMask.GetMask("Player"), QueryTriggerInteraction.Ignore);
 

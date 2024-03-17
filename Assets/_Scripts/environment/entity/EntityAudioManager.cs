@@ -17,7 +17,7 @@ namespace roguelike.environment.entity {
                 return sound != null ? sound : Resources.Load<AudioClip>($"audio/sfx/missing_sound");
             } }
         public AudioClip AttackSound { get {
-                var sound = Resources.Load<AudioClip>($"audio/sfx/{entity.EntityName}/heal_sound");
+                var sound = Resources.Load<AudioClip>($"audio/sfx/{entity.EntityName}/attack_sound");
                 return sound != null ? sound : Resources.Load<AudioClip>($"audio/sfx/missing_sound");
             } }
         public AudioClip MovementSound { get {

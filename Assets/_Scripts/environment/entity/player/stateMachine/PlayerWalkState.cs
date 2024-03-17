@@ -4,6 +4,12 @@ namespace roguelike.environment.entity.player.statemachine {
 
         public override void EnterState() {
             playerStateMachine.animator.SetTrigger("WalkTrigger");
+            playerStateMachine.player.MovementStartEvent.Invoke();
+        }
+
+        public override void ExitState() {
+            playerStateMachine.player.MovementStopEvent.Invoke();
+            base.ExitState();
         }
 
         public override void UpdateState() {
