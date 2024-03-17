@@ -21,25 +21,12 @@ namespace roguelike.system.manager {
         }
 
         public static Recipe FindRecipe(RecipeType type, ItemStack[] input) {
-            /*
-            foreach (KeyValuePair<RecipeType, List<Recipe>> entry in _recipeDatabase) {
-                foreach (Recipe recipe in entry.Value) {
-                    StringBuilder builder = new StringBuilder();
-                    builder.AppendLine("Result: " + recipe.Result);
-                    foreach(ItemStack stack in recipe.Ingredients) {
-                        builder.AppendLine(stack.ToString());
-                    }
-                    Debug.Log(builder.ToString());
-                }
-            } */
-
             foreach(KeyValuePair<RecipeType, List<Recipe>> entry in _recipeDatabase) {
                 if(entry.Key != type) { continue; }
                 foreach(Recipe recipe in entry.Value) {
                     if(recipe.CheckRecipe(input)) { return recipe; }
                 }
             }
-            Debug.Log("didn't find recipe");
             return null;
         }
 

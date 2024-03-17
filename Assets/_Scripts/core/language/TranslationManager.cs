@@ -24,7 +24,6 @@ public class TranslationManager {
         }
     }
 
-    // todo: event that calls this method when player changes their language or start the game
     public static void GetTranslationFromFile() { 
         TextAsset textAsset = Resources.Load<TextAsset>("data/lang/" + lang.ToString());
 

@@ -18,7 +18,7 @@ namespace roguelike.environment.world.deployable.workstation {
         protected virtual void Awake() {
             StationInventory = new List<ItemStack>();
             for (int i = 0; i < 9; i++) {
-                StationInventory.Add(new ItemStack(Items.AIR));
+                StationInventory.Add(ItemStack.EMPTY);
             }
 
             ResultStack = ItemStack.EMPTY;

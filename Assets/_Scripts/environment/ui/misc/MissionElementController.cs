@@ -27,6 +27,7 @@ namespace roguelike.rendering.ui.dungeonboard {
         }
 
         public void OnClicked(PointerDownEvent evt) {
+            DungeonManager.State = DungeonState.DUNGEON;
             DungeonManager.Instance.EnterDungeon(difficulty);
         }
     }

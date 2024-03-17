@@ -57,6 +57,10 @@
     border-bottom-width: 0;
     margin-bottom: 1.125%;
     margin-top: 1.125%;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .main-menu-button:hover {
@@ -161,4 +165,8 @@
     border-right-width: 0;
     border-top-width: 0;
     border-bottom-width: 0;
+}
+
+.slider {
+    width: 100%;
 }

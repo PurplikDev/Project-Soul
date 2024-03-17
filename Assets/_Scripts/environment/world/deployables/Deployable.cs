@@ -12,7 +12,7 @@ namespace roguelike.environment.world.deployable {
 
         private MeshRenderer _deployableRenderer;
         public Material _outlineMaterial;
-        private List<Material> _materials = new List<Material>();
+        private List<Material> _materials;
 
         public List<ItemStack> StationInventory { get; protected set; }
         public GameObject StationUIHolder;
@@ -20,8 +20,8 @@ namespace roguelike.environment.world.deployable {
         public Action SlotUpdateEvent;
 
         private void Start() {
+            _materials = new List<Material>();
             _deployableRenderer = transform.GetComponentInChildren<MeshRenderer>();
-            _outlineMaterial = Resources.Load<Material>("materials/props/outline");
             _materials.Add(_deployableRenderer.material);
         }
 

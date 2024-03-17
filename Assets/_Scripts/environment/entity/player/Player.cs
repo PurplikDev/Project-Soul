@@ -75,10 +75,6 @@ namespace roguelike.environment.entity.player {
 
         public override void PrimaryAction() { ItemInMainHand?.ItemAction(this); }
         public override void SecondaryAction() { ItemInOffHand?.ItemAction(this); }
-
-        public void SetHealth(float amount) {
-            Health = amount;
-        }
     }
 
     [System.Serializable]

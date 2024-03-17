@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace roguelike.environment.entity {
     public abstract class Entity : MonoBehaviour {
+
+        public string EntityName;
+
         [Header("Entity Stats", order = 0)]
         public Stat MaxHealth = new Stat(30);
         public Stat Speed = new Stat(5);
@@ -32,6 +35,13 @@ namespace roguelike.environment.entity {
         public Action DeathEvent;
         public Action HealthUpdate;
         public Action MaxHealthUpdate;
+
+        // these events are used to sound related stuff.... WHY DID I NOT START USING EVENTS FROM THE START?!?!?!?!??!?!?!
+        public Action HurtEvent;
+        public Action HealEvent;
+        public Action MovementStartEvent;
+        public Action MovementStopEvent;
+        public Action AttackEvent;
 
         public bool IsBlocking { get; internal set; } = false;
         public bool IsDead { get; internal set; } = false;
@@ -64,12 +74,22 @@ namespace roguelike.environment.entity {
             return Mathf.FloorToInt(Defence.Value);
         }
 
+        public void SetHealth(float amount) {
+            Health = amount;
+        }
+
+        public virtual void Heal(float healAmount) {
+            Health = healAmount + Health > MaxHealth.Value ? MaxHealth.Value : healAmount;
+            HealEvent.Invoke();
+        }
+
         public virtual void Damage(DamageSource source) {
             Health -= (float)source.CalculateDamage();
             if(Health <= 0) {
                 DeathEvent.Invoke();
             }
             HealthUpdate.Invoke();
+            HurtEvent.Invoke();
         }
 
         private void CheckAndApplyStatusEffects() {

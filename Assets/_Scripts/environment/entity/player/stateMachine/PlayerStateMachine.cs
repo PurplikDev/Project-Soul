@@ -14,6 +14,7 @@ namespace roguelike.environment.entity.player.statemachine {
         internal system.input.PlayerInput input { get; private set; }
         internal Player player { get; private set; }
         internal Animator animator { get; private set; }
+        
 
 
         // PUBLIC

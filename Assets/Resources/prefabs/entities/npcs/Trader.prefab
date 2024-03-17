@@ -140,9 +140,9 @@ MonoBehaviour:
     BaseValue: 0
   Immortal: 1
   Invisible: 0
-  InteractMessage: Goods for trade!
+  InteractMessage: []
   InteractionScreenHolder: {fileID: 6724485487805798084}
-  possibleOffer: {fileID: 11400000, guid: f29a5922a80cb7a4aacd1b44ad19f9da, type: 2}
+  possibleOffer: {fileID: 0}
 --- !u!114 &8770551255436761135
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -71,8 +71,8 @@ namespace roguelike.environment.ui.statemachine {
 
         public void OnTrader(Trader trader) {
             // todo: replace this with an in-world speech bubble
-            Debug.Log(trader.InteractMessage);
-            if(!_isInUI) {
+            Debug.Log(trader.InteractMessage[Random.Range(0, trader.InteractMessage.Length)]);
+            if (!_isInUI) {
                 _traderState = new UITraderState(this, trader);
                 states.Add(UIStates.TRADER, _traderState);
                 TransitionToState(UIStates.TRADER);
