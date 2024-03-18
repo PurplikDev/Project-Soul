@@ -7,7 +7,7 @@
                 <ui:Button name="ResumeButton" class="button" style="-unity-font-style: bold; background-color: rgba(0, 0, 0, 0); padding-left: 12px; width: 100%;">
                     <ui:Label tabindex="-1" text="ui.resume" display-tooltip-when-elided="true" name="ResumeButtonHeader" class="header" style="-unity-text-align: middle-left; font-size: 30px;" />
                 </ui:Button>
-                <ui:Button name="OptionsButton" class="button" style="background-color: rgba(0, 0, 0, 0); padding-left: 12px; width: 100%;">
+                <ui:Button name="SettingsButton" class="button" style="background-color: rgba(0, 0, 0, 0); padding-left: 12px; width: 100%;">
                     <ui:Label tabindex="-1" text="ui.settings" display-tooltip-when-elided="true" name="SettingsButtonHeader" class="header" style="-unity-text-align: middle-left; font-size: 30px;" />
                 </ui:Button>
                 <ui:Button name="QuitButton" class="button" style="background-color: rgba(0, 0, 0, 0); padding-left: 12px; width: 100%;">

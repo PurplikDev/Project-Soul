@@ -1,3 +1,4 @@
+using roguelike.rendering.ui;
 using roguelike.system.manager;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -19,7 +20,7 @@ namespace roguelike.environment.ui.statemachine {
             _root = _pauseUIHolder.GetComponent<UIDocument>().rootVisualElement;
 
             _root.Q<Button>("ResumeButton").clicked += ResumeClicked;
-            // _root.Q<Button>("SettingsButton").clicked += SettingsClicked;
+            _root.Q<Button>("SettingsButton").clicked += SettingsClicked;
             _root.Q<Button>("QuitButton").clicked += ExitToMenu;
 
             TranslationManager.TranslateHeader(_root.Q<Label>("PauseHeader"));
@@ -32,10 +33,12 @@ namespace roguelike.environment.ui.statemachine {
             _pauseUIHolder.SetActive(false);
 
             _root.Q<Button>("ResumeButton").clicked -= ResumeClicked;
-            // _root.Q<Button>("SettingsButton").clicked -= SettingsClicked;
+            _root.Q<Button>("SettingsButton").clicked -= SettingsClicked;
             _root.Q<Button>("QuitButton").clicked -= ExitToMenu;
 
             _root = null;
+
+            SettingsScreenRenderer.Instance.gameObject.SetActive(false);
         }
 
         public override UIStates GetNextState() {
@@ -46,6 +49,10 @@ namespace roguelike.environment.ui.statemachine {
 
         public void ResumeClicked() {
             stateMachine.ForceNone();
+        }
+
+        public void SettingsClicked() {
+            SettingsScreenRenderer.Instance.gameObject.SetActive(true);
         }
 
         private void ExitToMenu() {

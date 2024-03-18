@@ -7,5 +7,6 @@ namespace roguelike.core.utils {
         public static readonly string SHAPED_RECIPE_SIZE_ERROR = "Shaped recipe isn't the correct size!";
 
         public static readonly string SAVE_PATH = Application.persistentDataPath + "/GameSaves";
+        public static readonly string SETTINGS_PATH = Application.persistentDataPath + "/settings.json";
     }
 }

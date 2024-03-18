@@ -1,17 +1,18 @@
 using Newtonsoft.Json;
 using roguelike.core.utils;
+using roguelike.system.singleton;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class TranslationManager {
-
-    public static Language lang = Language.en_us;
+public class TranslationManager : PersistentSingleton<TranslationManager>{
+    public static Language Lang;
     public static Dictionary<string, string> language = new Dictionary<string, string>();
 
-    static TranslationManager() {
+    protected override void Awake() {
         GetTranslationFromFile();
         GameSettings.GameSettingsChanged += UpdatePickedLanguage;
+        base.Awake();
     }
 
     public static string GetTranslation(string key) {
@@ -25,7 +26,7 @@ public class TranslationManager {
     }
 
     public static void GetTranslationFromFile() { 
-        TextAsset textAsset = Resources.Load<TextAsset>("data/lang/" + lang.ToString());
+        TextAsset textAsset = Resources.Load<TextAsset>("data/lang/" + Lang.ToString());
 
         if (textAsset == null) { 
             Debug.LogError("Your lang file is empty! Selecting a default lang file!");
@@ -40,7 +41,7 @@ public class TranslationManager {
     }
 
     public static void UpdatePickedLanguage(GameSettings settings) {
-        lang = settings.TranslationLanguage;
+        Lang = settings.Lang;
         GetTranslationFromFile();
     }
 

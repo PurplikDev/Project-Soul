@@ -1,6 +1,7 @@
 using roguelike.core.utils;
 using roguelike.environment.entity;
 using roguelike.rendering.ui.slot;
+using roguelike.system.manager;
 using System;
 using System.Collections.Generic;
 using Tweens;
@@ -52,6 +53,9 @@ namespace roguelike.environment.ui.hud {
 
             GameSettings.GameSettingsChanged += DisplaySettingsUpdated;
 
+            HealthBarStyle = GameManager.CurrentGameSettings.HealthBarStyle;
+            HealthDisplayText = GameManager.CurrentGameSettings.HealthBarText;
+
             if (ShouldReveal) {
                 _heartDisplayHolder.style.opacity = 0;
                 _barHealthDisplay.style.opacity = 0;
@@ -77,6 +81,8 @@ namespace roguelike.environment.ui.hud {
 
         private void DisplaySettingsUpdated(GameSettings settings) {
             HealthBarStyle = settings.HealthBarStyle;
+            HealthDisplayText = settings.HealthBarText;
+
             UpdateHealthDisplay();
         }
 

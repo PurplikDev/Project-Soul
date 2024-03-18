@@ -1,6 +1,5 @@
 using Cinemachine;
 using Newtonsoft.Json;
-using roguelike.core.item;
 using roguelike.core.utils;
 using roguelike.core.utils.gamedata;
 using roguelike.environment.entity.player;
@@ -20,16 +19,16 @@ namespace roguelike.system.manager {
         public Action GlobalPauseEvent;
 
         public static GameData CurrentGameData { get; private set; }
+        public static GameSettings CurrentGameSettings;
         public static Player Player { get; private set; }
         public static GameObject PlayerObject { get; private set; }
         public static PlayerInput Input { get { return Player.PlayerInput; } }
-
-        public static GameSettings GameSettings { get; private set; }
 
         private static GameObject _playerPrefab { get { return Resources.Load<GameObject>("prefabs/entities/player"); } }
 
         public virtual void Start() {
             Invoke(nameof(LoadGame), 0.05f);
+            CurrentGameSettings = new GameSettings(0f, 0f, 0f, HealthBarStyle.CLASSIC,  false, TranslationManager.Language.en_us);
         }
 
         public void LoadGame() {

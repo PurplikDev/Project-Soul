@@ -11,19 +11,15 @@ namespace roguelike.rendering.ui.dungeonboard {
 
         private VisualElement _root, _offerHolder;
 
-        protected override void Awake() {
+        private void OnEnable() {
             _root = GetComponent<UIDocument>().rootVisualElement;
             _offerHolder = _root.Q<VisualElement>("DungeonOfferHolder");
 
             TranslationManager.TranslateHeader(_root.Q<Label>("DungeonBoardHeader"));
 
-            for(int i = 0; i< 3; i++) {
-                if(Mathematicus.ChanceIn(2, 3)) { CreateOffer(DungeonDifficulty.EASY); } 
-                else if (Mathematicus.ChanceIn(2, 3)) { CreateOffer(DungeonDifficulty.NORMAL); }
-                else { CreateOffer(DungeonDifficulty.HARD);}
+            for (int i = 0; i < 3; i++) {
+                if (Mathematicus.ChanceIn(2, 3)) { CreateOffer(DungeonDifficulty.EASY); } else if (Mathematicus.ChanceIn(2, 3)) { CreateOffer(DungeonDifficulty.NORMAL); } else { CreateOffer(DungeonDifficulty.HARD); }
             }
-
-            base.Awake();
         }
 
         private void CreateOffer(DungeonDifficulty difficulty) {

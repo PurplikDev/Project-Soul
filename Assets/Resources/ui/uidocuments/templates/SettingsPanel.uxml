@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Resources/ui/stylesheets/GenericUI.uss?fileID=7433441132597879392&amp;guid=ed10c5c2a46b611438e83ec12f00ff40&amp;type=3#GenericUI" />
     <ui:VisualElement name="SettingsPanelHolder" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); justify-content: flex-start; align-items: center; height: 100%; width: 60%; max-width: none; max-height: none; min-width: auto; min-height: auto; margin-left: 20%; margin-right: 20%; margin-top: 7.5%; margin-bottom: 7.5%; background-image: resource(&apos;sprites/ui/container_background&apos;); padding-left: 2.5%; padding-right: 2.5%; padding-top: 2.5%; padding-bottom: 2.5%;">
-        <ui:Label tabindex="-1" text="ui.settings" display-tooltip-when-elided="true" name="SettingsHeader" class="header" style="background-image: resource(&apos;sprites/ui/button&apos;); -unity-text-align: middle-left; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; width: 25%;" />
+        <ui:Label tabindex="-1" text="ui.settings" display-tooltip-when-elided="true" name="SettingsHeader" class="header" style="background-image: resource(&apos;sprites/ui/button&apos;); -unity-text-align: middle-center; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; width: 25%; font-size: 35%;" />
         <ui:VisualElement name="SettingsHolder" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: 100%; height: 80%; flex-direction: row;">
             <ui:VisualElement name="AudioSettings" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 50%;">
                 <ui:VisualElement name="SliderHolder" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: 80%; align-self: center; align-items: center; margin-top: 5%; margin-bottom: 5%;">
@@ -18,22 +18,26 @@
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="MiscSettings" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 50%; align-items: center;">
-                <ui:VisualElement name="EnumDropdownHolder" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: 80%; margin-bottom: 5%; margin-top: 5%;">
-                    <ui:Label tabindex="-1" text="ui.health_bar_style" display-tooltip-when-elided="true" name="Label" class="header" style="font-size: 20px;" />
-                    <ui:EnumField type="roguelike.core.utils.HealthBarStyle, Assembly-CSharp" class="header" style="color: rgb(13, 43, 69); font-size: 17.5px; background-image: none; border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0); border-left-width: -149px; border-right-width: -149px; border-top-width: -149px; border-bottom-width: -149px;" />
+                <ui:VisualElement name="HealthBarStyleDropdownHolder" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: 80%; margin-bottom: 5%; margin-top: 5%;">
+                    <ui:Label tabindex="-1" text="ui.health_bar_style" display-tooltip-when-elided="true" name="Label" class="header" style="font-size: 20%;" />
+                    <ui:EnumField type="roguelike.core.utils.HealthBarStyle, Assembly-CSharp" name="HealthBarDropdown" class="header" style="color: rgb(13, 43, 69); font-size: 17.5px; background-image: none; border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0); border-left-width: -149px; border-right-width: -149px; border-top-width: -149px; border-bottom-width: -149px;" />
                 </ui:VisualElement>
-                <ui:VisualElement name="EnumDropdownHolder" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: 80%; margin-top: 5%; margin-bottom: 5%;">
-                    <ui:Label tabindex="-1" text="ui.language" display-tooltip-when-elided="true" name="Label" class="header" style="font-size: 20px;" />
-                    <ui:EnumField type="TranslationManager+Language, Assembly-CSharp" class="header" style="font-size: 17.5px;" />
+                <ui:VisualElement name="HealthBarTextHolder" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row;">
+                    <ui:Label tabindex="-1" text="ui.health_bar_text" display-tooltip-when-elided="true" name="HealthBarTextLabel" class="header" style="font-size: 20%;" />
+                    <ui:Toggle name="HealthBarTextToggle" value="true" />
+                </ui:VisualElement>
+                <ui:VisualElement name="LanguageDropdownHolder" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: 80%; margin-top: 5%; margin-bottom: 5%;">
+                    <ui:Label tabindex="-1" text="ui.language" display-tooltip-when-elided="true" name="Label" class="header" style="font-size: 20%;" />
+                    <ui:EnumField type="TranslationManager+Language, Assembly-CSharp" name="LanguageDropdown" class="header" style="font-size: 17.5px;" />
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="ButtonHolder" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row; height: 10%; align-items: center; justify-content: space-around; width: 50%;">
-            <ui:Button display-tooltip-when-elided="true" name="ApplyButtonHolder" class="button" style="padding-left: 12px;">
-                <ui:Label tabindex="-1" text="ui.apply" display-tooltip-when-elided="true" name="ApplyButtonHeader" class="header" style="font-size: 30px;" />
+            <ui:Button display-tooltip-when-elided="true" name="ApplyButton" class="button" style="padding-left: 12px;">
+                <ui:Label tabindex="-1" text="ui.apply" display-tooltip-when-elided="true" name="ApplyButtonHeader" class="header" style="font-size: 30%;" />
             </ui:Button>
-            <ui:Button display-tooltip-when-elided="true" name="CloseButtonHolder" class="button" style="padding-left: 12px;">
-                <ui:Label tabindex="-1" text="ui.close" display-tooltip-when-elided="true" name="CloseButtonHeader" class="header" style="font-size: 30px;" />
+            <ui:Button display-tooltip-when-elided="true" name="CloseButton" class="button" style="padding-left: 12px;">
+                <ui:Label tabindex="-1" text="ui.close" display-tooltip-when-elided="true" name="CloseButtonHeader" class="header" style="font-size: 30%;" />
             </ui:Button>
         </ui:VisualElement>
     </ui:VisualElement>

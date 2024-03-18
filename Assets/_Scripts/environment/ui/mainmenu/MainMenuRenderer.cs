@@ -41,14 +41,8 @@ namespace roguelike.rendering.ui.mainmenu {
             _newSaveCreateButton = _saveMenuRoot.Q<Button>("CreateSaveButton");
             _newSaveCancelButton = _saveCreationRoot.Q<Button>("CreateSaveCancelButton");
 
-            TranslationManager.TranslateHeader(_playButton.Q<Label>());
-            TranslationManager.TranslateHeader(_settingsButton.Q<Label>());
-            TranslationManager.TranslateHeader(_quitButton.Q<Label>());
-            TranslationManager.TranslateHeader(_root.Q<Label>("SavesHeader"));
-            TranslationManager.TranslateHeader(_newSaveButton.Q<Label>());
-            TranslationManager.TranslateHeader(_saveCreationRoot.Q<Label>("CreateSaveButtonHeader"));
-            TranslationManager.TranslateHeader(_saveCreationRoot.Q<Label>("SaveCreationCharacterNameHeader"));
-            TranslationManager.TranslateHeader(_saveCreationRoot.Q<Label>("CreateSaveCancelButtonHeader"));
+            Translate(GameManager.CurrentGameSettings);
+            GameSettings.GameSettingsChanged += Translate;
 
             _playButton.clicked += OnPlayButton;
             _settingsButton.clicked += OnSettingsButton;
@@ -95,7 +89,7 @@ namespace roguelike.rendering.ui.mainmenu {
         }
 
         public void OnSettingsButton() {
-            Debug.LogWarning("Open settings menu here!");
+            SettingsScreenRenderer.Instance.gameObject.SetActive(true);
         }
 
         public void OnQuitButton() {
@@ -156,6 +150,17 @@ namespace roguelike.rendering.ui.mainmenu {
             };
 
             gameObject.AddTween(tween);
+        }
+
+        private void Translate(GameSettings _) {
+            TranslationManager.TranslateHeader(_playButton.Q<Label>());
+            TranslationManager.TranslateHeader(_settingsButton.Q<Label>());
+            TranslationManager.TranslateHeader(_quitButton.Q<Label>());
+            TranslationManager.TranslateHeader(_root.Q<Label>("SavesHeader"));
+            TranslationManager.TranslateHeader(_newSaveButton.Q<Label>());
+            TranslationManager.TranslateHeader(_saveCreationRoot.Q<Label>("CreateSaveButtonHeader"));
+            TranslationManager.TranslateHeader(_saveCreationRoot.Q<Label>("SaveCreationCharacterNameHeader"));
+            TranslationManager.TranslateHeader(_saveCreationRoot.Q<Label>("CreateSaveCancelButtonHeader"));
         }
     }
 }
