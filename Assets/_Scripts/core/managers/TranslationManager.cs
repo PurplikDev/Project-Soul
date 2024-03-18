@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using roguelike.core.utils;
+using roguelike.system.manager;
 using roguelike.system.singleton;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,7 +26,7 @@ public class TranslationManager : PersistentSingleton<TranslationManager>{
         }
     }
 
-    public static void GetTranslationFromFile() { 
+    public static void GetTranslationFromFile() {
         TextAsset textAsset = Resources.Load<TextAsset>("data/lang/" + Lang.ToString());
 
         if (textAsset == null) { 

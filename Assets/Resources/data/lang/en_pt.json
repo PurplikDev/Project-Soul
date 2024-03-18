@@ -1,0 +1,46 @@
+{
+  // ITEM NAMES
+
+        "air": "Air",
+
+        "gold" : "Gold",
+        "boots_of_the_traveler" : "Boots of the Traveler",
+
+  // ITEM DESCRIPTIONS
+	
+        "boots_of_the_traveler.description" : "Boots that were once worn by an ancient Thaumaturge, but now they belong to nobody...",
+
+  // UI
+
+        "ui.play" : "Plunder",
+        "ui.settings" : "Tinker",
+        "ui.quit" : "Sink Yourself",
+
+        "ui.saves" : "Ships",
+        "ui.new_save" : "New Vessel",
+        "ui.character_name" : "Pirate Name",
+
+        "ui.create" : "Create",
+        "ui.cancel" : "Cancel",
+        "ui.day" : "Day",
+
+        "ui.pause" : "Paused",
+        "ui.resume" : "Sail",
+        
+        "ui.inventory" : "Inventory",
+        "ui.character" : "Character",
+        "ui.stats" : "Statistics",
+        "ui.equipment" : "Equipment",
+        "ui.trinkets" : "Trinkets",
+        "ui.crafting_station" : "Crafting Station",
+        "ui.storage_crate" : "Storage Crate",
+
+        "ui.trader_inventory" : "Trader's Inventory",
+        "ui.trader_value" : "Trader Offer Value:",
+        "ui.player_value" : "Player Offer Value:",
+        "ui.deal" : "Deal",
+
+        "ui.altar_of_the_blaze" : "Altar of the Blaze",
+        "ui.sacrifice" : "Sacrifice",
+        "ui.scorch" : "Scorch"
+}

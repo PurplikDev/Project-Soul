@@ -161,6 +161,8 @@ namespace roguelike.rendering.ui.mainmenu {
             TranslationManager.TranslateHeader(_saveCreationRoot.Q<Label>("CreateSaveButtonHeader"));
             TranslationManager.TranslateHeader(_saveCreationRoot.Q<Label>("SaveCreationCharacterNameHeader"));
             TranslationManager.TranslateHeader(_saveCreationRoot.Q<Label>("CreateSaveCancelButtonHeader"));
+
+            Debug.Log("hello?");
         }
     }
 }
