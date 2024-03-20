@@ -28,7 +28,7 @@ namespace roguelike.system.manager {
 
         public virtual void Start() {
             Invoke(nameof(LoadGame), 0.05f);
-            CurrentGameSettings = new GameSettings(0f, 0f, 0f, HealthBarStyle.CLASSIC,  false, TranslationManager.Language.en_us);
+            CurrentGameSettings = GameSettings.GetOrCreateSettings();
         }
 
         public void LoadGame() {

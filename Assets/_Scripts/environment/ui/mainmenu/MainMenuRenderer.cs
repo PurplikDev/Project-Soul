@@ -20,6 +20,8 @@ namespace roguelike.rendering.ui.mainmenu {
 
         public AudioSource MainMenuMusicSource;
 
+        private Dictionary<string, Label> labels;
+
         private void Awake() {
             document = GetComponent<UIDocument>();
             _saveFileElement = Resources.Load<VisualTreeAsset>("ui/uidocuments/templates/SaveElement");
@@ -40,6 +42,26 @@ namespace roguelike.rendering.ui.mainmenu {
             _newSaveButton = _saveMenuRoot.Q<Button>("NewSaveButton");
             _newSaveCreateButton = _saveMenuRoot.Q<Button>("CreateSaveButton");
             _newSaveCancelButton = _saveCreationRoot.Q<Button>("CreateSaveCancelButton");
+
+            var playButtonHeader = _playButton.Q<Label>();
+            var settingsButtonHeader = _settingsButton.Q<Label>();
+            var quitButtonHeader = _quitButton.Q<Label>();
+            var savesHeader = _root.Q<Label>("SavesHeader");
+            var newSaveButtonHeader = _newSaveButton.Q<Label>();
+            var saveCreationButtonHeader = _saveCreationRoot.Q<Label>("CreateSaveButtonHeader");
+            var saveCreationCharacterNameHeader = _saveCreationRoot.Q<Label>("SaveCreationCharacterNameHeader");
+            var cancelButtonHeader = _saveCreationRoot.Q<Label>("CreateSaveCancelButtonHeader");
+
+            labels = new Dictionary<string, Label>();
+
+            labels.Add(playButtonHeader.text, playButtonHeader);
+            labels.Add(settingsButtonHeader.text, settingsButtonHeader);
+            labels.Add(quitButtonHeader.text, quitButtonHeader);
+            labels.Add(savesHeader.text, saveCreationButtonHeader);
+            labels.Add(newSaveButtonHeader.text, saveCreationButtonHeader);
+            labels.Add(saveCreationButtonHeader.text, saveCreationCharacterNameHeader);
+            labels.Add(saveCreationCharacterNameHeader.text, saveCreationCharacterNameHeader);
+            labels.Add(cancelButtonHeader.text, cancelButtonHeader);
 
             Translate(GameManager.CurrentGameSettings);
             GameSettings.GameSettingsChanged += Translate;
@@ -153,16 +175,9 @@ namespace roguelike.rendering.ui.mainmenu {
         }
 
         private void Translate(GameSettings _) {
-            TranslationManager.TranslateHeader(_playButton.Q<Label>());
-            TranslationManager.TranslateHeader(_settingsButton.Q<Label>());
-            TranslationManager.TranslateHeader(_quitButton.Q<Label>());
-            TranslationManager.TranslateHeader(_root.Q<Label>("SavesHeader"));
-            TranslationManager.TranslateHeader(_newSaveButton.Q<Label>());
-            TranslationManager.TranslateHeader(_saveCreationRoot.Q<Label>("CreateSaveButtonHeader"));
-            TranslationManager.TranslateHeader(_saveCreationRoot.Q<Label>("SaveCreationCharacterNameHeader"));
-            TranslationManager.TranslateHeader(_saveCreationRoot.Q<Label>("CreateSaveCancelButtonHeader"));
-
-            Debug.Log("hello?");
+            foreach(var element in labels) {
+                TranslationManager.TranslateHeader(element.Value, element.Key);
+            }
         }
     }
 }

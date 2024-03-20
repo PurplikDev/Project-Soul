@@ -2,6 +2,7 @@ using roguelike.core.utils;
 using roguelike.system.manager;
 using roguelike.system.singleton;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UIElements;
 
 namespace roguelike.rendering.ui {
@@ -24,10 +25,18 @@ namespace roguelike.rendering.ui {
             healthBarDropdown = root.Q<EnumField>("HealthBarDropdown");
             languageDropdown = root.Q<EnumField>("LanguageDropdown");
 
+            masterVolume = root.Q<Slider>("MasterVolumeSlider");
+            musicVolume = root.Q<Slider>("MusicVolumeSlider");
+            sfxVolume = root.Q<Slider>("SFXVolumeSlider");
+
             healthBarText = root.Q<Toggle>("HealthBarTextToggle");
 
             applyButton = root.Q<Button>("ApplyButton");
             closeButton = root.Q<Button>("CloseButton");
+
+            masterVolume.value = GameManager.CurrentGameSettings.MasterVolume;
+            musicVolume.value = GameManager.CurrentGameSettings.MusicVolume;
+            sfxVolume.value = GameManager.CurrentGameSettings.SFXVolume;
 
             healthBarDropdown.value = GameManager.CurrentGameSettings.HealthBarStyle;
             languageDropdown.value = GameManager.CurrentGameSettings.Lang;

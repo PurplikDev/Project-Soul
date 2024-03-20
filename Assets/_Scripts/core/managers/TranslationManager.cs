@@ -10,10 +10,10 @@ public class TranslationManager : PersistentSingleton<TranslationManager>{
     public static Language Lang;
     public static Dictionary<string, string> language = new Dictionary<string, string>();
 
-    protected override void Awake() {
+    private void Start() {
+        Lang = GameManager.CurrentGameSettings.Lang;
         GetTranslationFromFile();
         GameSettings.GameSettingsChanged += UpdatePickedLanguage;
-        base.Awake();
     }
 
     public static string GetTranslation(string key) {
@@ -39,6 +39,10 @@ public class TranslationManager : PersistentSingleton<TranslationManager>{
 
     public static void TranslateHeader(Label label) {
         label.text = GetTranslation(label.text);
+    }
+
+    public static void TranslateHeader(Label label, string entry) {
+        label.text = GetTranslation(entry);
     }
 
     public static void UpdatePickedLanguage(GameSettings settings) {

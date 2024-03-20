@@ -80,16 +80,16 @@ namespace roguelike.environment.entity {
 
         public virtual void Heal(float healAmount) {
             Health = healAmount + Health > MaxHealth.Value ? MaxHealth.Value : healAmount;
-            HealEvent.Invoke();
+            HealEvent?.Invoke();
         }
 
         public virtual void Damage(DamageSource source) {
             Health -= (float)source.CalculateDamage();
             if(Health <= 0) {
-                DeathEvent.Invoke();
+                DeathEvent?.Invoke();
             }
-            HealthUpdate.Invoke();
-            HurtEvent.Invoke();
+            HealthUpdate?.Invoke();
+            HurtEvent?.Invoke();
         }
 
         private void CheckAndApplyStatusEffects() {
