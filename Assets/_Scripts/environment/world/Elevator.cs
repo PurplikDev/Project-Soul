@@ -14,17 +14,22 @@ namespace roguelike.environment.world {
 
             if(player != null) {
                 var tween = new PositionYTween {
-                    duration = 3f,
+                    duration = 5f,
                     easeType = EaseType.ExpoIn,
                     from = ElevatorObject.transform.position.y,
                     to = ElevatorObject.transform.position.y - 5,
+                    onStart = (_) => {
+                        player.transform.SetParent(ElevatorObject.transform);
+                    },
                     onUpdate = (_, value) => {
                         ElevatorObject.transform.position = ElevatorObject.transform.position + new Vector3(0, value, 0);
                     },
                     onFinally = (_) => {
-                        DungeonBoardRenderer.Instance.gameObject.SetActive(true);
+                        DungeonBoardRenderer.Instance.DisplayBoard();
                     }
                 };
+
+                gameObject.AddTween(tween);
             }
         }
 

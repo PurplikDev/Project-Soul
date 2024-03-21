@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using roguelike.core.utils;
 using roguelike.core.utils.gamedata;
 using roguelike.environment.entity.player;
+using roguelike.environment.world.dungeon;
 using roguelike.system.input;
 using roguelike.system.singleton;
 using System;
@@ -83,7 +84,8 @@ namespace roguelike.system.manager {
                     Debug.LogError("No GameData present!");
                     return;
                 }
-                PlayerObject = Instantiate(_playerPrefab, new Vector3(0, 1, 0), _playerPrefab.transform.rotation);
+                var spawnPos = PlayerSpawnPoint.Instance != null ? PlayerSpawnPoint.Instance.transform.position : new Vector3(0, 1, 0);
+                PlayerObject = Instantiate(_playerPrefab, spawnPos, _playerPrefab.transform.rotation);
                 PlayerObject.transform.SetParent(null);
                 Player = PlayerObject.GetComponent<Player>();
                 GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>().Follow = PlayerObject.transform;

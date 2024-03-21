@@ -11,17 +11,6 @@ namespace roguelike.rendering.ui.dungeonboard {
 
         private VisualElement _root, _offerHolder;
 
-        private void OnEnable() {
-            _root = GetComponent<UIDocument>().rootVisualElement;
-            _offerHolder = _root.Q<VisualElement>("DungeonOfferHolder");
-
-            TranslationManager.TranslateHeader(_root.Q<Label>("DungeonBoardHeader"));
-
-            for (int i = 0; i < 3; i++) {
-                if (Mathematicus.ChanceIn(2, 3)) { CreateOffer(DungeonDifficulty.EASY); } else if (Mathematicus.ChanceIn(2, 3)) { CreateOffer(DungeonDifficulty.NORMAL); } else { CreateOffer(DungeonDifficulty.HARD); }
-            }
-        }
-
         private void CreateOffer(DungeonDifficulty difficulty) {
             var offer = _missionOffer.Instantiate();
             var missionElementController = new MissionElementController();
@@ -29,6 +18,20 @@ namespace roguelike.rendering.ui.dungeonboard {
             missionElementController.SetupElement(offer, this);
             missionElementController.FillData(difficulty);
             _offerHolder.Add(offer);
+        }
+
+        public void DisplayBoard() {
+            var document = GetComponent<UIDocument>();
+
+            document.enabled = true;
+            _root = document.rootVisualElement;
+            _offerHolder = _root.Q<VisualElement>("DungeonOfferHolder");
+
+            TranslationManager.TranslateHeader(_root.Q<Label>("DungeonBoardHeader"));
+
+            for (int i = 0; i < 3; i++) {
+                if (Mathematicus.ChanceIn(2, 3)) { CreateOffer(DungeonDifficulty.EASY); } else if (Mathematicus.ChanceIn(2, 3)) { CreateOffer(DungeonDifficulty.NORMAL); } else { CreateOffer(DungeonDifficulty.HARD); }
+            }
         }
     }
 }
