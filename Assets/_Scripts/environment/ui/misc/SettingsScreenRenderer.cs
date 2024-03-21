@@ -1,6 +1,7 @@
 using roguelike.core.utils;
 using roguelike.system.manager;
 using roguelike.system.singleton;
+using Tweens;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UIElements;
@@ -45,15 +46,35 @@ namespace roguelike.rendering.ui {
 
             applyButton.clicked += ApplySettings;
             closeButton.clicked += Close;
+
+            root.style.opacity = 0;
+
+            Reveal(1f);
         }
 
         public void ApplySettings() {
-            GameManager.CurrentGameSettings = new GameSettings(0f, 0f, 0f, (HealthBarStyle)healthBarDropdown.value, healthBarText.value, (TranslationManager.Language)languageDropdown.value);
+            GameManager.CurrentGameSettings = new GameSettings(masterVolume.value, musicVolume.value, sfxVolume.value, (HealthBarStyle)healthBarDropdown.value, healthBarText.value, (TranslationManager.Language)languageDropdown.value);
             GameSettings.GameSettingsChanged.Invoke(GameManager.CurrentGameSettings);
         }
 
         public void Close() {
-            gameObject.SetActive(false);
+            Reveal(0f);
+        }
+
+        private void Reveal(float value) {
+            var tween = new FloatTween {
+                duration = 0.25f,
+                from = root.style.opacity.value,
+                to = value,
+                onUpdate = (_, value) => {
+                    root.style.opacity = value;
+                },
+                onFinally = (_) => {
+                    if(value == 0f) { gameObject.SetActive(false); }
+                }
+            };
+
+            gameObject.AddTween(tween);
         }
     }
 }

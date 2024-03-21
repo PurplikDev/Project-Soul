@@ -8,19 +8,25 @@ namespace roguelike.system.manager {
         public DungeonDifficulty Difficulty;
         public static DungeonState State { get; set; }
 
-        public int Layer { get; private set; }
-        public int LayersUntilBoss { get; private set; }
+        public static int CurrentLayer { get; private set; }
+        public static int LayersUntilBoss { get; private set; }
 
-        private GameObject _camp { get { return Resources.Load<GameObject>("prefabs/dungeon/rooms/camp"); } }
-        private GameObject[] _layouts { get { return Resources.LoadAll<GameObject>("prefabs/dungeon/layouts"); } }
+        static GameObject camp { get { return Resources.Load<GameObject>("prefabs/dungeon/rooms/camp"); } }
+        static GameObject[] floors { get { return Resources.LoadAll<GameObject>("prefabs/dungeon/layouts"); } }
+        static GameObject[] firstFloors { get { return Resources.LoadAll<GameObject>("prefabs/dungeon/firstFloorLayouts"); } }
+        static GameObject[] bossFloors { get { return Resources.LoadAll<GameObject>("prefabs/dungeon/bossLayouts"); } }
 
         public static void SpawnDungeon(AsyncOperation _) {
             if(State == DungeonState.DUNGEON) {
-                // spawn dungeon
+                if(CurrentLayer == 1) {
+                    Instantiate(firstFloors[Random.Range(0, firstFloors.Length)]);
+                } else {
+                    Instantiate(floors[Random.Range(0, floors.Length)]);
+                }
             } else if(State == DungeonState.CAMP) {
-                // spawn camp
+                Instantiate(camp);
             } else if(State == DungeonState.BOSS) {
-                // spawn boss
+                Instantiate(bossFloors[Random.Range(0, bossFloors.Length)]);
             } else {
                 Debug.LogError("Invalid Dungeon State!");
             }
@@ -28,14 +34,14 @@ namespace roguelike.system.manager {
 
         public void EnterDungeon(DungeonDifficulty difficulty) {
             Difficulty = difficulty;
-            Layer = 1;
+            CurrentLayer = 1;
             LayersUntilBoss = Random.Range(5, 8);
             LoadingManager.Instance.LoadScene(3, GameState.DUNGEON);
             State = DungeonState.DUNGEON;
         }
 
         public void EnterLayer() {
-            Layer++;
+            CurrentLayer++;
             LayersUntilBoss--;
             State = DungeonState.DUNGEON;
         }

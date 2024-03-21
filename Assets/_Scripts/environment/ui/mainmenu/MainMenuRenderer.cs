@@ -111,7 +111,13 @@ namespace roguelike.rendering.ui.mainmenu {
         }
 
         public void OnSettingsButton() {
-            SettingsScreenRenderer.Instance.gameObject.SetActive(true);
+            if(SettingsScreenRenderer.Instance.gameObject.activeSelf) {
+                SettingsScreenRenderer.Instance.Close();
+            } else {
+                SettingsScreenRenderer.Instance.gameObject.SetActive(true);
+            }
+
+            
         }
 
         public void OnQuitButton() {

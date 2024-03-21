@@ -58,7 +58,7 @@ namespace roguelike.system.manager {
                     break;
 
                 case GameState.DUNGEON:
-                    DiscordManager.Instance?.ChangeActivity($"Floor {DungeonManager.Instance.Layer} [{DungeonManager.Instance.Difficulty.ToString().ToUpper()}]", "Surviving the Dungeon");
+                    DiscordManager.Instance?.ChangeActivity($"Floor {DungeonManager.CurrentLayer} [{DungeonManager.Instance.Difficulty.ToString().ToUpper()}]", "Surviving the Dungeon");
                     break;
             }
 

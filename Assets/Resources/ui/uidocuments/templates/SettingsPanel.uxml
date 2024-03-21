@@ -6,15 +6,15 @@
             <ui:VisualElement name="AudioSettings" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 50%;">
                 <ui:VisualElement name="SliderHolder" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: 80%; align-self: center; align-items: center; margin-top: 5%; margin-bottom: 5%;">
                     <ui:Label tabindex="-1" text="ui.master_audio" display-tooltip-when-elided="true" name="Label" class="header" style="font-size: 20px;" />
-                    <ui:Slider picking-mode="Ignore" value="0.5" high-value="1" name="MasterVolumeSlider" class="slider" />
+                    <ui:Slider picking-mode="Ignore" value="0" high-value="1" name="MasterVolumeSlider" low-value="0" class="slider" />
                 </ui:VisualElement>
                 <ui:VisualElement name="SliderHolder" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: 80%; align-self: center; align-items: center; margin-top: 5%; margin-bottom: 5%;">
                     <ui:Label tabindex="-1" text="ui.music_audio" display-tooltip-when-elided="true" name="Label" class="header" style="font-size: 20px;" />
-                    <ui:Slider picking-mode="Ignore" value="0.5" high-value="1" name="MusicVolumeSlider" class="slider" />
+                    <ui:Slider picking-mode="Ignore" value="0" high-value="1" name="MusicVolumeSlider" low-value="0" class="slider" />
                 </ui:VisualElement>
                 <ui:VisualElement name="SliderHolder" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: 80%; align-self: center; align-items: center; margin-top: 5%; margin-bottom: 5%;">
                     <ui:Label tabindex="-1" text="ui.sfx_audio" display-tooltip-when-elided="true" name="Label" class="header" style="font-size: 20px;" />
-                    <ui:Slider picking-mode="Ignore" value="0.5" high-value="1" name="SFXVolumeSlider" class="slider" />
+                    <ui:Slider picking-mode="Ignore" value="0" high-value="1" name="SFXVolumeSlider" low-value="0" class="slider" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="MiscSettings" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 50%; align-items: center;">

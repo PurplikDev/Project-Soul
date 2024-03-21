@@ -39,6 +39,7 @@ namespace roguelike.environment.world {
                                 break;
 
                             default:
+                                player.transform.SetParent(null);
                                 GameManager.Input.CharacterControls.Enable();
                                 break;
                         }
