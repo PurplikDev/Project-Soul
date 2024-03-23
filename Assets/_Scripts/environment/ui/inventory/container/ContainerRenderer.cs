@@ -48,7 +48,7 @@ namespace roguelike.rendering.ui {
 
         // POINTER EVENT METHODS
 
-        public virtual void ClickSlot(Vector2 position, ItemSlot originalSlot, bool isPrimary) {
+        public virtual void ClickSlot(Vector2 position, ItemSlot originalSlot, int mouseButton) {
 
             if (mouseSlot.SlotStack.IsEmpty() && originalSlot.SlotStack.IsEmpty()) {
                 return;
@@ -67,9 +67,9 @@ namespace roguelike.rendering.ui {
             }
 
             if (clickedSlot.SlotStack.Item == mouseSlot.SlotStack.Item &&
-                clickedSlot.SlotStack.Item.MaxStackSize != 1 && isPrimary) {
+                clickedSlot.SlotStack.Item.MaxStackSize != 1 && mouseButton == 0) {
                 FillSlot(clickedSlot, mouseSlot);
-            } else if (clickedSlot.SlotStack.StackSize > 1 && mouseSlot.SlotStack.IsEmpty() && !isPrimary) {
+            } else if (clickedSlot.SlotStack.StackSize > 1 && mouseSlot.SlotStack.IsEmpty() && mouseButton != 0) {
                 SplitSlot(clickedSlot);
             } else {
                 SwapSlots(clickedSlot);
@@ -128,6 +128,7 @@ namespace roguelike.rendering.ui {
 
         // MISC METHODS
 
-        protected abstract void SyncVisualToInternalSingle(ItemSlot clickedSlot); // Updates Internal inventory to be like visual
+        // Updates Internal inventory to be like visual
+        protected abstract void SyncVisualToInternalSingle(ItemSlot clickedSlot); 
     }
 }

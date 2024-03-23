@@ -91,21 +91,21 @@ namespace roguelike.rendering.ui
 
         // Slot Interaction Methods
 
-        public override void ClickSlot(Vector2 position, ItemSlot originalSlot, bool isPrimary) {
+        public override void ClickSlot(Vector2 position, ItemSlot originalSlot, int mouseButton) {
             if(originalSlot.SlotStack.IsEmpty()) { return; }
 
             if(playerInventorySlots.Contains(originalSlot)) {
                 if (SpaceInOffer(playerOffer, originalSlot.SlotStack)) {
-                    SwapItemsInSlots(originalSlot, playerOffer, isPrimary);
+                    SwapItemsInSlots(originalSlot, playerOffer, mouseButton == 0);
                 }
             } else if (traderInventorySlots.Contains(originalSlot)) {
                 if (SpaceInOffer(traderOffer, originalSlot.SlotStack)) {
-                    SwapItemsInSlots(originalSlot, traderOffer, isPrimary);
+                    SwapItemsInSlots(originalSlot, traderOffer, mouseButton == 0);
                 }
             } else if (playerOffer.Contains(originalSlot)) {
-                SwapItemsInSlots(originalSlot, playerInventorySlots, isPrimary);
+                SwapItemsInSlots(originalSlot, playerInventorySlots, mouseButton == 0);
             } else if (traderOffer.Contains(originalSlot)) {
-                SwapItemsInSlots(originalSlot, traderInventorySlots, isPrimary);
+                SwapItemsInSlots(originalSlot, traderInventorySlots, mouseButton == 0);
             }
 
             UpdateValues();

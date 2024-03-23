@@ -8,7 +8,6 @@ using Tweens;
 using UnityEngine;
 using UnityEngine.Scripting;
 using UnityEngine.UIElements;
-using static UnityEngine.Rendering.DebugUI;
 
 namespace roguelike.environment.ui.hud {
     public class HealthBarRenderer : MonoBehaviour {
@@ -95,6 +94,7 @@ namespace roguelike.environment.ui.hud {
                     break;
                 case HealthBarStyle.BAR: 
                     UpdateBar();
+                    DestroyHearts();
                     _heartDisplayHolder.style.visibility = Visibility.Hidden;
                     _barDisplayHolder.style.visibility = Visibility.Visible;
                     break;
@@ -103,7 +103,8 @@ namespace roguelike.environment.ui.hud {
         }
 
         private void HideHealthDisplay() {
-
+            _heartDisplayHolder.style.visibility = Visibility.Hidden;
+            _barDisplayHolder.style.visibility = Visibility.Hidden;
         }
 
         // HEART DISPLAY METHODS
@@ -119,8 +120,9 @@ namespace roguelike.environment.ui.hud {
         }
 
         private void UpdateHearts() {
-            // this renders new set of hearts when the max health is updated
-            if (Target.MaxHealth.Value != oldMaxHealth) { RenderHearts(); }
+            _hearts.Clear();
+            _heartDisplayHolder.Clear();
+            RenderHearts();
 
             float healthToDistribute = Target.Health;
             foreach (Heart heart in _hearts) {
@@ -136,12 +138,19 @@ namespace roguelike.environment.ui.hud {
             }
         }
 
+        private void DestroyHearts() {
+            foreach(Heart heart in _hearts) {
+                heart.UpdateHeart(0, false);
+            }
+            
+        }
+
         // BAR DISPLAY METHODS
 
         private void UpdateBar() {
             if(HealthDisplayText) {
                 _barHealthDisplay.text = $"{Target.Health}/{Target.MaxHealth.Value}";
-            } else if(_barHealthDisplay.style.visibility == Visibility.Visible) {
+            } else {
                 _barHealthDisplay.style.visibility = Visibility.Hidden;
             }
             

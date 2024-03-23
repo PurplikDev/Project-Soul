@@ -34,7 +34,7 @@ namespace roguelike.rendering.ui.slot {
         }
 
         public void OnPointerDown(PointerDownEvent evt) {
-            Renderer.ClickSlot(evt.position, this, evt.pressedButtons == 1);
+            Renderer.ClickSlot(evt.position, this, evt.pressedButtons);
         }
 
         protected virtual void UpdateSlot() {

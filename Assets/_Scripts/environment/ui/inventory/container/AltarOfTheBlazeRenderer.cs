@@ -31,8 +31,8 @@ namespace roguelike.rendering {
             _scorchButton.clicked += _altar.SaveGame;
         }
 
-        public override void ClickSlot(Vector2 position, ItemSlot originalSlot, bool isPrimary) {
-            base.ClickSlot(position, originalSlot, isPrimary);
+        public override void ClickSlot(Vector2 position, ItemSlot originalSlot, int mouseButton) {
+            base.ClickSlot(position, originalSlot, mouseButton);
 
             if(_sacrificeSlot.SlotStack.Item is Trophy) {
                 _sacrificeButton.AddToClassList("button");

@@ -1,4 +1,5 @@
 using roguelike.environment.entity.statsystem;
+using roguelike.environment.entity.statuseffect;
 using roguelike.system.singleton;
 using System;
 using System.Collections.Generic;
@@ -49,7 +50,7 @@ namespace roguelike.core.item {
             Register("coins", 1280, 1);
             Register("magic_silk", 32);
 
-
+            RegisterUseItem("bandage", 8, UseItemType.HEALING, 5);
 
             // Light Weapon Registry
 
@@ -135,7 +136,9 @@ namespace roguelike.core.item {
             _itemDatabase.Add(id, new Item(id, maxStackSize, itemValue));
         }
 
-
+        private void RegisterUseItem(string id, int value, UseItemType type, float potency) {
+            _itemDatabase.Add(id, new UseItem(id, value, type, potency));
+        }
 
         private void RegisterTrophy(string id, int itemValue) {
             _itemDatabase.Add(id, new Trophy(id, itemValue));

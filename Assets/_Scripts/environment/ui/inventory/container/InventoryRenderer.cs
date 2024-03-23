@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 namespace roguelike.rendering.ui {
     public class InventoryRenderer : ContainerRenderer {
-        protected VisualElement equipmentRoot, trinketRoot, itemTooltip;
+        protected VisualElement equipmentRoot, trinketRoot, itemTooltip, character;
 
         protected Label tooltipName, tooltipDescription;
 
@@ -20,6 +20,8 @@ namespace roguelike.rendering.ui {
 
             tooltipName = itemTooltip.Q<Label>("ItemTooltipName");
             tooltipDescription = itemTooltip.Q<Label>("ItemTooltipDescription");
+
+            character = root.Q<VisualElement>("CharacterBackground");
 
             TranslationManager.TranslateHeader(root.Q<Label>("InventoryHeader"));
             TranslationManager.TranslateHeader(root.Q<Label>("CharacterHeader"));
@@ -37,6 +39,20 @@ namespace roguelike.rendering.ui {
 
         protected override void SyncVisualToInternalSingle(ItemSlot clickedSlot) {
             inventory.UpdateItemStack(clickedSlot.SlotStack, clickedSlot.SlotIndex);
+        }
+
+        public override void ClickSlot(Vector2 position, ItemSlot originalSlot, int mouseButton) {
+
+            if (mouseButton == 2 && originalSlot.SlotStack.Item is UseItem useItem) {
+                useItem.Apply(inventory.Entity);
+                originalSlot.SlotStack.DecreaseStackSize(1);
+                if(originalSlot.SlotStack.StackSize <= 0) {
+                    originalSlot.SetStack(ItemStack.EMPTY);                    
+                }
+                originalSlot.UpdateSlotEvent.Invoke();
+            }
+
+            base.ClickSlot(position, originalSlot, mouseButton);
         }
 
 

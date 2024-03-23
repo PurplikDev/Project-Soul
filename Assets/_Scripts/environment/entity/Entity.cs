@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using roguelike.environment.entity.combat;
 using roguelike.environment.entity.statsystem;
+using roguelike.environment.entity.statuseffect;
 using UnityEngine;
 
 namespace roguelike.environment.entity {
@@ -79,8 +80,9 @@ namespace roguelike.environment.entity {
         }
 
         public virtual void Heal(float healAmount) {
-            Health = healAmount + Health > MaxHealth.Value ? MaxHealth.Value : healAmount;
+            Health = healAmount + Health > MaxHealth.Value ? MaxHealth.Value : healAmount + Health;
             HealEvent?.Invoke();
+            HealthUpdate?.Invoke();
         }
 
         public virtual void Damage(DamageSource source) {
@@ -92,10 +94,7 @@ namespace roguelike.environment.entity {
             HurtEvent?.Invoke();
         }
 
-        private void CheckAndApplyStatusEffects() {
-            if(ActiveEffects.Count < 1) { return; }
-            Debug.Log("Effect applied");
-        }
+        private void CheckAndApplyStatusEffects() {}
 
         // need to make this function run only in editor
         private void DeathRename() {
