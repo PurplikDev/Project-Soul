@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ElevatorDirection: 1
+  Type: 0
   ElevatorObject: {fileID: 560931818208162568}
 --- !u!65 &6715031334979845296
 BoxCollider:
@@ -67,7 +68,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.25, y: 2, z: 1.25}
+  m_Size: {x: 0.75, y: 2, z: 0.75}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!1001 &795374984721583705
 PrefabInstance:

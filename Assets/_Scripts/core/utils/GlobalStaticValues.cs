@@ -1,3 +1,4 @@
+using roguelike.environment.entity.statsystem;
 using UnityEngine;
 
 namespace roguelike.core.utils {
@@ -8,5 +9,11 @@ namespace roguelike.core.utils {
 
         public static readonly string SAVE_PATH = Application.persistentDataPath + "/GameSaves";
         public static readonly string SETTINGS_PATH = Application.persistentDataPath + "/settings.json";
+
+
+
+        public static readonly StatModifier TEMPLAR_BONUS_STAT = new StatModifier(2, StatModifierType.FLAT, StatType.DEFENCE);
+        public static readonly StatModifier ROGUE_BONUS_STAT = new StatModifier(2, StatModifierType.FLAT, StatType.SPEED);
+        public static readonly StatModifier THAUMATURGE_BONUS_STAT = new StatModifier(20, StatModifierType.FLAT, StatType.HEALTH);
     }
 }
