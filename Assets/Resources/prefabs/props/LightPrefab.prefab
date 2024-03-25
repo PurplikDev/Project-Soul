@@ -4962,8 +4962,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 180855149
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -5021,7 +5021,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 09f56f1cf1ed23c4580ce54763dc415d,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.92387956
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 09f56f1cf1ed23c4580ce54763dc415d,
         type: 3}
@@ -5031,7 +5031,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 09f56f1cf1ed23c4580ce54763dc415d,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.38268343
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 09f56f1cf1ed23c4580ce54763dc415d,
         type: 3}
@@ -5046,7 +5046,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 09f56f1cf1ed23c4580ce54763dc415d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 09f56f1cf1ed23c4580ce54763dc415d,
         type: 3}

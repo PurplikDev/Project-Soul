@@ -1,6 +1,4 @@
 using roguelike.environment.entity;
-using roguelike.environment.entity.statuseffect;
-using UnityEngine;
 
 namespace roguelike.core.item {
     public class UseItem : Item {
@@ -14,7 +12,10 @@ namespace roguelike.core.item {
         }
 
         public void Apply(Entity entity) {
-            entity.Heal(potency);
+            switch(type) {
+                case UseItemType.HEALING:
+                    entity.Heal(potency); break;
+            }
         }
     }
 
