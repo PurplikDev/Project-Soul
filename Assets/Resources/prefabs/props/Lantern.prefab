@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2263532754677068580}
-  - component: {fileID: 1899319976961040925}
   m_Layer: 7
   m_Name: Lantern
   m_TagString: Untagged
@@ -34,20 +33,6 @@ Transform:
   - {fileID: 4667495977911918412}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1899319976961040925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2167965086195582135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4ba489c52274ae4eaf943eb6c8c1893, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PrefabLight: {fileID: 3743392375959762232}
-  LightParticle: {fileID: 0}
 --- !u!1 &3419957696124024772
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,7 +75,7 @@ Light:
   m_GameObject: {fileID: 3419957696124024772}
   m_Enabled: 1
   serializedVersion: 10
-  m_Type: 2
+  m_Type: 3
   m_Shape: 0
   m_Color: {r: 0.98823535, g: 0.8235295, b: 0.6313726, a: 1}
   m_Intensity: 5
@@ -127,12 +112,12 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 0
+  m_RenderMode: 2
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 1984
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -157,7 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
+  m_AdditionalLightsShadowResolutionTier: 0
   m_LightLayerMask: 1
   m_RenderingLayers: 1
   m_CustomShadowLayers: 0

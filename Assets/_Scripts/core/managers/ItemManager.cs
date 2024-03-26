@@ -48,8 +48,15 @@ namespace roguelike.core.item {
 
             Register("air", 0);
             Register("coins", 1280, 1);
-            Register("magic_silk", 32);
 
+            // Crafting Materials
+            Register("magic_silk", 32, 32);
+            Register("old_bone", 32, 8);
+            Register("mystic_bone", 16, 48);
+            Register("piece_of_chainmail", 8, 16);
+            Register("chainmail", 16, 32);
+
+            // UseItems
             RegisterUseItem("bandage", 8, UseItemType.HEALING, 5);
 
             // Light Weapon Registry
@@ -87,7 +94,7 @@ namespace roguelike.core.item {
             // Chestplates
 
             RegisterEquipment("tunic_of_the_traveler", 128, EquipmentType.CHESTPLATE,
-                new StatModifier(1.25f, StatModifierType.FLAT, StatType.HEALTH),
+                new StatModifier(5f, StatModifierType.FLAT, StatType.HEALTH),
                 new StatModifier(1.5f, StatModifierType.ADDITIONAL, StatType.SPEED),
                 new StatModifier(0.75f, StatModifierType.FLAT, StatType.DEFENCE),
                 new StatModifier(1f, StatModifierType.FLAT, StatType.ROGUE),
@@ -115,6 +122,7 @@ namespace roguelike.core.item {
             // Debug/Admin/Easter Egg Items
 
             Register("missing_item", int.MaxValue);
+            RegisterUseItem("missing_use_item", int.MaxValue, UseItemType.HEALING, float.MaxValue);
             RegisterLightSword("missing_light_sword", int.MaxValue, int.MaxValue, 0f, 0f, int.MaxValue, new StatModifier(10f, StatModifierType.FLAT, StatType.HEALTH), new StatModifier(10f, StatModifierType.FLAT, StatType.DEFENCE), new StatModifier(10f, StatModifierType.FLAT, StatType.SPEED), new StatModifier(10f, StatModifierType.FLAT, StatType.TEMPLAR), new StatModifier(10f, StatModifierType.FLAT, StatType.ROGUE), new StatModifier(10f, StatModifierType.FLAT, StatType.THAUMATURGE));
             RegisterHeavySword("missing_heavy_sword", int.MaxValue, int.MaxValue, 0f, 0f, int.MaxValue, new StatModifier(10f, StatModifierType.FLAT, StatType.HEALTH), new StatModifier(10f, StatModifierType.FLAT, StatType.DEFENCE), new StatModifier(10f, StatModifierType.FLAT, StatType.SPEED), new StatModifier(10f, StatModifierType.FLAT, StatType.TEMPLAR), new StatModifier(10f, StatModifierType.FLAT, StatType.ROGUE), new StatModifier(10f, StatModifierType.FLAT, StatType.THAUMATURGE));
             RegisterShield("missing_shield", int.MaxValue, 0f, int.MaxValue, int.MaxValue, new StatModifier(10f, StatModifierType.FLAT, StatType.HEALTH), new StatModifier(10f, StatModifierType.FLAT, StatType.DEFENCE), new StatModifier(10f, StatModifierType.FLAT, StatType.SPEED), new StatModifier(10f, StatModifierType.FLAT, StatType.TEMPLAR), new StatModifier(10f, StatModifierType.FLAT, StatType.ROGUE), new StatModifier(10f, StatModifierType.FLAT, StatType.THAUMATURGE));
