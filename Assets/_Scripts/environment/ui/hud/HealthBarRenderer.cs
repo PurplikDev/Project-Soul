@@ -78,6 +78,13 @@ namespace roguelike.environment.ui.hud {
             }
         }
 
+        private void OnDestroy() {
+            Target.HealthUpdate -= UpdateHealthDisplay;
+            Target.MaxHealthUpdate -= UpdateHealthDisplay;
+            Target.DeathEvent -= HideHealthDisplay;
+            GameSettings.GameSettingsChanged -= DisplaySettingsUpdated;
+        }
+
         private void DisplaySettingsUpdated(GameSettings settings) {
             HealthBarStyle = settings.HealthBarStyle;
             HealthDisplayText = settings.HealthBarText;
@@ -198,7 +205,6 @@ namespace roguelike.environment.ui.hud {
                     _barFillEffect.style.width = new StyleLength(new Length(value, LengthUnit.Percent));
                 }
             };
-
             gameObject.AddTween(tween);
         }
     }

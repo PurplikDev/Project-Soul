@@ -30,10 +30,10 @@ namespace roguelike.system.manager {
 
         internal async void AsyncLoadGame(int sceneIndex, GameState gameState) {
             var scene = SceneManager.LoadSceneAsync(sceneIndex);
-            scene.completed += GameManager.SpawnPlayer;
-            if(gameState == GameState.DUNGEON) {
+            if (gameState == GameState.DUNGEON) {
                 scene.completed += DungeonManager.SpawnDungeon;
             }
+            scene.completed += GameManager.SpawnPlayer;
             GameManager.CurrentGameState = gameState;
             scene.allowSceneActivation = false;
 
