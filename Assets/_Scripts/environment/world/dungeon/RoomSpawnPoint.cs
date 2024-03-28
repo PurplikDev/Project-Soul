@@ -16,6 +16,7 @@ namespace roguelike.environment.world.dungeon {
         }
 
         private void Start() {
+            Debug.Log(orientation.ToString().ToLower());
             Destroy(gameObject);
         }
     }
