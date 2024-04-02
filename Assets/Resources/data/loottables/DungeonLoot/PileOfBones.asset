@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebb5d44126108074aad57cb9cb31ad80, type: 3}
   m_Name: PileOfBones
   m_EditorClassIdentifier: 
-  LootTableItems: []
+  LootTableItems:
+  - old_bone

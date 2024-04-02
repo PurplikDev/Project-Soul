@@ -32,8 +32,8 @@ namespace roguelike.environment.world.deployable {
         }
 
         public void OnHoverEnter(Player player) {
-            _materials.Add(_outlineMaterial);
-            _deployableRenderer.SetMaterials(_materials);
+            _materials?.Add(_outlineMaterial);
+            _deployableRenderer?.SetMaterials(_materials);
         }
 
         public void OnHover(Player player) {
@@ -41,8 +41,8 @@ namespace roguelike.environment.world.deployable {
         }
 
         public void OnHoverExit(Player player) {
-            _materials.Remove(_outlineMaterial);
-            _deployableRenderer.SetMaterials(_materials);
+            _materials?.Remove(_outlineMaterial);
+            _deployableRenderer?.SetMaterials(_materials);
         }
     }
 }

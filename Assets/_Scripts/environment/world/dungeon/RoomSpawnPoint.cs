@@ -8,16 +8,19 @@ namespace roguelike.environment.world.dungeon {
 
         void Awake() {
             // spawn random room from a pool
-            if(Mathematicus.ChanceIn(15)) {
-                // treasure room!!!!!!!!!!!!! yarrrrrrrrrrrr
+            if(Mathematicus.ChanceIn(0)) {
+                var treasure_rooms = Resources.LoadAll<GameObject>($"prefabs/dungeon/rooms/treasure/{orientation.ToString().ToLower()}");
+                if (treasure_rooms.Length > 0) {
+                    var room = treasure_rooms[Random.Range(0, treasure_rooms.Length)];
+                    Instantiate(room, transform.position, room.transform.rotation, transform.parent);
+                }
             } else {
-                // normal room :c
+                var rooms = Resources.LoadAll<GameObject>($"prefabs/dungeon/rooms/normal/{orientation.ToString().ToLower()}");
+                if(rooms.Length > 0) {
+                    var room = rooms[Random.Range(0, rooms.Length)];
+                    Instantiate(room, transform.position, room.transform.rotation, transform.parent);
+                }
             }
-        }
-
-        private void Start() {
-            Debug.Log(orientation.ToString().ToLower());
-            Destroy(gameObject);
         }
     }
 

@@ -4,6 +4,8 @@ using UnityEngine;
 namespace roguelike.environment.world.dungeon {
     public class EntitySpawnPoint : MonoBehaviour {
 
+        // todo: instead of a monster pool, apply damage, defence and health modifiers to spawned entities
+
         string[,] path = {
             { "tier_0", "tier_1", "tier_2" },  // [0,x]
             { "tier_1", "tier_1", "tier_2" }, // [1,x]

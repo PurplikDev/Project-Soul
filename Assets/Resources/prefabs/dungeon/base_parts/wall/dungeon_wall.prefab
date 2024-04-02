@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1534541554421435216}
   - component: {fileID: 3412427089820553267}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: dungeon_wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -47,7 +47,12 @@ namespace roguelike.core.item {
             // Generic Item/Registry
 
             Register("air", 0);
+
+            // Valuables
             Register("coins", 1280, 1);
+            Register("gem", 64, 128);
+            Register("old_necklace", 1, 256);
+            Register("zupa", 1, 1028);
 
             // Crafting Materials
             Register("magic_silk", 32, 32);

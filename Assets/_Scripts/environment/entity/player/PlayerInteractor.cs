@@ -81,11 +81,11 @@ namespace roguelike.environment.entity.player {
             if(Vector3.Distance(hitPos, Player.Position) < 2.5f) {
                 if(hoverable != null) {
                     if(hoverable == _hoverable) {
-                        _hoverable.OnHover(Player);
+                        _hoverable?.OnHover(Player);
                     } else if(hoverable != _hoverable) {
                         _hoverable?.OnHoverExit(Player);
                         _hoverable = hoverable;
-                        _hoverable.OnHoverEnter(Player);
+                        _hoverable?.OnHoverEnter(Player);
                     }
                 } else { HoverExit(); }
             } else if(_hoverable != null) { HoverExit(); }
