@@ -1,5 +1,7 @@
 using roguelike.core.utils.mathematicus;
+using roguelike.environment.world.dungeon;
 using roguelike.system.singleton;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace roguelike.system.manager {

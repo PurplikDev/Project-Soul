@@ -58,6 +58,11 @@ namespace roguelike.core.item {
                         Entity.StatByType[statModifier.StatType].RemoveModifier(statModifier);
                     }
                 }
+
+                Debug.Log(Entity.StatByType[StatType.TEMPLAR].Value);
+                Debug.Log(Entity.StatByType[StatType.ROGUE].Value);
+                Debug.Log(Entity.StatByType[StatType.THAUMATURGE].Value);
+
                 Entity.MaxHealthUpdate.Invoke();
             }
         }

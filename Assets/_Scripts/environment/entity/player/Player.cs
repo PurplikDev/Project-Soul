@@ -4,6 +4,7 @@ using roguelike.environment.entity.combat;
 using roguelike.environment.entity.statsystem;
 using roguelike.environment.ui.hud;
 using roguelike.environment.ui.statemachine;
+using roguelike.rendering.ui;
 using roguelike.system.input;
 using roguelike.system.manager;
 using UnityEngine;
@@ -69,7 +70,6 @@ namespace roguelike.environment.entity.player {
             Rogue = GameManager.CurrentGameData.PlayerData.Rogue;
             Thaumaturge = GameManager.CurrentGameData.PlayerData.Thaumaturge;
             Corruption = GameManager.CurrentGameData.PlayerData.Corruption;
-
             base.Awake();
         }
 
