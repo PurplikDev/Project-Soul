@@ -1,6 +1,5 @@
 using Newtonsoft.Json;
 using roguelike.core.item;
-using roguelike.environment.entity.combat;
 using roguelike.environment.entity.statsystem;
 using roguelike.environment.ui.hud;
 using roguelike.environment.ui.statemachine;
@@ -75,6 +74,10 @@ namespace roguelike.environment.entity.player {
 
         public override void PrimaryAction() { ItemInMainHand?.ItemAction(this); }
         public override void SecondaryAction() { ItemInOffHand?.ItemAction(this); }
+
+        public void DisplayMessage(string message) {
+            GetComponentInChildren<MessageDisplay>().DisplayMessage(message);
+        }
     }
 
     [System.Serializable]

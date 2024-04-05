@@ -1,4 +1,3 @@
-using System.Threading;
 using Tweens;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,7 +24,17 @@ namespace roguelike.rendering.ui {
                     text.color = color;
                 },
                 onFinally = (_) => {
-                    Thread.Sleep(2500);
+                    SleepMessage();
+                }
+            };
+
+            gameObject.AddTween(tween);
+        }
+
+        private void SleepMessage() {
+            var tween = new FloatTween {
+                duration = 2.5f,
+                onFinally = (_) => {
                     HideMessage();
                 }
             };

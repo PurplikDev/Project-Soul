@@ -48,6 +48,9 @@ namespace roguelike.core.item {
 
             Register("air", 0);
 
+            // Important Items
+            Register("ancient_gate_key", 1, 128);
+
             // Valuables
             Register("coins", 1280, 1);
             Register("gem", 64, 128);

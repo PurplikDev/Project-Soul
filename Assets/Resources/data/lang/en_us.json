@@ -1,47 +1,51 @@
 {
-  // ITEM NAMES
+    // ITEM NAMES
 
-        "air": "Air",
+    "air": "Air",
 
-        "gold" : "Gold",
-        "boots_of_the_traveler" : "Boots of the Traveler",
+    "gold": "Gold",
+    "boots_of_the_traveler": "Boots of the Traveler",
 
-  // ITEM DESCRIPTIONS
-	
-        "test4.description" : "testing testing testing testing testing testing testing testing testing testing testing testing testing testing testing",
-        "boots_of_the_traveler.description" : "Boots that were once worn by an ancient Thaumaturge, but now they belong to nobody...",
+    // ITEM DESCRIPTIONS
 
-  // UI
+    "test4.description": "testing testing testing testing testing testing testing testing testing testing testing testing testing testing testing",
+    "boots_of_the_traveler.description": "Boots that were once worn by an ancient Thaumaturge, but now they belong to nobody...",
 
-        "ui.play" : "Play",
-        "ui.settings" : "Settings",
-        "ui.quit" : "Quit",
+    // UI
 
-        "ui.saves" : "Saves",
-        "ui.new_save" : "New Saves",
-        "ui.character_name" : "Character Name",
+    "ui.play": "Play",
+    "ui.settings": "Settings",
+    "ui.quit": "Quit",
 
-        "ui.create" : "Create",
-        "ui.cancel" : "Cancel",
-        "ui.day" : "Day",
+    "ui.saves": "Saves",
+    "ui.new_save": "New Saves",
+    "ui.character_name": "Character Name",
 
-        "ui.pause" : "Paused",
-        "ui.resume" : "Resume",
-        
-        "ui.inventory" : "Inventory",
-        "ui.character" : "Character",
-        "ui.stats" : "Statistics",
-        "ui.equipment" : "Equipment",
-        "ui.trinkets" : "Trinkets",
-        "ui.crafting_station" : "Crafting Station",
-        "ui.storage_crate" : "Storage Crate",
+    "ui.create": "Create",
+    "ui.cancel": "Cancel",
+    "ui.day": "Day",
 
-        "ui.trader_inventory" : "Trader's Inventory",
-        "ui.trader_value" : "Trader Offer Value:",
-        "ui.player_value" : "Player Offer Value:",
-        "ui.deal" : "Deal",
+    "ui.pause": "Paused",
+    "ui.resume": "Resume",
 
-        "ui.altar_of_the_blaze" : "Altar of the Blaze",
-        "ui.sacrifice" : "Sacrifice",
-        "ui.scorch" : "Scorch"
+    "ui.inventory": "Inventory",
+    "ui.character": "Character",
+    "ui.stats": "Statistics",
+    "ui.equipment": "Equipment",
+    "ui.trinkets": "Trinkets",
+    "ui.crafting_station": "Crafting Station",
+    "ui.storage_crate": "Storage Crate",
+
+    "ui.trader_inventory": "Trader's Inventory",
+    "ui.trader_value": "Trader Offer Value:",
+    "ui.player_value": "Player Offer Value:",
+    "ui.deal": "Deal",
+
+    "ui.altar_of_the_blaze": "Altar of the Blaze",
+    "ui.sacrifice": "Sacrifice",
+    "ui.scorch": "Scorch",
+
+    "ui.need_key": "You need a key to open this door...",
+    "ui.key_got": "You have obtained a key!",
+    "ui.no_space": "You have no space in your Inventory..."
 }

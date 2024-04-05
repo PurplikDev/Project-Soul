@@ -66,6 +66,40 @@ namespace roguelike.core.item {
                 Entity.MaxHealthUpdate.Invoke();
             }
         }
+
+        public bool HasItem(Item item) {
+            foreach(var stack in Items) {
+                if(stack.Item == item) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void AddItem(ItemStack itemStack) {
+            for(int i = 0; i < InventorySize; i++) {
+                if(Items[i].IsEmpty()) {
+                    Items[i] = itemStack; return;
+                }
+            }
+        }
+
+        public void RemoveItem(Item item) {
+            for(int i = 0; i < Items.Count; i++) {
+                if (Items[i].Item == item) {
+                    Items[i] = ItemStack.EMPTY; return;
+                }
+            }
+        }
+
+        public bool HasSpace() {
+            foreach (var stack in Items) {
+                if (stack.IsEmpty()) {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 
     public class InventoryData {
