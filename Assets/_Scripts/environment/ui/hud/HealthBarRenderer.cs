@@ -38,7 +38,7 @@ namespace roguelike.environment.ui.hud {
             Target.DeathEvent += HideHealthDisplay;
         }
 
-        private void Awake() {
+        public void InitiateRenderer() {
             HealthDisplay = GetComponent<UIDocument>();
 
             var root = HealthDisplay.rootVisualElement;
@@ -166,7 +166,7 @@ namespace roguelike.environment.ui.hud {
             BarDamageEffect();
         }
 
-        private void RevealBar() {
+        public void RevealBar() {
             var tween = new FloatTween {
                 duration = 2,
                 from = 0,

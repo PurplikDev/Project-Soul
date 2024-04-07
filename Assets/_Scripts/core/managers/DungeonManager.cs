@@ -19,6 +19,7 @@ namespace roguelike.system.manager {
         static GameObject[] bossFloors { get { return Resources.LoadAll<GameObject>("prefabs/dungeon/bossLayouts"); } }
 
         public static void SpawnDungeon(AsyncOperation _) {
+            RoomSpawnPoint.keySpawned = false;
             if(State == DungeonState.DUNGEON) {
                 if(CurrentLayer == 1) {
                     Instantiate(firstFloors[Random.Range(0, firstFloors.Length)]);
@@ -46,6 +47,7 @@ namespace roguelike.system.manager {
             CurrentLayer++;
             LayersUntilBoss--;
             State = DungeonState.DUNGEON;
+            RoomSpawnPoint.keySpawned = false;
         }
 
         public void EnterCamp() {
@@ -55,6 +57,7 @@ namespace roguelike.system.manager {
         public void ExitCamp() {
             GameManager.UpdateGameData();
             EnterLayer();
+            LoadingManager.Instance.LoadScene(3, GameState.DUNGEON);
         }
 
         public void ExitLayer() {

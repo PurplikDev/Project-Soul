@@ -52,24 +52,16 @@ namespace roguelike.environment.entity.player {
             PlayerInteractor = GetComponentInChildren<PlayerInteractor>();
             UIStateMachine = GetComponent<UIStateMachine>();
             PlayerInteractor.Player = this;
-            GetComponentInChildren<HealthBarRenderer>().SetTarget(this);
+            var bar = GetComponentInChildren<HealthBarRenderer>();
+            bar.InitiateRenderer();
+            bar.SetTarget(this);
 
-
+            base.Awake();
 
             // LOADING DATA FROM SAVE
 
             Inventory = new Inventory(this, GameManager.CurrentGameData.PlayerData.PlayerInventory);
-
             SetHealth(GameManager.CurrentGameData.PlayerData.Health);
-
-            MaxHealth = GameManager.CurrentGameData.PlayerData.MaxHealth;
-            Speed = GameManager.CurrentGameData.PlayerData.Speed;
-            Defence = GameManager.CurrentGameData.PlayerData.Defence;
-            Templar = GameManager.CurrentGameData.PlayerData.Templar;
-            Rogue = GameManager.CurrentGameData.PlayerData.Rogue;
-            Thaumaturge = GameManager.CurrentGameData.PlayerData.Thaumaturge;
-            Corruption = GameManager.CurrentGameData.PlayerData.Corruption;
-            base.Awake();
         }
 
         public override void PrimaryAction() { ItemInMainHand?.ItemAction(this); }

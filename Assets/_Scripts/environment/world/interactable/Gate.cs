@@ -19,14 +19,18 @@ namespace roguelike.environment.world.interactable {
         public void Interact(Player player) {
             if(isOpening) { return; }
 
+            Debug.Log(Type.ToString());
+
             if(Type == GateType.LAYER_EXIT) {
                 if(player.Inventory.HasItem(ItemManager.GetItemByID("ancient_gate_key"))) {
                     player.Inventory.RemoveItem(ItemManager.GetItemByID("ancient_gate_key"));
                 } else {
-                    player.DisplayMessage("ui.need_key");
+                    player?.DisplayMessage("ui.need_key");
                     return;
                 }
             }
+
+            Debug.Log("hello????????????");
 
             var tween = new PositionYTween {
                 duration = 2.5f,

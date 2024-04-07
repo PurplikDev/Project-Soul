@@ -38,6 +38,7 @@ namespace roguelike.core.item {
         public void LoadItemsFromSave(InventoryData data) {
             for(int i = 0; i < data.Items.Count; i++) {
                 Items.Add(new ItemStack(data.Items[i]));
+                UpdateItemStack(Items[i], i); // works??? it's ugly, but works
             }
         }
 
@@ -57,10 +58,6 @@ namespace roguelike.core.item {
                         Entity.StatByType[statModifier.StatType].RemoveModifier(statModifier);
                     }
                 }
-
-                Debug.Log(Entity.StatByType[StatType.TEMPLAR].Value);
-                Debug.Log(Entity.StatByType[StatType.ROGUE].Value);
-                Debug.Log(Entity.StatByType[StatType.THAUMATURGE].Value);
 
                 Entity.MaxHealthUpdate.Invoke();
             }

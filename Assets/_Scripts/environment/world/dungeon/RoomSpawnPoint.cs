@@ -8,10 +8,11 @@ namespace roguelike.environment.world.dungeon {
         public RoomOrientation orientation;
 
         static int points;
-        static bool keySpawned;
+        public static bool keySpawned;
 
         void Awake() {
             points++;
+            keySpawned = false; // i set this to false in so many places, when i remove one of them, it doesn't work
         }
 
         void Start() {
@@ -24,8 +25,6 @@ namespace roguelike.environment.world.dungeon {
                     Instantiate(room, transform.position, room.transform.rotation, transform.parent);
                     return;
                 }
-            } else if(points == 1) {
-                keySpawned = false;
             }
 
             points--;
