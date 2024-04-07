@@ -10,7 +10,6 @@ using UnityEngine;
 
 namespace roguelike.core.item {
     public class Inventory {
-
         public static readonly int InventorySize = 20; // this reffers to the size of the generic item storage, not the amount of all the slots
         public static readonly int EquipmentSize = 6;
         public static readonly int TrinketSize = 8;

@@ -24,6 +24,7 @@ namespace roguelike.environment.world.interactable {
                     player.Inventory.RemoveItem(ItemManager.GetItemByID("ancient_gate_key"));
                 } else {
                     player.DisplayMessage("ui.need_key");
+                    return;
                 }
             }
 

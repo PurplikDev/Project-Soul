@@ -24,6 +24,8 @@ namespace roguelike.environment.world.dungeon {
                     Instantiate(room, transform.position, room.transform.rotation, transform.parent);
                     return;
                 }
+            } else if(points == 1) {
+                keySpawned = false;
             }
 
             points--;

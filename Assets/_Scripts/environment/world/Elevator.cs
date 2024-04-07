@@ -27,11 +27,12 @@ namespace roguelike.environment.world {
                     },
                     onUpdate = (_, value) => {
                         ElevatorObject.transform.position = transform.position + new Vector3(0, value, 0);
-                        player.transform.position = ElevatorObject.transform.position + new Vector3(0, 1, 0);
+                        player.transform.position = ElevatorObject.transform.position + new Vector3(0, 1.5f, 0);
                     },
                     onFinally = (_) => {
                         switch(Type) {
                             case ElevatorType.TOWN_EXIT:
+                                GameManager.UpdateGameData();
                                 DungeonBoardRenderer.Instance.DisplayBoard();
                                 break;
 

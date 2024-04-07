@@ -109,6 +109,11 @@ PrefabInstance:
       propertyPath: EntityName
       value: Slime
       objectReference: {fileID: 0}
+    - target: {fileID: 9159898711395760817, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: AttackRange.BaseValue
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -27,10 +27,15 @@ namespace roguelike.environment.world.dungeon {
                 layer = 2;
             }
 
-            Debug.Log(path[difficulty, layer]);
+            
         }
 
         private void Start() {
+
+            var enemies = Resources.LoadAll<GameObject>("prefabs/entities/hostile");
+            var randomEnemy = enemies[Random.Range(0, enemies.Length)];
+            Instantiate(randomEnemy, transform.position + new Vector3(0, 1, 0), new Quaternion(), transform.parent);
+
             Destroy(gameObject);
         }
     }

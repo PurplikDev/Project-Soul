@@ -67,9 +67,9 @@ namespace roguelike.rendering.ui {
             }
 
             if (clickedSlot.SlotStack.Item == mouseSlot.SlotStack.Item &&
-                clickedSlot.SlotStack.Item.MaxStackSize != 1 && mouseButton == 0) {
+                clickedSlot.SlotStack.Item.MaxStackSize != 1 && mouseButton == 1) {
                 FillSlot(clickedSlot, mouseSlot);
-            } else if (clickedSlot.SlotStack.StackSize > 1 && mouseSlot.SlotStack.IsEmpty() && mouseButton != 0) {
+            } else if (clickedSlot.SlotStack.StackSize > 1 && mouseSlot.SlotStack.IsEmpty() && mouseButton != 1) {
                 SplitSlot(clickedSlot);
             } else {
                 SwapSlots(clickedSlot);

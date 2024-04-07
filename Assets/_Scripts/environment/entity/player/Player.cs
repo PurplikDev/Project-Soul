@@ -76,7 +76,7 @@ namespace roguelike.environment.entity.player {
         public override void SecondaryAction() { ItemInOffHand?.ItemAction(this); }
 
         public void DisplayMessage(string message) {
-            GetComponentInChildren<MessageDisplay>().DisplayMessage(message);
+            GetComponentInChildren<MessageDisplay>()?.DisplayMessage(message);
         }
     }
 

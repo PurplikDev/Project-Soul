@@ -43,7 +43,7 @@ namespace roguelike.rendering.ui {
 
         public override void ClickSlot(Vector2 position, ItemSlot originalSlot, int mouseButton) {
 
-            if (mouseButton == 2 && originalSlot.SlotStack.Item is UseItem useItem) {
+            if (mouseButton == 4 && originalSlot.SlotStack.Item is UseItem useItem) {
                 useItem.Apply(inventory.Entity);
                 originalSlot.SlotStack.DecreaseStackSize(1);
                 if(originalSlot.SlotStack.StackSize <= 0) {
