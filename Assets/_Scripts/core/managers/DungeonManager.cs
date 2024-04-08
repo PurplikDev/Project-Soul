@@ -38,7 +38,7 @@ namespace roguelike.system.manager {
         public void EnterDungeon(DungeonDifficulty difficulty) {
             Difficulty = difficulty;
             CurrentLayer = 1;
-            LayersUntilBoss = Random.Range(5, 8);
+            LayersUntilBoss = Random.Range(4, 6);
             LoadingManager.Instance.LoadScene(3, GameState.DUNGEON);
             State = DungeonState.DUNGEON;
         }
@@ -46,7 +46,16 @@ namespace roguelike.system.manager {
         public void EnterLayer() {
             CurrentLayer++;
             LayersUntilBoss--;
-            State = DungeonState.DUNGEON;
+
+            Debug.Log(LayersUntilBoss);
+
+            if(LayersUntilBoss <= 0) {
+                State = DungeonState.BOSS;
+            } else {
+                State = DungeonState.DUNGEON;
+            }
+
+            
             RoomSpawnPoint.keySpawned = false;
         }
 

@@ -19,6 +19,7 @@ namespace roguelike.environment.world.dungeon {
             // kind of ungly code... i was too tired to make this properly (8 am tuesday)
 
             int layer;
+
             if(currentLayer < 3) {
                 layer = 0;
             } else if (currentLayer < 5) {

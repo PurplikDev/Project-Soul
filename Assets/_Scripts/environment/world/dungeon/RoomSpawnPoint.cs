@@ -15,6 +15,14 @@ namespace roguelike.environment.world.dungeon {
             keySpawned = false; // i set this to false in so many places, when i remove one of them, it doesn't work
         }
 
+        private void OnEnable() {
+            keySpawned = false;
+        }
+
+        private void OnDisable() {
+            keySpawned = false;
+        }
+
         void Start() {
 
             if(!keySpawned) {

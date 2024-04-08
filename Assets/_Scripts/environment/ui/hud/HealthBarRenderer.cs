@@ -14,7 +14,7 @@ namespace roguelike.environment.ui.hud {
 
         public Entity Target { get; private set; }
         public HealthBarStyle HealthBarStyle;
-        public bool HealthDisplayText, ShouldReveal;
+        public bool HealthDisplayText, ShouldReveal, keepHidden;
 
         private float oldMaxHealth = 0;
 
@@ -65,7 +65,7 @@ namespace roguelike.environment.ui.hud {
         private void Start() {
             UpdateHealthDisplay();
 
-            if (ShouldReveal) {
+            if (ShouldReveal && !keepHidden) {
                 switch (HealthBarStyle) {
                     case HealthBarStyle.CLASSIC:
                         // RevealHearts(); NOT IMPLEMENTED YET
@@ -149,7 +149,6 @@ namespace roguelike.environment.ui.hud {
             foreach(Heart heart in _hearts) {
                 heart.UpdateHeart(0, false);
             }
-            
         }
 
         // BAR DISPLAY METHODS
@@ -160,9 +159,7 @@ namespace roguelike.environment.ui.hud {
             } else {
                 _barHealthDisplay.style.visibility = Visibility.Hidden;
             }
-            
             _barFill.style.width = new StyleLength(new Length(Target.Health / Target.MaxHealth.Value * 100, LengthUnit.Percent));
-
             BarDamageEffect();
         }
 
@@ -179,7 +176,6 @@ namespace roguelike.environment.ui.hud {
                     RevealText();
                 }
             };
-
             gameObject.AddTween(tween);
         }
 

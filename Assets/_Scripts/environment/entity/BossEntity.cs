@@ -12,7 +12,10 @@ namespace roguelike.environment.entity {
 
         protected override void Awake() {
             base.Awake();
-            GetComponentInChildren<HealthBarRenderer>().SetTarget(this);
+            
+            var renderer = GetComponentInChildren<HealthBarRenderer>();
+            renderer.InitiateRenderer();
+            renderer.SetTarget(this);
         }
     }
 }

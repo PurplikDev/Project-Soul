@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4924392538187932341
+--- !u!1001 &7087271765317843593
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -11,67 +11,37 @@ PrefabInstance:
     - target: {fileID: 228350984010815142, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
         type: 3}
       propertyPath: m_Name
-      value: slime_queen
+      value: AncientConstruct
       objectReference: {fileID: 0}
-    - target: {fileID: 4421963080296287879, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
+    - target: {fileID: 785767354768006101, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
         type: 3}
-      propertyPath: m_Height
-      value: 1
+      propertyPath: m_Color.a
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4421963080296287879, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
         type: 3}
       propertyPath: m_Radius
-      value: 0.85
-      objectReference: {fileID: 0}
-    - target: {fileID: 4421963080296287879, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
-        type: 3}
-      propertyPath: m_Center.y
-      value: -0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5193246374071510627, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
-        type: 3}
-      propertyPath: keepHidden
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6588053821680174076, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
-        type: 3}
-      propertyPath: Angle
-      value: 360
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6588053821680174076, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
         type: 3}
       propertyPath: Range
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 6588053821680174076, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
         type: 3}
-      propertyPath: DoesWander
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6588053821680174076, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
-        type: 3}
-      propertyPath: DoesHaveBrain
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6588053821680174076, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
-        type: 3}
-      propertyPath: DoesPermaAgro
-      value: 1
+      propertyPath: ForgetTimer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6588053821680174076, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
         type: 3}
       propertyPath: LooksForPlayer
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6588053821680174076, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
         type: 3}
       propertyPath: NeedToSeePlayer
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6588053821680174076, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
-        type: 3}
-      propertyPath: DoesFollowToCorner
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6811281171197306542, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
         type: 3}
@@ -91,17 +61,17 @@ PrefabInstance:
     - target: {fileID: 6811281171197306542, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 38.183765
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6811281171197306542, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6811281171197306542, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 33.941128
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6811281171197306542, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
         type: 3}
@@ -111,17 +81,17 @@ PrefabInstance:
     - target: {fileID: 6811281171197306542, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6811281171197306542, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6811281171197306542, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6811281171197306542, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
         type: 3}
@@ -138,59 +108,66 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7798326749682616454, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
-        type: 3}
-      propertyPath: BossName
-      value: The Slime Queen
-      objectReference: {fileID: 0}
-    - target: {fileID: 7798326749682616454, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
-        type: 3}
-      propertyPath: EntityName
-      value: Slime Queen
-      objectReference: {fileID: 0}
-    - target: {fileID: 7798326749682616454, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
-        type: 3}
-      propertyPath: BossDescription
-      value: Royal Jelly
-      objectReference: {fileID: 0}
-    - target: {fileID: 7798326749682616454, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
-        type: 3}
-      propertyPath: Speed.BaseValue
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7798326749682616454, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
-        type: 3}
-      propertyPath: Defence.BaseValue
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7798326749682616454, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
-        type: 3}
-      propertyPath: MaxHealth.BaseValue
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 8026406986826934702, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: c9a581610ec196d4e93a7a9a15284eb2,
+      objectReference: {fileID: 21300000, guid: ea47acc0cec7d7e4c9ed5b3de9ab89b9,
         type: 3}
-    - target: {fileID: 8737180323261500797, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8737180323261500797, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8737180323261500797, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.5
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7798326749682616454, guid: 8e21ad715a2f7904ab8d165b2c054fc8, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 228350984010815142, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
+        type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 8988908228306382856}
   m_SourcePrefab: {fileID: 100100000, guid: 8e21ad715a2f7904ab8d165b2c054fc8, type: 3}
+--- !u!4 &1953365045083912180 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8737180323261500797, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
+    type: 3}
+  m_PrefabInstance: {fileID: 7087271765317843593}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7021191105383214127 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 228350984010815142, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
+    type: 3}
+  m_PrefabInstance: {fileID: 7087271765317843593}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8988908228306382856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7021191105383214127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f2b1bbe79b5f084dac1fd24ca4fbb37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EntityName: Ancient Construct
+  MaxHealth:
+    BaseValue: 100
+  Speed:
+    BaseValue: 0
+  Defence:
+    BaseValue: 0
+  Templar:
+    BaseValue: 0
+  Rogue:
+    BaseValue: 0
+  Thaumaturge:
+    BaseValue: 0
+  Immortal: 1
+  Invisible: 0
+  AttackSpeed:
+    BaseValue: 1.5
+  AttackCooldown:
+    BaseValue: 0.5
+  AttackRange:
+    BaseValue: 0.5
+  EntityAim: {fileID: 1953365045083912180}
+  Projectile: {fileID: 0}

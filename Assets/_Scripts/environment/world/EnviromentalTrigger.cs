@@ -6,6 +6,8 @@ namespace roguelike.environment.world {
     public class EnviromentalTrigger : MonoBehaviour {
         public UnityEvent OnEnterTriggerEvent, OnExitTriggerEvent;
 
+        public bool DestroyOnTriggerExit = false;
+
         private void OnTriggerEnter(Collider other) {
             var player = other.GetComponent<Player>();
             if (player != null) {
@@ -17,6 +19,10 @@ namespace roguelike.environment.world {
             var player = other.GetComponent<Player>();
             if (player != null) {
                 OnExitTriggerEvent.Invoke();
+            }
+
+            if(DestroyOnTriggerExit) {
+                Destroy(gameObject);
             }
         }
     }
