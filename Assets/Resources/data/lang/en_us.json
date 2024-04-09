@@ -8,7 +8,6 @@
 
     // ITEM DESCRIPTIONS
 
-    "test4.description": "testing testing testing testing testing testing testing testing testing testing testing testing testing testing testing",
     "boots_of_the_traveler.description": "Boots that were once worn by an ancient Thaumaturge, but now they belong to nobody...",
 
     // UI
@@ -44,6 +43,8 @@
     "ui.altar_of_the_blaze": "Altar of the Blaze",
     "ui.sacrifice": "Sacrifice",
     "ui.scorch": "Scorch",
+
+    "ui.perma_death": "Perma Death",
 
     "ui.need_key": "You need a key to open this door...",
     "ui.key_got": "You have obtained a key!",

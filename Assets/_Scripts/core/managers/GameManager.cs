@@ -37,7 +37,7 @@ namespace roguelike.system.manager {
         }
 
         private void GenerateDebugSave() {
-            CurrentGameData = new GameData("Purplik", 0, Player);
+            CurrentGameData = new GameData("Purplik", 0, Player, false);
 
             string output = JsonConvert.SerializeObject(CurrentGameData);
 
@@ -52,8 +52,7 @@ namespace roguelike.system.manager {
         public static void SaveGame() {
             if(CurrentGameData == null) { return; }
 
-            CurrentGameData = new GameData(CurrentGameData.Name, CurrentGameData.Day, Player);
-
+            CurrentGameData = new GameData(CurrentGameData.Name, CurrentGameData.Day, Player, CurrentGameData.IsPermaDeath);
             string output = JsonConvert.SerializeObject(CurrentGameData);
 
             Directory.CreateDirectory(Path.GetDirectoryName(GlobalStaticValues.SAVE_PATH + $"/{CurrentGameData.Name}.json"));
@@ -64,9 +63,10 @@ namespace roguelike.system.manager {
             }
         }
 
-        public static GameData CreateNewSave(string characterName) {
+        public static GameData CreateNewSave(string characterName, bool isPermaDeath) {
             GameData data = GameData.EMPTY;
             data.Name = characterName;
+            data.IsPermaDeath = isPermaDeath;
             return data;
         }
 
@@ -93,7 +93,7 @@ namespace roguelike.system.manager {
         }
 
         public static void UpdateGameData() {
-            CurrentGameData = new GameData(CurrentGameData.Name, CurrentGameData.Day, Player);
+            CurrentGameData = new GameData(CurrentGameData.Name, CurrentGameData.Day, Player, CurrentGameData.IsPermaDeath);
         }
     }
 

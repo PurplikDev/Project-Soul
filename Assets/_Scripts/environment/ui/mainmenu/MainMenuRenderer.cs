@@ -14,6 +14,7 @@ namespace roguelike.rendering.ui.mainmenu {
         private VisualElement _root, _menuRoot, _saveMenuRoot, _saveSelectionRoot, _saveCreationRoot;
         private ScrollView _saveFileList;
         private Button _playButton, _settingsButton, _quitButton, _newSaveButton, _newSaveCreateButton, _newSaveCancelButton;
+        private Toggle _permaDeathToggle;
         private TextField _characterName;
 
         private VisualTreeAsset _saveFileElement;
@@ -51,6 +52,9 @@ namespace roguelike.rendering.ui.mainmenu {
             var saveCreationButtonHeader = _saveCreationRoot.Q<Label>("CreateSaveButtonHeader");
             var saveCreationCharacterNameHeader = _saveCreationRoot.Q<Label>("SaveCreationCharacterNameHeader");
             var cancelButtonHeader = _saveCreationRoot.Q<Label>("CreateSaveCancelButtonHeader");
+            var permaDeathHeader = _saveCreationRoot.Q<Label>("PermaDeathHeader");
+
+            _permaDeathToggle = _saveCreationRoot.Q<Toggle>("PermaDeathToggle");
 
             labels = new Dictionary<string, Label>();
 
@@ -62,6 +66,7 @@ namespace roguelike.rendering.ui.mainmenu {
             labels.Add(saveCreationButtonHeader.text, saveCreationCharacterNameHeader);
             labels.Add(saveCreationCharacterNameHeader.text, saveCreationCharacterNameHeader);
             labels.Add(cancelButtonHeader.text, cancelButtonHeader);
+            labels.Add(permaDeathHeader.text, permaDeathHeader);
 
             Translate(GameManager.CurrentGameSettings);
             GameSettings.GameSettingsChanged += Translate;
@@ -135,7 +140,7 @@ namespace roguelike.rendering.ui.mainmenu {
 
             StopMusic();
 
-            var newGameData = GameManager.CreateNewSave(_characterName.value);
+            var newGameData = GameManager.CreateNewSave(_characterName.value, _permaDeathToggle.value);
             GameManager.Instance.LoadSave(newGameData);
             LoadingManager.Instance.LoadScene(2, GameState.TOWN);
         }

@@ -1,7 +1,7 @@
 .button {
     font-size: 25px;
     -unity-text-align: upper-left;
-    color: rgb(255, 255, 255);
+    color: rgb(255, 236, 214);
     -unity-background-image-tint-color: rgb(255, 255, 255);
     background-image: resource('sprites/ui/button');
     padding-left: 24px;

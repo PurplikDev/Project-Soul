@@ -11,24 +11,28 @@ namespace roguelike.core.utils.gamedata {
         public PlayerData PlayerData;
         public DateTime SaveTime;
 
-        public GameData(string name, int day, Player player) {
+        public bool IsPermaDeath;
+
+        public GameData(string name, int day, Player player, bool isPermaDeath) {
             Name = name;
             Day = day;
             PlayerData = new PlayerData(player);
             SaveTime = DateTime.Now;
+            IsPermaDeath = isPermaDeath;
         }
 
         [JsonConstructor]
-        public GameData(string name, int day, PlayerData playerData, DateTime time) {
+        public GameData(string name, int day, PlayerData playerData, DateTime time, bool isPermaDeath) {
             Name = name;
             Day = day;
             PlayerData = playerData;
             SaveTime = time;
+            IsPermaDeath = isPermaDeath;
         }
 
         public static GameData EMPTY {
             get {
-                return new GameData("", 0, new PlayerData(30, new Stat(30), new Stat(2.5f), new Stat(0), new Stat(0), new Stat(0), new Stat(0), new Stat(0), new item.InventoryData()), DateTime.Now);
+                return new GameData("", 0, new PlayerData(30, new Stat(30), new Stat(2.5f), new Stat(0), new Stat(0), new Stat(0), new Stat(0), new Stat(0), new item.InventoryData()), DateTime.Now, true);
             }
         }
 

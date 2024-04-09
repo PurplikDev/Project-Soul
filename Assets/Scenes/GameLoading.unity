@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -332,9 +332,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _loadingScreenTips:
   - Try keeping your health above 0, while damaging your enemies.
-  - Monsters will never spawn outside of room.
+  - Monsters will never spawn outside of rooms.
   - When trading try to keep your value as close to the trader's value as possible.
-    They don't mind the extra coin from you.
 --- !u!4 &626539375
 Transform:
   m_ObjectHideFlags: 0
