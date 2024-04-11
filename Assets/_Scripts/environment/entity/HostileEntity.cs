@@ -1,6 +1,7 @@
 using roguelike.environment.entity.combat;
 using roguelike.environment.entity.player;
 using roguelike.environment.entity.statsystem;
+using roguelike.environment.ui.hud;
 using UnityEngine;
 
 namespace roguelike.environment.entity {
@@ -13,10 +14,21 @@ namespace roguelike.environment.entity {
         [Space(order = 2)]
         public Transform EntityAim;
 
+        public float AttackDamage;
+        public int DamageTier;
+        [Space]
+        public bool HasHealthBar = false;
+
         protected override void Awake() {
             entityWidth = GetComponent<CharacterController>().radius;
             base.Awake();
             Health = MaxHealth.Value;
+
+            if(HasHealthBar) {
+                var renderer = GetComponentInChildren<HealthBarRenderer>();
+                renderer.SetTarget(this);
+                renderer.InitiateRenderer();
+            }
         }
 
         protected void Update() {
@@ -32,7 +44,7 @@ namespace roguelike.environment.entity {
             foreach(var collider in colliders) {
                 var player = collider.GetComponent<Player>();
 
-                player?.Damage(new DamageSource(1f, DamageType.COMBAT, 1, player, this));
+                player?.Damage(new DamageSource(AttackDamage, DamageType.COMBAT, DamageTier, player, this));
             }
         }
     }

@@ -26,6 +26,11 @@ namespace roguelike.system.manager {
                 } else {
                     Instantiate(floors[Random.Range(0, floors.Length)]);
                 }
+
+                if(!RoomSpawnPoint.keySpawned) {
+                    Debug.Log("why........ why are you like this computer");
+                }
+
             } else if(State == DungeonState.CAMP) {
                 Instantiate(camp);
             } else if(State == DungeonState.BOSS) {
@@ -80,6 +85,8 @@ namespace roguelike.system.manager {
         }
 
         public void ExitDungeon() {
+            GameManager.CurrentGameData.Day++;
+            GameManager.UpdateGameData();
             LoadingManager.Instance.LoadScene(2, GameState.TOWN);
             State = DungeonState.NONE;
         }

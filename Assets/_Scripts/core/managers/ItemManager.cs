@@ -74,7 +74,9 @@ namespace roguelike.core.item {
                 new StatModifier(2f, StatModifierType.FLAT, StatType.TEMPLAR),
                 new StatModifier(1.5f, StatModifierType.FLAT, StatType.ROGUE));
 
-
+            RegisterLightSword("fearless_bonecrusher", 48, 6, 0.75f, 0.5f, 2,
+                new StatModifier(2f, StatModifierType.FLAT, StatType.TEMPLAR),
+                new StatModifier(1.25f, StatModifierType.FLAT, StatType.THAUMATURGE));
 
             // Trinket Registry
 

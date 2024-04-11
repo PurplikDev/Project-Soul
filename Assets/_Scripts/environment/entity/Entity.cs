@@ -4,6 +4,7 @@ using roguelike.environment.entity.combat;
 using roguelike.environment.entity.statsystem;
 using roguelike.environment.entity.statuseffect;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace roguelike.environment.entity {
     public abstract class Entity : MonoBehaviour {
@@ -44,6 +45,8 @@ namespace roguelike.environment.entity {
         public Action MovementStopEvent;
         public Action AttackEvent;
 
+        public UnityEvent UnityDeathEvent; // i want this separate, personal reasons or autism, i dunno
+
         public bool IsBlocking { get; internal set; } = false;
         public bool IsDead { get; internal set; } = false;
         public float Health { get; protected set; }
@@ -76,7 +79,20 @@ namespace roguelike.environment.entity {
         }
 
         public void SetHealth(float amount) {
+            
+            if(Health > amount) {
+                HurtEvent?.Invoke();
+            } else {
+                HealEvent?.Invoke();
+            }
+
+            if(amount <= 0) {
+                DeathEvent?.Invoke();
+            }
+            
             Health = amount;
+            HealthUpdate?.Invoke();
+            
         }
 
         public virtual void Heal(float healAmount) {
@@ -89,6 +105,7 @@ namespace roguelike.environment.entity {
             Health -= (float)source.CalculateDamage();
             if(Health <= 0) {
                 DeathEvent?.Invoke();
+                UnityDeathEvent.Invoke();
             }
             HealthUpdate?.Invoke();
             HurtEvent?.Invoke();

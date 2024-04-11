@@ -1,4 +1,5 @@
 using roguelike.environment.entity.combat;
+using UnityEngine;
 
 namespace roguelike.environment.entity {
     public class ConstructPylon : HostileEntity {
@@ -18,7 +19,7 @@ namespace roguelike.environment.entity {
         }
 
         private void HurtCore() {
-            float damageToDo = AncientConstructCore.MaxHealth.Value / 4f;
+            float damageToDo = AncientConstructCore.MaxHealth.Value / 3f;
             AncientConstructCore.SetHealth(AncientConstructCore.Health - damageToDo);
         }
     }

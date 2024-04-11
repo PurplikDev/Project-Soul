@@ -1,5 +1,6 @@
 using roguelike.core.utils;
 using roguelike.environment.entity;
+using roguelike.environment.entity.player;
 using roguelike.rendering.ui.slot;
 using roguelike.system.manager;
 using System;
@@ -50,10 +51,12 @@ namespace roguelike.environment.ui.hud {
             _barFillEffect = _barDisplayHolder.Q<VisualElement>("HealthBarWhite");
             _barHealthDisplay = _barDisplayHolder.Q<Label>("HealthBarText");
 
-            GameSettings.GameSettingsChanged += DisplaySettingsUpdated;
+            if(Target is Player) {
+                GameSettings.GameSettingsChanged += DisplaySettingsUpdated;
 
-            HealthBarStyle = GameManager.CurrentGameSettings.HealthBarStyle;
-            HealthDisplayText = GameManager.CurrentGameSettings.HealthBarText;
+                HealthBarStyle = GameManager.CurrentGameSettings.HealthBarStyle;
+                HealthDisplayText = GameManager.CurrentGameSettings.HealthBarText;
+            }
 
             if (ShouldReveal) {
                 _heartDisplayHolder.style.opacity = 0;
@@ -65,7 +68,7 @@ namespace roguelike.environment.ui.hud {
         private void Start() {
             UpdateHealthDisplay();
 
-            if (ShouldReveal && !keepHidden) {
+            if (ShouldReveal) {
                 switch (HealthBarStyle) {
                     case HealthBarStyle.CLASSIC:
                         // RevealHearts(); NOT IMPLEMENTED YET

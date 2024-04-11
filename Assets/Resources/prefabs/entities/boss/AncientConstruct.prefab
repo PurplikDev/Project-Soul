@@ -23,15 +23,35 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5193246374071510627, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
+        type: 3}
+      propertyPath: ShouldReveal
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5193246374071510627, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
+        type: 3}
+      propertyPath: HealthDisplayText
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6588053821680174076, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
+        type: 3}
+      propertyPath: Angle
+      value: 360
+      objectReference: {fileID: 0}
     - target: {fileID: 6588053821680174076, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
         type: 3}
       propertyPath: Range
-      value: 25
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6588053821680174076, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
         type: 3}
       propertyPath: ForgetTimer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6588053821680174076, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
+        type: 3}
+      propertyPath: DoesHaveBrain
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6588053821680174076, guid: 8e21ad715a2f7904ab8d165b2c054fc8,
         type: 3}
@@ -150,7 +170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EntityName: Ancient Construct
   MaxHealth:
-    BaseValue: 100
+    BaseValue: 75
   Speed:
     BaseValue: 0
   Defence:
@@ -168,6 +188,10 @@ MonoBehaviour:
   AttackCooldown:
     BaseValue: 0.5
   AttackRange:
-    BaseValue: 0.5
+    BaseValue: 16
   EntityAim: {fileID: 1953365045083912180}
-  Projectile: {fileID: 0}
+  AttackDamage: 5
+  DamageTier: 2
+  HasHealthBar: 1
+  Projectile: {fileID: 7246419373930495461, guid: d68ba599094e3674fad91fa3077bea6b,
+    type: 3}
