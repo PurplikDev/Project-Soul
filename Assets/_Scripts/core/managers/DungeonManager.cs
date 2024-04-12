@@ -1,4 +1,6 @@
+using roguelike.core.item;
 using roguelike.core.utils.mathematicus;
+using roguelike.environment.entity.player;
 using roguelike.environment.world.dungeon;
 using roguelike.system.singleton;
 using System.Collections.Generic;
@@ -28,7 +30,7 @@ namespace roguelike.system.manager {
                 }
 
                 if(!RoomSpawnPoint.keySpawned) {
-                    Debug.Log("why........ why are you like this computer");
+                    GameManager.Player.Inventory.AddItem(new ItemStack(ItemManager.GetItemByID("ancient_gate_key"), 1));
                 }
 
             } else if(State == DungeonState.CAMP) {

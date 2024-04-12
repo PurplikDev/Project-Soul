@@ -61,9 +61,9 @@ namespace roguelike.rendering.ui.mainmenu {
             labels.Add(playButtonHeader.text, playButtonHeader);
             labels.Add(settingsButtonHeader.text, settingsButtonHeader);
             labels.Add(quitButtonHeader.text, quitButtonHeader);
-            labels.Add(savesHeader.text, saveCreationButtonHeader);
-            labels.Add(newSaveButtonHeader.text, saveCreationButtonHeader);
-            labels.Add(saveCreationButtonHeader.text, saveCreationCharacterNameHeader);
+            labels.Add(savesHeader.text, savesHeader);
+            labels.Add(newSaveButtonHeader.text, newSaveButtonHeader);
+            labels.Add(saveCreationButtonHeader.text, saveCreationButtonHeader);
             labels.Add(saveCreationCharacterNameHeader.text, saveCreationCharacterNameHeader);
             labels.Add(cancelButtonHeader.text, cancelButtonHeader);
             labels.Add(permaDeathHeader.text, permaDeathHeader);

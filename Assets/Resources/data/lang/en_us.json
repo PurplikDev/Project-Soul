@@ -48,5 +48,6 @@
 
     "ui.need_key": "You need a key to open this door...",
     "ui.key_got": "You have obtained a key!",
-    "ui.no_space": "You have no space in your Inventory..."
+    "ui.no_space": "You have no space in your Inventory...",
+    "ui.dungeon_gift": "The Dungeon grants you a gift..."
 }
