@@ -1,4 +1,5 @@
 using roguelike.environment.entity;
+using roguelike.environment.entity.player;
 using roguelike.environment.entity.statsystem;
 
 namespace roguelike.core.item {
@@ -29,6 +30,10 @@ namespace roguelike.core.item {
                 user.Speed.RemoveModifier(slowDown);
                 user.IsBlocking = false;
             }
+
+            if (user is Player player) {
+                player.RotateEquipment();
+            }
         }
 
         public void Blocked(Entity user) {
@@ -37,6 +42,9 @@ namespace roguelike.core.item {
                 user.Speed.RemoveModifier(slowDown);
                 user.IsBlocking = false;
                 PerformedBlocksAmount = 0;
+                if (user is Player player) {
+                    player.RotateEquipment();
+                }
             }
         }
     }

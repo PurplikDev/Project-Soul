@@ -60,6 +60,17 @@ namespace roguelike.core.item {
                 }
 
                 Entity.MaxHealthUpdate.Invoke();
+
+
+                // this is the part of the project where i just want to have this over with and start writing dogshit code like this
+                // yes, i am not proud of this and yes, i am sorry for writing it like this
+                if(Entity is Player player) {
+                    if (index == 24) {
+                        player.MainHandSprite.sprite = itemStack.Item.Icon;
+                    } else if (index == 25) {
+                        player.OffHandSprite.sprite = itemStack.Item.Icon;
+                    }
+                }
             }
         }
 

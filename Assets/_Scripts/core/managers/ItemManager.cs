@@ -55,7 +55,6 @@ namespace roguelike.core.item {
             Register("coins", 1280, 1);
             Register("gem", 64, 128);
             Register("old_necklace", 1, 256);
-            Register("zupa", 1, 1028);
 
             // Crafting Materials
             Register("magic_silk", 32, 32);
@@ -66,6 +65,8 @@ namespace roguelike.core.item {
 
             // UseItems
             RegisterUseItem("bandage", 8, UseItemType.HEALING, 5);
+            RegisterUseItem("magic_bandage", 32, UseItemType.HEALING, 10);
+            RegisterUseItem("zupa", 1028, UseItemType.HEALING, int.MaxValue);
 
             // Light Weapon Registry
 
@@ -77,6 +78,10 @@ namespace roguelike.core.item {
             RegisterLightSword("fearless_bonecrusher", 48, 6, 0.75f, 0.5f, 2,
                 new StatModifier(2f, StatModifierType.FLAT, StatType.TEMPLAR),
                 new StatModifier(1.25f, StatModifierType.FLAT, StatType.THAUMATURGE));
+
+            // Shield Registry
+
+            RegisterShield("templar_shield", 128, -0.25f, 2, 3);
 
             // Trinket Registry
 
@@ -126,6 +131,18 @@ namespace roguelike.core.item {
                 new StatModifier(0.75f, StatModifierType.FLAT, StatType.DEFENCE),
                 new StatModifier(1f, StatModifierType.FLAT, StatType.ROGUE),
                 new StatModifier(1.75f, StatModifierType.FLAT, StatType.THAUMATURGE));
+
+
+
+            // Tutorial Gear
+
+            RegisterLightSword("trainer_sword", 0, 5, 0.5f, 0.75f, 2, new StatModifier(10f, StatModifierType.FLAT, StatType.TEMPLAR));
+            RegisterShield("trainer_shield", 0, -0.125f, 2, 3);
+            RegisterEquipment("trainer_helmet", 0, EquipmentType.HELMET, new StatModifier(0.25f, StatModifierType.ADDITIONAL, StatType.HEALTH), new StatModifier(1.5f, StatModifierType.FLAT, StatType.TEMPLAR));
+            RegisterEquipment("trainer_tunic", 0, EquipmentType.CHESTPLATE, new StatModifier(1.5f, StatModifierType.FLAT, StatType.DEFENCE), new StatModifier(10f, StatModifierType.FLAT, StatType.TEMPLAR));
+            RegisterEquipment("trainer_leggings", 0, EquipmentType.PANTS, new StatModifier(10f, StatModifierType.FLAT, StatType.DEFENCE), new StatModifier(0.5f, StatModifierType.ADDITIONAL, StatType.SPEED), new StatModifier(10f, StatModifierType.FLAT, StatType.TEMPLAR));
+            RegisterEquipment("trainer_boots", 0, EquipmentType.BOOTS, new StatModifier(1.5f, StatModifierType.FLAT, StatType.SPEED), new StatModifier(10f, StatModifierType.FLAT, StatType.TEMPLAR));
+            RegisterTrinket("trainer_talisman", 0, new StatModifier(2.5f, StatModifierType.FLAT, StatType.HEALTH), new StatModifier(1.5f, StatModifierType.FLAT, StatType.TEMPLAR));
 
 
 

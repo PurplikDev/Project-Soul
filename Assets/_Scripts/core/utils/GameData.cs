@@ -32,7 +32,7 @@ namespace roguelike.core.utils.gamedata {
 
         public static GameData EMPTY {
             get {
-                return new GameData("", 0, new PlayerData(30, new Stat(30), new Stat(2.5f), new Stat(0), new Stat(0), new Stat(0), new Stat(0), new Stat(0), new item.InventoryData()), DateTime.Now, true);
+                return new GameData("", 0, new PlayerData(30, new Stat(30), new Stat(3.5f), new Stat(0), new Stat(0), new Stat(0), new Stat(0), new Stat(0), new item.InventoryData()), DateTime.Now, true);
             }
         }
 

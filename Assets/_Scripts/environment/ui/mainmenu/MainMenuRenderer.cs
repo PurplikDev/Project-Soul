@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using Tweens;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UIElements;
 
 namespace roguelike.rendering.ui.mainmenu {
@@ -13,7 +14,7 @@ namespace roguelike.rendering.ui.mainmenu {
 
         private VisualElement _root, _menuRoot, _saveMenuRoot, _saveSelectionRoot, _saveCreationRoot;
         private ScrollView _saveFileList;
-        private Button _playButton, _settingsButton, _quitButton, _newSaveButton, _newSaveCreateButton, _newSaveCancelButton;
+        private Button _playButton, _tutorialButton, _settingsButton, _quitButton, _newSaveButton, _newSaveCreateButton, _newSaveCancelButton;
         private Toggle _permaDeathToggle;
         private TextField _characterName;
 
@@ -38,6 +39,7 @@ namespace roguelike.rendering.ui.mainmenu {
             _characterName = _saveCreationRoot.Q<TextField>("SaveCreationCharacterNameField");
 
             _playButton = _menuRoot.Q<Button>("PlayButton");
+            _tutorialButton = _menuRoot.Q<Button>("TutorialButton");
             _settingsButton = _menuRoot.Q<Button>("SettingsButton");
             _quitButton = _menuRoot.Q<Button>("QuitButton");
             _newSaveButton = _saveMenuRoot.Q<Button>("NewSaveButton");
@@ -45,6 +47,7 @@ namespace roguelike.rendering.ui.mainmenu {
             _newSaveCancelButton = _saveCreationRoot.Q<Button>("CreateSaveCancelButton");
 
             var playButtonHeader = _playButton.Q<Label>();
+            var tutorialButtonHeader = _tutorialButton.Q<Label>();
             var settingsButtonHeader = _settingsButton.Q<Label>();
             var quitButtonHeader = _quitButton.Q<Label>();
             var savesHeader = _root.Q<Label>("SavesHeader");
@@ -59,6 +62,7 @@ namespace roguelike.rendering.ui.mainmenu {
             labels = new Dictionary<string, Label>();
 
             labels.Add(playButtonHeader.text, playButtonHeader);
+            labels.Add(tutorialButtonHeader.text, tutorialButtonHeader);
             labels.Add(settingsButtonHeader.text, settingsButtonHeader);
             labels.Add(quitButtonHeader.text, quitButtonHeader);
             labels.Add(savesHeader.text, savesHeader);
@@ -72,6 +76,7 @@ namespace roguelike.rendering.ui.mainmenu {
             GameSettings.GameSettingsChanged += Translate;
 
             _playButton.clicked += OnPlayButton;
+            _tutorialButton.clicked += OnTutorialButton;
             _settingsButton.clicked += OnSettingsButton;
             _quitButton.clicked += OnQuitButton;
             _newSaveButton.clicked += OnNewSaveButton;
@@ -113,6 +118,14 @@ namespace roguelike.rendering.ui.mainmenu {
                 TweenElementOpacity(_saveSelectionRoot, 0);
                 TweenElementOpacity(_saveCreationRoot, 0);
             }
+        }
+
+        public void OnTutorialButton() {
+            StopMusic();
+            var newGameData = GameManager.CreateNewSave("Tutorial", true);
+            newGameData.PlayerData.Health = 10f;
+            GameManager.Instance.LoadSave(newGameData);
+            LoadingManager.Instance.LoadScene(4, GameState.DUNGEON);
         }
 
         public void OnSettingsButton() {

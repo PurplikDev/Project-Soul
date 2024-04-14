@@ -4,8 +4,11 @@ using roguelike.environment.entity.statsystem;
 using roguelike.environment.ui.hud;
 using roguelike.environment.ui.statemachine;
 using roguelike.rendering.ui;
+using roguelike.rendering.ui.slot;
 using roguelike.system.input;
 using roguelike.system.manager;
+using System;
+using Tweens;
 using UnityEngine;
 
 namespace roguelike.environment.entity.player {
@@ -31,7 +34,11 @@ namespace roguelike.environment.entity.player {
         [Header("Player UI Elements")]
         public GameObject InventoryScreen;
         public GameObject PauseScreen;
-
+        [Space]
+        [Header("Player Equipment")]
+        public GameObject EquipmentHolder;
+        public SpriteRenderer MainHandSprite;
+        public SpriteRenderer OffHandSprite;
 
         public HandheldItem ItemInMainHand {
             get {
@@ -69,6 +76,22 @@ namespace roguelike.environment.entity.player {
 
         public void DisplayMessage(string message) {
             GetComponentInChildren<MessageDisplay>()?.DisplayMessage(message);
+        }
+
+        internal void RotateEquipment() {
+
+            Debug.Log(EquipmentHolder.transform.rotation.eulerAngles);
+
+            var rotationTween = new FloatTween {
+                duration = 0.25f,
+                from = IsBlocking ? 0 : -180f,
+                to = IsBlocking ? -180f : 0,
+                easeType = EaseType.ExpoInOut,
+                onUpdate = (_, value) => {
+                    EquipmentHolder.transform.localRotation = Quaternion.Euler(0, 0, value) ;
+                }
+            };
+            gameObject.AddTween(rotationTween);
         }
     }
 

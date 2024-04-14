@@ -12,9 +12,9 @@ namespace roguelike.environment.world.dungeon {
 
         public void Awake() {
             if (defaultState == GateState.OPEN) {
-                gateObject.transform.position = openPos;
+                gateObject.transform.localPosition = openPos;
             } else {
-                gateObject.transform.position = closedPos;
+                gateObject.transform.localPosition = closedPos;
             }
         }
 
@@ -33,7 +33,7 @@ namespace roguelike.environment.world.dungeon {
                 to = posTo,
                 easeType = EaseType.ExpoInOut,
                 onUpdate = (_, value) => {
-                    gateObject.transform.position = value;
+                    gateObject.transform.localPosition = value;
                 }
             };
 

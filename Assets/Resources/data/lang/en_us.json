@@ -5,15 +5,18 @@
 
     "gold": "Gold",
     "boots_of_the_traveler": "Boots of the Traveler",
+    "zupa": "Zupa",
 
     // ITEM DESCRIPTIONS
 
     "boots_of_the_traveler.description": "Boots that were once worn by an ancient Thaumaturge, but now they belong to nobody...",
+    "zupa.description": "Zupa leczy ciało i duszę od zarania dziejów. Skosztuj i poczuj jej moc na własnej skórze.",
 
     // UI
 
     "ui.play": "Play",
     "ui.settings": "Settings",
+    "ui.tutorial": "Tutorial",
     "ui.quit": "Quit",
 
     "ui.saves": "Saves",
@@ -49,5 +52,14 @@
     "ui.need_key": "You need a key to open this door...",
     "ui.key_got": "You have obtained a key!",
     "ui.no_space": "You have no space in your Inventory...",
-    "ui.dungeon_gift": "The Dungeon grants you a gift..."
+    "ui.dungeon_gift": "The Dungeon grants you a gift...",
+
+
+    // TUTORIAL MESSAGES
+
+    "tutorial.welcome": "Welcome to the Project Soul Tutorial level.",
+    "tutorial.interactables": "You can interact with different objects and Traders using the \"F\" key.",
+    "tutorial.gates": "Small gates will take you to new layers of dungeons. Big gates only block your way until you kill a boss. Not this one though.",
+    "tutorial.crafting": "You can craft items in crafting stations. Try following the recipe on this parchment with items from the chest next to it."
+    
 }

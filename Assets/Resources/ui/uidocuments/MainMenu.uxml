@@ -6,6 +6,9 @@
             <ui:Button display-tooltip-when-elided="true" name="PlayButton" class="main-menu-button">
                 <ui:Label tabindex="-1" text="ui.play" display-tooltip-when-elided="true" name="PlayButtonHeader" />
             </ui:Button>
+            <ui:Button display-tooltip-when-elided="true" name="TutorialButton" class="main-menu-button">
+                <ui:Label tabindex="-1" text="ui.tutorial" display-tooltip-when-elided="true" name="TutorialButtonHeader" />
+            </ui:Button>
             <ui:Button display-tooltip-when-elided="true" name="SettingsButton" class="main-menu-button">
                 <ui:Label tabindex="-1" text="ui.settings" display-tooltip-when-elided="true" name="SettingsButtonHeader" />
             </ui:Button>

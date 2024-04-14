@@ -1,0 +1,20 @@
+{
+  'Result': {
+    'ItemID': 'magic_bandage',
+    'ItemAmount': 1
+  },
+  'Ingredients': [
+    {
+      'ItemID': 'magic_silk',
+      'ItemAmount': 1
+    },
+    {
+      'ItemID': 'magic_silk',
+      'ItemAmount': 1
+    },
+    {
+      'ItemID': 'magic_silk',
+      'ItemAmount': 1
+    }
+  ]
+}

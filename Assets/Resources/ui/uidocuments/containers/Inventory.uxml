@@ -10,8 +10,8 @@
                         <roguelike.rendering.ui.slot.EquipmentSlot slot-equipment-type="CHESTPLATE" style="background-image: resource(&apos;sprites/ui/chestplate_background&apos;);" />
                         <roguelike.rendering.ui.slot.EquipmentSlot slot-equipment-type="PANTS" style="background-image: resource(&apos;sprites/ui/pants_background&apos;);" />
                         <roguelike.rendering.ui.slot.EquipmentSlot slot-equipment-type="BOOTS" style="background-image: resource(&apos;sprites/ui/boots_background&apos;);" />
-                        <roguelike.rendering.ui.slot.WeaponSlot slot-equipment-type="MAIN_HAND" />
-                        <roguelike.rendering.ui.slot.WeaponSlot slot-equipment-type="OFF_HAND" />
+                        <roguelike.rendering.ui.slot.WeaponSlot slot-equipment-type="MAIN_HAND" style="background-image: resource(&apos;sprites/ui/weapon_background&apos;);" />
+                        <roguelike.rendering.ui.slot.WeaponSlot slot-equipment-type="OFF_HAND" style="background-image: resource(&apos;sprites/ui/shield_background&apos;);" />
                     </ui:VisualElement>
                 </ui:VisualElement>
                 <ui:VisualElement name="Trinket" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; width: 105%; justify-content: flex-start; height: auto;">
