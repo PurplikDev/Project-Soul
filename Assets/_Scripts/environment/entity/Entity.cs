@@ -28,8 +28,6 @@ namespace roguelike.environment.entity {
 
         public Dictionary<StatType, Stat> StatByType = new Dictionary<StatType, Stat>();
 
-        public List<StatusEffect> ActiveEffects = new List<StatusEffect>();
-
         public Vector3 Position { get { return transform.position; } }
         public Quaternion Rotation { get { return Quaternion.LookRotation(LookDirection); } }
         public virtual Vector3 LookDirection { get; internal set; } = Vector3.forward;
@@ -58,12 +56,6 @@ namespace roguelike.environment.entity {
             StatByType.Add(StatType.TEMPLAR, Templar);
             StatByType.Add(StatType.ROGUE, Rogue);
             StatByType.Add(StatType.THAUMATURGE, Thaumaturge);
-
-            DeathEvent += DeathRename;
-        }
-
-        protected virtual void Start() {
-            InvokeRepeating(nameof(CheckAndApplyStatusEffects), 1f, 1f);
         }
 
         public virtual void PrimaryAction() {
@@ -109,13 +101,6 @@ namespace roguelike.environment.entity {
             }
             HealthUpdate?.Invoke();
             HurtEvent?.Invoke();
-        }
-
-        private void CheckAndApplyStatusEffects() {}
-
-        // need to make this function run only in editor
-        private void DeathRename() {
-            gameObject.name += " (Dead)";
         }
     }
 }

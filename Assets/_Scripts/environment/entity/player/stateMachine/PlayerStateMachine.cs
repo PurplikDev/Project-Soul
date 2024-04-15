@@ -35,7 +35,7 @@ namespace roguelike.environment.entity.player.statemachine {
 
             states.Add(PlayerStates.IDLE, new PlayerIdleState(this));
             states.Add(PlayerStates.WALK, new PlayerWalkState(this));
-            states.Add(PlayerStates.RUN, new PlayerRunState(this));
+            // states.Add(PlayerStates.RUN, new PlayerRunState(this));
             states.Add(PlayerStates.ATTACK, new PlayerAttackState(this));
 
             currentState = states[PlayerStates.IDLE];

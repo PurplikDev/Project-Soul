@@ -16,7 +16,9 @@ namespace roguelike.environment.entity.player.statemachine {
             playerStateMachine.player.Speed.AddModifier(_attackSlowdown);
         }
 
-        public override void UpdateState() {}
+        public override void UpdateState() {
+            playerStateMachine.CharacterController.SimpleMove(playerStateMachine.GetCurrentMovementSpeed);
+        }
 
         public override void ExitState() {
             playerStateMachine.player.Speed.RemoveModifier(_attackSlowdown);
