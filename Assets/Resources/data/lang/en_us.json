@@ -58,8 +58,10 @@
     // TUTORIAL MESSAGES
 
     "tutorial.welcome": "Welcome to the Project Soul Tutorial level.",
-    "tutorial.interactables": "You can interact with different objects and Traders using the \"F\" key.",
-    "tutorial.gates": "Small gates will take you to new layers of dungeons. Big gates only block your way until you kill a boss. Not this one though.",
-    "tutorial.crafting": "You can craft items in crafting stations. Try following the recipe on this parchment with items from the chest next to it."
-    
+    "tutorial.interactables": "You can interact with different objects and Traders [F].",
+    "tutorial.gates": "Small gates will take you to new layers of dungeons. Big gates only block your way until you kill a specific enemy.",
+    "tutorial.crafting": "You can craft items in crafting stations. Try following the recipe on this parchment with items from the chest next to it.",
+    "tutorial.equipment": "You can equip items in the inventory [E] into their respective slots. Use items can be used with clicking the mouse wheel.",
+    "tutorial.blocking": "While blocking [Right Mouse Button] you walk slower. You can block attacks when you are looking at them. You have limited blocks before your shield goes down. Then it needs to be put up again."
+
 }

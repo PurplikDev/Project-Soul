@@ -7,12 +7,12 @@ namespace roguelike.rendering.ui {
 
         [SerializeField] Text text;
 
-        public void DisplayMessage(string message) {
+        public void DisplayMessage(string message, float duration) {
             text.text = TranslationManager.GetTranslation(message);
-            ShowMessage();
+            ShowMessage(duration);
         }
 
-        private void ShowMessage() {
+        private void ShowMessage(float duration) {
             var color = text.color;
 
             var tween = new FloatTween {
@@ -24,16 +24,16 @@ namespace roguelike.rendering.ui {
                     text.color = color;
                 },
                 onFinally = (_) => {
-                    SleepMessage();
+                    SleepMessage(duration);
                 }
             };
 
             gameObject.AddTween(tween);
         }
 
-        private void SleepMessage() {
+        private void SleepMessage(float duration) {
             var tween = new FloatTween {
-                duration = 2.5f,
+                duration = duration,
                 onFinally = (_) => {
                     HideMessage();
                 }

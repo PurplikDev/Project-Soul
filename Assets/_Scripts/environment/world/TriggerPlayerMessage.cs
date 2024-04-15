@@ -7,11 +7,12 @@ namespace roguelike.environment.world {
         [SerializeField] string message;
 
         public bool DestroyOnTriggerExit = false;
+        public float Duration = 2.5f;
 
         private void OnTriggerEnter(Collider other) {
             var player = other.GetComponent<Player>();
             if (player != null) {
-                player.DisplayMessage(message);
+                player.DisplayMessage(message, Duration);
             }
         }
 

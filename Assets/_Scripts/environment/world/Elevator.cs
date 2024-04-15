@@ -40,6 +40,10 @@ namespace roguelike.environment.world {
                                 DungeonManager.Instance.ExitDungeon();
                                 break;
 
+                            case ElevatorType.TUTORIAL_EXIT:
+                                GameManager.Instance.GoToMainMenu();
+                                break;
+
                             default:
                                 player.transform.SetParent(null);
                                 GameManager.Input.CharacterControls.Enable();
@@ -61,6 +65,6 @@ namespace roguelike.environment.world {
         }
 
         public enum Direction { UP, DOWN }
-        public enum ElevatorType { DUNGEON_ENTRY, DUNGEON_EXIT, TOWN_EXIT }
+        public enum ElevatorType { DUNGEON_ENTRY, DUNGEON_EXIT, TOWN_EXIT, TUTORIAL_EXIT }
     }
 }

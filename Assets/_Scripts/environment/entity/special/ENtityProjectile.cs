@@ -20,7 +20,6 @@ namespace roguelike.environment.entity.special {
             var entity = other.GetComponent<Entity>();
             if(entity != owner) {
                 entity.Damage(new combat.DamageSource(((HostileEntity)owner).AttackDamage, combat.DamageType.COMBAT, ((HostileEntity)owner).DamageTier,entity ,owner));
-                Debug.Log(entity.EntityName);
                 Destroy(gameObject);
             }
         }

@@ -74,14 +74,11 @@ namespace roguelike.environment.entity.player {
         public override void PrimaryAction() { ItemInMainHand?.ItemAction(this); }
         public override void SecondaryAction() { ItemInOffHand?.ItemAction(this); }
 
-        public void DisplayMessage(string message) {
-            GetComponentInChildren<MessageDisplay>()?.DisplayMessage(message);
+        public void DisplayMessage(string message, float duration = 2.5f) {
+            GetComponentInChildren<MessageDisplay>()?.DisplayMessage(message, duration);
         }
 
         internal void RotateEquipment() {
-
-            Debug.Log(EquipmentHolder.transform.rotation.eulerAngles);
-
             var rotationTween = new FloatTween {
                 duration = 0.25f,
                 from = IsBlocking ? 0 : -180f,

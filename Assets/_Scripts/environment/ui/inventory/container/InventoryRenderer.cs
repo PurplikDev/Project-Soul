@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using roguelike.core.item;
 using roguelike.rendering.ui.slot;
@@ -94,6 +95,12 @@ namespace roguelike.rendering.ui {
 
         private void HideTooltip(PointerOutEvent evt) {
             itemTooltip.style.visibility = Visibility.Hidden;
+        }
+
+        internal void Close() {
+            if(!mouseSlot.SlotStack.IsEmpty()) {
+                inventory.AddItem(mouseSlot.SlotStack);
+            }
         }
     }
 }

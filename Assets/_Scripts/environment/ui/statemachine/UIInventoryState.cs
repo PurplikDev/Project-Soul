@@ -19,6 +19,7 @@ namespace roguelike.environment.ui.statemachine {
         }
 
         public override void ExitState() {
+            _inventoryRenderer.Close();
             _inventoryUIHolder.SetActive(false);
             _inventoryRenderer = null;
         }
