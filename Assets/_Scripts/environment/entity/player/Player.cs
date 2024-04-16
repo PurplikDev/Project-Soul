@@ -60,8 +60,8 @@ namespace roguelike.environment.entity.player {
             UIStateMachine = GetComponent<UIStateMachine>();
             PlayerInteractor.Player = this;
             var bar = GetComponentInChildren<HealthBarRenderer>();
-            bar.InitiateRenderer();
             bar.SetTarget(this);
+            bar.InitiateRenderer();
 
             base.Awake();
 

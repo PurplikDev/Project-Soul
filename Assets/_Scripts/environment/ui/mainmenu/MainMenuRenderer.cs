@@ -125,7 +125,7 @@ namespace roguelike.rendering.ui.mainmenu {
             var newGameData = GameManager.CreateNewSave("Tutorial", true);
             newGameData.PlayerData.Health = 10f;
             GameManager.Instance.LoadSave(newGameData);
-            LoadingManager.Instance.LoadScene(4, GameState.DUNGEON);
+            LoadingManager.Instance.LoadScene(4, GameState.TUTORIAL);
         }
 
         public void OnSettingsButton() {

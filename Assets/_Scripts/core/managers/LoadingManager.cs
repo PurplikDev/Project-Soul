@@ -60,6 +60,10 @@ namespace roguelike.system.manager {
                 case GameState.DUNGEON:
                     DiscordManager.Instance?.ChangeActivity($"Floor {DungeonManager.CurrentLayer} [{DungeonManager.Instance.Difficulty.ToString().ToUpper()}]", "Surviving the Dungeon");
                     break;
+
+                case GameState.TUTORIAL:
+                    DiscordManager.Instance?.ChangeActivity("Training Grounds...", "Learning about the cruel...");
+                    break;
             }
 
             FinishLoading();

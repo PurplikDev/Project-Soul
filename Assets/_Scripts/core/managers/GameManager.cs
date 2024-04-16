@@ -100,6 +100,7 @@ namespace roguelike.system.manager {
     public enum GameState {
         MAINMENU,
         TOWN,
-        DUNGEON
+        DUNGEON,
+        TUTORIAL
     }
 }
