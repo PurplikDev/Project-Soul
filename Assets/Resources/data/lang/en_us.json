@@ -7,10 +7,30 @@
     "boots_of_the_traveler": "Boots of the Traveler",
     "zupa": "Zupa",
 
+    "magic_bandage": "Magic Bandage",
+
+    "trainer_sword": "Trainer Sword",
+    "trainer_shield": "Trainer Shield",
+    "trainer_helmet": "Trainer Helmet",
+    "trainer_tunic": "Trainer Tunic",
+    "trainer_leggings": "Trainer Leggings",
+    "trainer_boots": "Trainer Boots",
+    "trainer_talisman": "Trainer Talisman",
+
     // ITEM DESCRIPTIONS
 
     "boots_of_the_traveler.description": "Boots that were once worn by an ancient Thaumaturge, but now they belong to nobody...",
-    "zupa.description": "Zupa leczy ciało i duszę od zarania dziejów. Skosztuj i poczuj jej moc na własnej skórze.",
+    "zupa.description": "Zupa leczy ciało i duszę od zarania dziejów. Skosztuj i poczuj jej moc na własnej skórze. Click the mouse button to use on yourself.",
+
+    "magic_bandage.description": "Magical Healing item that repairs your body. Click the mouse button to use on yourself.",
+
+    "trainer_sword.description": "Sword for training",
+    "trainer_shield.description": "Shield for training",
+    "trainer_helmet.description": "Helmet for training",
+    "trainer_tunic.description": "Tunic for training",
+    "trainer_leggings.description": "Leggings for training",
+    "trainer_boots.description": "Boots for training",
+    "trainer_talisman.description": "Talisman for training",
 
     // UI
 
@@ -58,10 +78,11 @@
     // TUTORIAL MESSAGES
 
     "tutorial.welcome": "Welcome to the Project Soul Tutorial level.",
-    "tutorial.interactables": "You can interact with different objects and Traders [F].",
+    "tutorial.interactables": "You can interact with different objects and Traders by using the [F] key.",
     "tutorial.gates": "Small gates will take you to new layers of dungeons. Big gates only block your way until you kill a specific enemy.",
     "tutorial.crafting": "You can craft items in crafting stations. Try following the recipe on this parchment with items from the chest next to it.",
-    "tutorial.equipment": "You can equip items in the inventory [E] into their respective slots. Use items can be used with clicking the mouse wheel.",
-    "tutorial.blocking": "While blocking [Right Mouse Button] you walk slower. You can block attacks when you are looking at them. You have limited blocks before your shield goes down. Then it needs to be put up again."
+    "tutorial.equipment": "You can equip items in the inventory, openable with the [E] key, into their respective slots. Use items can be used with clicking the mouse wheel.",
+    "tutorial.blocking": "While blocking, by pressing [Right Mouse Button], you walk slower. You can block attacks when you are looking at them. You have limited blocks before your shield goes down. Then it needs to be put up again.",
+    "tutorial.combat": "You attack by pressing the [Left Mouse Button], you can attack while blocking, but when you attack you are locked in place."
 
 }
