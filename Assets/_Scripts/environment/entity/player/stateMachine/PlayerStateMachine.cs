@@ -63,7 +63,7 @@ namespace roguelike.environment.entity.player.statemachine {
 
         void OnAttackInput(InputAction.CallbackContext context) {
             var item = (core.item.WeaponItem)player.ItemInMainHand;
-            if(item != null) {
+            if(item != null && !(currentState is PlayerAttackState)) {
                 TransitionToState(PlayerStates.ATTACK);
                 StartCoroutine(((PlayerAttackState)currentState).PlayerAttack(item));
             }

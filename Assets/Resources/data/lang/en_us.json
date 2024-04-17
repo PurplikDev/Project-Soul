@@ -20,9 +20,9 @@
     // ITEM DESCRIPTIONS
 
     "boots_of_the_traveler.description": "Boots that were once worn by an ancient Thaumaturge, but now they belong to nobody...",
-    "zupa.description": "Zupa leczy ciało i duszę od zarania dziejów. Skosztuj i poczuj jej moc na własnej skórze. Click the mouse button to use on yourself.",
+    "zupa.description": "Zupa leczy ciało i duszę od zarania dziejów. Skosztuj i poczuj jej moc na własnej skórze.",
 
-    "magic_bandage.description": "Magical Healing item that repairs your body. Click the mouse button to use on yourself.",
+    "magic_bandage.description": "Magical Healing item that repairs your body.",
 
     "trainer_sword.description": "Sword for training",
     "trainer_shield.description": "Shield for training",

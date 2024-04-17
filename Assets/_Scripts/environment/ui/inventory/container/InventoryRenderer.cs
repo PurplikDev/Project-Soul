@@ -3,6 +3,7 @@ using System.Linq;
 using roguelike.core.item;
 using roguelike.rendering.ui.slot;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 namespace roguelike.rendering.ui {
@@ -88,6 +89,16 @@ namespace roguelike.rendering.ui {
             if(evt.currentTarget is ItemSlot slot && !slot.SlotStack.IsEmpty()) {
                 tooltipName.text = slot.SlotStack.Item.Name;
                 tooltipDescription.text = slot.SlotStack.Item.Description;
+
+                if(slot.SlotStack.Item is WeaponItem weapon) {
+                    tooltipDescription.text += $" \nDamage: {weapon.Damage} | Tier: {weapon.WeaponTier} | Duration: {weapon.SwingSpeed + weapon.AttackCooldown}";
+                } else if(slot.SlotStack.Item is Shield shield) {
+                    tooltipDescription.text += $" \nshield";
+                } else if(slot.SlotStack.Item is EquipmentItem) {
+                    tooltipDescription.text += $" \nequipment";
+                } else if(slot.SlotStack.Item is UseItem) {
+                    tooltipDescription.text += $" \nPress [Mouse 3] to use on yourself.";
+                }
 
                 itemTooltip.style.visibility = Visibility.Visible;
             }

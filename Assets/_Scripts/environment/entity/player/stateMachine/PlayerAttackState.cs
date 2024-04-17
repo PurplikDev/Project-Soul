@@ -11,6 +11,7 @@ namespace roguelike.environment.entity.player.statemachine {
         public PlayerAttackState(PlayerStateMachine stateMachine) : base(stateMachine, PlayerStates.WALK) { }
 
         public override void EnterState() {
+            if(_isAttacking) { return; }
             _isAttacking = true;
             playerStateMachine.animator.SetBool("IsAttacking", true);
         }
