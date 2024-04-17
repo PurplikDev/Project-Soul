@@ -39,6 +39,15 @@
     "ui.tutorial": "Tutorial",
     "ui.quit": "Quit",
 
+    "ui.master_audio": "Master Audio",
+    "ui.sfx_audio": "SFX Audio",
+    "ui.music_audio": "Music Audio",
+    "ui.apply": "Apply",
+    "ui.close": "Close",
+    "ui.health_bar_style": "Health Bar Style",
+    "ui.health_bar_text": "Health Bar Text",
+    "ui.language": "Language",
+
     "ui.saves": "Saves",
     "ui.new_save": "New Saves",
     "ui.character_name": "Character Name",

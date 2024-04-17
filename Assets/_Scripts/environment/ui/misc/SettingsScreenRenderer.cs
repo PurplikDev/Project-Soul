@@ -1,6 +1,7 @@
 using roguelike.core.utils;
 using roguelike.system.manager;
 using roguelike.system.singleton;
+using System.Collections.Generic;
 using Tweens;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -14,6 +15,8 @@ namespace roguelike.rendering.ui {
         Slider masterVolume, musicVolume, sfxVolume;
         Toggle healthBarText;
         Button applyButton, closeButton;
+
+        Dictionary<string, Label> labels;
 
         protected override void Awake() {
             base.Awake();
@@ -35,6 +38,30 @@ namespace roguelike.rendering.ui {
             applyButton = root.Q<Button>("ApplyButton");
             closeButton = root.Q<Button>("CloseButton");
 
+            var masterHeader = root.Q<Label>("MasterSliderHeader");
+            var musicHeader = root.Q<Label>("MusicSliderHeader");
+            var sfxHeader = root.Q<Label>("SFXSliderHeader");
+            var settingsHeader = root.Q<Label>("SettingsHeader");
+            var barHeader = root.Q<Label>("BarStyleHeader");
+            var barTextHeader = root.Q<Label>("HealthBarTextLabel");
+            var languageHeader = root.Q<Label>("LanguageHeader");
+            var closeButtonHeader = root.Q<Label>("CloseButtonHeader");
+            var applyButtonHeader = applyButton.Q<Label>();
+
+            labels = new Dictionary<string, Label> {
+                { applyButtonHeader.text, applyButtonHeader },
+                { masterHeader.text, masterHeader },
+                { musicHeader.text, musicHeader },
+                { sfxHeader.text, sfxHeader },
+                { settingsHeader.text, settingsHeader },
+                { barHeader.text, barHeader },
+                { barTextHeader.text, barTextHeader },
+                { languageHeader.text, languageHeader },
+                { closeButtonHeader.text, closeButtonHeader }
+            };
+
+            Translate(GameManager.CurrentGameSettings);
+
             masterVolume.value = GameManager.CurrentGameSettings.MasterVolume;
             musicVolume.value = GameManager.CurrentGameSettings.MusicVolume;
             sfxVolume.value = GameManager.CurrentGameSettings.SFXVolume;
@@ -52,9 +79,16 @@ namespace roguelike.rendering.ui {
             Reveal(1f);
         }
 
+        private void Translate(GameSettings _) {
+            foreach (var element in labels) {
+                TranslationManager.TranslateHeader(element.Value, element.Key);
+            }
+        }
+
         public void ApplySettings() {
             GameManager.CurrentGameSettings = new GameSettings(masterVolume.value, musicVolume.value, sfxVolume.value, (HealthBarStyle)healthBarDropdown.value, healthBarText.value, (TranslationManager.Language)languageDropdown.value);
             GameSettings.GameSettingsChanged.Invoke(GameManager.CurrentGameSettings);
+            Translate(GameManager.CurrentGameSettings);
         }
 
         public void Close() {

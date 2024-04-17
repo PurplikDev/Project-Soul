@@ -59,7 +59,6 @@ namespace roguelike.rendering.ui {
                 var recipe = ((CraftingStation)deployable).CheckForRecipes();
 
                 if(recipe != null) {
-                    Debug.Log("recipe is null");
                     _resultSlot.ForceStack(recipe.Result);
                 } else {
                     _resultSlot.ForceStack(ItemStack.EMPTY);

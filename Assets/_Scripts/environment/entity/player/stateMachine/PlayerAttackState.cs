@@ -12,8 +12,7 @@ namespace roguelike.environment.entity.player.statemachine {
 
         public override void EnterState() {
             _isAttacking = true;
-            playerStateMachine.animator.SetTrigger("AttackTrigger");
-            playerStateMachine.player.Speed.AddModifier(_attackSlowdown);
+            playerStateMachine.animator.SetBool("IsAttacking", true);
         }
 
         public override void UpdateState() {
@@ -22,6 +21,7 @@ namespace roguelike.environment.entity.player.statemachine {
 
         public override void ExitState() {
             playerStateMachine.player.Speed.RemoveModifier(_attackSlowdown);
+            playerStateMachine.animator.SetBool("IsAttacking", false);
         }
 
         public override PlayerStates GetNextState() {
@@ -32,8 +32,12 @@ namespace roguelike.environment.entity.player.statemachine {
         }
 
         public IEnumerator PlayerAttack(WeaponItem item) {
+            playerStateMachine.animator.SetTrigger("AttackStartTrigger");
+            playerStateMachine.animator.SetFloat("AttackStartModifier", ((1 / item.SwingSpeed) + (1 % item.SwingSpeed)));
             yield return new WaitForSeconds(item.SwingSpeed);
             playerStateMachine.player.PrimaryAction();
+            playerStateMachine.animator.SetTrigger("AttackEndTrigger");
+            playerStateMachine.animator.SetFloat("AttackEndModifier", ((1 / item.AttackCooldown) + (1 % item.AttackCooldown)));
             yield return new WaitForSeconds(item.AttackCooldown);
             _isAttacking = false;
         }

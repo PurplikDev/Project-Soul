@@ -20,7 +20,7 @@ public class TranslationManager : PersistentSingleton<TranslationManager>{
         try {
             return language[key];
         } catch (KeyNotFoundException) {
-            Debug.LogWarning("[" + key + "] isn't present in the lang file. Adding a placeholder into the cache!");
+            Debug.LogError("[" + key + "] isn't present in the lang file. Adding a placeholder into the cache!");
             language.Add(key, key);
             return key;
         }
@@ -28,13 +28,22 @@ public class TranslationManager : PersistentSingleton<TranslationManager>{
 
     public static void GetTranslationFromFile() {
         TextAsset textAsset = Resources.Load<TextAsset>("data/lang/" + Lang.ToString());
-
+        TextAsset defaultAsset = Resources.Load<TextAsset>("data/lang/" + Language.en_us.ToString());
         if (textAsset == null) { 
             Debug.LogError("Your lang file is empty! Selecting a default lang file!");
-            textAsset = Resources.Load<TextAsset>("data/lang/" + Language.en_us.ToString());
+            textAsset = defaultAsset;
         }
 
         language = JsonConvert.DeserializeObject<Dictionary<string, string>>(textAsset.text.ToString());
+        
+        var englishLang  = JsonConvert.DeserializeObject<Dictionary<string, string>>(defaultAsset.text.ToString());
+
+        foreach(var pair in englishLang) {
+            if(!language.ContainsKey(pair.Key)) {
+                language.Add(pair.Key, pair.Value);
+            }
+        }
+
     }
 
     public static void TranslateHeader(Label label) {

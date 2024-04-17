@@ -5,21 +5,21 @@
         <ui:VisualElement name="SettingsHolder" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: 100%; height: 80%; flex-direction: row;">
             <ui:VisualElement name="AudioSettings" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 50%;">
                 <ui:VisualElement name="SliderHolder" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: 80%; align-self: center; align-items: center; margin-top: 5%; margin-bottom: 5%;">
-                    <ui:Label tabindex="-1" text="ui.master_audio" display-tooltip-when-elided="true" name="Label" class="header" style="font-size: 20px;" />
+                    <ui:Label tabindex="-1" text="ui.master_audio" display-tooltip-when-elided="true" name="MasterSliderHeader" class="header" style="font-size: 20px;" />
                     <ui:Slider picking-mode="Ignore" value="0.5" high-value="1" name="MasterVolumeSlider" low-value="0.0001" class="slider" />
                 </ui:VisualElement>
                 <ui:VisualElement name="SliderHolder" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: 80%; align-self: center; align-items: center; margin-top: 5%; margin-bottom: 5%;">
-                    <ui:Label tabindex="-1" text="ui.music_audio" display-tooltip-when-elided="true" name="Label" class="header" style="font-size: 20px;" />
+                    <ui:Label tabindex="-1" text="ui.music_audio" display-tooltip-when-elided="true" name="MusicSliderHeader" class="header" style="font-size: 20px;" />
                     <ui:Slider picking-mode="Ignore" value="0.5" high-value="1" name="MusicVolumeSlider" low-value="0.0001" class="slider" />
                 </ui:VisualElement>
                 <ui:VisualElement name="SliderHolder" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: 80%; align-self: center; align-items: center; margin-top: 5%; margin-bottom: 5%;">
-                    <ui:Label tabindex="-1" text="ui.sfx_audio" display-tooltip-when-elided="true" name="Label" class="header" style="font-size: 20px;" />
+                    <ui:Label tabindex="-1" text="ui.sfx_audio" display-tooltip-when-elided="true" name="SFXSliderHeader" class="header" style="font-size: 20px;" />
                     <ui:Slider picking-mode="Ignore" value="0.5" high-value="1" name="SFXVolumeSlider" low-value="0.0001" class="slider" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="MiscSettings" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 50%; align-items: center;">
                 <ui:VisualElement name="HealthBarStyleDropdownHolder" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: 80%; margin-bottom: 5%; margin-top: 5%;">
-                    <ui:Label tabindex="-1" text="ui.health_bar_style" display-tooltip-when-elided="true" name="Label" class="header" style="font-size: 20%;" />
+                    <ui:Label tabindex="-1" text="ui.health_bar_style" display-tooltip-when-elided="true" name="BarStyleHeader" class="header" style="font-size: 20%;" />
                     <ui:EnumField type="roguelike.core.utils.HealthBarStyle, Assembly-CSharp" name="HealthBarDropdown" class="header" style="color: rgb(13, 43, 69); font-size: 17.5px; background-image: none; border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0); border-left-width: -149px; border-right-width: -149px; border-top-width: -149px; border-bottom-width: -149px;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="HealthBarTextHolder" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row;">
@@ -27,7 +27,7 @@
                     <ui:Toggle name="HealthBarTextToggle" value="true" />
                 </ui:VisualElement>
                 <ui:VisualElement name="LanguageDropdownHolder" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: 80%; margin-top: 5%; margin-bottom: 5%;">
-                    <ui:Label tabindex="-1" text="ui.language" display-tooltip-when-elided="true" name="Label" class="header" style="font-size: 20%;" />
+                    <ui:Label tabindex="-1" text="ui.language" display-tooltip-when-elided="true" name="LanguageHeader" class="header" style="font-size: 20%;" />
                     <ui:EnumField type="TranslationManager+Language, Assembly-CSharp" name="LanguageDropdown" class="header" style="font-size: 17.5px;" />
                 </ui:VisualElement>
             </ui:VisualElement>

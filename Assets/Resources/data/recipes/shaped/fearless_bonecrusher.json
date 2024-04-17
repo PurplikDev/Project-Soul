@@ -1,0 +1,11 @@
+{
+  'Result': {
+    'ItemID': 'fearless_bonecrusher',
+    'ItemAmount': 1
+  },
+  'Ingredients': [
+    { 'ItemID': 'air', 'ItemAmount': 1 }, { 'ItemID': 'mystic_bone', 'ItemAmount': 1 }, { 'ItemID': 'air', 'ItemAmount': 1 },
+    { 'ItemID': 'air', 'ItemAmount': 1 }, { 'ItemID': 'mystic_bone', 'ItemAmount': 1 }, { 'ItemID': 'air', 'ItemAmount': 1 },
+    { 'ItemID': 'air', 'ItemAmount': 1 }, { 'ItemID': 'old_bone', 'ItemAmount': 1 }, { 'ItemID': 'air', 'ItemAmount': 1 }
+  ]
+}

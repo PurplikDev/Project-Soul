@@ -633,7 +633,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8878739549611107291}
   - component: {fileID: 8092277932573074569}
-  - component: {fileID: 5333795637340708906}
   m_Layer: 9
   m_Name: HandOff
   m_TagString: Untagged
@@ -708,18 +707,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5333795637340708906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7334045158140509841}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: facc3aae15390834881ff92dd677e96f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8111650899813401520
 GameObject:
   m_ObjectHideFlags: 0
@@ -913,7 +900,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5887300414087830203}
   - component: {fileID: 960297861327097011}
-  - component: {fileID: 4253213400949590173}
   m_Layer: 9
   m_Name: HandMain
   m_TagString: Untagged
@@ -988,18 +974,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4253213400949590173
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8603608754554356972}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: facc3aae15390834881ff92dd677e96f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &9058214843783697483
 GameObject:
   m_ObjectHideFlags: 0
