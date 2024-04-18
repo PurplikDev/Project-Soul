@@ -7,6 +7,9 @@
     "boots_of_the_traveler": "Boots of the Traveler",
     "zupa": "Zupa",
 
+    "old_necklace": "Old Necklace",
+
+    "bandage": "Bandage",
     "magic_bandage": "Magic Bandage",
 
     "trainer_sword": "Trainer Sword",
@@ -17,12 +20,18 @@
     "trainer_boots": "Trainer Boots",
     "trainer_talisman": "Trainer Talisman",
 
+    "crooked_blade": "Crooked Blade",
+    "templar_shield": "Templar Shield",
+
+    "tunic_of_the_traveler": "Tunic of the Traveler",
+
     // ITEM DESCRIPTIONS
 
-    "boots_of_the_traveler.description": "Boots that were once worn by an ancient Thaumaturge, but now they belong to nobody...",
     "zupa.description": "Zupa leczy ciało i duszę od zarania dziejów. Skosztuj i poczuj jej moc na własnej skórze.",
-
+    "bandage.description": "Healing item, heals 5 health.",
     "magic_bandage.description": "Magical Healing item that repairs your body.",
+
+    "old_necklace.description": "Reminds you of your past... for some reason...",
 
     "trainer_sword.description": "Sword for training",
     "trainer_shield.description": "Shield for training",
@@ -31,6 +40,12 @@
     "trainer_leggings.description": "Leggings for training",
     "trainer_boots.description": "Boots for training",
     "trainer_talisman.description": "Talisman for training",
+
+    "crooked_blade.description": "An oddly shaped blade.",
+    "templar_shield.description": "Piece of protective metal, tested by dangerous combat.",
+
+    "tunic_of_the_traveler.description": "Tunic that once belonged to a fearless Thaumaturge.",
+    "boots_of_the_traveler.description": "Boots that were once worn by an ancient Thaumaturge, but now they belong to nobody...",
 
     // UI
 
@@ -77,12 +92,22 @@
     "ui.scorch": "Scorch",
 
     "ui.perma_death": "Perma Death",
+    "ui.death_screen": "You are dead",
+    "ui.accept_death": "Accept Death...",
+
 
     "ui.need_key": "You need a key to open this door...",
     "ui.key_got": "You have obtained a key!",
     "ui.no_space": "You have no space in your Inventory...",
     "ui.dungeon_gift": "The Dungeon grants you a gift...",
 
+    "ui.mission_board": "Mission Board",
+
+    // DUNGEON
+
+    "dungeon.easy": "Easy",
+    "dungeon.normal": "Normal",
+    "dungeon.hard": "Hard",
 
     // TUTORIAL MESSAGES
 
@@ -92,6 +117,11 @@
     "tutorial.crafting": "You can craft items in crafting stations. Try following the recipe on this parchment with items from the chest next to it.",
     "tutorial.equipment": "You can equip items in the inventory, openable with the [E] key, into their respective slots. Use items can be used with clicking the mouse wheel.",
     "tutorial.blocking": "While blocking, by pressing [Right Mouse Button], you walk slower. You can block attacks when you are looking at them. You have limited blocks before your shield goes down. Then it needs to be put up again.",
-    "tutorial.combat": "You attack by pressing the [Left Mouse Button], you can attack while blocking, but when you attack you are locked in place."
+    "tutorial.combat": "You attack by pressing the [Left Mouse Button], you can attack while blocking, but when you attack you are locked in place.",
 
+
+    "cultist.scorch": "Scorch yourself to save the game.",
+    "cultist.pray1": "Omnia in eo iustum est.",
+    "cultist.pray2": "Tomas est dude",
+    "cultist.pray3": "Auxilium! Auxilium! Auxilium! Auxilium!"
 }

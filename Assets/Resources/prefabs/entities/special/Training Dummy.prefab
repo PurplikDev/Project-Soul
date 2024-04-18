@@ -61,7 +61,17 @@ PrefabInstance:
     - target: {fileID: 7368721368942156920, guid: dc1fe72712bc4cf4a9710c1124307252,
         type: 3}
       propertyPath: m_Name
-      value: Entity
+      value: Training Dummy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8445354430429279803, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 548eebef5dddab547ba469c3de4a0c10, type: 2}
+    - target: {fileID: 9159898711395760817, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: EntityName
+      value: TrainingDummy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

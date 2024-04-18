@@ -13,6 +13,17 @@ namespace roguelike.environment.entity.statsystem {
             ModifierType = modifierType;
             StatType = statType;
         }
+
+        public override string ToString() {
+            if(ModifierType == StatModifierType.ADDITIONAL) {
+                return $"{StatType}: {ModifierValue * 100}%";
+            } else {
+                if(ModifierValue > 0) {
+                    return $"{StatType}: +{ModifierValue}";
+                }
+                return $"{StatType}: {ModifierValue}";
+            }
+        }
     }
 
     public enum StatModifierType {

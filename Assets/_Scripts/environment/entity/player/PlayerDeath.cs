@@ -1,6 +1,8 @@
 using Cinemachine;
 using roguelike.core.utils;
+using roguelike.environment.entity.statsystem;
 using roguelike.system.manager;
+using System.Collections.Generic;
 using System.IO;
 using Tweens;
 using UnityEngine;
@@ -13,10 +15,12 @@ namespace roguelike.environment.entity.player {
         [SerializeField] UIDocument document;
 
         VisualElement deathBG;
-        Label deathLabel;
+        Label deathLabel, deathButtonHeader;
         Button deathButton;
 
         Player player;
+
+        Dictionary<string, Label> labels;
 
         private void Awake() {
             player = GetComponentInParent<Player>();
@@ -29,14 +33,21 @@ namespace roguelike.environment.entity.player {
             deathBG = document.rootVisualElement.Q<VisualElement>("DeathScreenBackground");
             deathLabel = document.rootVisualElement.Q<Label>("DeathScreenHeader");
             deathButton = document.rootVisualElement.Q<Button>("DeathScreenButton");
+            deathButtonHeader = deathButton.Q<Label>();
 
-            TranslationManager.TranslateHeader(deathLabel);
+            labels = new Dictionary<string, Label> {
+                { deathLabel.text, deathLabel },
+                { deathButtonHeader.text, deathButtonHeader }
+            };
 
             deathButton.clicked += EndGame;
         }
 
         private void Death() {
             player.DeathEvent -= Death;
+            foreach(var label in labels) {
+                TranslationManager.TranslateHeader(label.Value, label.Key);
+            }
             CameraZoom();
         }
 

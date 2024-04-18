@@ -1,0 +1,15 @@
+# Made in Blockbench 4.9.4
+mtllib dungeon_floor.mtl
+
+o floor
+v 3 0 3
+v 3 0 -3
+v -3 0 3
+v -3 0 -3
+vt 0.75 0.625
+vt 0.75 1
+vt 0.375 1
+vt 0.375 0.625
+vn 0 1 0
+usemtl m_f89d5b31-65a2-12f9-21c4-ea31fe3f3449
+f 1/1/1 2/2/1 4/3/1 3/4/1

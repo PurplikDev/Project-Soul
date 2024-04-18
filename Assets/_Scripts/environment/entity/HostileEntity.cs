@@ -36,6 +36,11 @@ namespace roguelike.environment.entity {
             EntityAim.rotation = Rotation;
         }
 
+        public override void Damage(DamageSource source) {
+            base.Damage(source);
+            GetComponent<Animator>().SetTrigger("Hit");
+        }
+
         internal virtual void Attack() {
             AttackEvent.Invoke();
             // spawn a sphere in front of the entity

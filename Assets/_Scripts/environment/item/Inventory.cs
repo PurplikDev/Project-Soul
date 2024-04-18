@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using roguelike.core.eventsystem;
+using roguelike.core.utils;
 using roguelike.core.utils.gamedata;
 using roguelike.environment.entity;
 using roguelike.environment.entity.player;
@@ -69,6 +70,37 @@ namespace roguelike.core.item {
                         player.MainHandSprite.sprite = itemStack.Item.Icon;
                     } else if (index == 25) {
                         player.OffHandSprite.sprite = itemStack.Item.Icon;
+                    }
+
+                    player.Defence.RemoveModifier(GlobalStaticValues.TEMPLAR_BONUS_STAT);
+                    player.Speed.RemoveModifier(GlobalStaticValues.ROGUE_BONUS_STAT);
+                    player.MaxHealth.RemoveModifier(GlobalStaticValues.THAUMATURGE_BONUS_STAT);
+
+                    float classValue = player.Templar.Value;
+                    StatType playerClass = StatType.TEMPLAR;
+
+                    if (player.Thaumaturge.Value > classValue) {
+                        classValue = player.Thaumaturge.Value;
+                        playerClass = StatType.THAUMATURGE;
+                    }
+
+                    if (player.Rogue.Value > classValue) {
+                        classValue = player.Rogue.Value;
+                        playerClass = StatType.ROGUE;
+                    }
+
+                    if (classValue >= 10) {
+                        switch (playerClass) {
+                            case StatType.TEMPLAR:
+                                player.Defence.AddModifier(GlobalStaticValues.TEMPLAR_BONUS_STAT);
+                                break;
+                            case StatType.ROGUE:
+                                player.Speed.AddModifier(GlobalStaticValues.ROGUE_BONUS_STAT);
+                                break;
+                            case StatType.THAUMATURGE:
+                                player.MaxHealth.AddModifier(GlobalStaticValues.THAUMATURGE_BONUS_STAT);
+                                break;
+                        }
                     }
                 }
             }

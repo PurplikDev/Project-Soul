@@ -6,8 +6,8 @@ namespace roguelike.core.item {
     public class Shield : HandheldItem {
 
         StatModifier slowDown;
-        int maxBlockAmount;
 
+        public int MaxBlockAmount { get; private set; }
         public bool IsUp { get; private set; }
         public int WeaponTier { get; private set; }
         public int PerformedBlocksAmount { get; private set; }
@@ -17,7 +17,7 @@ namespace roguelike.core.item {
             IsUp = false;
             slowDown = new StatModifier(slowdownEffect, StatModifierType.ADDITIONAL, StatType.SPEED);
             WeaponTier = weaponTier;
-            maxBlockAmount = maxAmountOfBlocks;
+            MaxBlockAmount = maxAmountOfBlocks;
         }
 
         public override void ItemAction(Entity user) {
@@ -38,7 +38,7 @@ namespace roguelike.core.item {
 
         public void Blocked(Entity user) {
             PerformedBlocksAmount++;
-            if(PerformedBlocksAmount >= maxBlockAmount) {
+            if(PerformedBlocksAmount >= MaxBlockAmount) {
                 user.Speed.RemoveModifier(slowDown);
                 user.IsBlocking = false;
                 PerformedBlocksAmount = 0;

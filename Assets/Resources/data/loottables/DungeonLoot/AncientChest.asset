@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: AncientChest
   m_EditorClassIdentifier: 
   LootTableItems:
-  - bandage
+  - coins
+  - gem
+  - old_necklace

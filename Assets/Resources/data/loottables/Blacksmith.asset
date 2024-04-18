@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Blacksmith
   m_EditorClassIdentifier: 
   LootTableItems:
-  - test
-  - test4
-  - test_light_sword
+  - fearless_bonecrusher
+  - crooked_blade
+  - templar_shield

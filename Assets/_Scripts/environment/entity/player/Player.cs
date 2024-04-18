@@ -1,13 +1,12 @@
 using Newtonsoft.Json;
 using roguelike.core.item;
+using roguelike.core.utils;
 using roguelike.environment.entity.statsystem;
 using roguelike.environment.ui.hud;
 using roguelike.environment.ui.statemachine;
 using roguelike.rendering.ui;
-using roguelike.rendering.ui.slot;
 using roguelike.system.input;
 using roguelike.system.manager;
-using System;
 using Tweens;
 using UnityEngine;
 
@@ -90,6 +89,7 @@ namespace roguelike.environment.entity.player {
             };
             gameObject.AddTween(rotationTween);
         }
+
     }
 
     [System.Serializable]

@@ -3,7 +3,9 @@
     <ui:VisualElement name="DeathScreenBackground" style="flex-grow: 1; background-color: rgb(13, 43, 69); opacity: 0;">
         <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: auto; height: initial; align-items: center; justify-content: center; align-self: center;">
             <ui:Label tabindex="-1" text="ui.death_screen" display-tooltip-when-elided="true" name="DeathScreenHeader" style="color: rgb(255, 212, 163); font-size: 50%; -unity-text-align: middle-center; -unity-font-style: bold; opacity: 0;" />
-            <ui:Button text="ui.accept_death" display-tooltip-when-elided="true" name="DeathScreenButton" class="button" style="padding-left: 12px; -unity-text-align: middle-center; opacity: 0;" />
+            <ui:Button display-tooltip-when-elided="true" name="DeathScreenButton" class="button" style="padding-left: 12px; -unity-text-align: middle-center; opacity: 0;">
+                <ui:Label tabindex="-1" text="ui.accept_death" display-tooltip-when-elided="true" class="header" style="padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; font-size: 30px; color: rgb(255, 236, 214);" />
+            </ui:Button>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

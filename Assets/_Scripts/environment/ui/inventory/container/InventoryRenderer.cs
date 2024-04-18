@@ -1,16 +1,15 @@
-using System;
 using System.Linq;
 using roguelike.core.item;
+using roguelike.environment.entity.statsystem;
 using roguelike.rendering.ui.slot;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 namespace roguelike.rendering.ui {
     public class InventoryRenderer : ContainerRenderer {
         protected VisualElement equipmentRoot, trinketRoot, itemTooltip, character;
 
-        protected Label tooltipName, tooltipDescription;
+        protected Label tooltipName, tooltipDescription, classLabel;
 
         public InventoryRenderer(Inventory entityInventory, UIDocument inventoryUI) : base(entityInventory, inventoryUI) {
             root = inventoryUI.rootVisualElement;
@@ -25,10 +24,14 @@ namespace roguelike.rendering.ui {
 
             character = root.Q<VisualElement>("CharacterBackground");
 
+            classLabel = root.Q<Label>("PlayerClass");
+
             TranslationManager.TranslateHeader(root.Q<Label>("InventoryHeader"));
             TranslationManager.TranslateHeader(root.Q<Label>("CharacterHeader"));
             TranslationManager.TranslateHeader(root.Q<Label>("EquipmentHeader"));
             TranslationManager.TranslateHeader(root.Q<Label>("TrinketsHeader"));
+
+            
 
             RegisterEquipmentSlots();
             RegisterTrinketSlots();
@@ -54,7 +57,30 @@ namespace roguelike.rendering.ui {
                 originalSlot.UpdateSlotEvent.Invoke();
             }
 
+            SelectClass();
+
             base.ClickSlot(position, originalSlot, mouseButton);
+        }
+
+        private void SelectClass() {
+            float classValue = inventory.Entity.Templar.Value;
+            StatType playerClass = StatType.TEMPLAR;
+
+            if(inventory.Entity.Thaumaturge.Value > classValue) {
+                classValue = inventory.Entity.Thaumaturge.Value;
+                playerClass = StatType.THAUMATURGE;
+            }
+
+            if (inventory.Entity.Rogue.Value > classValue) {
+                classValue = inventory.Entity.Rogue.Value;
+                playerClass = StatType.ROGUE;
+            }
+
+            if(classValue > 0) {
+                classLabel.text = $"{playerClass.ToString().ToUpper()} - {classValue}";
+            } else {
+                classLabel.text = "";
+            }
         }
 
 
@@ -90,12 +116,18 @@ namespace roguelike.rendering.ui {
                 tooltipName.text = slot.SlotStack.Item.Name;
                 tooltipDescription.text = slot.SlotStack.Item.Description;
 
-                if(slot.SlotStack.Item is WeaponItem weapon) {
-                    tooltipDescription.text += $" \nDamage: {weapon.Damage} | Tier: {weapon.WeaponTier} | Duration: {weapon.SwingSpeed + weapon.AttackCooldown}";
-                } else if(slot.SlotStack.Item is Shield shield) {
-                    tooltipDescription.text += $" \nshield";
-                } else if(slot.SlotStack.Item is EquipmentItem) {
-                    tooltipDescription.text += $" \nequipment";
+                if (slot.SlotStack.Item is EquipmentItem equipment) {
+
+                    if (equipment is WeaponItem weapon) {
+                        tooltipDescription.text += $"\n DAMAGE: {weapon.Damage}  TIER: {weapon.WeaponTier}  DURATION: {weapon.SwingSpeed + weapon.AttackCooldown}";
+                    } else if (equipment is Shield shield) {
+                        tooltipDescription.text += $"\n BLOCKS: {shield.MaxBlockAmount}  TIER: {shield.WeaponTier}";
+                    }
+                    tooltipDescription.text += $"\n";
+                    foreach(var statModifier in equipment.StatModifiers) {
+                        tooltipDescription.text += $" {statModifier.ToString()} ";
+                    }
+
                 } else if(slot.SlotStack.Item is UseItem) {
                     tooltipDescription.text += $" \nPress [Mouse 3] to use on yourself.";
                 }

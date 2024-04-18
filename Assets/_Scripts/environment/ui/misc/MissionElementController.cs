@@ -1,4 +1,6 @@
 using roguelike.system.manager;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UIElements;
 using static roguelike.system.manager.DungeonManager;
 
@@ -11,6 +13,8 @@ namespace roguelike.rendering.ui.dungeonboard {
 
         DungeonBoardRenderer dungeonBoardRenderer;
 
+        List<string> missionNames = new List<string>() { "Ancient Halls", "Soulless Corridors", "John Waller's home", "Local Dorms" };
+
         public void SetupElement(VisualElement root, DungeonBoardRenderer renderer) {
             missionName = root.Q<Label>("MissionHeader");
             missionDifficulty = root.Q<Label>("DifficultyHeader");
@@ -20,8 +24,11 @@ namespace roguelike.rendering.ui.dungeonboard {
         }
 
         public void FillData(DungeonDifficulty dungeonDifficulty) {
-            missionName.text = "mission"; // random name pool to pick
-            missionIcon.style.backgroundImage = null; // add random image pool to pick
+            missionName.text = missionNames[Random.Range(0, missionNames.Count)];
+
+            var images = Resources.LoadAll<Sprite>("sprites/ui/missions");
+
+            missionIcon.style.backgroundImage = images[Random.Range(0, images.Length)].texture;
             missionDifficulty.text = TranslationManager.GetTranslation($"dungeon.{dungeonDifficulty.ToString().ToLower()}");
             difficulty = dungeonDifficulty;
         }

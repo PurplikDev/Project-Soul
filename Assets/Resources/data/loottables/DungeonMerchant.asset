@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LootTableItems:
   - air
+  - bandage
+  - magic_bandage
+  - zupa

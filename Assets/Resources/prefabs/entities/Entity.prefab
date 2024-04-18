@@ -306,7 +306,7 @@ Animator:
   m_GameObject: {fileID: 7368721368942156920}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9016f62f2b6024a75830254d6f6ef693, type: 2}
+  m_Controller: {fileID: 9100000, guid: 548eebef5dddab547ba469c3de4a0c10, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -344,6 +344,9 @@ MonoBehaviour:
     BaseValue: 0
   Immortal: 0
   Invisible: 0
+  UnityDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
   AttackSpeed:
     BaseValue: 1.5
   AttackCooldown:
@@ -351,6 +354,9 @@ MonoBehaviour:
   AttackRange:
     BaseValue: 0.5
   EntityAim: {fileID: 2029155580072626083}
+  AttackDamage: 0
+  DamageTier: 0
+  HasHealthBar: 0
 --- !u!114 &4468917740967889186
 MonoBehaviour:
   m_ObjectHideFlags: 0

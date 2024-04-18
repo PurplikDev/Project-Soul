@@ -56,8 +56,6 @@ namespace roguelike.environment.ui.hud {
 
                 HealthBarStyle = GameManager.CurrentGameSettings.HealthBarStyle;
                 HealthDisplayText = GameManager.CurrentGameSettings.HealthBarText;
-
-                Debug.Log("I iwll update");
             }
 
             if (ShouldReveal) {

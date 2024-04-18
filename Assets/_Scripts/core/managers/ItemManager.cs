@@ -73,7 +73,7 @@ namespace roguelike.core.item {
             RegisterLightSword("crooked_blade", 32, 12, 0.5f, 0.75f, 1, 
                 new StatModifier(1.125f, StatModifierType.FLAT, StatType.SPEED),
                 new StatModifier(2f, StatModifierType.FLAT, StatType.TEMPLAR),
-                new StatModifier(1.5f, StatModifierType.FLAT, StatType.ROGUE));
+                new StatModifier(10.5f, StatModifierType.FLAT, StatType.ROGUE));
 
             RegisterLightSword("fearless_bonecrusher", 48, 6, 0.75f, 0.5f, 2,
                 new StatModifier(2f, StatModifierType.FLAT, StatType.TEMPLAR),
