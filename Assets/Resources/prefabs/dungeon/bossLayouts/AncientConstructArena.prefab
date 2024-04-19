@@ -6021,6 +6021,11 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1080305718566287076, guid: ecd13966ec114b84eb42cd9a27df44ad,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2242671443718051708, guid: ecd13966ec114b84eb42cd9a27df44ad,
         type: 3}
       propertyPath: m_LocalPosition.x

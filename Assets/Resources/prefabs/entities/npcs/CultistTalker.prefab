@@ -117,5 +117,12 @@ MonoBehaviour:
       m_Calls: []
   InteractMessage: []
   InteractionScreenHolder: {fileID: 0}
+  AudioSource: {fileID: 7740935526335408067}
   message: cultist.scorch
   duration: 5
+--- !u!82 &7740935526335408067 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1825490955289466704, guid: 89a46b7549fa3a348bf4dec83ecfc5cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 8230365165793308819}
+  m_PrefabAsset: {fileID: 0}

@@ -37,6 +37,7 @@ namespace roguelike.environment.entity.player.statemachine {
             playerStateMachine.animator.SetFloat("AttackStartModifier", ((1 / item.SwingSpeed) + (1 % item.SwingSpeed)));
             yield return new WaitForSeconds(item.SwingSpeed);
             playerStateMachine.player.PrimaryAction();
+            playerStateMachine.player.AttackEvent.Invoke();
             playerStateMachine.animator.SetTrigger("AttackEndTrigger");
             playerStateMachine.animator.SetFloat("AttackEndModifier", ((1 / item.AttackCooldown) + (1 % item.AttackCooldown)));
             yield return new WaitForSeconds(item.AttackCooldown);

@@ -1,5 +1,6 @@
 using roguelike.core.item;
 using roguelike.environment.entity.player;
+using roguelike.environment.world.dungeon;
 using roguelike.system.manager;
 using Tweens;
 using UnityEngine;
@@ -20,11 +21,14 @@ namespace roguelike.environment.world.interactable {
             if(isOpening || player == null) { return; }
 
             if(Type == GateType.LAYER_EXIT) {
-                if(player.Inventory.HasItem(ItemManager.GetItemByID("ancient_gate_key"))) {
-                    player.Inventory.RemoveItem(ItemManager.GetItemByID("ancient_gate_key"));
-                } else {
-                    player?.DisplayMessage("ui.need_key");
-                    return;
+
+                if(RoomSpawnPoint.keySpawned) { 
+                    if (player.Inventory.HasItem(ItemManager.GetItemByID("ancient_gate_key"))) {
+                        player.Inventory.RemoveItem(ItemManager.GetItemByID("ancient_gate_key"));
+                    } else {
+                        player?.DisplayMessage("ui.need_key");
+                        return;
+                    }
                 }
             }
 

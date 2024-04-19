@@ -36,12 +36,6 @@ namespace roguelike.core.item {
             return item;
         }
 
-
-        // i just want to say, i hate this
-        // i have no idea why i made this like this
-        // no idea what i was thinking back then
-        // i want to rewrite it, but that would take too much effort
-
         private void RegisterItems() {
             
             // Generic Item/Registry
@@ -52,16 +46,14 @@ namespace roguelike.core.item {
             Register("ancient_gate_key", 1, 128);
 
             // Valuables
-            Register("coins", 1280, 1);
-            Register("gem", 64, 128);
+            Register("coins", 128, 1);
+            Register("gem", 1, 128);
             Register("old_necklace", 1, 256);
 
             // Crafting Materials
             Register("magic_silk", 32, 32);
             Register("old_bone", 32, 8);
             Register("mystic_bone", 16, 48);
-            Register("piece_of_chainmail", 8, 16);
-            Register("chainmail", 16, 32);
 
             // UseItems
             RegisterUseItem("bandage", 8, UseItemType.HEALING, 5);
@@ -73,11 +65,11 @@ namespace roguelike.core.item {
             RegisterLightSword("crooked_blade", 32, 12, 0.5f, 0.75f, 1, 
                 new StatModifier(1.125f, StatModifierType.FLAT, StatType.SPEED),
                 new StatModifier(2f, StatModifierType.FLAT, StatType.TEMPLAR),
-                new StatModifier(10.5f, StatModifierType.FLAT, StatType.ROGUE));
+                new StatModifier(2.5f, StatModifierType.FLAT, StatType.ROGUE));
 
             RegisterLightSword("fearless_bonecrusher", 48, 6, 0.75f, 0.5f, 2,
-                new StatModifier(2f, StatModifierType.FLAT, StatType.TEMPLAR),
-                new StatModifier(1.25f, StatModifierType.FLAT, StatType.THAUMATURGE));
+                new StatModifier(3f, StatModifierType.FLAT, StatType.TEMPLAR),
+                new StatModifier(2.25f, StatModifierType.FLAT, StatType.THAUMATURGE));
 
             // Shield Registry
 
@@ -139,9 +131,9 @@ namespace roguelike.core.item {
             RegisterLightSword("trainer_sword", 0, 5, 0.5f, 0.75f, 2, new StatModifier(10f, StatModifierType.FLAT, StatType.TEMPLAR));
             RegisterShield("trainer_shield", 0, -0.125f, 2, 3);
             RegisterEquipment("trainer_helmet", 0, EquipmentType.HELMET, new StatModifier(0.25f, StatModifierType.ADDITIONAL, StatType.HEALTH), new StatModifier(1.5f, StatModifierType.FLAT, StatType.TEMPLAR));
-            RegisterEquipment("trainer_tunic", 0, EquipmentType.CHESTPLATE, new StatModifier(1.5f, StatModifierType.FLAT, StatType.DEFENCE), new StatModifier(10f, StatModifierType.FLAT, StatType.TEMPLAR));
-            RegisterEquipment("trainer_leggings", 0, EquipmentType.PANTS, new StatModifier(10f, StatModifierType.FLAT, StatType.DEFENCE), new StatModifier(0.5f, StatModifierType.ADDITIONAL, StatType.SPEED), new StatModifier(10f, StatModifierType.FLAT, StatType.TEMPLAR));
-            RegisterEquipment("trainer_boots", 0, EquipmentType.BOOTS, new StatModifier(1.5f, StatModifierType.FLAT, StatType.SPEED), new StatModifier(10f, StatModifierType.FLAT, StatType.TEMPLAR));
+            RegisterEquipment("trainer_tunic", 0, EquipmentType.CHESTPLATE, new StatModifier(1.5f, StatModifierType.FLAT, StatType.DEFENCE), new StatModifier(2.5f, StatModifierType.FLAT, StatType.TEMPLAR));
+            RegisterEquipment("trainer_leggings", 0, EquipmentType.PANTS, new StatModifier(0.5f, StatModifierType.ADDITIONAL, StatType.SPEED));
+            RegisterEquipment("trainer_boots", 0, EquipmentType.BOOTS, new StatModifier(1.5f, StatModifierType.FLAT, StatType.SPEED));
             RegisterTrinket("trainer_talisman", 0, new StatModifier(2.5f, StatModifierType.FLAT, StatType.HEALTH), new StatModifier(1.5f, StatModifierType.FLAT, StatType.TEMPLAR));
 
 

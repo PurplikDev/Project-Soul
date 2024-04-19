@@ -9,6 +9,7 @@ namespace roguelike.environment.entity.npc {
 
         public override void Interact(Player player) {
             player.DisplayMessage(message, duration);
+            AudioSource.Play();
         }
     }
 }

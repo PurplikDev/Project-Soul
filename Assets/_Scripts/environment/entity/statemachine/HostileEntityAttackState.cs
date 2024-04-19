@@ -7,7 +7,7 @@ namespace roguelike.environment.entity.statemachine {
 
         public override void EnterState() {
             stateMachine.isAttacking = true;
-            stateMachine.animator.SetTrigger("AttackTrigger");
+            stateMachine.hostileEntity.AttackEvent.Invoke();
         }
 
         public override void UpdateState() { }

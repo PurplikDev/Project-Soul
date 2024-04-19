@@ -31,8 +31,8 @@ namespace roguelike.core.item {
                 user.IsBlocking = false;
             }
 
-            if (user is Player player) {
-                player.RotateEquipment();
+            if (user is Player player && player != null) {
+                player?.RotateEquipment();
             }
         }
 

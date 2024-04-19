@@ -89,7 +89,7 @@ namespace roguelike.core.item {
                         playerClass = StatType.ROGUE;
                     }
 
-                    if (classValue >= 10) {
+                    if (classValue >= 5) {
                         switch (playerClass) {
                             case StatType.TEMPLAR:
                                 player.Defence.AddModifier(GlobalStaticValues.TEMPLAR_BONUS_STAT);
@@ -158,7 +158,16 @@ namespace roguelike.core.item {
         /// This constructor creates and empty inventory!
         /// </summary>
         public InventoryData() {
-            for (int i = 0; i < Inventory.InventorySize; i++) { Items.Add(ItemStackData.EMPTY); }
+            for (int i = 0; i < Inventory.InventorySize - 7; i++) { Items.Add(ItemStackData.EMPTY); }
+
+            Items.Add(new ItemStackData(new ItemStack(ItemManager.GetItemByID("trainer_sword"))));
+            Items.Add(new ItemStackData(new ItemStack(ItemManager.GetItemByID("trainer_shield"))));
+            Items.Add(new ItemStackData(new ItemStack(ItemManager.GetItemByID("trainer_helmet"))));
+            Items.Add(new ItemStackData(new ItemStack(ItemManager.GetItemByID("trainer_tunic"))));
+            Items.Add(new ItemStackData(new ItemStack(ItemManager.GetItemByID("trainer_leggings"))));
+            Items.Add(new ItemStackData(new ItemStack(ItemManager.GetItemByID("trainer_boots"))));
+            Items.Add(new ItemStackData(new ItemStack(ItemManager.GetItemByID("trainer_talisman"))));
+
             for (int i = 0; i < Inventory.EquipmentSize; i++) { Items.Add(ItemStackData.EMPTY); }
             for (int i = 0; i < Inventory.TrinketSize; i++) { Items.Add(ItemStackData.EMPTY); }
         }

@@ -10,19 +10,19 @@ namespace roguelike.environment.entity {
 
         public AudioClip HurtSound { get {
                 var sound = Resources.Load<AudioClip>($"audio/sfx/{entity.EntityName}/hurt_sound");
-                return sound != null ? sound : Resources.Load<AudioClip>($"audio/sfx/missing_sound");
+                return sound != null ? sound : Resources.Load<AudioClip>($"audio/sfx/missing_hurt_sound");
             } }
         public AudioClip HealSound { get {
                 var sound = Resources.Load<AudioClip>($"audio/sfx/{entity.EntityName}/heal_sound");
-                return sound != null ? sound : Resources.Load<AudioClip>($"audio/sfx/missing_sound");
+                return sound != null ? sound : Resources.Load<AudioClip>($"audio/sfx/missing_heal_sound");
             } }
         public AudioClip AttackSound { get {
                 var sound = Resources.Load<AudioClip>($"audio/sfx/{entity.EntityName}/attack_sound");
-                return sound != null ? sound : Resources.Load<AudioClip>($"audio/sfx/missing_sound");
+                return sound != null ? sound : Resources.Load<AudioClip>($"audio/sfx/missing_attack_sound");
             } }
         public AudioClip MovementSound { get {
                 var sound = Resources.Load<AudioClip>($"audio/sfx/{entity.EntityName}/movement_sound");
-                return sound != null ? sound : Resources.Load<AudioClip>($"audio/sfx/missing_sound");
+                return sound != null ? sound : Resources.Load<AudioClip>($"audio/sfx/missing_movement_sound");
             } }
 
         internal Entity entity;

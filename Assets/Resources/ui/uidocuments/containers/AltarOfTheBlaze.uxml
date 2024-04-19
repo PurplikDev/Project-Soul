@@ -5,44 +5,44 @@
         <ui:VisualElement name="Inventory" class="inventory" style="flex-direction: row; flex-wrap: nowrap; flex-grow: 0; justify-content: center; align-items: stretch; height: 57%; width: 65%;">
             <ui:VisualElement name="Altar" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; width: 50%; justify-content: flex-start; flex-shrink: 0; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px;">
                 <ui:Label text="ui.altar_of_the_blaze" display-tooltip-when-elided="true" name="AltarHeader" class="header" style="-unity-text-align: middle-left;" />
-                <ui:VisualElement name="ScorchButtonHolder" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: column; justify-content: space-around; align-items: center; height: 35%;">
-                    <ui:Button display-tooltip-when-elided="true" name="ScorchButton" class="button" style="padding-left: 12px; height: auto;">
-                        <ui:Label tabindex="-1" text="ui.scorch" display-tooltip-when-elided="true" name="ScorchButtonHeader" class="header" style="background-image: none; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
+                <ui:VisualElement name="ScorchButtonHolder" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: column; justify-content: space-around; align-items: center; height: 100%;">
+                    <ui:Button display-tooltip-when-elided="true" name="ScorchButton" class="button" style="padding-left: 12px; height: 35%; -unity-text-align: middle-center; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; justify-content: center; align-items: center;">
+                        <ui:Label tabindex="-1" text="ui.scorch" display-tooltip-when-elided="true" name="ScorchButtonHeader" class="header" style="background-image: none; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; font-size: 50px;" />
                     </ui:Button>
                 </ui:VisualElement>
-                <ui:VisualElement name="AltarSacrifice" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; width: auto; justify-content: space-around; height: 50%; margin-bottom: 0; align-items: center; margin-left: 0; margin-right: 0; margin-top: 0;">
+                <ui:VisualElement name="AltarSacrifice" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; width: auto; justify-content: space-around; height: 50%; margin-bottom: 0; align-items: center; margin-left: 0; margin-right: 0; margin-top: 0; visibility: hidden; opacity: 0; display: none; position: absolute;">
                     <ui:Button display-tooltip-when-elided="true" name="SacrificeButton" class="button button_inactive" style="padding-left: 12px; height: auto;">
                         <ui:Label tabindex="-1" text="ui.sacrifice" display-tooltip-when-elided="true" name="SacrificeButtonHeader" class="header" style="background-image: none; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; font-size: 40px;" />
                     </ui:Button>
                     <roguelike.rendering.ui.slot.ItemSlot name="AltarSacrificeSlot" style="background-image: resource(&apos;sprites/ui/crafting_slot&apos;); width: 128px; height: 128px;" />
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="Inventory" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; width: 50%; flex-shrink: 0;">
-                <ui:Label display-tooltip-when-elided="true" name="InventoryHeader" text="ui.inventory" class="header" style="-unity-text-align: middle-left;" />
-                <ui:VisualElement name="InventorySlotContainer" class="slotsContainer inventorySlotContainer" style="align-items: center; justify-content: center; flex-direction: row; margin-top: 0; margin-left: 0; margin-right: 0; margin-bottom: 0; flex-shrink: 1; flex-wrap: wrap; padding-left: 11px; padding-right: 11px; padding-top: 11px; padding-bottom: 11px;">
-                    <roguelike.rendering.ui.slot.ItemSlot />
-                    <roguelike.rendering.ui.slot.ItemSlot />
-                    <roguelike.rendering.ui.slot.ItemSlot />
-                    <roguelike.rendering.ui.slot.ItemSlot />
-                    <roguelike.rendering.ui.slot.ItemSlot />
-                    <roguelike.rendering.ui.slot.ItemSlot />
-                    <roguelike.rendering.ui.slot.ItemSlot />
-                    <roguelike.rendering.ui.slot.ItemSlot />
-                    <roguelike.rendering.ui.slot.ItemSlot />
-                    <roguelike.rendering.ui.slot.ItemSlot />
-                    <roguelike.rendering.ui.slot.ItemSlot />
-                    <roguelike.rendering.ui.slot.ItemSlot />
-                    <roguelike.rendering.ui.slot.ItemSlot />
-                    <roguelike.rendering.ui.slot.ItemSlot />
-                    <roguelike.rendering.ui.slot.ItemSlot />
-                    <roguelike.rendering.ui.slot.ItemSlot />
-                    <roguelike.rendering.ui.slot.ItemSlot />
-                    <roguelike.rendering.ui.slot.ItemSlot />
-                    <roguelike.rendering.ui.slot.ItemSlot />
-                    <roguelike.rendering.ui.slot.ItemSlot />
-                </ui:VisualElement>
-            </ui:VisualElement>
         </ui:VisualElement>
         <roguelike.rendering.ui.slot.ItemSlot name="MouseSlot" style="display: flex; position: absolute; visibility: hidden;" />
+    </ui:VisualElement>
+    <ui:VisualElement name="Inventory" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: nowrap; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; width: 50%; flex-shrink: 0; visibility: hidden; opacity: 0; position: absolute;">
+        <ui:Label display-tooltip-when-elided="true" name="InventoryHeader" text="ui.inventory" class="header" style="-unity-text-align: middle-left;" />
+        <ui:VisualElement name="InventorySlotContainer" class="slotsContainer inventorySlotContainer" style="align-items: center; justify-content: center; flex-direction: row; margin-top: 0; margin-left: 0; margin-right: 0; margin-bottom: 0; flex-shrink: 1; flex-wrap: wrap; padding-left: 11px; padding-right: 11px; padding-top: 11px; padding-bottom: 11px;">
+            <roguelike.rendering.ui.slot.ItemSlot />
+            <roguelike.rendering.ui.slot.ItemSlot />
+            <roguelike.rendering.ui.slot.ItemSlot />
+            <roguelike.rendering.ui.slot.ItemSlot />
+            <roguelike.rendering.ui.slot.ItemSlot />
+            <roguelike.rendering.ui.slot.ItemSlot />
+            <roguelike.rendering.ui.slot.ItemSlot />
+            <roguelike.rendering.ui.slot.ItemSlot />
+            <roguelike.rendering.ui.slot.ItemSlot />
+            <roguelike.rendering.ui.slot.ItemSlot />
+            <roguelike.rendering.ui.slot.ItemSlot />
+            <roguelike.rendering.ui.slot.ItemSlot />
+            <roguelike.rendering.ui.slot.ItemSlot />
+            <roguelike.rendering.ui.slot.ItemSlot />
+            <roguelike.rendering.ui.slot.ItemSlot />
+            <roguelike.rendering.ui.slot.ItemSlot />
+            <roguelike.rendering.ui.slot.ItemSlot />
+            <roguelike.rendering.ui.slot.ItemSlot />
+            <roguelike.rendering.ui.slot.ItemSlot />
+            <roguelike.rendering.ui.slot.ItemSlot />
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

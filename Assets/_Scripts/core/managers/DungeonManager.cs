@@ -21,6 +21,10 @@ namespace roguelike.system.manager {
         static GameObject[] bossFloors { get { return Resources.LoadAll<GameObject>("prefabs/dungeon/bossLayouts"); } }
 
         public static void SpawnDungeon(AsyncOperation _) {
+
+            Instantiate(bossFloors[Random.Range(0, bossFloors.Length)]);
+            return;
+
             RoomSpawnPoint.keySpawned = false;
             if(State == DungeonState.DUNGEON) {
                 if(CurrentLayer == 1) {
@@ -28,11 +32,6 @@ namespace roguelike.system.manager {
                 } else {
                     Instantiate(floors[Random.Range(0, floors.Length)]);
                 }
-
-                if(!RoomSpawnPoint.keySpawned) {
-                    GameManager.Player.Inventory.AddItem(new ItemStack(ItemManager.GetItemByID("ancient_gate_key"), 1));
-                }
-
             } else if(State == DungeonState.CAMP) {
                 Instantiate(camp);
             } else if(State == DungeonState.BOSS) {

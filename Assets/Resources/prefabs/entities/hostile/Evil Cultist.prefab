@@ -1,0 +1,171 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &5862899379107616641
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 723451890515026800, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3c28b45ff03546043891f2b8ca9e5a75,
+        type: 3}
+    - target: {fileID: 723451890515026800, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 269ca06fae753bb4f9da5f29ceb86df3, type: 2}
+    - target: {fileID: 2029155580072626083, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2029155580072626083, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2029155580072626083, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4318733422776708208, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4318733422776708208, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4318733422776708208, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4318733422776708208, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4318733422776708208, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4318733422776708208, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4318733422776708208, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4318733422776708208, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4318733422776708208, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4318733422776708208, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4468917740967889186, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: Angle
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 4468917740967889186, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: Range
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4468917740967889186, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: DoesWander
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4468917740967889186, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: ForgetTimer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4468917740967889186, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: DoesHaveBrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4468917740967889186, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: MinimumSearchingIteractions
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6355783003351811161, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: m_Radius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7368721368942156920, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: m_Name
+      value: Evil Cultist
+      objectReference: {fileID: 0}
+    - target: {fileID: 9159898711395760817, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: DamageTier
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9159898711395760817, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: EntityName
+      value: Evil Cultist
+      objectReference: {fileID: 0}
+    - target: {fileID: 9159898711395760817, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: AttackDamage
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9159898711395760817, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: Speed.BaseValue
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9159898711395760817, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: Defence.BaseValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9159898711395760817, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: MaxHealth.BaseValue
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 9159898711395760817, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: AttackRange.BaseValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9159898711395760817, guid: dc1fe72712bc4cf4a9710c1124307252,
+        type: 3}
+      propertyPath: AttackSpeed.BaseValue
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dc1fe72712bc4cf4a9710c1124307252, type: 3}

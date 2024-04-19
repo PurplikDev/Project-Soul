@@ -10,6 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 76787348375562427, guid: 8d9463f5a800933478131be02e787628,
         type: 3}
+      propertyPath: AudioSource
+      value: 
+      objectReference: {fileID: 7092803098707492514}
+    - target: {fileID: 76787348375562427, guid: 8d9463f5a800933478131be02e787628,
+        type: 3}
       propertyPath: possibleOffer
       value: 
       objectReference: {fileID: 11400000, guid: cf87b597fa92e0c4db964939e5512551,
@@ -100,3 +105,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d9463f5a800933478131be02e787628, type: 3}
+--- !u!82 &7092803098707492514 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4367044818799723068, guid: 8d9463f5a800933478131be02e787628,
+    type: 3}
+  m_PrefabInstance: {fileID: 6842215740196224158}
+  m_PrefabAsset: {fileID: 0}

@@ -14,6 +14,8 @@ namespace roguelike.environment.entity.npc {
 
         public GameObject InteractionScreenHolder;
 
+        public AudioSource AudioSource;
+
         public virtual void Interact(Player player) { }
 
         public void OnHover(Player player) {}

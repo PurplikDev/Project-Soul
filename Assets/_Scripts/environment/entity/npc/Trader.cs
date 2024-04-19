@@ -28,6 +28,7 @@ namespace roguelike.environment.entity.npc
             Stock.Clear();
             FillInventory();
             player.UIStateMachine.OnTrader(this);
+            AudioSource.Play();
         }
 
         protected void FillInventory() {

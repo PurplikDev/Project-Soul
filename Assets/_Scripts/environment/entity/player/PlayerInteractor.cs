@@ -33,7 +33,7 @@ namespace roguelike.environment.entity.player {
             // { Debug.LogWarning("Hook this up to the state machine so that it's better ya know"); }
 
         public void ActionSecondary(InputAction.CallbackContext context)
-            { Player.SecondaryAction(); }
+            { Player?.SecondaryAction(); }
 
         public void Interact(InputAction.CallbackContext context)
             { _hoverable?.Interact(Player); }

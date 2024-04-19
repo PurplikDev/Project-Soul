@@ -40,6 +40,8 @@ namespace roguelike.rendering.ui {
                 slot.RegisterCallback<PointerOverEvent>(ShowTooltip);
                 slot.RegisterCallback<PointerOutEvent>(HideTooltip);
             }
+
+            SelectClass();
         }
 
         protected override void SyncVisualToInternalSingle(ItemSlot clickedSlot) {
@@ -57,9 +59,9 @@ namespace roguelike.rendering.ui {
                 originalSlot.UpdateSlotEvent.Invoke();
             }
 
-            SelectClass();
-
             base.ClickSlot(position, originalSlot, mouseButton);
+
+            SelectClass();
         }
 
         private void SelectClass() {
@@ -76,7 +78,7 @@ namespace roguelike.rendering.ui {
                 playerClass = StatType.ROGUE;
             }
 
-            if(classValue > 0) {
+            if(classValue >= 5) {
                 classLabel.text = $"{playerClass.ToString().ToUpper()} - {classValue}";
             } else {
                 classLabel.text = "";

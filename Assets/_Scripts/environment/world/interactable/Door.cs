@@ -10,12 +10,15 @@ namespace roguelike.environment.world.interactable {
 
         Quaternion defaultRotation;
 
+        public AudioSource AudioSource;
+
         private void Awake() {
             defaultRotation = transform.rotation;
         }
 
         public void Interact(Player player) {
             DoorInteraction();
+            AudioSource.Play();
         }
 
         public void OnHover(Player player) {}

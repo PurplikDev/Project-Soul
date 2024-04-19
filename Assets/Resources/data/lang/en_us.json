@@ -3,9 +3,10 @@
 
     "air": "Air",
 
-    "gold": "Gold",
+    "coins": "Coins",
     "boots_of_the_traveler": "Boots of the Traveler",
     "zupa": "Zupa",
+    "gem": "Gem",
 
     "old_necklace": "Old Necklace",
 
@@ -27,6 +28,8 @@
 
     // ITEM DESCRIPTIONS
 
+    "gem.description": "Old pretty stones... they might be worth something...",
+    "coins.description": "Little metal coins, they still hold some value...",
     "zupa.description": "Zupa leczy ciało i duszę od zarania dziejów. Skosztuj i poczuj jej moc na własnej skórze.",
     "bandage.description": "Healing item, heals 5 health.",
     "magic_bandage.description": "Magical Healing item that repairs your body.",

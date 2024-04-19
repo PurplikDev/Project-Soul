@@ -87,6 +87,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8770551255436761135}
   m_SourcePrefab: {fileID: 100100000, guid: 89a46b7549fa3a348bf4dec83ecfc5cb, type: 3}
+--- !u!82 &4367044818799723068 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1825490955289466704, guid: 89a46b7549fa3a348bf4dec83ecfc5cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 2724588139068986732}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6559621151282058988 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9135510976890487680, guid: 89a46b7549fa3a348bf4dec83ecfc5cb,
@@ -126,6 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9534297325741564b8e0c039f2b2938c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EntityName: 
   MaxHealth:
     BaseValue: 30
   Speed:
@@ -140,8 +147,12 @@ MonoBehaviour:
     BaseValue: 0
   Immortal: 1
   Invisible: 0
+  UnityDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
   InteractMessage: []
   InteractionScreenHolder: {fileID: 6724485487805798084}
+  AudioSource: {fileID: 4367044818799723068}
   possibleOffer: {fileID: 0}
 --- !u!114 &8770551255436761135
 MonoBehaviour:

@@ -4,6 +4,7 @@ using roguelike.core.utils;
 using roguelike.environment.entity.statsystem;
 using roguelike.environment.ui.hud;
 using roguelike.environment.ui.statemachine;
+using roguelike.environment.world.dungeon;
 using roguelike.rendering.ui;
 using roguelike.system.input;
 using roguelike.system.manager;
@@ -70,6 +71,12 @@ namespace roguelike.environment.entity.player {
             SetHealth(GameManager.CurrentGameData.PlayerData.Health);
         }
 
+        private void Start() {
+            if(DungeonManager.Instance != null && DungeonManager.State == DungeonManager.DungeonState.DUNGEON && !RoomSpawnPoint.keySpawned) {
+                DisplayMessage("The Gate is open!");
+            }
+        }
+
         public override void PrimaryAction() { ItemInMainHand?.ItemAction(this); }
         public override void SecondaryAction() { ItemInOffHand?.ItemAction(this); }
 
@@ -78,16 +85,10 @@ namespace roguelike.environment.entity.player {
         }
 
         internal void RotateEquipment() {
-            var rotationTween = new FloatTween {
-                duration = 0.25f,
-                from = IsBlocking ? 0 : -180f,
-                to = IsBlocking ? -180f : 0,
-                easeType = EaseType.ExpoInOut,
-                onUpdate = (_, value) => {
-                    EquipmentHolder.transform.localRotation = Quaternion.Euler(0, 0, value) ;
-                }
-            };
-            gameObject.AddTween(rotationTween);
+            var tempSprite = MainHandSprite.sprite;
+
+            MainHandSprite.sprite = OffHandSprite.sprite;
+            OffHandSprite.sprite = tempSprite;
         }
 
     }
